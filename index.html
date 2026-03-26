@@ -368,6 +368,7 @@
     }
     .we-do-headline.animate span { color: var(--text-dim); transition: color 0.05s; }
     .we-do-headline.animate span.lit { color: #fff; }
+    .we-do-headline { overflow-wrap: break-word; word-break: break-word; }
 
     /* ─── SERVICES (STACKED CARDS) ──────────────── */
     .services-section {
@@ -574,6 +575,16 @@
       transition: border-color 0.2s, color 0.2s;
     }
     .partner-logo:hover { border-color: rgba(38,168,255,0.3); color: rgba(255,255,255,0.8); }
+    .partner-logo img {
+      height: 28px;
+      max-width: 130px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.5;
+      transition: opacity 0.2s;
+      display: block;
+    }
+    .partner-logo:hover img { opacity: 0.9; }
 
     /* ─── CLIENTS ───────────────────────────────── */
     .clients-section {
@@ -611,6 +622,16 @@
       color: rgba(255,255,255,0.8);
       background: rgba(38,168,255,0.04);
     }
+    .client-logo img {
+      height: 30px;
+      max-width: 120px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.5;
+      transition: opacity 0.2s;
+      display: block;
+    }
+    .client-logo:hover img { opacity: 0.9; }
 
     /* ─── TRUSTED SECTION (horizontal scroll) ───── */
     .trusted-wrapper {
@@ -1004,41 +1025,6 @@
       background: linear-gradient(90deg, transparent, rgba(38,168,255,0.4), transparent);
     }
 
-    /* ─── STATS SECTION ─────────────────────────── */
-    .stats-section {
-      padding: 80px 60px;
-      background: #000;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      max-width: 1100px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.05);
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.07);
-    }
-    .stat-item {
-      padding: 40px;
-      background: #000;
-      text-align: center;
-    }
-    .stat-number {
-      font-size: clamp(2.2rem, 4vw, 3.4rem);
-      font-weight: 700;
-      color: var(--blue);
-      letter-spacing: -0.03em;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .stat-label {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.45;
-    }
-
     /* ─── INDUSTRIES SECTION ─────────────────────── */
     .industries-section {
       padding: 100px 60px;
@@ -1219,29 +1205,6 @@
 </section>
 
 <div class="divider-glow"></div>
-
-<!-- ─── STATS ─────────────────────────────────────────── -->
-<section class="stats-section">
-  <div class="stats-grid">
-    <div class="stat-item">
-      <div class="stat-number" data-target="200">0+</div>
-      <div class="stat-label">Enterprise Clients Worldwide</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number" data-target="50">0+</div>
-      <div class="stat-label">AI Projects Delivered</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number" data-target="98">0%</div>
-      <div class="stat-label">Client Satisfaction Rate</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number" data-target="12">0+</div>
-      <div class="stat-label">Years of Innovation</div>
-    </div>
-  </div>
-</section>
-
 
 <!-- ─── SERVICES (STACKED CARDS) ────────────────────── -->
 <section class="services-section" id="services">
@@ -1503,56 +1466,22 @@
 <section class="partners-section" id="partners">
   <div class="partners-header">
     <h2>Our Partners</h2>
-    <p>Trusted by the world's leading technology providers</p>
-  </div>
-  <div class="marquee-wrapper" style="margin-bottom:24px;">
-    <div class="marquee-track" id="marquee1">
-      <div class="partner-logo">AWS</div>
-      <div class="partner-logo">Google Cloud</div>
-      <div class="partner-logo">Microsoft Azure</div>
-      <div class="partner-logo">Databricks</div>
-      <div class="partner-logo">Snowflake</div>
-      <div class="partner-logo">HashiCorp</div>
-      <div class="partner-logo">NVIDIA</div>
-      <div class="partner-logo">Confluent</div>
-      <div class="partner-logo">Red Hat</div>
-      <div class="partner-logo">Terraform</div>
-      <!-- Duplicate for infinite scroll -->
-      <div class="partner-logo">AWS</div>
-      <div class="partner-logo">Google Cloud</div>
-      <div class="partner-logo">Microsoft Azure</div>
-      <div class="partner-logo">Databricks</div>
-      <div class="partner-logo">Snowflake</div>
-      <div class="partner-logo">HashiCorp</div>
-      <div class="partner-logo">NVIDIA</div>
-      <div class="partner-logo">Confluent</div>
-      <div class="partner-logo">Red Hat</div>
-      <div class="partner-logo">Terraform</div>
-    </div>
   </div>
   <div class="marquee-wrapper">
-    <div class="marquee-track reverse" id="marquee2">
-      <div class="partner-logo">Kubernetes</div>
-      <div class="partner-logo">OpenAI</div>
-      <div class="partner-logo">Anthropic</div>
-      <div class="partner-logo">Hugging Face</div>
-      <div class="partner-logo">LangChain</div>
-      <div class="partner-logo">Weaviate</div>
-      <div class="partner-logo">Pinecone</div>
-      <div class="partner-logo">dbt Labs</div>
-      <div class="partner-logo">Grafana</div>
-      <div class="partner-logo">Elastic</div>
-      <!-- Duplicate -->
-      <div class="partner-logo">Kubernetes</div>
-      <div class="partner-logo">OpenAI</div>
-      <div class="partner-logo">Anthropic</div>
-      <div class="partner-logo">Hugging Face</div>
-      <div class="partner-logo">LangChain</div>
-      <div class="partner-logo">Weaviate</div>
-      <div class="partner-logo">Pinecone</div>
-      <div class="partner-logo">dbt Labs</div>
-      <div class="partner-logo">Grafana</div>
-      <div class="partner-logo">Elastic</div>
+    <div class="marquee-track" id="marquee1">
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48191_partner1.svg" alt="Partner"/></div>
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818f_partner2.svg" alt="Partner"/></div>
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818e_partner3.svg" alt="Partner"/></div>
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818d_partner4.svg" alt="Partner"/></div>
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48190_partner5.svg" alt="Partner"/></div>
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d482f3_crayon-group-seeklogo%201.svg" alt="Crayon Group"/></div>
+      <!-- Duplicate for infinite scroll -->
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48191_partner1.svg" alt="Partner"/></div>
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818f_partner2.svg" alt="Partner"/></div>
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818e_partner3.svg" alt="Partner"/></div>
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818d_partner4.svg" alt="Partner"/></div>
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48190_partner5.svg" alt="Partner"/></div>
+      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d482f3_crayon-group-seeklogo%201.svg" alt="Crayon Group"/></div>
     </div>
   </div>
 </section>
@@ -1562,15 +1491,40 @@
 <section class="clients-section">
   <h2>Our Clients</h2>
   <div class="clients-grid">
-    <div class="client-logo">Mahindra Rise</div>
-    <div class="client-logo">AstraZeneca</div>
-    <div class="client-logo">HDFC Bank</div>
-    <div class="client-logo">ICICI Bank</div>
-    <div class="client-logo">Thoughtworks</div>
-    <div class="client-logo">Tata Group</div>
-    <div class="client-logo">Mirae Asset</div>
+    <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"/></div>
+    <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"/></div>
+    <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank"/></div>
+    <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank"/></div>
+    <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48237_Thoughtworks.svg" alt="Thoughtworks"/></div>
+    <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata"/></div>
+    <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48234_Mirae.svg" alt="Mirae Asset"/></div>
   </div>
-  <p style="text-align:center;margin-top:32px;font-size:0.85rem;color:rgba(255,255,255,0.3);font-style:italic;">Trusted by Industry Leaders</p>
+</section>
+
+<!-- ─── TRUSTED BY INDUSTRY LEADERS ─────────────────── -->
+<section style="padding:80px 0;background:#000;overflow:hidden;">
+  <div style="padding:0 40px;margin-bottom:48px;">
+    <h2 style="font-size:clamp(1.4rem,2.5vw,2rem);font-weight:600;letter-spacing:-0.02em;">Trusted by Industry Leaders</h2>
+  </div>
+  <div class="marquee-wrapper">
+    <div class="marquee-track" style="gap:0;">
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48237_Thoughtworks.svg" alt="Thoughtworks" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48234_Mirae.svg" alt="Mirae Asset" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <!-- Duplicate -->
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48237_Thoughtworks.svg" alt="Thoughtworks" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+      <div style="display:flex;align-items:center;justify-content:center;width:180px;height:80px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);padding:0 32px;"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48234_Mirae.svg" alt="Mirae Asset" style="height:28px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:0.55;"/></div>
+    </div>
+  </div>
 </section>
 
 <div class="divider-glow"></div>
@@ -1882,31 +1836,6 @@ document.querySelectorAll('.scramble-text').forEach(el => {
   observer.observe(el);
 })();
 
-// ── Stats counter ──────────────────────────────────────
-function animateCount(el, target, suffix) {
-  let current = 0;
-  const step = Math.ceil(target / 60);
-  const interval = setInterval(() => {
-    current = Math.min(current + step, target);
-    el.textContent = current + suffix;
-    if (current >= target) clearInterval(interval);
-  }, 25);
-}
-const statsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.querySelectorAll('.stat-number').forEach(el => {
-        const target = parseInt(el.dataset.target);
-        const suffix = el.textContent.includes('%') ? '%' : '+';
-        animateCount(el, target, suffix);
-      });
-      statsObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-const statsGrid = document.querySelector('.stats-grid');
-if (statsGrid) statsObserver.observe(statsGrid);
-
 // ── GSAP ScrollTrigger for stacked cards ───────────────
 gsap.registerPlugin(ScrollTrigger, Flip);
 
@@ -1997,16 +1926,6 @@ gsap.utils.toArray('.industry-card').forEach((card, i) => {
   });
 });
 
-gsap.utils.toArray('.stat-item').forEach((item, i) => {
-  gsap.from(item, {
-    opacity: 0,
-    y: 20,
-    duration: 0.5,
-    delay: i * 0.1,
-    scrollTrigger: { trigger: item, start: 'top 85%' }
-  });
-});
-
 // ── Achievements collage parallax ─────────────────────
 gsap.to('.ach-p1', {
   y: -40,
@@ -2023,9 +1942,43 @@ gsap.to('.ach-p3', {
 
 // ── Hero entrance animation ────────────────────────────
 gsap.from('.hero-label', { opacity: 0, y: 20, duration: 0.8, delay: 0.2 });
-gsap.from('.hero-title', { opacity: 0, y: 30, duration: 0.9, delay: 0.4 });
 gsap.from('.hero-subtitle', { opacity: 0, y: 20, duration: 0.8, delay: 0.6 });
 gsap.from('.hero-actions', { opacity: 0, y: 20, duration: 0.7, delay: 0.8 });
+
+// ── Hero title scramble on load ────────────────────────
+(function() {
+  const heroTitle = document.querySelector('.hero-title');
+  if (!heroTitle) return;
+  const lines = ['Pioneering the Future of', 'Intelligent Enterprises'];
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  // Start with invisible, GSAP will handle opacity via a custom approach
+  heroTitle.style.opacity = '0';
+  setTimeout(() => {
+    heroTitle.style.opacity = '1';
+    let frame = 0;
+    const totalFrames = 32;
+    const interval = setInterval(() => {
+      const scrambled = lines.map((line, lineIdx) => {
+        const lineProgress = frame - lineIdx * 4;
+        if (lineProgress < 0) {
+          return line.split('').map(c => c === ' ' ? ' ' : CHARS[Math.floor(Math.random() * 26)]).join('');
+        } else if (lineProgress < totalFrames * 0.45) {
+          return line.split('').map(c => c === ' ' ? ' ' : CHARS[Math.floor(Math.random() * 26)]).join('');
+        } else {
+          const progress = Math.max(0, (lineProgress - totalFrames * 0.45) / (totalFrames * 0.55));
+          const reveal = Math.floor(progress * line.length);
+          return line.split('').map((c, i) => (i < reveal || c === ' ') ? c : CHARS[Math.floor(Math.random() * 26)]).join('');
+        }
+      });
+      heroTitle.innerHTML = scrambled[0] + '<br/>' + scrambled[1];
+      frame++;
+      if (frame >= totalFrames + 4) {
+        clearInterval(interval);
+        heroTitle.innerHTML = lines[0] + '<br/>' + lines[1];
+      }
+    }, 40);
+  }, 300);
+})();
 
 // ── Form submit ────────────────────────────────────────
 function handleFormSubmit(e) {
