@@ -3,336 +3,896 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bootlabs</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>BootLabs — Labs that Build Intelligent Enterprises</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <style>
+/* ── FONTS ── */
+@font-face {
+  font-family: Neuehaasdisplayroman;
+  src: url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: Neuehaasdisplaymedium;
+  src: url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+/* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:#000;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden;}
+body{
+  background:#06060a;
+  color:#fff;
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
 a{text-decoration:none;color:inherit;}
 img{display:block;max-width:100%;}
+ul{list-style:none;}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
 
-.container{max-width:1200px;margin:0 auto;padding:0 40px;}
+/* ── CSS VARS ── */
+:root{
+  --blue:#0066FF;
+  --cyan:#26a8ff;
+  --glass:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.08);
+  --border-blue:rgba(0,102,255,0.35);
+  --text-dim:rgba(255,255,255,0.45);
+  --text-mid:rgba(255,255,255,0.7);
+}
 
-/* NAVBAR */
+/* ── NOISE OVERLAY ── */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.4;
+}
+
+/* ══════════════════════════════════
+   NAVBAR
+══════════════════════════════════ */
 .navbar{
-  position:fixed;top:0;left:0;width:100%;z-index:200;
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);
+  z-index:500;
   display:flex;align-items:center;justify-content:space-between;
-  padding:22px 48px;transition:background .3s;
+  width:calc(100% - 64px);max-width:1280px;
+  padding:14px 28px;
+  background:rgba(6,6,10,0.7);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--border);
+  border-radius:100px;
+  transition:background .3s,border-color .3s;
 }
-.navbar::before{
-  content:"";position:absolute;inset:0;
-  backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);z-index:-1;
+.navbar.scrolled{background:rgba(6,6,10,0.92);border-color:rgba(255,255,255,0.12);}
+.nav-logo img{width:120px;height:auto;display:block;}
+.nav-links{display:flex;align-items:center;gap:36px;}
+.nav-links a{
+  font-size:14px;font-weight:400;
+  color:var(--text-mid);
+  letter-spacing:.01em;
+  transition:color .2s;
+  position:relative;
 }
-.navbar.sticky{background:#000;}
-.nav-logo img{width:127px;height:auto;}
-.nav-links{display:flex;align-items:center;gap:36px;list-style:none;}
-.nav-links a{font-size:14px;font-weight:500;color:rgba(255,255,255,.85);letter-spacing:.02em;}
+.nav-links a::after{
+  content:"";position:absolute;bottom:-4px;left:0;width:0;height:1px;
+  background:var(--cyan);transition:width .3s;
+}
+.nav-links a:hover{color:#fff;}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{
+  background:var(--blue);
+  color:#fff;
+  border:none;
+  padding:10px 22px;
+  border-radius:100px;
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:14px;
+  cursor:pointer;
+  transition:background .2s,transform .2s,box-shadow .2s;
+}
+.nav-cta:hover{
+  background:#0055dd;
+  box-shadow:0 0 24px rgba(0,102,255,.5);
+  transform:translateY(-1px);
+}
 
-/* SCRAMBLE */
-.char{position:relative;display:inline-block;}
-.char-real{opacity:0;position:relative;display:inline-block;}
-.char-scramble{position:absolute;left:0;top:0;opacity:1;}
-.scramble-text:hover .char-scramble{color:#26a8ff;transition:color .4s .4s linear;}
-
-/* BUTTON */
-.main-button{
-  position:relative;display:inline-block;
-  background:#0099FF;color:#fff;
-  padding:12px 26px;border-radius:6px;
-  font-size:14px;font-weight:600;letter-spacing:.02em;
-  cursor:pointer;border:none;font-family:inherit;overflow:visible;
-}
-.main-button::before{
-  content:"";position:absolute;background:#0099FF;
-  width:100%;height:3px;opacity:1;top:-2px;left:0;
-  filter:blur(6px);transition:all .3s ease;
-}
-.main-button:hover::before{top:0;}
-.main-button::after{
-  content:"";position:absolute;background:#0099FF;
-  width:100%;height:28px;opacity:1;border-radius:100%;
-  bottom:-13px;left:0;filter:blur(6px);transition:all .3s ease;
-}
-.main-button:hover::after{bottom:-10px;filter:blur(9px);}
-
-/* HERO */
+/* ══════════════════════════════════
+   HERO  (UNCHANGED)
+══════════════════════════════════ */
 .hero-section{
   position:relative;width:100%;height:100vh;
   overflow:hidden;background:#000;
 }
 .hero-section video{
   position:absolute;inset:0;
-  width:100%;height:100%;object-fit:cover;
+  width:100%;height:100%;
+  object-fit:cover;
 }
 
-/* WHAT WE DO */
-.we-do-section{background:#000;padding:140px 0 160px;}
-.we-do-wrapper{position:relative;min-height:80vh;display:flex;align-items:flex-start;}
-.we-do-sticky{position:sticky;top:25vh;padding-bottom:60px;width:100%;}
-.scroll-text-heading{
-  font-size:12px;font-weight:600;letter-spacing:.14em;
-  text-transform:uppercase;color:#0099FF;margin-bottom:28px;
+/* ══════════════════════════════════
+   WHAT WE DO — NEW LAYOUT
+══════════════════════════════════ */
+.wedo-section{
+  padding:160px 0 120px;
+  background:#06060a;
+  position:relative;overflow:hidden;
 }
-.scroll-text{
-  font-size:clamp(26px,3.6vw,52px);font-weight:500;
-  line-height:1.4;color:#fff;max-width:840px;
-}
-.scroll-text span{color:#464b4d;transition:color .1s;}
-
-/* SERVICES */
-.home-services-section{background:#000;padding:80px 0 260px;}
-.services-heading{
-  font-size:12px;font-weight:600;letter-spacing:.14em;
-  text-transform:uppercase;color:#0099FF;margin-bottom:60px;
-}
-.wrapper{position:relative;}
-.card-wrapper{position:relative;}
-.card-wrapper.mb-50{margin-bottom:50px;}
-.card{
-  background:#0d0d0d;border-radius:20px;padding:52px 48px;
-  display:grid;grid-template-columns:1fr 1fr;gap:48px;
-  align-items:center;position:relative;overflow:hidden;
-  transform-style:preserve-3d;will-change:transform;
-}
-.outline::after{
-  content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
-  background:
-    radial-gradient(27.48% 27.32% at 10.25% -1.21%,rgba(204,215,255,.9) 0%,rgba(204,215,255,0) 63.94%),
-    linear-gradient(0deg,rgba(38,168,255,.16),rgba(38,168,255,.16));
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;
-  pointer-events:none;z-index:1;
-}
-.card-icon{width:52px;height:52px;margin-bottom:22px;object-fit:contain;}
-.card-title{font-size:30px;font-weight:700;margin-bottom:12px;line-height:1.2;}
-.card-desc{font-size:15px;color:#888;line-height:1.65;margin-bottom:28px;}
-.card-tags{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
-.card-tag{display:flex;align-items:center;gap:10px;font-size:14px;color:#bbb;}
-.card-tag::before{
-  content:"";width:18px;height:18px;flex-shrink:0;
-  background:url('https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480e4_list-dot.svg') center/contain no-repeat;
-}
-.learn-more{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:14px;font-weight:600;color:#0099FF;transition:gap .2s;
-}
-.learn-more:hover{gap:10px;}
-.card-visual{
-  position:relative;display:flex;
-  justify-content:center;align-items:center;min-height:260px;
-}
-.card-visual img{width:100%;max-width:320px;object-fit:contain;}
-.card-glow{
-  position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);
-  width:200px;height:80px;
-  background:url('https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48214_glow%20(1).png') center/contain no-repeat;
-}
-
-/* PARTNERS */
-.partners-section{background:#000;padding:80px 0;}
-.section-label{
-  font-size:12px;font-weight:600;letter-spacing:.14em;
-  text-transform:uppercase;color:#0099FF;
-  text-align:center;margin-bottom:52px;
-}
-.partners-grid{
-  display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:52px;
-}
-.partner-logo img{
-  height:34px;width:auto;
-  filter:brightness(0) invert(1);opacity:.6;transition:opacity .25s;
-}
-.partner-logo:hover img{opacity:1;}
-
-/* TRUSTED */
-.trusted-section{background:#000;overflow:hidden;}
-.trusted-wrapper{position:relative;padding:80px 0 60px;}
-.trusted-title{
-  font-size:clamp(28px,4vw,56px);font-weight:700;
-  padding:0 40px;margin-bottom:52px;
-}
-.scroll-container{overflow:hidden;width:100%;}
-.scroll-main{
-  display:flex;align-items:center;gap:64px;
-  width:max-content;padding:20px 40px;
-}
-.client-logo img{
-  height:38px;width:auto;
-  filter:brightness(0) invert(1);opacity:.7;transition:opacity .25s;flex-shrink:0;
-}
-.client-logo:hover img{opacity:1;}
-
-/* CASE STUDIES */
-.case-studies-section{background:#000;padding:80px 0 100px;}
-.cs-header{
-  display:flex;align-items:center;
-  justify-content:space-between;margin-bottom:32px;
-}
-.see-more{font-size:14px;font-weight:600;color:#0099FF;transition:opacity .2s;}
-.see-more:hover{opacity:.75;}
-.slider-nav{display:flex;gap:12px;margin-bottom:24px;}
-.swiper-btn{
-  width:46px;height:46px;border-radius:50%;
-  background:#111;border:1px solid #222;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:background .2s;flex-shrink:0;
-}
-.swiper-btn:hover{background:#1a1a1a;}
-.swiper-btn img{width:18px;height:auto;}
-.swiper-btn.prev img{transform:rotate(180deg);}
-.cs-card{
-  background:#0d0d0d;border-radius:14px;
-  overflow:hidden;height:100%;display:block;
-}
-.cs-card-img{width:100%;aspect-ratio:16/10;object-fit:cover;}
-.cs-body{padding:22px 24px 28px;}
-.cs-date{font-size:12px;color:#555;margin-bottom:10px;}
-.cs-title{font-size:16px;font-weight:600;line-height:1.45;color:#fff;}
-.swiper-slide{height:auto;}
-
-/* AWARDS */
-.award-section{background:#000;padding:80px 0 120px;}
-.awards-sricky{position:relative;}
-.heading-sticky{
-  position:sticky;top:80px;z-index:10;
-  padding:32px 0 24px;background:#000;
-}
-.heading-box.award h2{
-  font-size:clamp(26px,4vw,52px);font-weight:700;line-height:1.2;
-}
-.award-wrapper{padding-top:60px;}
-.bottom-award{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:20px;align-items:start;
-}
-.award-card{border-radius:14px;overflow:hidden;background:#0a0a0a;}
-.award-card.middle{margin-top:-60px;}
-.award-card img{width:100%;height:auto;display:block;object-fit:cover;}
-
-/* JOIN US */
-.join-us-section{
-  background:#000;padding:120px 0;
-  text-align:center;position:relative;overflow:hidden;
-}
-.join-us-section::before{
-  content:"";position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);width:600px;height:400px;
-  background:radial-gradient(ellipse at center,rgba(0,153,255,.12) 0%,transparent 70%);
+/* faint radial glow top-left */
+.wedo-section::before{
+  content:"";position:absolute;
+  top:-200px;left:-200px;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(0,102,255,.12) 0%,transparent 70%);
   pointer-events:none;
 }
-.join-us-title{
-  font-size:clamp(28px,4.5vw,58px);font-weight:700;
-  line-height:1.2;margin-bottom:40px;
-  max-width:680px;margin-left:auto;margin-right:auto;
+.wedo-eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--cyan);
+  margin-bottom:40px;
 }
+.wedo-eyebrow::before{
+  content:"";display:block;width:32px;height:1px;background:var(--cyan);
+}
+.wedo-headline{
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:clamp(32px,4.5vw,68px);
+  font-weight:400;
+  line-height:1.1;
+  color:#fff;
+  max-width:900px;
+  margin-bottom:64px;
+}
+.wedo-headline em{
+  font-style:normal;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.wedo-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+}
+.wedo-stat{
+  padding:40px 36px;
+  background:#06060a;
+  transition:background .3s;
+}
+.wedo-stat:hover{background:rgba(0,102,255,.05);}
+.wedo-stat-num{
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:56px;line-height:1;
+  color:#fff;
+  margin-bottom:8px;
+}
+.wedo-stat-num span{
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.wedo-stat-label{font-size:15px;color:var(--text-dim);}
 
-/* POPUP */
+/* ══════════════════════════════════
+   SERVICES — TABBED LAYOUT
+══════════════════════════════════ */
+.services-section{
+  padding:120px 0 160px;
+  background:#06060a;
+  position:relative;
+}
+/* subtle divider */
+.services-section::before{
+  content:"";display:block;
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+  margin-bottom:0;
+  position:absolute;top:0;left:0;
+}
+.section-eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:20px;
+}
+.section-eyebrow::before{content:"";display:block;width:32px;height:1px;background:var(--cyan);}
+.section-title{
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:clamp(28px,3.5vw,52px);
+  font-weight:400;line-height:1.15;
+  color:#fff;margin-bottom:64px;
+}
+/* Tab nav */
+.svc-tabs{
+  display:flex;gap:4px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:6px;
+  background:rgba(255,255,255,.02);
+  margin-bottom:40px;
+  width:fit-content;
+}
+.svc-tab{
+  padding:12px 28px;
+  font-size:14px;color:var(--text-dim);
+  border-radius:10px;cursor:pointer;
+  transition:all .25s;
+  border:1px solid transparent;
+  font-family:Neuehaasdisplayroman,sans-serif;
+  user-select:none;
+}
+.svc-tab:hover{color:#fff;}
+.svc-tab.active{
+  background:rgba(0,102,255,.15);
+  border-color:var(--border-blue);
+  color:#fff;
+}
+/* Panel grid */
+.svc-panels{position:relative;}
+.svc-panel{display:none;}
+.svc-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:2px;animation:fadeUp .4s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.svc-left{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-right:none;
+  border-radius:20px 0 0 20px;
+  padding:64px 56px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.svc-right{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:0 20px 20px 0;
+  display:flex;align-items:center;justify-content:center;
+  min-height:480px;
+  position:relative;overflow:hidden;
+}
+/* blue glow behind icon */
+.svc-right::before{
+  content:"";position:absolute;
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(0,102,255,.2) 0%,transparent 70%);
+  border-radius:50%;
+  animation:pulse 4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(1.15);opacity:1;}}
+.svc-right img{position:relative;z-index:1;width:280px;height:auto;object-fit:contain;}
+.svc-name{
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:36px;font-weight:400;
+  color:#fff;margin-bottom:16px;
+}
+.svc-desc{font-size:15px;color:var(--text-mid);line-height:1.7;margin-bottom:32px;}
+.svc-features{margin-bottom:36px;}
+.svc-feature{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 0;
+  border-bottom:1px solid var(--border);
+  font-size:16px;color:var(--text-mid);
+  transition:color .2s;
+}
+.svc-feature:last-child{border-bottom:none;}
+.svc-feature:hover{color:#fff;}
+.svc-feature::before{
+  content:"";flex-shrink:0;
+  width:6px;height:6px;
+  background:var(--cyan);
+  border-radius:50%;
+  box-shadow:0 0 8px var(--cyan);
+}
+.svc-learn-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;
+  border:1px solid var(--border-blue);
+  border-radius:100px;
+  color:#fff;font-size:14px;
+  background:rgba(0,102,255,.1);
+  transition:all .2s;
+  width:fit-content;
+  font-family:Neuehaasdisplayroman,sans-serif;
+}
+.svc-learn-btn:hover{
+  background:var(--blue);
+  border-color:var(--blue);
+  box-shadow:0 0 20px rgba(0,102,255,.4);
+}
+.svc-learn-btn svg{transition:transform .2s;}
+.svc-learn-btn:hover svg{transform:translateX(4px);}
+
+/* ══════════════════════════════════
+   PARTNERS
+══════════════════════════════════ */
+.partners-section{
+  padding:100px 0;
+  background:#06060a;
+  border-top:1px solid var(--border);
+}
+.partners-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:56px;
+}
+.partners-title{
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:clamp(24px,3vw,44px);font-weight:400;color:#fff;
+}
+.partners-subtitle{font-size:14px;color:var(--text-dim);max-width:300px;text-align:right;}
+.partners-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:2px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:20px;overflow:hidden;
+}
+.partner-cell{
+  background:#06060a;
+  display:flex;align-items:center;justify-content:center;
+  padding:36px 24px;min-height:100px;
+  transition:background .25s;
+}
+.partner-cell:hover{background:rgba(255,255,255,.04);}
+.partner-cell img{max-width:100%;max-height:56px;object-fit:contain;}
+
+/* ══════════════════════════════════
+   CLIENTS MARQUEE
+══════════════════════════════════ */
+.clients-section{
+  padding:80px 0;
+  background:#06060a;
+  overflow:hidden;
+  border-top:1px solid var(--border);
+}
+.clients-label{
+  font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--text-dim);text-align:center;margin-bottom:40px;
+}
+.marquee-outer{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);}
+.marquee-track{
+  display:flex;gap:64px;width:max-content;
+  animation:marqScroll 28s linear infinite;
+}
+.marquee-track:hover{animation-play-state:paused;}
+@keyframes marqScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.marquee-item img{height:32px;width:auto;filter:brightness(0) invert(1);opacity:.5;transition:opacity .2s;}
+.marquee-item:hover img{opacity:1;}
+
+/* ══════════════════════════════════
+   IMPACT / TRUSTED SECTION
+   (Replaces "Trusted by Industry Leaders" GSAP pin)
+   — a clean 3-col stat + logo block
+══════════════════════════════════ */
+.impact-section{
+  padding:120px 0;
+  background:linear-gradient(180deg,#06060a 0%,#090912 100%);
+  border-top:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.impact-section::after{
+  content:"";position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(0,102,255,.08) 0%,transparent 70%);
+  pointer-events:none;border-radius:50%;
+}
+.impact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+.impact-left{}
+.impact-eyebrow{
+  font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+}
+.impact-eyebrow::before{content:"";display:block;width:32px;height:1px;background:var(--cyan);}
+.impact-headline{
+  font-size:clamp(28px,3.5vw,52px);font-weight:400;
+  color:#fff;line-height:1.15;margin-bottom:40px;
+}
+.impact-numbers{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:0;}
+.impact-num-item{}
+.impact-number{
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:52px;line-height:1;color:#fff;margin-bottom:6px;
+}
+.impact-number span{
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.impact-num-label{font-size:13px;color:var(--text-dim);}
+
+/* right side: logo grid */
+.impact-right{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:2px;
+  background:var(--border);
+  border:1px solid var(--border);border-radius:20px;overflow:hidden;
+}
+.impact-logo-cell{
+  background:#06060a;
+  display:flex;align-items:center;justify-content:center;
+  padding:40px 32px;
+  transition:background .25s;
+}
+.impact-logo-cell:hover{background:rgba(255,255,255,.03);}
+.impact-logo-cell img{
+  max-height:36px;width:auto;max-width:160px;object-fit:contain;
+  filter:brightness(0) invert(1);opacity:.5;
+  transition:opacity .2s;
+}
+.impact-logo-cell:hover img{opacity:.9;}
+
+/* ══════════════════════════════════
+   CASE STUDIES — EDITORIAL
+══════════════════════════════════ */
+.cs-section{
+  padding:120px 0 160px;
+  background:#06060a;
+  border-top:1px solid var(--border);
+}
+.cs-header-row{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:56px;
+}
+.cs-see-more{
+  font-size:13px;color:var(--cyan);
+  display:flex;align-items:center;gap:6px;
+  border-bottom:1px solid rgba(38,168,255,.3);
+  padding-bottom:2px;
+  transition:opacity .2s;
+}
+.cs-see-more:hover{opacity:.7;}
+/* swiper custom */
+.cs-swiper{overflow:visible !important;}
+.cs-slide-card{
+  display:block;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  background:var(--glass);
+  transition:border-color .25s,transform .25s;
+}
+.cs-slide-card:hover{border-color:rgba(38,168,255,.3);transform:translateY(-4px);}
+.cs-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
+.cs-body{padding:24px;}
+.cs-tag{
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:10px;
+}
+.cs-title{font-size:17px;color:#fff;line-height:1.45;font-family:Neuehaasdisplayroman,sans-serif;}
+.cs-date{font-size:12px;color:var(--text-dim);margin-top:12px;}
+/* nav arrows */
+.cs-nav{display:flex;gap:12px;margin-top:32px;}
+.cs-arrow{
+  width:48px;height:48px;border-radius:50%;
+  border:1px solid var(--border);
+  background:var(--glass);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;
+}
+.cs-arrow:hover{border-color:var(--cyan);background:rgba(38,168,255,.1);}
+.cs-arrow svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.5;}
+.cs-arrow.prev svg{transform:rotate(180deg);}
+
+/* ══════════════════════════════════
+   ACHIEVEMENTS — MAGAZINE STYLE
+══════════════════════════════════ */
+.awards-section{
+  padding:120px 0;
+  background:#06060a;
+  border-top:1px solid var(--border);
+}
+.awards-inner{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:80px;align-items:start;
+}
+.awards-sticky-text{position:sticky;top:120px;}
+.awards-sticky-text .section-eyebrow{margin-bottom:20px;}
+.awards-big-title{
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:clamp(32px,4vw,56px);
+  font-weight:400;line-height:1.1;
+  color:#fff;margin-bottom:24px;
+}
+.awards-desc{font-size:15px;color:var(--text-dim);line-height:1.7;max-width:340px;}
+.awards-photo-stack{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.award-photo{border-radius:16px;overflow:hidden;position:relative;}
+.award-photo img{width:100%;height:260px;object-fit:cover;display:block;transition:transform .5s;}
+.award-photo:hover img{transform:scale(1.04);}
+.award-photo:first-child{grid-column:span 2;}
+.award-photo:first-child img{height:340px;}
+
+/* ══════════════════════════════════
+   CTA SECTION
+══════════════════════════════════ */
+.cta-section{
+  padding:160px 0;
+  background:linear-gradient(135deg,#06060a 0%,#07091a 50%,#06060a 100%);
+  text-align:center;
+  position:relative;overflow:hidden;
+  border-top:1px solid var(--border);
+}
+.cta-section::before{
+  content:"";position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:800px;height:500px;
+  background:radial-gradient(ellipse,rgba(0,102,255,.1) 0%,transparent 70%);
+  pointer-events:none;
+}
+/* animated ring */
+.cta-ring{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:600px;height:600px;
+  border:1px solid rgba(0,102,255,.12);
+  border-radius:50%;
+  animation:ringPulse 6s ease-in-out infinite;
+}
+.cta-ring:nth-child(2){width:900px;height:900px;animation-delay:2s;border-color:rgba(0,102,255,.06);}
+@keyframes ringPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1;}50%{transform:translate(-50%,-50%) scale(1.04);opacity:.6;}}
+.cta-label{
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:20px;position:relative;
+}
+.cta-headline{
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:clamp(36px,5vw,80px);
+  font-weight:400;line-height:1.05;
+  color:#fff;margin-bottom:20px;position:relative;
+}
+.cta-sub{font-size:18px;color:var(--text-dim);margin-bottom:48px;position:relative;}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:18px 40px;
+  background:var(--blue);
+  color:#fff;border:none;border-radius:100px;
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:16px;cursor:pointer;
+  transition:all .25s;position:relative;
+  box-shadow:0 8px 32px rgba(0,102,255,.35);
+}
+.cta-btn:hover{
+  background:#0055dd;
+  box-shadow:0 12px 40px rgba(0,102,255,.5);
+  transform:translateY(-2px);
+}
+.cta-btn svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:1.8;transition:transform .2s;}
+.cta-btn:hover svg{transform:translateX(4px);}
+
+/* ══════════════════════════════════
+   CONTACT POPUP
+══════════════════════════════════ */
 .popup-section{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.82);z-index:1000;
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.8);backdrop-filter:blur(8px);
   align-items:center;justify-content:center;
 }
 .popup-section.active{display:flex;}
 .popup-box{
-  background:#0d0d0d;border:1px solid #1a1a1a;
-  border-radius:18px;padding:44px 48px;
-  width:100%;max-width:500px;position:relative;
+  background:#0f0f17;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:24px;
+  padding:48px;width:100%;max-width:480px;
+  position:relative;
 }
 .popup-close{
-  position:absolute;top:18px;right:22px;
-  background:none;border:none;color:#666;
-  font-size:22px;cursor:pointer;transition:color .2s;
+  position:absolute;top:20px;right:20px;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:none;
+  color:#fff;font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
 }
-.popup-close:hover{color:#fff;}
-.popup-title{font-size:22px;font-weight:700;margin-bottom:28px;}
+.popup-close:hover{background:rgba(255,255,255,.16);}
+.popup-title{font-size:24px;font-family:Neuehaasdisplayroman,sans-serif;color:#fff;margin-bottom:28px;}
 .form-group{margin-bottom:18px;}
-.form-label{
-  display:block;font-size:11px;font-weight:600;
-  letter-spacing:.1em;text-transform:uppercase;
-  color:#666;margin-bottom:7px;
-}
-.form-label span{color:#0099FF;}
+.form-label{display:block;font-size:13px;color:var(--text-dim);margin-bottom:8px;}
+.form-label span{color:var(--cyan);}
 .form-input{
-  width:100%;background:#111;border:1px solid #222;
-  border-radius:8px;padding:13px 15px;color:#fff;
-  font-size:14px;font-family:inherit;outline:none;
-  transition:border-color .2s;resize:vertical;
+  width:100%;background:rgba(255,255,255,.05);
+  border:1px solid var(--border);border-radius:10px;
+  padding:12px 16px;color:#fff;
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:14px;
+  transition:border-color .2s;
+  resize:none;
 }
-.form-input:focus{border-color:#0099FF;}
-.form-submit{width:100%;margin-top:8px;padding:14px;}
+.form-input:focus{outline:none;border-color:rgba(0,102,255,.5);}
+.form-submit{
+  width:100%;background:var(--blue);
+  color:#fff;border:none;border-radius:10px;
+  padding:14px;font-size:15px;
+  font-family:Neuehaasdisplayroman,sans-serif;
+  cursor:pointer;transition:background .2s;margin-top:8px;
+}
+.form-submit:hover{background:#0055dd;}
 
-/* FOOTER */
-.footer-section{background:#000;padding:80px 0 36px;border-top:1px solid #111;}
-.footer-animate{
-  font-size:clamp(32px,5.5vw,76px);font-weight:700;
-  color:transparent;
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-stroke:2px rgba(255,255,255,.25);
-  text-shadow:0 3px 2px rgba(0,0,0,.35),0 -2px 4px rgba(0,0,0,0),0 0 4px #60bafd6b,0 0 5px #60bafd6b;
-  margin-bottom:64px;line-height:1.15;
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+.footer{
+  background:#06060a;
+  border-top:1px solid var(--border);
+  padding:80px 0 40px;
 }
-.footer-grid{
-  display:grid;grid-template-columns:1.4fr 1fr 1fr;
-  gap:40px;margin-bottom:60px;
+.footer-top{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:48px;margin-bottom:80px;
 }
+.footer-brand-col img{width:110px;margin-bottom:20px;}
+.footer-brand-tagline{font-size:14px;color:var(--text-dim);line-height:1.7;max-width:260px;}
 .footer-col-title{
-  font-size:12px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#444;margin-bottom:18px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:20px;
 }
-.footer-links{list-style:none;display:flex;flex-direction:column;gap:12px;}
-.footer-links a{font-size:14px;color:#888;transition:color .2s;}
-.footer-links a:hover{color:#fff;}
-.footer-bottom{
-  display:flex;align-items:center;
-  justify-content:space-between;
-  padding-top:28px;border-top:1px solid #111;
+.footer-col-links{display:flex;flex-direction:column;gap:12px;}
+.footer-col-links a{font-size:14px;color:rgba(255,255,255,.6);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+/* big scramble text */
+.footer-marquee-row{
+  border-top:1px solid var(--border);
+  padding-top:40px;margin-bottom:40px;
+  overflow:hidden;
 }
-.footer-logo img{width:100px;height:auto;}
-.footer-copy{font-size:13px;color:#444;}
-.footer-legal{display:flex;gap:22px;}
-.footer-legal a{font-size:13px;color:#444;transition:color .2s;}
+.footer-big-text{
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:clamp(60px,10vw,160px);
+  font-weight:400;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.12);
+  white-space:nowrap;
+  line-height:1;
+  transition:color .1s,-webkit-text-stroke .1s;
+}
+.footer-bottom-row{
+  border-top:1px solid var(--border);
+  padding-top:24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-copy{font-size:13px;color:var(--text-dim);}
+.footer-legal{display:flex;gap:24px;}
+.footer-legal a{font-size:13px;color:var(--text-dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
 
-/* RESPONSIVE */
+/* ══════════════════════════════════
+   HAMBURGER / MOBILE NAV
+══════════════════════════════════ */
+.nav-hamburger{
+  display:none;
+  flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  width:40px;height:40px;cursor:pointer;
+  border:1px solid var(--border);border-radius:10px;
+  background:rgba(255,255,255,.04);
+  flex-shrink:0;
+}
+.nav-hamburger span{
+  display:block;width:18px;height:1.5px;
+  background:#fff;border-radius:2px;
+  transition:transform .3s,opacity .3s;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* full-screen mobile menu overlay */
+.mobile-menu{
+  display:none;
+  position:fixed;inset:0;z-index:490;
+  background:rgba(6,6,10,0.97);
+  backdrop-filter:blur(20px);
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:36px;
+  opacity:0;transition:opacity .3s;
+}
+.mobile-menu.open{display:flex;opacity:1;}
+.mobile-menu a,.mobile-menu button{
+  font-family:Neuehaasdisplayroman,sans-serif;
+  font-size:28px;color:#fff;
+  background:none;border:none;cursor:pointer;
+  transition:color .2s;
+}
+.mobile-menu a:hover,.mobile-menu button:hover{color:var(--cyan);}
+.mobile-menu-cta{
+  margin-top:12px;
+  background:var(--blue) !important;
+  color:#fff !important;
+  padding:16px 40px !important;
+  border-radius:100px !important;
+  font-size:18px !important;
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE — 1200px
+══════════════════════════════════ */
+@media(max-width:1200px){
+  .footer-top{grid-template-columns:1.5fr 1fr 1fr;gap:40px;}
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE — 1024px (tablet landscape)
+══════════════════════════════════ */
+@media(max-width:1024px){
+  .container{padding:0 32px;}
+  .wedo-section{padding:120px 0 80px;}
+  .services-section{padding:80px 0 100px;}
+  .impact-section{padding:80px 0;}
+  .cs-section{padding:80px 0 100px;}
+  .awards-section{padding:80px 0;}
+  .cta-section{padding:120px 0;}
+  .footer{padding:64px 0 32px;}
+
+  .impact-grid{grid-template-columns:1fr;gap:48px;}
+  .awards-inner{grid-template-columns:1fr;gap:48px;}
+  .awards-sticky-text{position:static;}
+  .awards-photo-stack{grid-template-columns:1fr 1fr;}
+  .award-photo:first-child img{height:280px;}
+  .award-photo img{height:220px;}
+
+  .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
+  .footer-brand-col{grid-column:span 2;}
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE — 768px (tablet portrait)
+══════════════════════════════════ */
 @media(max-width:768px){
-  .navbar{padding:16px 20px;}
-  .nav-links{display:none;}
-  .main-button{padding:10px 18px;font-size:13px;}
-  .card{grid-template-columns:1fr;}
-  .card-visual{min-height:180px;}
-  .bottom-award{grid-template-columns:1fr;}
-  .award-card.middle{margin-top:0;}
-  .footer-grid{grid-template-columns:1fr;}
-  .footer-animate{-webkit-text-stroke:1px rgba(255,255,255,.25);}
-  .footer-bottom{flex-direction:column;gap:16px;text-align:center;}
-  .footer-legal{justify-content:center;}
-  .we-do-section{padding:80px 0 100px;}
   .container{padding:0 20px;}
+
+  /* navbar */
+  .navbar{top:12px;width:calc(100% - 32px);padding:10px 16px;}
+  .nav-links{display:none;}
+  .nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+
+  /* sections */
+  .wedo-section{padding:100px 0 64px;}
+  .services-section{padding:64px 0 80px;}
+  .partners-section{padding:64px 0;}
+  .clients-section{padding:56px 0;}
+  .impact-section{padding:64px 0;}
+  .cs-section{padding:64px 0 80px;}
+  .awards-section{padding:64px 0;}
+  .cta-section{padding:80px 0;}
+  .footer{padding:48px 0 24px;}
+
+  /* what we do */
+  .wedo-stats{grid-template-columns:1fr;}
+  .wedo-stat{padding:28px 24px;}
+  .wedo-stat-num{font-size:42px;}
+
+  /* services */
+  .svc-tabs{
+    width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    flex-wrap:nowrap;scrollbar-width:none;
+  }
+  .svc-tabs::-webkit-scrollbar{display:none;}
+  .svc-tab{white-space:nowrap;flex-shrink:0;padding:10px 20px;font-size:13px;}
+  .svc-panel.active{grid-template-columns:1fr;}
+  .svc-right{display:none;}
+  .svc-left{border-radius:16px;border-right:1px solid var(--border);padding:36px 28px;}
+  .svc-name{font-size:26px;}
+  .section-title{margin-bottom:36px;}
+
+  /* partners */
+  .partners-header{flex-direction:column;align-items:flex-start;gap:10px;}
+  .partners-subtitle{text-align:left;max-width:100%;}
+  .partners-grid{grid-template-columns:repeat(3,1fr);}
+  .partner-cell{padding:24px 16px;}
+  .partner-cell img{max-height:40px;}
+
+  /* impact */
+  .impact-numbers{grid-template-columns:1fr 1fr;gap:24px;}
+  .impact-number{font-size:40px;}
+  .impact-right{grid-template-columns:repeat(2,1fr);}
+  .impact-logo-cell{padding:28px 20px;}
+
+  /* case studies header */
+  .cs-header-row{flex-direction:column;align-items:flex-start;gap:16px;}
+
+  /* achievements */
+  .awards-photo-stack{grid-template-columns:1fr;}
+  .award-photo:first-child{grid-column:span 1;}
+  .award-photo img{height:200px !important;}
+
+  /* cta rings */
+  .cta-ring{width:320px;height:320px;}
+  .cta-ring:nth-child(2){width:480px;height:480px;}
+
+  /* popup */
+  .popup-box{padding:32px 24px;border-radius:20px;max-width:calc(100% - 32px);}
+
+  /* footer */
+  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-brand-col{grid-column:span 1;}
+  .footer-bottom-row{flex-direction:column;gap:16px;text-align:center;}
+  .footer-legal{justify-content:center;}
+  .footer-big-text{font-size:clamp(48px,14vw,100px);}
+  .footer-marquee-row{padding-top:28px;margin-bottom:28px;}
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE — 480px (small phones)
+══════════════════════════════════ */
+@media(max-width:480px){
+  .container{padding:0 16px;}
+  .navbar{width:calc(100% - 24px);top:10px;padding:10px 14px;}
+  .nav-logo img{width:96px;}
+
+  .wedo-section{padding:80px 0 48px;}
+  .wedo-stat-num{font-size:36px;}
+  .wedo-stat{padding:24px 20px;}
+
+  .svc-tab{padding:9px 16px;font-size:12px;}
+  .svc-left{padding:28px 20px;}
+  .svc-name{font-size:22px;}
+  .svc-feature{font-size:14px;gap:10px;}
+
+  .partners-grid{grid-template-columns:repeat(2,1fr);}
+  .partner-cell{padding:20px 12px;}
+
+  .impact-numbers{grid-template-columns:1fr 1fr;gap:16px;}
+  .impact-number{font-size:34px;}
+  .impact-right{grid-template-columns:1fr 1fr;}
+  .impact-logo-cell{padding:20px 12px;}
+  .impact-logo-cell img{max-height:28px;}
+
+  .cta-ring{width:220px;height:220px;}
+  .cta-ring:nth-child(2){width:340px;height:340px;}
+  .cta-sub{font-size:15px;}
+  .cta-btn{padding:14px 28px;font-size:14px;}
+
+  .popup-box{padding:24px 20px;}
+  .popup-title{font-size:20px;}
+
+  .footer-top{gap:24px;}
+  .footer-big-text{font-size:clamp(36px,16vw,80px);}
+
+  .mobile-menu a,.mobile-menu button{font-size:22px;}
+  .mobile-menu-cta{font-size:16px !important;padding:14px 32px !important;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- ══ MOBILE MENU OVERLAY ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobileMenu()">What We Do</a>
+  <a href="#partners" onclick="closeMobileMenu()">Partners</a>
+  <a href="#case-studies" onclick="closeMobileMenu()">Insights</a>
+  <button class="mobile-menu-cta" onclick="closeMobileMenu();document.querySelector('.popup-section').classList.add('active')">Let's Connect</button>
+</div>
+
+<!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
   <div class="nav-logo">
-    <a href="#"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="Bootlabs"></a>
+    <a href="#"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
   </div>
   <ul class="nav-links">
-    <li><a href="#Services" class="scramble-text">What We Do</a></li>
-    <li><a href="#" class="scramble-text">Who We Are</a></li>
-    <li><a href="#" class="scramble-text">Insights</a></li>
-    <li><a href="#" class="scramble-text">Join Us</a></li>
+    <li><a href="#services">What We Do</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#case-studies">Insights</a></li>
+    <li><a href="#contact" onclick="document.querySelector('.popup-section').classList.add('active');return false;">Join Us</a></li>
   </ul>
-  <button class="main-button" onclick="document.querySelector('.popup-section').classList.add('active')">Let's Connect</button>
+  <button class="nav-cta" onclick="document.querySelector('.popup-section').classList.add('active')">Let's Connect</button>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
-<!-- HERO — fullscreen video (logo + text animation is inside the video) -->
-<section class="hero-section auto">
+<!-- ══ HERO (UNCHANGED) ══ -->
+<section class="hero-section">
   <video autoplay muted loop playsinline
     poster="https://cdn.prod.website-files.com/69133bfd571090aeadf4498e/698458b44da968b931922543_Home%20Page%20Logo%20%26%20text%20v17_poster.0000000.jpg">
     <source src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48332_Home%20Page%20Logo%20%26%20text%20v17_mp4.mp4" type="video/mp4">
@@ -340,264 +900,352 @@ img{display:block;max-width:100%;}
   </video>
 </section>
 
-<!-- WHAT WE DO -->
-<section class="we-do-section">
+<!-- ══ WHAT WE DO ══ -->
+<section class="wedo-section">
   <div class="container">
-    <div class="we-do-wrapper">
-      <div class="we-do-sticky">
-        <div class="scroll-text-heading">What We Do</div>
-        <h3 class="scroll-text animate">BootLabs is an AI engineering company pioneering platform-led, cloud-native, and AI-driven transformations for modern enterprises and sovereign ecosystems.</h3>
+    <div class="wedo-eyebrow">What We Do</div>
+    <h2 class="wedo-headline">
+      BootLabs is an <em>AI engineering company</em> pioneering platform-led, cloud-native, and AI-driven transformations for modern enterprises and sovereign ecosystems.
+    </h2>
+    <div class="wedo-stats">
+      <div class="wedo-stat">
+        <div class="wedo-stat-num" data-count="200"><span>0</span>+</div>
+        <div class="wedo-stat-label">AI & Cloud projects delivered</div>
+      </div>
+      <div class="wedo-stat">
+        <div class="wedo-stat-num" data-count="50"><span>0</span>+</div>
+        <div class="wedo-stat-label">Enterprise clients globally</div>
+      </div>
+      <div class="wedo-stat">
+        <div class="wedo-stat-num" data-count="98"><span>0</span>%</div>
+        <div class="wedo-stat-label">Client satisfaction rate</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- OUR SERVICES -->
-<section class="home-services-section" id="Services">
+<!-- ══ OUR SERVICES ══ -->
+<section class="services-section" id="services">
   <div class="container">
-    <div class="services-heading">Our Services</div>
-    <div class="wrapper">
+    <div class="section-eyebrow">Our Services</div>
+    <h2 class="section-title">Engineering the future,<br>one platform at a time.</h2>
 
+    <div class="svc-tabs">
+      <div class="svc-tab active" data-tab="0">AI Engineering</div>
+      <div class="svc-tab" data-tab="1">Software Engineering</div>
+      <div class="svc-tab" data-tab="2">Platform Engineering</div>
+    </div>
+
+    <div class="svc-panels">
       <!-- AI Engineering -->
-      <div class="card-wrapper mb-50">
-        <div class="card outline">
-          <div class="card-content">
-            <img class="card-icon" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d481b1_ai-icon.svg" alt="AI Engineering">
-            <h3 class="card-title">AI Engineering</h3>
-            <p class="card-desc">Transform your business with AI that learns, adapts, and scales with your needs.</p>
-            <div class="card-tags">
-              <div class="card-tag">AI enabled Managed Services</div>
-              <div class="card-tag">AIOps</div>
-              <div class="card-tag">Agentic AI Development</div>
+      <div class="svc-panel active" data-panel="0">
+        <div class="svc-left">
+          <div>
+            <h3 class="svc-name">AI Engineering</h3>
+            <p class="svc-desc">Transform your business with AI that learns, adapts, and scales with your needs. We build intelligent systems that drive real outcomes.</p>
+            <div class="svc-features">
+              <div class="svc-feature">AI enabled Managed Services</div>
+              <div class="svc-feature">AIOps</div>
+              <div class="svc-feature">Agentic AI Development</div>
             </div>
-            <a href="#" class="learn-more">Learn More &rarr;</a>
           </div>
-          <div class="card-visual">
-            <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480e1_service-card-bg.svg" alt="">
-            <div class="card-glow"></div>
-          </div>
+          <a href="#" class="svc-learn-btn">
+            Explore AI Engineering
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="svc-right">
+          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d481b1_ai-icon.svg" alt="AI Engineering">
         </div>
       </div>
 
       <!-- Software Engineering -->
-      <div class="card-wrapper">
-        <div class="card outline" style="background-image:url('https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d481f2_Software%20Engineering.png');background-size:cover;background-position:center right;">
-          <div class="card-content">
-            <img class="card-icon" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480e2_service-img3.svg" alt="Software Engineering">
-            <h3 class="card-title">Software Engineering</h3>
-            <p class="card-desc">Develop robust, cloud-ready software designed for speed, security, and scalability.</p>
-            <div class="card-tags">
-              <div class="card-tag">Application Development &amp; Modernization</div>
-              <div class="card-tag">DevSecOps</div>
-              <div class="card-tag">FinOps</div>
+      <div class="svc-panel" data-panel="1">
+        <div class="svc-left">
+          <div>
+            <h3 class="svc-name">Software Engineering</h3>
+            <p class="svc-desc">Develop robust, cloud-ready software designed for speed, security, and scalability. Built for the enterprises of tomorrow.</p>
+            <div class="svc-features">
+              <div class="svc-feature">Application Development &amp; Modernization</div>
+              <div class="svc-feature">DevSecOps</div>
+              <div class="svc-feature">FinOps</div>
             </div>
-            <a href="#" class="learn-more">Learn More &rarr;</a>
           </div>
-          <div class="card-visual">
-            <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480e2_service-img3.svg" alt="">
-          </div>
+          <a href="#" class="svc-learn-btn">
+            Explore Software Engineering
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="svc-right">
+          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480e2_service-img3.svg" alt="Software Engineering" style="width:260px;height:auto;">
         </div>
       </div>
 
       <!-- Platform Engineering -->
-      <div class="card-wrapper mb-50">
-        <div class="card outline">
-          <div class="card-content">
-            <img class="card-icon" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480e3_service-img2.svg" alt="Platform Engineering">
-            <h3 class="card-title">Platform Engineering</h3>
-            <p class="card-desc">Scale securely with platforms designed for agility, security, and performance.</p>
-            <div class="card-tags">
-              <div class="card-tag">Enterprise GenAI Platform</div>
-              <div class="card-tag">Sailor</div>
-              <div class="card-tag">Guardian</div>
+      <div class="svc-panel" data-panel="2">
+        <div class="svc-left">
+          <div>
+            <h3 class="svc-name">Platform Engineering</h3>
+            <p class="svc-desc">Scale securely with platforms designed for agility, security, and performance. From GenAI to sovereign cloud infrastructure.</p>
+            <div class="svc-features">
+              <div class="svc-feature">Enterprise GenAI Platform</div>
+              <div class="svc-feature">Sailor</div>
+              <div class="svc-feature">Guardian</div>
             </div>
-            <a href="#" class="learn-more">Learn More &rarr;</a>
           </div>
-          <div class="card-visual">
-            <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480e3_service-img2.svg" alt="">
+          <a href="#" class="svc-learn-btn">
+            Explore Platform Engineering
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="svc-right">
+          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480e3_service-img2.svg" alt="Platform Engineering" style="width:260px;height:auto;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OUR PARTNERS ══ -->
+<section class="partners-section" id="partners">
+  <div class="container">
+    <div class="partners-header">
+      <div>
+        <div class="section-eyebrow" style="margin-bottom:12px;">Our Partners</div>
+        <h2 class="partners-title">Ecosystem &amp; alliances</h2>
+      </div>
+      <p class="partners-subtitle">We partner with the world's leading technology platforms to deliver best-in-class solutions.</p>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818e_partner3.svg" alt="AWS Partner"></div>
+      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818f_partner2.svg" alt="Google Cloud Partner"></div>
+      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818d_partner4.svg" alt="Microsoft"></div>
+      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48190_partner5.svg" alt="Veeam"></div>
+      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d482f3_crayon-group-seeklogo%201.svg" alt="Crayon"></div>
+      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48191_partner1.svg" alt="Redington"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLIENTS MARQUEE ══ -->
+<section class="clients-section">
+  <div class="clients-label">Trusted by leading enterprises across industries</div>
+  <div class="marquee-outer">
+    <div class="marquee-track">
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48237_Thoughtworks.svg" alt="Thoughtworks"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata Digital"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48234_Mirae.svg" alt="Mirae Asset"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"></div>
+      <!-- duplicate for seamless loop -->
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48237_Thoughtworks.svg" alt="Thoughtworks"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata Digital"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48234_Mirae.svg" alt="Mirae Asset"></div>
+      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ IMPACT (replaces GSAP horizontal trusted) ══ -->
+<section class="impact-section" id="impact">
+  <div class="container">
+    <div class="impact-grid">
+      <div class="impact-left">
+        <div class="impact-eyebrow">Our Impact</div>
+        <h2 class="impact-headline">Trusted by industry leaders across every sector</h2>
+        <div class="impact-numbers">
+          <div class="impact-num-item">
+            <div class="impact-number" data-count="200"><span>0</span>+</div>
+            <div class="impact-num-label">Successful projects</div>
+          </div>
+          <div class="impact-num-item">
+            <div class="impact-number" data-count="7"><span>0</span></div>
+            <div class="impact-num-label">Countries served</div>
+          </div>
+          <div class="impact-num-item">
+            <div class="impact-number" data-count="50"><span>0</span>+</div>
+            <div class="impact-num-label">Enterprise clients</div>
+          </div>
+          <div class="impact-num-item">
+            <div class="impact-number" data-count="99"><span>0</span>%</div>
+            <div class="impact-num-label">Uptime SLA</div>
           </div>
         </div>
       </div>
-
+      <div class="impact-right">
+        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"></div>
+        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank"></div>
+        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank"></div>
+        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48237_Thoughtworks.svg" alt="Thoughtworks"></div>
+        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata Digital"></div>
+        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48234_Mirae.svg" alt="Mirae Asset"></div>
+        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"></div>
+        <div class="impact-logo-cell" style="opacity:.3;justify-content:center;align-items:center;">
+          <span style="font-size:13px;color:var(--text-dim);">+ many more</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- OUR PARTNERS -->
-<section class="partners-section">
+<!-- ══ CASE STUDIES ══ -->
+<section class="cs-section" id="case-studies">
   <div class="container">
-    <div class="section-label">Our Partners</div>
-    <div class="partners-grid">
-      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48191_partner1.svg" alt="Partner"></div>
-      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818f_partner2.svg" alt="Partner"></div>
-      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818e_partner3.svg" alt="Partner"></div>
-      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818d_partner4.svg" alt="Partner"></div>
-      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48190_partner5.svg" alt="Partner"></div>
-      <div class="partner-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d482f3_crayon-group-seeklogo%201.svg" alt="Crayon"></div>
-    </div>
-  </div>
-</section>
-
-<!-- TRUSTED BY INDUSTRY LEADERS -->
-<section class="trusted-section">
-  <div class="trusted-wrapper">
-    <div class="container">
-      <h2 class="trusted-title">Trusted by Industry Leaders</h2>
-    </div>
-    <div class="scroll-container">
-      <div class="scroll-main">
-        <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"></div>
-        <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"></div>
-        <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank"></div>
-        <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank"></div>
-        <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48237_Thoughtworks.svg" alt="Thoughtworks"></div>
-        <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata"></div>
-        <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48234_Mirae.svg" alt="Mirae"></div>
-        <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480c1_Trusted%20Logo.svg" alt="Client"></div>
-        <!-- duplicates for scroll -->
-        <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"></div>
-        <div class="client-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"></div>
+    <div class="cs-header-row">
+      <div>
+        <div class="section-eyebrow" style="margin-bottom:12px;">Case Studies</div>
+        <h2 class="section-title" style="margin-bottom:0;">Stories of transformation</h2>
       </div>
+      <a href="https://www.bootlabstech.com/insights" class="cs-see-more">
+        View all insights
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
-  </div>
-</section>
-
-<!-- CASE STUDIES -->
-<section class="case-studies-section">
-  <div class="container">
-    <div class="cs-header">
-      <div class="services-heading" style="margin-bottom:0">Case Studies</div>
-      <a href="https://www.bootlabstech.com/insights" class="see-more">See More</a>
-    </div>
-    <div class="slider-nav">
-      <div class="swiper-btn prev swiper-button-prev1">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480c3_Slider%20Arrow.svg" alt="Prev">
-      </div>
-      <div class="swiper-btn next swiper-button-next1">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480c3_Slider%20Arrow.svg" alt="Next">
-      </div>
-    </div>
-    <div class="swiper cs-slider">
+    <div class="swiper cs-swiper" id="csSwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <a href="https://www.bootlabstech.com/insights/unlock-the-secrets-of-2024-master-threat-detection-and-response-like-a-pro" class="cs-card">
-            <img class="cs-card-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483c0_11668650_20945657.jpg" alt="">
+          <a href="https://www.bootlabstech.com/insights/unlock-the-secrets-of-2024-master-threat-detection-and-response-like-a-pro" class="cs-slide-card">
+            <img class="cs-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483c0_11668650_20945657.jpg" alt="">
             <div class="cs-body">
-              <div class="cs-date">August 18, 2024</div>
+              <div class="cs-tag">Security</div>
               <div class="cs-title">Unlock the Secrets of 2024: Master Threat Detection and Response Like a Pro!</div>
+              <div class="cs-date">August 18, 2024</div>
             </div>
           </a>
         </div>
         <div class="swiper-slide">
-          <a href="https://www.bootlabstech.com/insights/endpoint-detection-and-response-90-do-it-wrong" class="cs-card">
-            <img class="cs-card-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483bf_7119018_3463986-1536x1536.jpg" alt="">
+          <a href="https://www.bootlabstech.com/insights/endpoint-detection-and-response-90-do-it-wrong" class="cs-slide-card">
+            <img class="cs-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483bf_7119018_3463986-1536x1536.jpg" alt="">
             <div class="cs-body">
-              <div class="cs-date">September 17, 2024</div>
+              <div class="cs-tag">Detection &amp; Response</div>
               <div class="cs-title">Endpoint Detection and Response: 90% Do It Wrong</div>
+              <div class="cs-date">September 17, 2024</div>
             </div>
           </a>
         </div>
         <div class="swiper-slide">
-          <a href="https://www.bootlabstech.com/insights/building-effective-security-awareness-metrics-blueprint-for-2024-success" class="cs-card">
-            <img class="cs-card-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483be_21743663_6485985-1536x1536.jpg" alt="">
+          <a href="https://www.bootlabstech.com/insights/building-effective-security-awareness-metrics-blueprint-for-2024-success" class="cs-slide-card">
+            <img class="cs-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483be_21743663_6485985-1536x1536.jpg" alt="">
             <div class="cs-body">
-              <div class="cs-date">September 16, 2024</div>
+              <div class="cs-tag">Security Awareness</div>
               <div class="cs-title">Building Effective Security Awareness Metrics: Blueprint for 2024 Success</div>
+              <div class="cs-date">September 16, 2024</div>
             </div>
           </a>
         </div>
         <div class="swiper-slide">
-          <a href="#" class="cs-card">
-            <img class="cs-card-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483bd_7970619_3810077-1536x1536.jpg" alt="">
+          <a href="#" class="cs-slide-card">
+            <img class="cs-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483bd_7970619_3810077-1536x1536.jpg" alt="">
             <div class="cs-body">
-              <div class="cs-date">September 9, 2024</div>
+              <div class="cs-tag">Penetration Testing</div>
               <div class="cs-title">Top 10 Web Application Penetration Testing Tools for 2024</div>
+              <div class="cs-date">September 9, 2024</div>
             </div>
           </a>
         </div>
         <div class="swiper-slide">
-          <a href="#" class="cs-card">
-            <img class="cs-card-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483bc_maxresdefault-1024x576.jpg" alt="">
+          <a href="#" class="cs-slide-card">
+            <img class="cs-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483bc_maxresdefault-1024x576.jpg" alt="">
             <div class="cs-body">
-              <div class="cs-date">September 9, 2024</div>
+              <div class="cs-tag">Automation</div>
               <div class="cs-title">Skyrocket Security with SOAR in 2024: Automate &amp; Dominate!</div>
+              <div class="cs-date">September 9, 2024</div>
             </div>
           </a>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ACHIEVEMENTS WORTH CELEBRATING -->
-<section class="award-section">
-  <div class="awards-sricky">
-    <div class="heading-sticky">
-      <div class="container">
-        <div class="heading-box award">
-          <h2>Achievements Worth<br>Celebrating</h2>
-        </div>
+    <div class="cs-nav">
+      <div class="cs-arrow prev" id="csPrev">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </div>
-    </div>
-    <div class="container">
-      <div class="award-wrapper">
-        <div class="bottom-award">
-          <div class="award-card">
-            <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480aa_38ae2fea-8b64-4e52-b6d6-43442f44e2a8.avif" alt="Achievement">
-          </div>
-          <div class="award-card middle">
-            <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480c2_cs.png" alt="Achievement">
-          </div>
-          <div class="award-card">
-            <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480a4_30aa37a7-8c31-4609-acf8-e4e98c99560a.avif" alt="Achievement">
-          </div>
-        </div>
+      <div class="cs-arrow next" id="csNext">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LET'S BUILD -->
-<section class="join-us-section">
+<!-- ══ ACHIEVEMENTS ══ -->
+<section class="awards-section" id="awards">
   <div class="container">
-    <h2 class="join-us-title">Let's Build Intelligent Enterprises with AI</h2>
-    <button class="main-button" onclick="document.querySelector('.popup-section').classList.add('active')">Reach Out</button>
+    <div class="awards-inner">
+      <div class="awards-sticky-text">
+        <div class="section-eyebrow">Recognition</div>
+        <h2 class="awards-big-title">Achievements Worth Celebrating</h2>
+        <p class="awards-desc">Industry recognition for our commitment to excellence, innovation, and client outcomes across AI, cloud, and platform engineering.</p>
+      </div>
+      <div class="awards-photo-stack">
+        <div class="award-photo">
+          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480aa_38ae2fea-8b64-4e52-b6d6-43442f44e2a8.avif" alt="Achievement">
+        </div>
+        <div class="award-photo">
+          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480c2_cs.png" alt="Achievement">
+        </div>
+        <div class="award-photo">
+          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480a4_30aa37a7-8c31-4609-acf8-e4e98c99560a.avif" alt="Achievement">
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- CONTACT POPUP -->
-<section class="popup-section" id="contactPopup">
+<!-- ══ CTA ══ -->
+<section class="cta-section" id="contact">
+  <div class="cta-ring"></div>
+  <div class="cta-ring"></div>
+  <div class="container" style="position:relative;">
+    <div class="cta-label">Get Started</div>
+    <h2 class="cta-headline">Let's Build Intelligent<br>Enterprises with AI</h2>
+    <p class="cta-sub">Partner with us to accelerate your digital transformation journey.</p>
+    <button class="cta-btn" onclick="document.querySelector('.popup-section').classList.add('active')">
+      Reach Out
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ══ CONTACT POPUP ══ -->
+<div class="popup-section" id="popup" onclick="if(event.target===this)this.classList.remove('active')">
   <div class="popup-box">
     <button class="popup-close" onclick="document.querySelector('.popup-section').classList.remove('active')">&#x2715;</button>
     <div class="popup-title">Contact us</div>
     <div class="form-group">
       <label class="form-label">Full Name <span>*</span></label>
-      <input type="text" class="form-input">
+      <input type="text" class="form-input" placeholder="Jane Smith">
     </div>
     <div class="form-group">
       <label class="form-label">Email <span>*</span></label>
-      <input type="email" class="form-input">
+      <input type="email" class="form-input" placeholder="jane@company.com">
     </div>
     <div class="form-group">
-      <label class="form-label">Number <span>*</span></label>
-      <input type="tel" class="form-input">
+      <label class="form-label">Phone Number <span>*</span></label>
+      <input type="tel" class="form-input" placeholder="+91 98765 43210">
     </div>
     <div class="form-group">
       <label class="form-label">Message <span>*</span></label>
-      <textarea class="form-input" rows="4"></textarea>
+      <textarea class="form-input" rows="3" placeholder="Tell us about your project..."></textarea>
     </div>
-    <button class="main-button form-submit">Send Message</button>
+    <button class="form-submit">Send Message</button>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
-<footer class="footer-section">
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
   <div class="container">
-    <div class="footer-animate" data-original="Shaping the Future of Intelligent Enterprises.">Shaping the Future of Intelligent Enterprises.</div>
-    <div class="footer-grid">
+    <div class="footer-top">
+      <div class="footer-brand-col">
+        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <p class="footer-brand-tagline">Labs that Build Intelligent Enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
       <div>
         <div class="footer-col-title">What We Do</div>
-        <ul class="footer-links">
+        <ul class="footer-col-links">
           <li><a href="#">AI Engineering</a></li>
           <li><a href="#">Software Engineering</a></li>
           <li><a href="#">Platform Engineering</a></li>
@@ -607,7 +1255,7 @@ img{display:block;max-width:100%;}
       </div>
       <div>
         <div class="footer-col-title">Insights</div>
-        <ul class="footer-links">
+        <ul class="footer-col-links">
           <li><a href="#">Case Studies</a></li>
           <li><a href="#">Articles</a></li>
           <li><a href="#">News &amp; Events</a></li>
@@ -615,22 +1263,23 @@ img{display:block;max-width:100%;}
       </div>
       <div>
         <div class="footer-col-title">Industries</div>
-        <ul class="footer-links">
+        <ul class="footer-col-links">
           <li><a href="#">BFSI</a></li>
           <li><a href="#">Manufacturing</a></li>
           <li><a href="#">Healthcare</a></li>
           <li><a href="#">Retail</a></li>
           <li><a href="#">Capital Markets</a></li>
           <li><a href="#">Automotive</a></li>
-          <li><a href="#">Startups &amp; Tech</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-logo">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="Bootlabs">
-      </div>
-      <div class="footer-copy">&copy; Copyright 2026</div>
+
+    <div class="footer-marquee-row">
+      <div class="footer-big-text" id="footerBig">BootLabs</div>
+    </div>
+
+    <div class="footer-bottom-row">
+      <div class="footer-copy">&copy; Copyright 2026 BootLabs. All rights reserved.</div>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -639,149 +1288,126 @@ img{display:block;max-width:100%;}
   </div>
 </footer>
 
+<!-- ══ SCRIPTS ══ -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-// NAVBAR STICKY
-window.addEventListener("scroll", function () {
-  document.querySelector(".navbar").classList.toggle("sticky", window.scrollY > 50);
-});
-
-// SCRAMBLE TEXT ON HOVER
-const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-document.querySelectorAll('.scramble-text').forEach(el => {
-  const orig = el.textContent.trim();
-  let busy = false;
-  el.innerHTML = orig.split('').map(c =>
-    '<span class="char"><span class="char-real">' + (c===' '?'&nbsp;':c) + '</span><span class="char-scramble">' + (c===' '?'&nbsp;':c) + '</span></span>'
-  ).join('');
-  const spans = el.querySelectorAll('.char');
-  el.addEventListener('mouseenter', () => {
-    if (busy) return; busy = true;
-    const totalF = Math.floor(700/30); let f = 0;
-    const iv = setInterval(() => {
-      if (f < totalF*0.5) {
-        spans.forEach((s,i) => {
-          if (orig[i]!==' ') s.querySelector('.char-scramble').textContent = ALPHA[Math.floor(Math.random()*26)];
-        });
-      } else {
-        const rev = Math.floor(((f-totalF*0.5)/(totalF*0.5))*spans.length);
-        spans.forEach((s,i) => {
-          const sc = s.querySelector('.char-scramble');
-          sc.textContent = i<rev ? orig[i] : (orig[i]!==' ' ? ALPHA[Math.floor(Math.random()*26)] : '\u00a0');
-        });
-      }
-      if (++f >= totalF) {
-        clearInterval(iv);
-        spans.forEach((s,i) => s.querySelector('.char-scramble').textContent = orig[i]===' '?'\u00a0':orig[i]);
-        busy = false;
-      }
-    }, 30);
-  });
-});
-
-// GSAP
 gsap.registerPlugin(ScrollTrigger);
 
-// WHAT WE DO — char colour reveal
-document.addEventListener("DOMContentLoaded", () => {
-  const animEls = document.querySelectorAll(".animate");
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".we-do-wrapper",
-      start: "top 30%",
-      end: "bottom 70%",
-      scrub: true,
-    }
-  });
-  animEls.forEach(el => {
-    const raw = el.textContent;
-    el.innerHTML = raw.split("").map(c => "<span>" + c + "</span>").join("");
-    tl.from(el.querySelectorAll("span"), { color: "#464b4d", stagger: 1, duration: 1 }, "+=0.5");
-  });
+/* ── NAVBAR SCROLL ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
 });
 
-// SERVICES — stacked card scroll pin
-const cardWrappers = gsap.utils.toArray(".card-wrapper");
-const cardEls = gsap.utils.toArray(".card");
-cardWrappers.forEach((wrapper, i) => {
-  const card = cardEls[i];
-  const isLast = i === cardEls.length - 1;
-  gsap.to(card, {
-    scale: isLast ? 1 : 0.9 + 0.025 * i,
-    rotationX: isLast ? 0 : -10,
-    transformOrigin: "top center",
-    ease: "none",
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "top " + (100 + 20 * i),
-      end: "bottom 550",
-      endTrigger: ".wrapper",
-      scrub: true,
-      pin: wrapper,
-      pinSpacing: false,
-    }
-  });
-});
-
-// TRUSTED — horizontal scroll pin
-const scrollMain = document.querySelector(".scroll-main");
-if (scrollMain) {
-  const dist = scrollMain.scrollWidth - window.innerWidth;
-  gsap.to(scrollMain, {
-    x: () => -dist,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".trusted-wrapper",
-      start: "top 15%",
-      end: "+=" + dist,
-      scrub: true,
-      pin: true,
-      anticipatePin: 1,
-    }
-  });
+/* ── MOBILE MENU ── */
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const burger = document.getElementById('hamburger');
+  const isOpen = menu.classList.toggle('open');
+  burger.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
-// SWIPER CASE STUDIES
-new Swiper(".cs-slider", {
-  slidesPerView: 2,
-  spaceBetween: 20,
-  loop: true,
-  navigation: { nextEl: ".swiper-button-next1", prevEl: ".swiper-button-prev1" },
-  breakpoints: { 320: { slidesPerView: 1 }, 768: { slidesPerView: 2 } },
-});
-
-// FOOTER HEADLINE — scroll-triggered scramble
-document.addEventListener("DOMContentLoaded", () => {
-  const up = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const lo = "abcdefghijklmnopqrstuvwxyz";
-  document.querySelectorAll(".footer-animate").forEach(el => {
-    const orig = el.dataset.original || el.textContent;
-    el.dataset.original = orig;
-    ScrollTrigger.create({
-      trigger: el, start: "top 80%", once: true,
-      onEnter: () => {
-        let fps=30, frames=500/(1000/fps), frame=0;
-        const iv = setInterval(() => {
-          let out = "";
-          if (frame < frames*0.5) {
-            for (let i=0;i<orig.length;i++) out += orig[i]===' ' ? ' ' : (i===0?up:lo)[Math.floor(Math.random()*26)];
-          } else {
-            const rev = Math.floor(((frame-frames*0.5)/(frames*0.5))*orig.length);
-            for (let i=0;i<orig.length;i++) out += i<rev ? orig[i] : (orig[i]===' '?' ':(i===0?up:lo)[Math.floor(Math.random()*26)]);
-          }
-          el.textContent = out;
-          if (++frame >= frames) { clearInterval(iv); el.textContent = orig; }
-        }, 1000/fps);
-      }
-    });
+/* ── SERVICE TABS ── */
+document.querySelectorAll('.svc-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const idx = tab.dataset.tab;
+    document.querySelectorAll('.svc-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.svc-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelector(`.svc-panel[data-panel="${idx}"]`).classList.add('active');
   });
 });
 
-// POPUP — close on backdrop click
-document.querySelector('.popup-section').addEventListener('click', function(e) {
-  if (e.target === this) this.classList.remove('active');
+/* ── COUNTER ANIMATION ── */
+function animateCount(el) {
+  const target = parseInt(el.dataset.count);
+  const span = el.querySelector('span');
+  let start = 0;
+  const duration = 1800;
+  const step = timestamp => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    span.textContent = Math.floor(ease * target);
+    if (progress < 1) requestAnimationFrame(step);
+    else span.textContent = target;
+  };
+  requestAnimationFrame(step);
+}
+
+document.querySelectorAll('[data-count]').forEach(el => {
+  let triggered = false;
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top 85%',
+    onEnter: () => { if (!triggered) { triggered = true; animateCount(el); } }
+  });
+});
+
+/* ── FADE-UP REVEAL ── */
+gsap.utils.toArray('.wedo-stat,.partner-cell,.impact-num-item,.impact-logo-cell,.award-photo,.cs-slide-card').forEach((el, i) => {
+  gsap.from(el, {
+    opacity: 0, y: 30,
+    duration: 0.7,
+    delay: (i % 3) * 0.1,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+  });
+});
+
+/* ── SWIPER CASE STUDIES ── */
+const csSwiper = new Swiper('#csSwiper', {
+  slidesPerView: 1.15,
+  spaceBetween: 20,
+  loop: true,
+  navigation: { nextEl: '#csNext', prevEl: '#csPrev' },
+  breakpoints: {
+    640: { slidesPerView: 1.5 },
+    900: { slidesPerView: 2.2 },
+    1200: { slidesPerView: 3 }
+  }
+});
+document.getElementById('csPrev').addEventListener('click', () => csSwiper.slidePrev());
+document.getElementById('csNext').addEventListener('click', () => csSwiper.slideNext());
+
+/* ── FOOTER SCRAMBLE ── */
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+ScrollTrigger.create({
+  trigger: '#footerBig',
+  start: 'top 85%',
+  once: true,
+  onEnter: () => {
+    const el = document.getElementById('footerBig');
+    const orig = el.textContent;
+    let frame = 0;
+    const totalFrames = Math.floor(600 / (1000/30));
+    const iv = setInterval(() => {
+      let out = '';
+      if (frame < totalFrames * 0.5) {
+        for (let i = 0; i < orig.length; i++) out += orig[i] === ' ' ? ' ' : CHARS[Math.floor(Math.random() * CHARS.length)];
+      } else {
+        const revealed = Math.floor(((frame - totalFrames * 0.5) / (totalFrames * 0.5)) * orig.length);
+        for (let i = 0; i < orig.length; i++) out += i < revealed ? orig[i] : (orig[i] === ' ' ? ' ' : CHARS[Math.floor(Math.random() * CHARS.length)]);
+      }
+      el.textContent = out;
+      if (++frame >= totalFrames) { clearInterval(iv); el.textContent = orig; }
+    }, 1000/30);
+  }
+});
+
+/* ── SECTION REVEAL ── */
+gsap.utils.toArray('.wedo-headline,.section-title,.impact-headline,.awards-big-title,.cta-headline').forEach(el => {
+  gsap.from(el, {
+    opacity: 0, y: 40, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+  });
 });
 </script>
 </body>
