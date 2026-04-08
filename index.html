@@ -3,895 +3,746 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BootLabs — Labs that Build Intelligent Enterprises</title>
+<title>BootLabs — The AI Engineering Partner Behind India's Most Demanding Enterprises</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <style>
 /* ── FONTS ── */
-@font-face {
-  font-family: Neuehaasdisplayroman;
-  src: url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");
-  font-weight: 400; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: Neuehaasdisplaymedium;
-  src: url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");
-  font-weight: 500; font-style: normal; font-display: swap;
-}
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
 
 /* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  background:#06060a;
-  color:#fff;
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:16px;
-  line-height:1.6;
-  overflow-x:hidden;
-}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
 a{text-decoration:none;color:inherit;}
-img{display:block;max-width:100%;}
+img{display:block;max-width:100%;height:auto;}
 ul{list-style:none;}
-.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+button{font-family:NHD,sans-serif;cursor:pointer;}
+input,textarea{box-sizing:border-box;}
 
-/* ── CSS VARS ── */
+/* ── VARS ── */
 :root{
-  --blue:#0066FF;
-  --cyan:#26a8ff;
-  --glass:rgba(255,255,255,0.03);
-  --border:rgba(255,255,255,0.08);
-  --border-blue:rgba(0,102,255,0.35);
-  --text-dim:rgba(255,255,255,0.45);
-  --text-mid:rgba(255,255,255,0.7);
+  --blue:#0066FF;--cyan:#26a8ff;
+  --border:rgba(255,255,255,.08);
+  --border-blue:rgba(0,102,255,.35);
+  --dim:rgba(255,255,255,.45);
+  --mid:rgba(255,255,255,.7);
+  --glass:rgba(255,255,255,.03);
+  --r:20px;
 }
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
+.eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
+.section-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 14px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);}
+.h1{font-size:clamp(36px,5.5vw,88px);font-weight:400;line-height:1.04;letter-spacing:-.01em;}
+.h2{font-size:clamp(28px,4vw,56px);font-weight:400;line-height:1.1;}
+.h3{font-size:clamp(20px,2.5vw,32px);font-weight:400;line-height:1.2;}
+.body-l{font-size:18px;line-height:1.75;color:var(--mid);}
+.body-s{font-size:15px;line-height:1.65;color:var(--dim);}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;font-weight:400;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
+.btn-primary:hover{background:#0055dd;box-shadow:0 8px 32px rgba(0,102,255,.5);transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;transition:transform .2s;}
+.btn-primary:hover svg{transform:translateX(3px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+.divider{width:100%;height:1px;background:var(--border);}
 
-/* ── NOISE OVERLAY ── */
-body::before{
-  content:"";
-  position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:0;opacity:.4;
+/* ══════════════════════
+   MOBILE MENU
+══════════════════════ */
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:490;
+  background:rgba(6,6,10,.97);backdrop-filter:blur(20px);
+  flex-direction:column;padding:100px 32px 48px;
+  overflow-y:auto;
 }
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mob-sub{padding:12px 0 4px;display:none;flex-direction:column;gap:10px;}
+.mob-sub.open{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
 
-/* ══════════════════════════════════
+/* ══════════════════════
    NAVBAR
-══════════════════════════════════ */
+══════════════════════ */
 .navbar{
   position:fixed;top:20px;left:50%;transform:translateX(-50%);
-  z-index:500;
-  display:flex;align-items:center;justify-content:space-between;
-  width:calc(100% - 64px);max-width:1280px;
-  padding:14px 28px;
-  background:rgba(6,6,10,0.7);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border:1px solid var(--border);
-  border-radius:100px;
+  z-index:500;width:calc(100% - 64px);max-width:1280px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:12px 24px;
+  background:rgba(6,6,10,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid var(--border);border-radius:100px;
   transition:background .3s,border-color .3s;
 }
-.navbar.scrolled{background:rgba(6,6,10,0.92);border-color:rgba(255,255,255,0.12);}
-.nav-logo img{width:120px;height:auto;display:block;}
-.nav-links{display:flex;align-items:center;gap:36px;}
-.nav-links a{
-  font-size:14px;font-weight:400;
-  color:var(--text-mid);
-  letter-spacing:.01em;
-  transition:color .2s;
-  position:relative;
+.navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
+.nav-logo img{height:28px;width:auto;display:block;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{
+  font-size:13px;color:var(--mid);padding:8px 14px;border-radius:100px;
+  transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;
 }
-.nav-links a::after{
-  content:"";position:absolute;bottom:-4px;left:0;width:0;height:1px;
-  background:var(--cyan);transition:width .3s;
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.05);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+/* simple dropdown menu */
+.simple-menu{
+  position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);
+  width:240px;
+  background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:10px;
+  display:flex;flex-direction:column;gap:4px;
+  backdrop-filter:blur(20px);
+  z-index:600;
+  visibility:hidden;opacity:0;pointer-events:none;
+  transition:opacity .18s ease,visibility 0s linear .18s;
 }
-.nav-links a:hover{color:#fff;}
-.nav-links a:hover::after{width:100%;}
-.nav-cta{
-  background:var(--blue);
-  color:#fff;
-  border:none;
-  padding:10px 22px;
-  border-radius:100px;
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:14px;
-  cursor:pointer;
-  transition:background .2s,transform .2s,box-shadow .2s;
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{
+  visibility:visible;opacity:1;pointer-events:auto;
+  transition:opacity .18s ease,visibility 0s;
 }
-.nav-cta:hover{
-  background:#0055dd;
-  box-shadow:0 0 24px rgba(0,102,255,.5);
-  transform:translateY(-1px);
+.simple-item{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;border-radius:10px;
+  font-size:13px;color:var(--mid);
+  text-decoration:none;transition:background .2s,color .2s;
 }
+.simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
+.simple-item-sub{font-size:11px;color:var(--dim);margin-top:2px;}
 
-/* ══════════════════════════════════
-   HERO  (UNCHANGED)
-══════════════════════════════════ */
-.hero-section{
-  position:relative;width:100%;height:100vh;
-  overflow:hidden;background:#000;
-}
-.hero-section video{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-}
-
-/* ══════════════════════════════════
-   WHAT WE DO — NEW LAYOUT
-══════════════════════════════════ */
-.wedo-section{
-  padding:160px 0 120px;
-  background:#06060a;
-  position:relative;overflow:hidden;
-}
-/* faint radial glow top-left */
-.wedo-section::before{
-  content:"";position:absolute;
-  top:-200px;left:-200px;
-  width:700px;height:700px;
-  background:radial-gradient(circle,rgba(0,102,255,.12) 0%,transparent 70%);
-  pointer-events:none;
-}
-.wedo-eyebrow{
-  display:flex;align-items:center;gap:12px;
-  font-size:12px;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--cyan);
-  margin-bottom:40px;
-}
-.wedo-eyebrow::before{
-  content:"";display:block;width:32px;height:1px;background:var(--cyan);
-}
-.wedo-headline{
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:clamp(32px,4.5vw,68px);
-  font-weight:400;
-  line-height:1.1;
-  color:#fff;
-  max-width:900px;
-  margin-bottom:64px;
-}
-.wedo-headline em{
-  font-style:normal;
-  background:linear-gradient(90deg,var(--blue),var(--cyan));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.wedo-stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  background:var(--border);
-  border:1px solid var(--border);
-  border-radius:20px;
-  overflow:hidden;
-}
-.wedo-stat{
-  padding:40px 36px;
-  background:#06060a;
-  transition:background .3s;
-}
-.wedo-stat:hover{background:rgba(0,102,255,.05);}
-.wedo-stat-num{
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:56px;line-height:1;
-  color:#fff;
-  margin-bottom:8px;
-}
-.wedo-stat-num span{
-  background:linear-gradient(90deg,var(--blue),var(--cyan));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.wedo-stat-label{font-size:15px;color:var(--text-dim);}
-
-/* ══════════════════════════════════
-   SERVICES — TABBED LAYOUT
-══════════════════════════════════ */
-.services-section{
-  padding:120px 0 160px;
-  background:#06060a;
-  position:relative;
-}
-/* subtle divider */
-.services-section::before{
-  content:"";display:block;
-  width:100%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--border),transparent);
-  margin-bottom:0;
-  position:absolute;top:0;left:0;
-}
-.section-eyebrow{
-  display:flex;align-items:center;gap:12px;
-  font-size:12px;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--cyan);margin-bottom:20px;
-}
-.section-eyebrow::before{content:"";display:block;width:32px;height:1px;background:var(--cyan);}
-.section-title{
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:clamp(28px,3.5vw,52px);
-  font-weight:400;line-height:1.15;
-  color:#fff;margin-bottom:64px;
-}
-/* Tab nav */
-.svc-tabs{
-  display:flex;gap:4px;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:6px;
-  background:rgba(255,255,255,.02);
-  margin-bottom:40px;
-  width:fit-content;
-}
-.svc-tab{
-  padding:12px 28px;
-  font-size:14px;color:var(--text-dim);
-  border-radius:10px;cursor:pointer;
-  transition:all .25s;
-  border:1px solid transparent;
-  font-family:Neuehaasdisplayroman,sans-serif;
-  user-select:none;
-}
-.svc-tab:hover{color:#fff;}
-.svc-tab.active{
-  background:rgba(0,102,255,.15);
-  border-color:var(--border-blue);
-  color:#fff;
-}
-/* Panel grid */
-.svc-panels{position:relative;}
-.svc-panel{display:none;}
-.svc-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:2px;animation:fadeUp .4s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
-.svc-left{
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-right:none;
-  border-radius:20px 0 0 20px;
-  padding:64px 56px;
-  display:flex;flex-direction:column;justify-content:space-between;
-}
-.svc-right{
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:0 20px 20px 0;
-  display:flex;align-items:center;justify-content:center;
-  min-height:480px;
-  position:relative;overflow:hidden;
-}
-/* blue glow behind icon */
-.svc-right::before{
-  content:"";position:absolute;
-  width:300px;height:300px;
-  background:radial-gradient(circle,rgba(0,102,255,.2) 0%,transparent 70%);
-  border-radius:50%;
-  animation:pulse 4s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(1.15);opacity:1;}}
-.svc-right img{position:relative;z-index:1;width:280px;height:auto;object-fit:contain;}
-.svc-name{
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:36px;font-weight:400;
-  color:#fff;margin-bottom:16px;
-}
-.svc-desc{font-size:15px;color:var(--text-mid);line-height:1.7;margin-bottom:32px;}
-.svc-features{margin-bottom:36px;}
-.svc-feature{
-  display:flex;align-items:center;gap:14px;
-  padding:16px 0;
-  border-bottom:1px solid var(--border);
-  font-size:16px;color:var(--text-mid);
-  transition:color .2s;
-}
-.svc-feature:last-child{border-bottom:none;}
-.svc-feature:hover{color:#fff;}
-.svc-feature::before{
-  content:"";flex-shrink:0;
-  width:6px;height:6px;
-  background:var(--cyan);
-  border-radius:50%;
-  box-shadow:0 0 8px var(--cyan);
-}
-.svc-learn-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 28px;
-  border:1px solid var(--border-blue);
-  border-radius:100px;
-  color:#fff;font-size:14px;
-  background:rgba(0,102,255,.1);
-  transition:all .2s;
-  width:fit-content;
-  font-family:Neuehaasdisplayroman,sans-serif;
-}
-.svc-learn-btn:hover{
-  background:var(--blue);
-  border-color:var(--blue);
-  box-shadow:0 0 20px rgba(0,102,255,.4);
-}
-.svc-learn-btn svg{transition:transform .2s;}
-.svc-learn-btn:hover svg{transform:translateX(4px);}
-
-/* ══════════════════════════════════
-   PARTNERS
-══════════════════════════════════ */
-.partners-section{
-  padding:100px 0;
-  background:#06060a;
-  border-top:1px solid var(--border);
-}
-.partners-header{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  margin-bottom:56px;
-}
-.partners-title{
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:clamp(24px,3vw,44px);font-weight:400;color:#fff;
-}
-.partners-subtitle{font-size:14px;color:var(--text-dim);max-width:300px;text-align:right;}
-.partners-grid{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:2px;
-  background:var(--border);
-  border:1px solid var(--border);
-  border-radius:20px;overflow:hidden;
-}
-.partner-cell{
-  background:#06060a;
-  display:flex;align-items:center;justify-content:center;
-  padding:36px 24px;min-height:100px;
-  transition:background .25s;
-}
-.partner-cell:hover{background:rgba(255,255,255,.04);}
-.partner-cell img{max-width:100%;max-height:56px;object-fit:contain;}
-
-/* ══════════════════════════════════
-   CLIENTS MARQUEE
-══════════════════════════════════ */
-.clients-section{
-  padding:80px 0;
-  background:#06060a;
-  overflow:hidden;
-  border-top:1px solid var(--border);
-}
-.clients-label{
-  font-size:12px;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--text-dim);text-align:center;margin-bottom:40px;
-}
-.marquee-outer{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);}
-.marquee-track{
-  display:flex;gap:64px;width:max-content;
-  animation:marqScroll 28s linear infinite;
-}
-.marquee-track:hover{animation-play-state:paused;}
-@keyframes marqScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-.marquee-item img{height:32px;width:auto;filter:brightness(0) invert(1);opacity:.5;transition:opacity .2s;}
-.marquee-item:hover img{opacity:1;}
-
-/* ══════════════════════════════════
-   IMPACT / TRUSTED SECTION
-   (Replaces "Trusted by Industry Leaders" GSAP pin)
-   — a clean 3-col stat + logo block
-══════════════════════════════════ */
-.impact-section{
-  padding:120px 0;
-  background:linear-gradient(180deg,#06060a 0%,#090912 100%);
-  border-top:1px solid var(--border);
-  position:relative;overflow:hidden;
-}
-.impact-section::after{
-  content:"";position:absolute;
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  width:600px;height:600px;
-  background:radial-gradient(circle,rgba(0,102,255,.08) 0%,transparent 70%);
-  pointer-events:none;border-radius:50%;
-}
-.impact-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;align-items:center;
-}
-.impact-left{}
-.impact-eyebrow{
-  font-size:12px;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--cyan);margin-bottom:24px;
-  display:flex;align-items:center;gap:12px;
-}
-.impact-eyebrow::before{content:"";display:block;width:32px;height:1px;background:var(--cyan);}
-.impact-headline{
-  font-size:clamp(28px,3.5vw,52px);font-weight:400;
-  color:#fff;line-height:1.15;margin-bottom:40px;
-}
-.impact-numbers{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:0;}
-.impact-num-item{}
-.impact-number{
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:52px;line-height:1;color:#fff;margin-bottom:6px;
-}
-.impact-number span{
-  background:linear-gradient(90deg,var(--blue),var(--cyan));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.impact-num-label{font-size:13px;color:var(--text-dim);}
-
-/* right side: logo grid */
-.impact-right{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:2px;
-  background:var(--border);
-  border:1px solid var(--border);border-radius:20px;overflow:hidden;
-}
-.impact-logo-cell{
-  background:#06060a;
-  display:flex;align-items:center;justify-content:center;
-  padding:40px 32px;
-  transition:background .25s;
-}
-.impact-logo-cell:hover{background:rgba(255,255,255,.03);}
-.impact-logo-cell img{
-  max-height:36px;width:auto;max-width:160px;object-fit:contain;
-  filter:brightness(0) invert(1);opacity:.5;
-  transition:opacity .2s;
-}
-.impact-logo-cell:hover img{opacity:.9;}
-
-/* ══════════════════════════════════
-   CASE STUDIES — EDITORIAL
-══════════════════════════════════ */
-.cs-section{
-  padding:120px 0 160px;
-  background:#06060a;
-  border-top:1px solid var(--border);
-}
-.cs-header-row{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  margin-bottom:56px;
-}
-.cs-see-more{
-  font-size:13px;color:var(--cyan);
-  display:flex;align-items:center;gap:6px;
-  border-bottom:1px solid rgba(38,168,255,.3);
-  padding-bottom:2px;
-  transition:opacity .2s;
-}
-.cs-see-more:hover{opacity:.7;}
-/* swiper custom */
-.cs-swiper{overflow:visible !important;}
-.cs-slide-card{
-  display:block;
-  border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-  background:var(--glass);
-  transition:border-color .25s,transform .25s;
-}
-.cs-slide-card:hover{border-color:rgba(38,168,255,.3);transform:translateY(-4px);}
-.cs-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
-.cs-body{padding:24px;}
-.cs-tag{
-  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--cyan);margin-bottom:10px;
-}
-.cs-title{font-size:17px;color:#fff;line-height:1.45;font-family:Neuehaasdisplayroman,sans-serif;}
-.cs-date{font-size:12px;color:var(--text-dim);margin-top:12px;}
-/* nav arrows */
-.cs-nav{display:flex;gap:12px;margin-top:32px;}
-.cs-arrow{
-  width:48px;height:48px;border-radius:50%;
-  border:1px solid var(--border);
-  background:var(--glass);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .2s;
-}
-.cs-arrow:hover{border-color:var(--cyan);background:rgba(38,168,255,.1);}
-.cs-arrow svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.5;}
-.cs-arrow.prev svg{transform:rotate(180deg);}
-
-/* ══════════════════════════════════
-   ACHIEVEMENTS — MAGAZINE STYLE
-══════════════════════════════════ */
-.awards-section{
-  padding:120px 0;
-  background:#06060a;
-  border-top:1px solid var(--border);
-}
-.awards-inner{
-  display:grid;
-  grid-template-columns:1fr 2fr;
-  gap:80px;align-items:start;
-}
-.awards-sticky-text{position:sticky;top:120px;}
-.awards-sticky-text .section-eyebrow{margin-bottom:20px;}
-.awards-big-title{
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:clamp(32px,4vw,56px);
-  font-weight:400;line-height:1.1;
-  color:#fff;margin-bottom:24px;
-}
-.awards-desc{font-size:15px;color:var(--text-dim);line-height:1.7;max-width:340px;}
-.awards-photo-stack{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-.award-photo{border-radius:16px;overflow:hidden;position:relative;}
-.award-photo img{width:100%;height:260px;object-fit:cover;display:block;transition:transform .5s;}
-.award-photo:hover img{transform:scale(1.04);}
-.award-photo:first-child{grid-column:span 2;}
-.award-photo:first-child img{height:340px;}
-
-/* ══════════════════════════════════
-   CTA SECTION
-══════════════════════════════════ */
-.cta-section{
-  padding:160px 0;
-  background:linear-gradient(135deg,#06060a 0%,#07091a 50%,#06060a 100%);
-  text-align:center;
-  position:relative;overflow:hidden;
-  border-top:1px solid var(--border);
-}
-.cta-section::before{
-  content:"";position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:800px;height:500px;
-  background:radial-gradient(ellipse,rgba(0,102,255,.1) 0%,transparent 70%);
-  pointer-events:none;
-}
-/* animated ring */
-.cta-ring{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:600px;height:600px;
-  border:1px solid rgba(0,102,255,.12);
-  border-radius:50%;
-  animation:ringPulse 6s ease-in-out infinite;
-}
-.cta-ring:nth-child(2){width:900px;height:900px;animation-delay:2s;border-color:rgba(0,102,255,.06);}
-@keyframes ringPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1;}50%{transform:translate(-50%,-50%) scale(1.04);opacity:.6;}}
-.cta-label{
-  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--cyan);margin-bottom:20px;position:relative;
-}
-.cta-headline{
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:clamp(36px,5vw,80px);
-  font-weight:400;line-height:1.05;
-  color:#fff;margin-bottom:20px;position:relative;
-}
-.cta-sub{font-size:18px;color:var(--text-dim);margin-bottom:48px;position:relative;}
-.cta-btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:18px 40px;
-  background:var(--blue);
-  color:#fff;border:none;border-radius:100px;
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:16px;cursor:pointer;
-  transition:all .25s;position:relative;
-  box-shadow:0 8px 32px rgba(0,102,255,.35);
-}
-.cta-btn:hover{
-  background:#0055dd;
-  box-shadow:0 12px 40px rgba(0,102,255,.5);
-  transform:translateY(-2px);
-}
-.cta-btn svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:1.8;transition:transform .2s;}
-.cta-btn:hover svg{transform:translateX(4px);}
-
-/* ══════════════════════════════════
-   CONTACT POPUP
-══════════════════════════════════ */
-.popup-section{
-  display:none;position:fixed;inset:0;z-index:1000;
-  background:rgba(0,0,0,.8);backdrop-filter:blur(8px);
-  align-items:center;justify-content:center;
-}
-.popup-section.active{display:flex;}
-.popup-box{
-  background:#0f0f17;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:24px;
-  padding:48px;width:100%;max-width:480px;
-  position:relative;
-}
-.popup-close{
-  position:absolute;top:20px;right:20px;
-  width:36px;height:36px;border-radius:50%;
-  background:rgba(255,255,255,.08);border:none;
-  color:#fff;font-size:16px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s;
-}
-.popup-close:hover{background:rgba(255,255,255,.16);}
-.popup-title{font-size:24px;font-family:Neuehaasdisplayroman,sans-serif;color:#fff;margin-bottom:28px;}
-.form-group{margin-bottom:18px;}
-.form-label{display:block;font-size:13px;color:var(--text-dim);margin-bottom:8px;}
-.form-label span{color:var(--cyan);}
-.form-input{
-  width:100%;background:rgba(255,255,255,.05);
-  border:1px solid var(--border);border-radius:10px;
-  padding:12px 16px;color:#fff;
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:14px;
-  transition:border-color .2s;
-  resize:none;
-}
-.form-input:focus{outline:none;border-color:rgba(0,102,255,.5);}
-.form-submit{
-  width:100%;background:var(--blue);
-  color:#fff;border:none;border-radius:10px;
-  padding:14px;font-size:15px;
-  font-family:Neuehaasdisplayroman,sans-serif;
-  cursor:pointer;transition:background .2s;margin-top:8px;
-}
-.form-submit:hover{background:#0055dd;}
-
-/* ══════════════════════════════════
-   FOOTER
-══════════════════════════════════ */
-.footer{
-  background:#06060a;
-  border-top:1px solid var(--border);
-  padding:80px 0 40px;
-}
-.footer-top{
-  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
-  gap:48px;margin-bottom:80px;
-}
-.footer-brand-col img{width:110px;margin-bottom:20px;}
-.footer-brand-tagline{font-size:14px;color:var(--text-dim);line-height:1.7;max-width:260px;}
-.footer-col-title{
-  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--text-dim);margin-bottom:20px;
-}
-.footer-col-links{display:flex;flex-direction:column;gap:12px;}
-.footer-col-links a{font-size:14px;color:rgba(255,255,255,.6);transition:color .2s;}
-.footer-col-links a:hover{color:#fff;}
-/* big scramble text */
-.footer-marquee-row{
-  border-top:1px solid var(--border);
-  padding-top:40px;margin-bottom:40px;
-  overflow:hidden;
-}
-.footer-big-text{
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:clamp(60px,10vw,160px);
-  font-weight:400;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(255,255,255,.12);
-  white-space:nowrap;
-  line-height:1;
-  transition:color .1s,-webkit-text-stroke .1s;
-}
-.footer-bottom-row{
-  border-top:1px solid var(--border);
-  padding-top:24px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.footer-copy{font-size:13px;color:var(--text-dim);}
-.footer-legal{display:flex;gap:24px;}
-.footer-legal a{font-size:13px;color:var(--text-dim);transition:color .2s;}
-.footer-legal a:hover{color:#fff;}
-
-/* ══════════════════════════════════
-   HAMBURGER / MOBILE NAV
-══════════════════════════════════ */
-.nav-hamburger{
-  display:none;
-  flex-direction:column;justify-content:center;align-items:center;gap:5px;
-  width:40px;height:40px;cursor:pointer;
-  border:1px solid var(--border);border-radius:10px;
-  background:rgba(255,255,255,.04);
-  flex-shrink:0;
-}
-.nav-hamburger span{
-  display:block;width:18px;height:1.5px;
-  background:#fff;border-radius:2px;
-  transition:transform .3s,opacity .3s;
-}
+/* mega menu */
+.mega-menu{
+  position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);
+  width:min(680px,96vw);
+  background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;
+  display:grid;grid-template-columns:1fr 1fr;gap:4px;
+  box-shadow:0 32px 64px rgba(0,0,0,.6);
+  z-index:600;
+  visibility:hidden;opacity:0;pointer-events:none;
+  transition:opacity .18s ease,visibility 0s linear .18s;
+}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{
+  visibility:visible;opacity:1;pointer-events:auto;
+  transition:opacity .18s ease,visibility 0s;
+}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-num{font-size:10px;letter-spacing:.1em;color:var(--dim);margin-bottom:4px;}
+.mega-item-title{font-size:14px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;transition:background .2s;}
+.nav-hamburger:hover{background:rgba(255,255,255,.06);}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
 .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-hamburger.open span:nth-child(2){opacity:0;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
-/* full-screen mobile menu overlay */
-.mobile-menu{
-  display:none;
-  position:fixed;inset:0;z-index:490;
-  background:rgba(6,6,10,0.97);
-  backdrop-filter:blur(20px);
-  flex-direction:column;align-items:center;justify-content:center;
-  gap:36px;
+/* ══════════════════════
+   HERO  (VIDEO — UNCHANGED)
+══════════════════════ */
+.hero-section{position:relative;width:100%;height:100vh;overflow:hidden;background:#000;}
+.hero-section video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;}
+@media(max-width:768px){
+  /* Switch to contain on portrait so the animated text isn't cropped */
+  .hero-section video{object-fit:contain;background:#000;}
+  /* Give the hero a 16:9-ish height on mobile so video fills nicely */
+  .hero-section{height:min(100vh,56.25vw + 120px);}
+}
+
+/* ══════════════════════
+   STAT STRIP
+══════════════════════ */
+.stat-strip{
+  background:#0a0a12;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:0;overflow:hidden;width:100%;
+}
+.stat-track{
+  display:flex;align-items:stretch;
+  animation:statScroll 20s linear infinite;
+  width:max-content;
+}
+.stat-track:hover{animation-play-state:paused;}
+@keyframes statScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.stat-item{
+  display:flex;align-items:center;gap:16px;
+  padding:20px 48px;
+  border-right:1px solid var(--border);
+  white-space:nowrap;flex-shrink:0;
+}
+.stat-item-num{font-size:22px;font-weight:400;color:#fff;}
+.stat-item-num span{color:var(--cyan);}
+.stat-item-label{font-size:13px;color:var(--dim);}
+.stat-dot{width:4px;height:4px;border-radius:50%;background:var(--border);flex-shrink:0;}
+
+/* ══════════════════════
+   PROOF STRIP (CLIENT LOGOS)
+══════════════════════ */
+.proof-section{padding:80px 0;background:#06060a;border-bottom:1px solid var(--border);}
+.proof-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);text-align:center;margin-bottom:48px;}
+.proof-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+}
+.proof-cell{
+  background:#06060a;display:flex;align-items:center;justify-content:center;
+  padding:32px 24px;min-height:96px;transition:background .25s;
+}
+.proof-cell:hover{background:rgba(255,255,255,.03);}
+.proof-cell img{max-height:36px;max-width:120px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;transition:opacity .25s;}
+.proof-cell:hover img{opacity:.9;}
+.proof-cell-text{font-size:15px;font-weight:500;color:rgba(255,255,255,.4);letter-spacing:.04em;transition:color .25s;}
+.proof-cell:hover .proof-cell-text{color:rgba(255,255,255,.9);}
+
+/* ══════════════════════
+   WHAT WE DO — 5 CAPABILITIES
+══════════════════════ */
+.wedo-section{padding:120px 0;background:#06060a;}
+.wedo-top{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;margin-bottom:64px;flex-wrap:wrap;}
+.wedo-headline{max-width:640px;}
+.wedo-cta{flex-shrink:0;}
+.caps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.cap-card{
+  background:#06060a;padding:36px 32px;
+  transition:background .3s;position:relative;overflow:hidden;
+}
+.cap-card::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 0% 100%,rgba(0,102,255,.08) 0%,transparent 60%);
   opacity:0;transition:opacity .3s;
 }
-.mobile-menu.open{display:flex;opacity:1;}
-.mobile-menu a,.mobile-menu button{
-  font-family:Neuehaasdisplayroman,sans-serif;
-  font-size:28px;color:#fff;
-  background:none;border:none;cursor:pointer;
-  transition:color .2s;
-}
-.mobile-menu a:hover,.mobile-menu button:hover{color:var(--cyan);}
-.mobile-menu-cta{
-  margin-top:12px;
-  background:var(--blue) !important;
-  color:#fff !important;
-  padding:16px 40px !important;
-  border-radius:100px !important;
-  font-size:18px !important;
-}
+.cap-card:hover{background:#080810;}
+.cap-card:hover::before{opacity:1;}
+.cap-num{font-size:13px;letter-spacing:.12em;color:var(--dim);margin-bottom:20px;}
+.cap-title{font-size:30px;color:#fff;margin-bottom:16px;line-height:1.15;}
+.cap-subs{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+.cap-sub{font-size:17px;color:var(--mid);display:flex;align-items:center;gap:10px;}
+.cap-sub::before{content:"";display:block;width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+.cap-link{font-size:14px;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;opacity:0;transform:translateX(-4px);transition:opacity .25s,transform .25s;}
+.cap-card:hover .cap-link{opacity:1;transform:none;}
+.cap-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;}
+/* last two cards span differently on 3-col */
+.cap-card:nth-child(4),.cap-card:nth-child(5){grid-column:span 1;}
+.caps-row2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-top:none;overflow:hidden;}
 
-/* ══════════════════════════════════
-   RESPONSIVE — 1200px
-══════════════════════════════════ */
-@media(max-width:1200px){
-  .footer-top{grid-template-columns:1.5fr 1fr 1fr;gap:40px;}
+/* ══════════════════════
+   INDUSTRY SPOTLIGHT
+══════════════════════ */
+.industry-section{padding:120px 0;background:#080810;border-top:1px solid var(--border);}
+.industry-header{margin-bottom:56px;}
+.industry-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.industry-card{
+  background:#080810;padding:40px 32px;
+  display:flex;flex-direction:column;gap:0;
+  transition:background .3s;position:relative;overflow:hidden;
+  cursor:pointer;
 }
+.industry-card::after{
+  content:"";position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  transform:scaleX(0);transform-origin:left;transition:transform .35s;
+}
+.industry-card:hover{background:rgba(0,102,255,.04);}
+.industry-card:hover::after{transform:scaleX(1);}
+.industry-icon{font-size:28px;margin-bottom:20px;}
+.industry-name{font-size:18px;font-weight:500;color:#fff;margin-bottom:8px;}
+.industry-stat{font-size:36px;line-height:1;color:var(--cyan);margin:20px 0 8px;font-weight:400;}
+.industry-stat-label{font-size:15px;color:var(--mid);margin-bottom:24px;flex:1;line-height:1.6;}
+.industry-arrow{font-size:12px;color:var(--cyan);display:flex;align-items:center;gap:6px;opacity:0;transform:translateX(-4px);transition:all .25s;}
+.industry-card:hover .industry-arrow{opacity:1;transform:none;}
 
-/* ══════════════════════════════════
-   RESPONSIVE — 1024px (tablet landscape)
-══════════════════════════════════ */
-@media(max-width:1024px){
+/* ══════════════════════
+   USE CASE CAROUSEL
+══════════════════════ */
+.usecase-section{padding:120px 0;background:#06060a;border-top:1px solid var(--border);overflow:hidden;}
+.usecase-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.usecase-left{position:relative;}
+.usecase-slides{position:relative;min-height:320px;}
+.usecase-slide{
+  position:absolute;inset:0;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .5s,transform .5s;
+  pointer-events:none;
+}
+.usecase-slide.active{opacity:1;transform:none;position:relative;pointer-events:auto;}
+.usecase-q{
+  font-size:clamp(22px,3vw,38px);font-weight:400;line-height:1.25;
+  color:#fff;margin-bottom:20px;
+}
+.usecase-q em{font-style:normal;color:var(--cyan);}
+.usecase-answer{font-size:17px;color:var(--mid);line-height:1.75;margin-bottom:32px;}
+.usecase-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.usecase-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border);border-radius:100px;color:var(--dim);}
+/* nav dots */
+.usecase-dots{display:flex;align-items:center;gap:10px;margin-top:36px;}
+.usecase-dot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .25s;}
+.usecase-dot.active{width:24px;border-radius:3px;background:var(--blue);}
+/* right visual */
+.usecase-right{position:relative;}
+.usecase-visual{
+  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+  background:#0a0a16;
+  aspect-ratio:4/3;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.usecase-visual::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 50%,rgba(0,102,255,.12) 0%,transparent 60%);
+}
+.usecase-number{font-size:120px;font-weight:400;color:rgba(0,102,255,.08);line-height:1;position:relative;z-index:1;}
+
+/* ══════════════════════
+   PLATFORMS
+══════════════════════ */
+.platforms-section{padding:120px 0;background:#080810;border-top:1px solid var(--border);}
+.platforms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.platforms-grid--two{grid-template-columns:1fr 1fr;}
+.platforms-grid--three{grid-template-columns:1fr 1fr 1fr;}
+.platform-card{
+  border:1px solid var(--border);border-radius:var(--r);padding:40px 36px;
+  background:var(--glass);
+  display:flex;flex-direction:column;gap:16px;
+  transition:border-color .3s,background .3s;position:relative;overflow:hidden;
+}
+.platform-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.platform-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.04);}
+.platform-card:hover::before{opacity:1;}
+.platform-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cyan);padding:5px 12px;border:1px solid var(--border-blue);border-radius:100px;
+  background:rgba(0,102,255,.06);width:fit-content;
+}
+.platform-name{font-size:28px;color:#fff;}
+.platform-desc{font-size:16px;color:var(--mid);line-height:1.75;flex:1;}
+.platform-link{font-size:13px;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;margin-top:8px;transition:gap .2s;}
+.platform-link:hover{gap:10px;}
+.platform-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;}
+
+/* ══════════════════════
+   WHY BOOTLABS
+══════════════════════ */
+.why-section{padding:120px 0;background:#06060a;border-top:1px solid var(--border);}
+.why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:56px;}
+.why-card{
+  background:#06060a;padding:36px 28px;
+  transition:background .3s;
+}
+.why-card:hover{background:rgba(0,102,255,.04);}
+.why-icon{width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.12);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:18px;}
+.why-title{font-size:16px;color:#fff;margin-bottom:10px;line-height:1.3;}
+.why-desc{font-size:15px;color:var(--mid);line-height:1.7;}
+
+/* ══════════════════════
+   PARTNERS & CERTS
+══════════════════════ */
+.partners-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.partners-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.partners-grid-wrap{display:flex;flex-direction:column;gap:32px;}
+.partners-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.partner-cell{background:#080810;display:flex;align-items:center;justify-content:center;padding:32px 24px;transition:background .25s;}
+.partner-cell:hover{background:rgba(255,255,255,.03);}
+.partner-cell img{max-height:64px;max-width:160px;width:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:.55;transition:opacity .25s;}
+.partner-cell:hover img{opacity:1;}
+.certs-row{display:flex;gap:16px;flex-wrap:wrap;}
+.cert-badge{
+  display:flex;align-items:center;gap:12px;
+  padding:16px 20px;border:1px solid var(--border-blue);border-radius:14px;
+  background:rgba(0,102,255,.06);flex:1;min-width:160px;
+}
+.cert-icon{width:36px;height:36px;border-radius:8px;background:rgba(0,102,255,.15);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.cert-text{font-size:13px;color:#fff;line-height:1.4;}
+.cert-sub{font-size:11px;color:var(--dim);}
+/* right: Databricks note + why partner text */
+.partners-right{}
+.partners-right .eyebrow{margin-bottom:20px;}
+.partners-right-title{font-size:clamp(24px,3vw,40px);font-weight:400;color:#fff;margin-bottom:16px;line-height:1.2;}
+.partners-right-desc{font-size:17px;color:var(--mid);line-height:1.75;margin-bottom:32px;}
+
+/* ══════════════════════
+   FOUNDER CTA
+══════════════════════ */
+.founder-section{
+  padding:120px 0;
+  background:linear-gradient(135deg,#06060a 0%,#07091a 60%,#06060a 100%);
+  border-top:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.founder-section::before{
+  content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:800px;height:600px;
+  background:radial-gradient(ellipse,rgba(0,102,255,.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+.founder-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;}
+.founder-left{}
+.founder-quote{
+  font-size:clamp(22px,2.8vw,38px);font-weight:400;line-height:1.3;
+  color:#fff;margin-bottom:28px;
+  position:relative;padding-left:24px;
+}
+.founder-quote::before{
+  content:"";position:absolute;left:0;top:4px;bottom:4px;
+  width:2px;background:linear-gradient(180deg,var(--blue),var(--cyan));
+  border-radius:2px;
+}
+.founder-attribution{display:flex;align-items:center;gap:16px;margin-bottom:32px;}
+.founder-avatar{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--border-blue);}
+.founder-name{font-size:16px;color:#fff;font-weight:500;}
+.founder-role{font-size:14px;color:var(--dim);}
+/* Photo column */
+.founder-right{display:grid;grid-template-rows:auto 1fr;gap:16px;}
+.founder-photo-wrap{
+  position:relative;border-radius:20px;overflow:hidden;
+  border:1px solid var(--border);
+  aspect-ratio:3/4;
+  max-height:500px;
+}
+.founder-photo-wrap img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  display:block;
+}
+.founder-photo-wrap::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(6,6,10,.7) 100%);
+}
+.founder-cards{display:flex;flex-direction:column;gap:14px;}
+.founder-action-card{
+  border:1px solid var(--border);border-radius:var(--r);padding:32px;
+  background:rgba(255,255,255,.02);transition:border-color .3s,background .3s;
+}
+.founder-action-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.04);}
+.founder-action-title{font-size:18px;color:#fff;margin-bottom:8px;}
+.founder-action-desc{font-size:16px;color:var(--mid);margin-bottom:20px;line-height:1.7;}
+
+/* ══════════════════════
+   FOOTER
+══════════════════════ */
+.footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;width:auto;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
+.footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+.footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
+.footer-big{
+  font-size:clamp(40px,10vw,150px);font-weight:400;
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);
+  white-space:nowrap;line-height:1;
+  overflow:hidden;
+}
+.footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+
+/* ══════════════════════
+   RESPONSIVE
+══════════════════════ */
+/* ── TABLET LANDSCAPE ── */
+@media(max-width:1100px){
   .container{padding:0 32px;}
-  .wedo-section{padding:120px 0 80px;}
-  .services-section{padding:80px 0 100px;}
-  .impact-section{padding:80px 0;}
-  .cs-section{padding:80px 0 100px;}
-  .awards-section{padding:80px 0;}
-  .cta-section{padding:120px 0;}
-  .footer{padding:64px 0 32px;}
-
-  .impact-grid{grid-template-columns:1fr;gap:48px;}
-  .awards-inner{grid-template-columns:1fr;gap:48px;}
-  .awards-sticky-text{position:static;}
-  .awards-photo-stack{grid-template-columns:1fr 1fr;}
-  .award-photo:first-child img{height:280px;}
-  .award-photo img{height:220px;}
-
+  .caps-grid{grid-template-columns:1fr 1fr;}
+  .caps-row2{grid-template-columns:1fr 1fr;}
+  .why-grid{grid-template-columns:repeat(3,1fr);}
+  .industry-grid{grid-template-columns:repeat(2,1fr);}
+  .partners-inner{grid-template-columns:1fr;gap:48px;}
+  .founder-inner{grid-template-columns:1fr;gap:48px;}
   .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
-  .footer-brand-col{grid-column:span 2;}
+  .footer-brand{grid-column:span 2;}
+  .platforms-grid,.platforms-grid--two,.platforms-grid--three{grid-template-columns:1fr 1fr;}
+  .usecase-inner{grid-template-columns:1fr;gap:40px;}
+  .usecase-right{display:none;}
 }
 
-/* ══════════════════════════════════
-   RESPONSIVE — 768px (tablet portrait)
-══════════════════════════════════ */
+/* ── TABLET PORTRAIT / MOBILE ── */
 @media(max-width:768px){
-  .container{padding:0 20px;}
+  /* layout */
+  .container{padding:0 18px;}
 
   /* navbar */
-  .navbar{top:12px;width:calc(100% - 32px);padding:10px 16px;}
-  .nav-links{display:none;}
-  .nav-cta{display:none;}
+  .navbar{
+    top:10px;
+    width:calc(100% - 24px);
+    padding:10px 14px;
+    border-radius:60px;
+  }
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
 
-  /* sections */
-  .wedo-section{padding:100px 0 64px;}
-  .services-section{padding:64px 0 80px;}
-  .partners-section{padding:64px 0;}
-  .clients-section{padding:56px 0;}
-  .impact-section{padding:64px 0;}
-  .cs-section{padding:64px 0 80px;}
-  .awards-section{padding:64px 0;}
-  .cta-section{padding:80px 0;}
-  .footer{padding:48px 0 24px;}
+  /* stat strip */
+  .stat-item{padding:14px 20px;}
+  .stat-item-num{font-size:17px;}
+  .stat-item-label{font-size:12px;}
+
+  /* proof */
+  .proof-section{padding:56px 0;}
+  .proof-grid{grid-template-columns:repeat(2,1fr);}
+  .proof-cell{padding:20px 12px;min-height:72px;}
+  .proof-cell img{max-height:24px;max-width:90px;}
+  .proof-cell-text{font-size:13px;}
 
   /* what we do */
-  .wedo-stats{grid-template-columns:1fr;}
-  .wedo-stat{padding:28px 24px;}
-  .wedo-stat-num{font-size:42px;}
-
-  /* services */
-  .svc-tabs{
-    width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
-    flex-wrap:nowrap;scrollbar-width:none;
+  .wedo-section{padding:72px 0;}
+  .wedo-top{flex-direction:column;align-items:flex-start;gap:20px;margin-bottom:36px;}
+  .caps-grid{grid-template-columns:1fr;border-radius:14px 14px 0 0;}
+  .caps-row2{
+    grid-template-columns:1fr;
+    border-radius:0 0 14px 14px;
+    border:1px solid var(--border);
+    border-top:none;
   }
-  .svc-tabs::-webkit-scrollbar{display:none;}
-  .svc-tab{white-space:nowrap;flex-shrink:0;padding:10px 20px;font-size:13px;}
-  .svc-panel.active{grid-template-columns:1fr;}
-  .svc-right{display:none;}
-  .svc-left{border-radius:16px;border-right:1px solid var(--border);padding:36px 28px;}
-  .svc-name{font-size:26px;}
-  .section-title{margin-bottom:36px;}
+  .cap-card{padding:28px 22px;}
+  .cap-card:nth-child(1){border-right:none;}
+  /* override the desktop border-right hack on row2 */
+  .caps-row2 .cap-card{border-right:none !important;border-bottom:1px solid var(--border);}
+  .caps-row2 .cap-card:last-child{border-bottom:none;}
+
+  /* industries */
+  .industry-section{padding:72px 0;}
+  .industry-grid{grid-template-columns:1fr 1fr;}
+  .industry-card{padding:24px 18px;}
+  .industry-stat{font-size:28px;}
+
+  /* use case */
+  .usecase-section{padding:72px 0;}
+  .usecase-inner{grid-template-columns:1fr;gap:32px;}
+  .usecase-right{display:none;}
+  .usecase-slides{min-height:auto;}
+  .usecase-q{font-size:clamp(20px,5vw,28px);}
+
+  /* platforms */
+  .platforms-section{padding:72px 0;}
+  .platforms-grid,.platforms-grid--two{grid-template-columns:1fr;}
+
+  /* why */
+  .why-section{padding:72px 0;}
+  .why-grid{grid-template-columns:1fr 1fr;}
 
   /* partners */
-  .partners-header{flex-direction:column;align-items:flex-start;gap:10px;}
-  .partners-subtitle{text-align:left;max-width:100%;}
+  .partners-section{padding:64px 0;}
+  .partners-inner{grid-template-columns:1fr;gap:40px;}
   .partners-grid{grid-template-columns:repeat(3,1fr);}
-  .partner-cell{padding:24px 16px;}
-  .partner-cell img{max-height:40px;}
+  .partner-cell{padding:20px 12px;}
+  .certs-row{flex-direction:column;}
+  .cert-badge{min-width:unset;}
 
-  /* impact */
-  .impact-numbers{grid-template-columns:1fr 1fr;gap:24px;}
-  .impact-number{font-size:40px;}
-  .impact-right{grid-template-columns:repeat(2,1fr);}
-  .impact-logo-cell{padding:28px 20px;}
-
-  /* case studies header */
-  .cs-header-row{flex-direction:column;align-items:flex-start;gap:16px;}
-
-  /* achievements */
-  .awards-photo-stack{grid-template-columns:1fr;}
-  .award-photo:first-child{grid-column:span 1;}
-  .award-photo img{height:200px !important;}
-
-  /* cta rings */
-  .cta-ring{width:320px;height:320px;}
-  .cta-ring:nth-child(2){width:480px;height:480px;}
-
-  /* popup */
-  .popup-box{padding:32px 24px;border-radius:20px;max-width:calc(100% - 32px);}
+  /* founder */
+  .founder-section{padding:72px 0;}
+  .founder-inner{grid-template-columns:1fr;gap:36px;}
+  .founder-quote{font-size:clamp(20px,5vw,28px);}
 
   /* footer */
+  .footer{padding:56px 0 28px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
-  .footer-brand-col{grid-column:span 1;}
-  .footer-bottom-row{flex-direction:column;gap:16px;text-align:center;}
-  .footer-legal{justify-content:center;}
-  .footer-big-text{font-size:clamp(48px,14vw,100px);}
-  .footer-marquee-row{padding-top:28px;margin-bottom:28px;}
+  .footer-brand{grid-column:span 1;}
+  .footer-bot{flex-direction:column;align-items:flex-start;gap:12px;}
+  .footer-big{font-size:clamp(48px,14vw,120px);}
 }
 
-/* ══════════════════════════════════
-   RESPONSIVE — 480px (small phones)
-══════════════════════════════════ */
+/* ── SMALL PHONES ── */
 @media(max-width:480px){
-  .container{padding:0 16px;}
-  .navbar{width:calc(100% - 24px);top:10px;padding:10px 14px;}
-  .nav-logo img{width:96px;}
+  .container{padding:0 14px;}
+  .navbar{width:calc(100% - 16px);padding:9px 12px;}
+  .nav-logo img{height:22px;}
 
-  .wedo-section{padding:80px 0 48px;}
-  .wedo-stat-num{font-size:36px;}
-  .wedo-stat{padding:24px 20px;}
+  /* proof */
+  .proof-grid{grid-template-columns:repeat(2,1fr);}
 
-  .svc-tab{padding:9px 16px;font-size:12px;}
-  .svc-left{padding:28px 20px;}
-  .svc-name{font-size:22px;}
-  .svc-feature{font-size:14px;gap:10px;}
+  /* caps */
+  .caps-grid{border-radius:12px 12px 0 0;}
+  .caps-row2{border-radius:0 0 12px 12px;}
+  .cap-card{padding:24px 18px;}
+  .cap-title{font-size:22px;}
 
+  /* industries */
+  .industry-grid{grid-template-columns:1fr;}
+  .industry-stat{font-size:36px;}
+
+  /* why */
+  .why-grid{grid-template-columns:1fr;}
+
+  /* partners */
   .partners-grid{grid-template-columns:repeat(2,1fr);}
-  .partner-cell{padding:20px 12px;}
 
-  .impact-numbers{grid-template-columns:1fr 1fr;gap:16px;}
-  .impact-number{font-size:34px;}
-  .impact-right{grid-template-columns:1fr 1fr;}
-  .impact-logo-cell{padding:20px 12px;}
-  .impact-logo-cell img{max-height:28px;}
+  /* footer */
+  .footer-big{font-size:clamp(36px,16vw,80px);}
+  .footer-legal{flex-wrap:wrap;gap:12px;}
 
-  .cta-ring{width:220px;height:220px;}
-  .cta-ring:nth-child(2){width:340px;height:340px;}
-  .cta-sub{font-size:15px;}
-  .cta-btn{padding:14px 28px;font-size:14px;}
-
-  .popup-box{padding:24px 20px;}
-  .popup-title{font-size:20px;}
-
-  .footer-top{gap:24px;}
-  .footer-big-text{font-size:clamp(36px,16vw,80px);}
-
-  .mobile-menu a,.mobile-menu button{font-size:22px;}
-  .mobile-menu-cta{font-size:16px !important;padding:14px 32px !important;}
+  /* mobile menu */
+  .mob-nav-link{font-size:20px;}
+  .mobile-menu-cta{font-size:15px !important;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ MOBILE MENU OVERLAY ══ -->
+<!-- ══ MOBILE MENU ══ -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#services" onclick="closeMobileMenu()">What We Do</a>
-  <a href="#partners" onclick="closeMobileMenu()">Partners</a>
-  <a href="#case-studies" onclick="closeMobileMenu()">Insights</a>
-  <button class="mobile-menu-cta" onclick="closeMobileMenu();document.querySelector('.popup-section').classList.add('active')">Let's Connect</button>
+  <nav class="mob-nav-links">
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">
+        Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mob-sub">
+        <a href="ai-engineering.html" onclick="closeMobileMenu()">AI Engineering</a>
+        <a href="platform-engineering.html" onclick="closeMobileMenu()">Platform Engineering</a>
+        <a href="cloud-devops.html" onclick="closeMobileMenu()">Cloud &amp; DevOps Engineering</a>
+        <a href="software-engineering.html" onclick="closeMobileMenu()">Software Engineering</a>
+        <a href="security-engineering.html" onclick="closeMobileMenu()">Security Engineering</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Solutions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="resilient-operations-center.html" onclick="closeMobileMenu()">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" onclick="closeMobileMenu()">AI in SDLC</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">
+        Industries <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mob-sub">
+        <a href="manufacturing.html" onclick="closeMobileMenu()">Manufacturing</a>
+        <a href="automotive.html" onclick="closeMobileMenu()">Automotive</a>
+        <a href="financial-services.html" onclick="closeMobileMenu()">Financial Services</a>
+        <a href="qsr.html" onclick="closeMobileMenu()">QSR</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">
+        Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mob-sub">
+        <a href="sailor.html" onclick="closeMobileMenu()">Sailor</a>
+        <a href="guardian.html" onclick="closeMobileMenu()">Guardian</a>
+      </div>
+    </div>
+    <a class="mob-nav-link" href="#partners" onclick="closeMobileMenu()">Partners</a>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">
+        Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mob-sub">
+        <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="white-papers.html" onclick="closeMobileMenu()">White Papers</a>
+        <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </nav>
+  <div class="mob-cta">
+    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button>
+  </div>
 </div>
 
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
-  <div class="nav-logo">
-    <a href="#"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <a href="#" class="nav-logo">
+    <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+  </a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="#" class="nav-link">
+        Services
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <div class="mega-menu">
+        <a href="ai-engineering.html" class="mega-item">
+          <div class="mega-item-title">AI Engineering</div>
+          <div class="mega-item-subs">Enterprise GenAI · AI Agents · AIOps · Managed Services</div>
+        </a>
+        <a href="platform-engineering.html" class="mega-item">
+          <div class="mega-item-title">Platform Engineering</div>
+          <div class="mega-item-subs">IDP · Self-Service Infra · Platform Governance · Multi-Cloud</div>
+        </a>
+        <a href="cloud-devops.html" class="mega-item">
+          <div class="mega-item-title">Cloud & DevOps Engineering</div>
+          <div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Observability & SRE</div>
+        </a>
+        <a href="software-engineering.html" class="mega-item">
+          <div class="mega-item-title">Software Engineering</div>
+          <div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div>
+        </a>
+        <a href="security-engineering.html" class="mega-item" style="grid-column:span 2;">
+          <div class="mega-item-title">Security Engineering</div>
+          <div class="mega-item-subs">DevSecOps · Vulnerability Management · CSPM · Security Automation</div>
+        </a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">
+        Solutions
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <div class="simple-menu">
+        <a href="resilient-operations-center.html" class="simple-item">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" class="simple-item">AI in SDLC</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#industry" class="nav-link">
+        Industries
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <div class="simple-menu">
+        <a href="manufacturing.html" class="simple-item">Manufacturing</a>
+        <a href="automotive.html" class="simple-item">Automotive</a>
+        <a href="financial-services.html" class="simple-item">Financial Services</a>
+        <a href="qsr.html" class="simple-item">QSR</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#platforms" class="nav-link">
+        Platforms
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <div class="simple-menu">
+        <a href="sailor.html" class="simple-item">Sailor</a>
+        <a href="guardian.html" class="simple-item">Guardian</a>
+      </div>
+    </div>
+    <a href="#partners" class="nav-link">Partners</a>
+    <div class="nav-item">
+      <a href="#insights" class="nav-link">
+        Insights
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <div class="simple-menu">
+        <a href="case-studies.html" class="simple-item">Case Studies</a>
+        <a href="white-papers.html" class="simple-item">White Papers</a>
+        <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
+      </div>
+    </div>
   </div>
-  <ul class="nav-links">
-    <li><a href="#services">What We Do</a></li>
-    <li><a href="#partners">Partners</a></li>
-    <li><a href="#case-studies">Insights</a></li>
-    <li><a href="#contact" onclick="document.querySelector('.popup-section').classList.add('active');return false;">Join Us</a></li>
-  </ul>
-  <button class="nav-cta" onclick="document.querySelector('.popup-section').classList.add('active')">Let's Connect</button>
-  <div class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()">
-    <span></span><span></span><span></span>
+  <div class="nav-right">
+    <button class="btn-primary" onclick="openContact()">
+      Book a Call
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<!-- ══ HERO (UNCHANGED) ══ -->
+<!-- ══ HERO — VIDEO UNCHANGED ══ -->
 <section class="hero-section">
   <video autoplay muted loop playsinline
     poster="https://cdn.prod.website-files.com/69133bfd571090aeadf4498e/698458b44da968b931922543_Home%20Page%20Logo%20%26%20text%20v17_poster.0000000.jpg">
@@ -900,338 +751,378 @@ body::before{
   </video>
 </section>
 
-<!-- ══ WHAT WE DO ══ -->
-<section class="wedo-section">
+<!-- ══ STAT STRIP ══ -->
+<div class="stat-strip">
+  <div class="stat-track">
+    <!-- set 1 -->
+    <div class="stat-item"><span class="stat-item-num"><span class="counter" data-target="30">0</span><span style="color:var(--cyan)">+</span></span><span class="stat-item-label">Enterprise Clients</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num"><span class="counter" data-target="50">0</span><span style="color:var(--cyan)">+</span></span><span class="stat-item-label">AI Projects Delivered</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num" style="font-size:15px;color:var(--cyan)">ISO 27001</span><span class="stat-item-label">+ SOC 2 Certified</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num"><span class="counter" data-target="7">0</span></span><span class="stat-item-label">Countries Served</span></div>
+    <div class="stat-dot"></div>
+    <!-- set 2 (duplicate for seamless loop) -->
+    <div class="stat-item"><span class="stat-item-num"><span>30</span><span style="color:var(--cyan)">+</span></span><span class="stat-item-label">Enterprise Clients</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num"><span>50</span><span style="color:var(--cyan)">+</span></span><span class="stat-item-label">AI Projects Delivered</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num" style="font-size:15px;color:var(--cyan)">ISO 27001</span><span class="stat-item-label">+ SOC 2 Certified</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num"><span>7</span></span><span class="stat-item-label">Countries Served</span></div>
+    <div class="stat-dot"></div>
+  </div>
+</div>
+
+<!-- ══ PROOF STRIP ══ -->
+<section class="proof-section" id="clients">
   <div class="container">
-    <div class="wedo-eyebrow">What We Do</div>
-    <h2 class="wedo-headline">
-      BootLabs is an <em>AI engineering company</em> pioneering platform-led, cloud-native, and AI-driven transformations for modern enterprises and sovereign ecosystems.
-    </h2>
-    <div class="wedo-stats">
-      <div class="wedo-stat">
-        <div class="wedo-stat-num" data-count="200"><span>0</span>+</div>
-        <div class="wedo-stat-label">AI & Cloud projects delivered</div>
+    <p class="proof-label">Trusted by the world's most demanding enterprises</p>
+    <div class="proof-grid">
+      <div class="proof-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"></div>
+      <div class="proof-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata Digital"></div>
+      <div class="proof-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank"></div>
+      <div class="proof-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank"></div>
+      <div class="proof-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"></div>
+      <div class="proof-cell"><span class="proof-cell-text">L&T</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">Apollo</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">Ather Energy</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">LAPP</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">DEWA</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">Mirrae Assets</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">HDFC Securities</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">Sanabil Investments</span></div>
+      <div class="proof-cell"><span class="proof-cell-text" style="font-size:13px;letter-spacing:.08em;">more...</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT WE DO — 5 CAPABILITIES ══ -->
+<section class="wedo-section" id="services">
+  <div class="container">
+    <div class="wedo-top">
+      <div class="wedo-headline">
+        <div class="eyebrow" style="margin-bottom:20px;">What We Do</div>
+        <h2 class="h2">Five engineering disciplines.<br>One integrated partner.</h2>
       </div>
-      <div class="wedo-stat">
-        <div class="wedo-stat-num" data-count="50"><span>0</span>+</div>
-        <div class="wedo-stat-label">Enterprise clients globally</div>
+      <div class="wedo-cta">
+        <a href="#" class="btn-outline">
+          All capabilities
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
-      <div class="wedo-stat">
-        <div class="wedo-stat-num" data-count="98"><span>0</span>%</div>
-        <div class="wedo-stat-label">Client satisfaction rate</div>
+    </div>
+
+    <!-- top 3 -->
+    <div class="caps-grid" style="border-radius:20px 20px 0 0;">
+      <div class="cap-card">
+        <div class="cap-num">01</div>
+        <div class="cap-title">AI Engineering</div>
+        <div class="cap-subs">
+          <div class="cap-sub">Enterprise GenAI Platforms</div>
+          <div class="cap-sub">AI Agents & Knowledge Assistants</div>
+          <div class="cap-sub">AIOps & Intelligent Automation</div>
+          <div class="cap-sub">AI-enabled Managed Services</div>
+        </div>
+        <a href="#" class="cap-link">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">02</div>
+        <div class="cap-title">Platform Engineering</div>
+        <div class="cap-subs">
+          <div class="cap-sub">Internal Developer Platforms (IDP)</div>
+          <div class="cap-sub">Self-Service Infrastructure</div>
+          <div class="cap-sub">Platform Governance & Automation</div>
+          <div class="cap-sub">Multi-Cloud Platform Engineering</div>
+        </div>
+        <a href="#" class="cap-link">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">03</div>
+        <div class="cap-title">Cloud & DevOps Engineering</div>
+        <div class="cap-subs">
+          <div class="cap-sub">Cloud Architecture & Migration</div>
+          <div class="cap-sub">Kubernetes & Container Platforms</div>
+          <div class="cap-sub">CI/CD & Infrastructure as Code</div>
+          <div class="cap-sub">Observability & SRE</div>
+        </div>
+        <a href="#" class="cap-link">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+    <!-- bottom 2 -->
+    <div class="caps-row2" style="border-radius:0 0 20px 20px;border:1px solid var(--border);border-top:none;">
+      <div class="cap-card" style="border:none;border-right:1px solid var(--border);">
+        <div class="cap-num">04</div>
+        <div class="cap-title">Software Engineering</div>
+        <div class="cap-subs">
+          <div class="cap-sub">Cloud Native App Development</div>
+          <div class="cap-sub">Application Modernization</div>
+          <div class="cap-sub">Microservices Architecture</div>
+          <div class="cap-sub">API & Integration Platforms</div>
+        </div>
+        <a href="#" class="cap-link">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="cap-card" style="border:none;">
+        <div class="cap-num">05</div>
+        <div class="cap-title">Security Engineering</div>
+        <div class="cap-subs">
+          <div class="cap-sub">DevSecOps Integration</div>
+          <div class="cap-sub">Vulnerability Management</div>
+          <div class="cap-sub">Cloud Security Posture (CSPM)</div>
+          <div class="cap-sub">Security Automation</div>
+        </div>
+        <a href="#" class="cap-link">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ OUR SERVICES ══ -->
-<section class="services-section" id="services">
+<!-- ══ INDUSTRY SPOTLIGHT ══ -->
+<section class="industry-section" id="industry">
   <div class="container">
-    <div class="section-eyebrow">Our Services</div>
-    <h2 class="section-title">Engineering the future,<br>one platform at a time.</h2>
-
-    <div class="svc-tabs">
-      <div class="svc-tab active" data-tab="0">AI Engineering</div>
-      <div class="svc-tab" data-tab="1">Software Engineering</div>
-      <div class="svc-tab" data-tab="2">Platform Engineering</div>
+    <div class="industry-header">
+      <div class="eyebrow" style="margin-bottom:20px;">Industries</div>
+      <h2 class="h2">Built for the sectors<br>that cannot afford to fail.</h2>
     </div>
+    <div class="industry-grid">
+      <div class="industry-card">
+        <div class="industry-name">Manufacturing</div>
+        <div class="industry-stat">40%</div>
+        <div class="industry-stat-label">reduction in inventory carrying costs through AI-driven production planning, procurement automation, and real-time supply chain visibility</div>
+        <a href="#" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="industry-card">
+        <div class="industry-name">Automotive</div>
+        <div class="industry-stat">3×</div>
+        <div class="industry-stat-label">faster issue resolution across customer, dealer, and vendor support with AI-powered service platforms and unified data layers</div>
+        <a href="#" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="industry-card">
+        <div class="industry-name">Financial Services</div>
+        <div class="industry-stat">60%</div>
+        <div class="industry-stat-label">reduction in document processing time — from KYC to claims — with cloud-native AI pipelines and intelligent customer support automation</div>
+        <a href="#" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="industry-card">
+        <div class="industry-name">QSR</div>
+        <div class="industry-stat">25%</div>
+        <div class="industry-stat-label">improvement in in-store throughput with AI-powered order flow optimisation, kitchen display intelligence, and demand forecasting at outlet level</div>
+        <a href="#" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="svc-panels">
-      <!-- AI Engineering -->
-      <div class="svc-panel active" data-panel="0">
-        <div class="svc-left">
-          <div>
-            <h3 class="svc-name">AI Engineering</h3>
-            <p class="svc-desc">Transform your business with AI that learns, adapts, and scales with your needs. We build intelligent systems that drive real outcomes.</p>
-            <div class="svc-features">
-              <div class="svc-feature">AI enabled Managed Services</div>
-              <div class="svc-feature">AIOps</div>
-              <div class="svc-feature">Agentic AI Development</div>
+<!-- ══ USE CASE CAROUSEL ══ -->
+<section class="usecase-section" id="usecases">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Real problems. Real answers.</div>
+    <div class="usecase-inner">
+      <div class="usecase-left">
+        <div class="usecase-slides">
+          <div class="usecase-slide active" data-slide="0">
+            <p class="usecase-q">Is your cloud bill growing faster than <em>your revenue?</em></p>
+            <p class="usecase-answer">Most enterprises overpay by 30–40% because cloud was provisioned for peak, not for reality. Our FinOps and platform engineering teams right-size infrastructure, automate resource governance, and build cost-aware CI/CD pipelines — so you stop paying for idle capacity.</p>
+            <div class="usecase-tags">
+              <span class="usecase-tag">Cloud & DevOps</span>
+              <span class="usecase-tag">FinOps</span>
+              <span class="usecase-tag">Platform Engineering</span>
             </div>
           </div>
-          <a href="#" class="svc-learn-btn">
-            Explore AI Engineering
-            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          <div class="usecase-slide" data-slide="1">
+            <p class="usecase-q">How long does it take your team to <em>ship a production release?</em></p>
+            <p class="usecase-answer">If it takes more than a day, your DevOps pipeline is costing you competitive advantage. We build fully automated CI/CD platforms with GitOps, Kubernetes-native deployments, and SRE-grade observability — cutting release cycles from weeks to hours.</p>
+            <div class="usecase-tags">
+              <span class="usecase-tag">DevOps</span>
+              <span class="usecase-tag">Kubernetes</span>
+              <span class="usecase-tag">SRE</span>
+            </div>
+          </div>
+          <div class="usecase-slide" data-slide="2">
+            <p class="usecase-q">How many hours does your compliance team spend on <em>manual document reviews?</em></p>
+            <p class="usecase-answer">Our Enterprise GenAI platform ingests regulatory frameworks, policy documents, and audit trails to automate compliance checks at scale. Financial services clients have cut manual review time by 60% while improving audit accuracy.</p>
+            <div class="usecase-tags">
+              <span class="usecase-tag">Financial Services</span>
+              <span class="usecase-tag">GenAI</span>
+              <span class="usecase-tag">Compliance</span>
+            </div>
+          </div>
+          <div class="usecase-slide" data-slide="3">
+            <p class="usecase-q">Are your production lines going down <em>without warning?</em></p>
+            <p class="usecase-answer">We build AIOps platforms that connect to your SCADA, ERP, and sensor data to predict equipment failures before they happen. Manufacturers using our predictive maintenance stack have cut unplanned downtime by 40% within the first quarter.</p>
+            <div class="usecase-tags">
+              <span class="usecase-tag">Manufacturing</span>
+              <span class="usecase-tag">AIOps</span>
+              <span class="usecase-tag">Predictive Maintenance</span>
+            </div>
+          </div>
         </div>
-        <div class="svc-right">
-          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d481b1_ai-icon.svg" alt="AI Engineering">
+        <div class="usecase-dots">
+          <div class="usecase-dot active" onclick="goToSlide(0)"></div>
+          <div class="usecase-dot" onclick="goToSlide(1)"></div>
+          <div class="usecase-dot" onclick="goToSlide(2)"></div>
+          <div class="usecase-dot" onclick="goToSlide(3)"></div>
         </div>
       </div>
-
-      <!-- Software Engineering -->
-      <div class="svc-panel" data-panel="1">
-        <div class="svc-left">
-          <div>
-            <h3 class="svc-name">Software Engineering</h3>
-            <p class="svc-desc">Develop robust, cloud-ready software designed for speed, security, and scalability. Built for the enterprises of tomorrow.</p>
-            <div class="svc-features">
-              <div class="svc-feature">Application Development &amp; Modernization</div>
-              <div class="svc-feature">DevSecOps</div>
-              <div class="svc-feature">FinOps</div>
-            </div>
-          </div>
-          <a href="#" class="svc-learn-btn">
-            Explore Software Engineering
-            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-        <div class="svc-right">
-          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480e2_service-img3.svg" alt="Software Engineering" style="width:260px;height:auto;">
-        </div>
-      </div>
-
-      <!-- Platform Engineering -->
-      <div class="svc-panel" data-panel="2">
-        <div class="svc-left">
-          <div>
-            <h3 class="svc-name">Platform Engineering</h3>
-            <p class="svc-desc">Scale securely with platforms designed for agility, security, and performance. From GenAI to sovereign cloud infrastructure.</p>
-            <div class="svc-features">
-              <div class="svc-feature">Enterprise GenAI Platform</div>
-              <div class="svc-feature">Sailor</div>
-              <div class="svc-feature">Guardian</div>
-            </div>
-          </div>
-          <a href="#" class="svc-learn-btn">
-            Explore Platform Engineering
-            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-        <div class="svc-right">
-          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480e3_service-img2.svg" alt="Platform Engineering" style="width:260px;height:auto;">
+      <div class="usecase-right">
+        <div class="usecase-visual" id="usecaseVisual">
+          <div class="usecase-number" id="usecaseNum">01</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ OUR PARTNERS ══ -->
+<!-- ══ PLATFORMS ══ -->
+<section class="platforms-section" id="platforms">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Our Platforms</div>
+    <h2 class="h2" style="max-width:600px;">Proprietary platforms that give you an unfair advantage.</h2>
+    <div class="platforms-grid platforms-grid--two">
+      <div class="platform-card">
+        <div class="platform-badge">Platform</div>
+        <div class="platform-name">Sailor</div>
+        <p class="platform-desc">A hybrid and multi-cloud orchestration platform that unifies infrastructure across clouds, on-prem, and edge — with AI-ready architecture and built-in governance.</p>
+        <a href="sailor.html" class="platform-link">Explore Sailor <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="platform-card">
+        <div class="platform-badge">Platform</div>
+        <div class="platform-name">Guardian</div>
+        <p class="platform-desc">An Application Security Posture Management platform that gives engineering and security teams continuous visibility into vulnerabilities, misconfigurations, and risk across the SDLC.</p>
+        <a href="guardian.html" class="platform-link">Explore Guardian <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY BOOTLABS ══ -->
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Why BootLabs</div>
+    <h2 class="h2" style="max-width:700px;">Five outcomes that define every engagement.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-title">AI-Driven Enterprise</div>
+        <p class="why-desc">Every solution we build is AI-first by design — not bolted on after the fact. From intelligent automation to production-grade GenAI, AI is the default, not the add-on.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Cloud-Native Innovation</div>
+        <p class="why-desc">Platform-first engineering that eliminates vendor lock-in. Kubernetes-native, IaC-driven, and observable from day one.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Operational Resilience</div>
+        <p class="why-desc">99.9% SLA commitments backed by AIOps, SRE practices, and proactive incident prevention — not reactive firefighting.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Security & Compliance</div>
+        <p class="why-desc">Security is embedded in every layer — from code pipelines to cloud infrastructure and AI model deployment. We build so your posture is never an afterthought.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Cost Optimisation</div>
+        <p class="why-desc">30–40% infrastructure cost reduction through right-sizing, automated resource governance, and intelligent workload placement across cloud providers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PARTNERS & CERTS ══ -->
 <section class="partners-section" id="partners">
   <div class="container">
-    <div class="partners-header">
-      <div>
-        <div class="section-eyebrow" style="margin-bottom:12px;">Our Partners</div>
-        <h2 class="partners-title">Ecosystem &amp; alliances</h2>
+    <div class="partners-inner">
+      <div class="partners-grid-wrap">
+        <div>
+          <p class="body-s" style="margin-bottom:16px;letter-spacing:.12em;text-transform:uppercase;font-size:10px;">Technology Partners</p>
+          <div class="partners-grid">
+            <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818e_partner3.svg" alt="AWS"></div>
+            <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818f_partner2.svg" alt="Google Cloud"></div>
+            <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818d_partner4.svg" alt="Microsoft Azure"></div>
+            <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48190_partner5.svg" alt="Veeam"></div>
+            <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d482f3_crayon-group-seeklogo%201.svg" alt="Crayon"></div>
+            <div class="partner-cell"><span class="proof-cell-text" style="font-size:13px;">Databricks</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="body-s" style="margin-bottom:16px;letter-spacing:.12em;text-transform:uppercase;font-size:10px;">Certifications</p>
+          <div class="certs-row">
+            <div class="cert-badge">
+              <div>
+                <div class="cert-text">ISO 27001</div>
+                <div class="cert-sub">Information Security Management</div>
+              </div>
+            </div>
+            <div class="cert-badge">
+              <div>
+                <div class="cert-text">SOC 2 Type II</div>
+                <div class="cert-sub">Security, Availability & Confidentiality</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="partners-subtitle">We partner with the world's leading technology platforms to deliver best-in-class solutions.</p>
-    </div>
-    <div class="partners-grid">
-      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818e_partner3.svg" alt="AWS Partner"></div>
-      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818f_partner2.svg" alt="Google Cloud Partner"></div>
-      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818d_partner4.svg" alt="Microsoft"></div>
-      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48190_partner5.svg" alt="Veeam"></div>
-      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d482f3_crayon-group-seeklogo%201.svg" alt="Crayon"></div>
-      <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48191_partner1.svg" alt="Redington"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CLIENTS MARQUEE ══ -->
-<section class="clients-section">
-  <div class="clients-label">Trusted by leading enterprises across industries</div>
-  <div class="marquee-outer">
-    <div class="marquee-track">
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48237_Thoughtworks.svg" alt="Thoughtworks"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata Digital"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48234_Mirae.svg" alt="Mirae Asset"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"></div>
-      <!-- duplicate for seamless loop -->
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48237_Thoughtworks.svg" alt="Thoughtworks"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata Digital"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48234_Mirae.svg" alt="Mirae Asset"></div>
-      <div class="marquee-item"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"></div>
+      <div class="partners-right">
+        <div class="eyebrow" style="margin-bottom:20px;">Ecosystem</div>
+        <h2 class="partners-right-title">Best-in-class partners. Integrated, not bolt-on.</h2>
+        <p class="partners-right-desc">We partner with AWS, Google Cloud, and Microsoft as an advanced technology partner — not a reseller. Every engagement is built on certified architectures, co-engineered solutions, and direct escalation paths that most SIs cannot offer.</p>
+        <a href="#" class="btn-outline">
+          View partner programme
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══ IMPACT (replaces GSAP horizontal trusted) ══ -->
-<section class="impact-section" id="impact">
+<!-- ══ FOUNDER CTA ══ -->
+<section class="founder-section" id="contact">
   <div class="container">
-    <div class="impact-grid">
-      <div class="impact-left">
-        <div class="impact-eyebrow">Our Impact</div>
-        <h2 class="impact-headline">Trusted by industry leaders across every sector</h2>
-        <div class="impact-numbers">
-          <div class="impact-num-item">
-            <div class="impact-number" data-count="200"><span>0</span>+</div>
-            <div class="impact-num-label">Successful projects</div>
-          </div>
-          <div class="impact-num-item">
-            <div class="impact-number" data-count="7"><span>0</span></div>
-            <div class="impact-num-label">Countries served</div>
-          </div>
-          <div class="impact-num-item">
-            <div class="impact-number" data-count="50"><span>0</span>+</div>
-            <div class="impact-num-label">Enterprise clients</div>
-          </div>
-          <div class="impact-num-item">
-            <div class="impact-number" data-count="99"><span>0</span>%</div>
-            <div class="impact-num-label">Uptime SLA</div>
+    <div class="founder-inner">
+      <div class="founder-left">
+        <div class="eyebrow" style="margin-bottom:28px;">From the Founder</div>
+        <blockquote class="founder-quote">
+          "Enterprises deserve platforms built <em style="font-style:italic;color:var(--cyan);">for them</em>, not sold to them."
+        </blockquote>
+        <div class="founder-attribution">
+          <img class="founder-avatar" src="ram.jpg" alt="Ram — Founder & CEO, BootLabs">
+          <div>
+            <div class="founder-name">Ram</div>
+            <div class="founder-role">Founder & CEO, BootLabs</div>
           </div>
         </div>
+        <p class="body-l" style="max-width:480px;">We started BootLabs because India's most ambitious enterprises were being handed generic cloud blueprints and off-the-shelf AI toolkits. They needed a partner who would actually engineer the solution — not just the proposal.</p>
       </div>
-      <div class="impact-right">
-        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"></div>
-        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank"></div>
-        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank"></div>
-        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48237_Thoughtworks.svg" alt="Thoughtworks"></div>
-        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata Digital"></div>
-        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48234_Mirae.svg" alt="Mirae Asset"></div>
-        <div class="impact-logo-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"></div>
-        <div class="impact-logo-cell" style="opacity:.3;justify-content:center;align-items:center;">
-          <span style="font-size:13px;color:var(--text-dim);">+ many more</span>
+      <div class="founder-right">
+        <div class="founder-action-card">
+          <div class="founder-action-title">Book a Discovery Call</div>
+          <p class="founder-action-desc">30 minutes with our engineering leadership. We'll map your biggest operational challenge to a concrete AI or platform outcome — no decks, no sales theatre.</p>
+          <button class="btn-primary" onclick="openContact()">
+            Schedule a call
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CASE STUDIES ══ -->
-<section class="cs-section" id="case-studies">
-  <div class="container">
-    <div class="cs-header-row">
-      <div>
-        <div class="section-eyebrow" style="margin-bottom:12px;">Case Studies</div>
-        <h2 class="section-title" style="margin-bottom:0;">Stories of transformation</h2>
-      </div>
-      <a href="https://www.bootlabstech.com/insights" class="cs-see-more">
-        View all insights
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-    <div class="swiper cs-swiper" id="csSwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <a href="https://www.bootlabstech.com/insights/unlock-the-secrets-of-2024-master-threat-detection-and-response-like-a-pro" class="cs-slide-card">
-            <img class="cs-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483c0_11668650_20945657.jpg" alt="">
-            <div class="cs-body">
-              <div class="cs-tag">Security</div>
-              <div class="cs-title">Unlock the Secrets of 2024: Master Threat Detection and Response Like a Pro!</div>
-              <div class="cs-date">August 18, 2024</div>
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="https://www.bootlabstech.com/insights/endpoint-detection-and-response-90-do-it-wrong" class="cs-slide-card">
-            <img class="cs-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483bf_7119018_3463986-1536x1536.jpg" alt="">
-            <div class="cs-body">
-              <div class="cs-tag">Detection &amp; Response</div>
-              <div class="cs-title">Endpoint Detection and Response: 90% Do It Wrong</div>
-              <div class="cs-date">September 17, 2024</div>
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="https://www.bootlabstech.com/insights/building-effective-security-awareness-metrics-blueprint-for-2024-success" class="cs-slide-card">
-            <img class="cs-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483be_21743663_6485985-1536x1536.jpg" alt="">
-            <div class="cs-body">
-              <div class="cs-tag">Security Awareness</div>
-              <div class="cs-title">Building Effective Security Awareness Metrics: Blueprint for 2024 Success</div>
-              <div class="cs-date">September 16, 2024</div>
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="#" class="cs-slide-card">
-            <img class="cs-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483bd_7970619_3810077-1536x1536.jpg" alt="">
-            <div class="cs-body">
-              <div class="cs-tag">Penetration Testing</div>
-              <div class="cs-title">Top 10 Web Application Penetration Testing Tools for 2024</div>
-              <div class="cs-date">September 9, 2024</div>
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="#" class="cs-slide-card">
-            <img class="cs-img" src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48085/698498a0f85a3bb0b6d483bc_maxresdefault-1024x576.jpg" alt="">
-            <div class="cs-body">
-              <div class="cs-tag">Automation</div>
-              <div class="cs-title">Skyrocket Security with SOAR in 2024: Automate &amp; Dominate!</div>
-              <div class="cs-date">September 9, 2024</div>
-            </div>
-          </a>
+        <div class="founder-action-card">
+          <div class="founder-action-title">Download Capability Deck</div>
+          <p class="founder-action-desc">Get our latest capabilities overview — service areas, case study snapshots, and platform briefs in one document.</p>
+          <button class="btn-outline" style="border-radius:100px;">
+            Download PDF
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </button>
         </div>
       </div>
     </div>
-    <div class="cs-nav">
-      <div class="cs-arrow prev" id="csPrev">
-        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
-      <div class="cs-arrow next" id="csNext">
-        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ ACHIEVEMENTS ══ -->
-<section class="awards-section" id="awards">
-  <div class="container">
-    <div class="awards-inner">
-      <div class="awards-sticky-text">
-        <div class="section-eyebrow">Recognition</div>
-        <h2 class="awards-big-title">Achievements Worth Celebrating</h2>
-        <p class="awards-desc">Industry recognition for our commitment to excellence, innovation, and client outcomes across AI, cloud, and platform engineering.</p>
-      </div>
-      <div class="awards-photo-stack">
-        <div class="award-photo">
-          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480aa_38ae2fea-8b64-4e52-b6d6-43442f44e2a8.avif" alt="Achievement">
-        </div>
-        <div class="award-photo">
-          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480c2_cs.png" alt="Achievement">
-        </div>
-        <div class="award-photo">
-          <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480a4_30aa37a7-8c31-4609-acf8-e4e98c99560a.avif" alt="Achievement">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CTA ══ -->
-<section class="cta-section" id="contact">
-  <div class="cta-ring"></div>
-  <div class="cta-ring"></div>
-  <div class="container" style="position:relative;">
-    <div class="cta-label">Get Started</div>
-    <h2 class="cta-headline">Let's Build Intelligent<br>Enterprises with AI</h2>
-    <p class="cta-sub">Partner with us to accelerate your digital transformation journey.</p>
-    <button class="cta-btn" onclick="document.querySelector('.popup-section').classList.add('active')">
-      Reach Out
-      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </button>
   </div>
 </section>
 
 <!-- ══ CONTACT POPUP ══ -->
-<div class="popup-section" id="popup" onclick="if(event.target===this)this.classList.remove('active')">
-  <div class="popup-box">
-    <button class="popup-close" onclick="document.querySelector('.popup-section').classList.remove('active')">&#x2715;</button>
-    <div class="popup-title">Contact us</div>
-    <div class="form-group">
-      <label class="form-label">Full Name <span>*</span></label>
-      <input type="text" class="form-input" placeholder="Jane Smith">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Email <span>*</span></label>
-      <input type="email" class="form-input" placeholder="jane@company.com">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Phone Number <span>*</span></label>
-      <input type="tel" class="form-input" placeholder="+91 98765 43210">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Message <span>*</span></label>
-      <textarea class="form-input" rows="3" placeholder="Tell us about your project..."></textarea>
-    </div>
-    <button class="form-submit">Send Message</button>
+<div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
+  <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
+    <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+    <div style="font-size:22px;color:#fff;margin-bottom:24px;font-family:NHD;">Book a Discovery Call</div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">What challenge are you solving?</label><textarea rows="3" placeholder="Tell us about your project..." style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;resize:none;"></textarea></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Request</button>
   </div>
 </div>
 
@@ -1239,50 +1130,54 @@ body::before{
 <footer class="footer">
   <div class="container">
     <div class="footer-top">
-      <div class="footer-brand-col">
+      <div class="footer-brand">
         <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
-        <p class="footer-brand-tagline">Labs that Build Intelligent Enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
-        <div class="footer-col-title">What We Do</div>
+        <div class="footer-col-head">Services</div>
         <ul class="footer-col-links">
-          <li><a href="#">AI Engineering</a></li>
-          <li><a href="#">Software Engineering</a></li>
-          <li><a href="#">Platform Engineering</a></li>
-          <li><a href="#">AI Agents</a></li>
-          <li><a href="#">GenAI Platform</a></li>
+          <li><a href="ai-engineering.html" onclick="closeMobileMenu()">AI Engineering</a></li>
+          <li><a href="platform-engineering.html" onclick="closeMobileMenu()">Platform Engineering</a></li>
+          <li><a href="cloud-devops.html">Cloud &amp; DevOps</a></li>
+          <li><a href="software-engineering.html" onclick="closeMobileMenu()">Software Engineering</a></li>
+          <li><a href="security-engineering.html" onclick="closeMobileMenu()">Security Engineering</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Insights</div>
+        <div class="footer-col-head">Platforms</div>
         <ul class="footer-col-links">
-          <li><a href="#">Case Studies</a></li>
-          <li><a href="#">Articles</a></li>
-          <li><a href="#">News &amp; Events</a></li>
+          <li><a href="sailor.html">Sailor</a></li>
+          <li><a href="guardian.html">Guardian</a></li>
         </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Industries</div>
+        <div class="footer-col-head" style="margin-top:28px;">Industries</div>
         <ul class="footer-col-links">
-          <li><a href="#">BFSI</a></li>
           <li><a href="#">Manufacturing</a></li>
-          <li><a href="#">Healthcare</a></li>
-          <li><a href="#">Retail</a></li>
-          <li><a href="#">Capital Markets</a></li>
-          <li><a href="#">Automotive</a></li>
+          <li><a href="#">BFSI</a></li>
+          <li><a href="#">QSR & Retail</a></li>
+          <li><a href="#">Energy & Utilities</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Insights</a></li>
+          <li><a href="#">Partners</a></li>
+          <li><a href="#">Contact</a></li>
         </ul>
       </div>
     </div>
-
-    <div class="footer-marquee-row">
-      <div class="footer-big-text" id="footerBig">BootLabs</div>
+    <div class="footer-mid">
+      <div class="footer-big" id="footerBig">BootLabs</div>
     </div>
-
-    <div class="footer-bottom-row">
-      <div class="footer-copy">&copy; Copyright 2026 BootLabs. All rights reserved.</div>
+    <div class="footer-bot">
+      <div class="footer-copy">© 2026 BootLabs Technology. All rights reserved.</div>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
       </div>
     </div>
   </div>
@@ -1291,123 +1186,117 @@ body::before{
 <!-- ══ SCRIPTS ══ -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-/* ── NAVBAR SCROLL ── */
+/* ── NAVBAR ── */
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
 });
 
 /* ── MOBILE MENU ── */
 function toggleMobileMenu() {
-  const menu = document.getElementById('mobileMenu');
-  const burger = document.getElementById('hamburger');
-  const isOpen = menu.classList.toggle('open');
-  burger.classList.toggle('open', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
+  const m = document.getElementById('mobileMenu');
+  const h = document.getElementById('hamburger');
+  const open = m.classList.toggle('open');
+  h.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
 }
 function closeMobileMenu() {
   document.getElementById('mobileMenu').classList.remove('open');
   document.getElementById('hamburger').classList.remove('open');
   document.body.style.overflow = '';
 }
-
-/* ── SERVICE TABS ── */
-document.querySelectorAll('.svc-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    const idx = tab.dataset.tab;
-    document.querySelectorAll('.svc-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.svc-panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.querySelector(`.svc-panel[data-panel="${idx}"]`).classList.add('active');
-  });
-});
-
-/* ── COUNTER ANIMATION ── */
-function animateCount(el) {
-  const target = parseInt(el.dataset.count);
-  const span = el.querySelector('span');
-  let start = 0;
-  const duration = 1800;
-  const step = timestamp => {
-    if (!start) start = timestamp;
-    const progress = Math.min((timestamp - start) / duration, 1);
-    const ease = 1 - Math.pow(1 - progress, 3);
-    span.textContent = Math.floor(ease * target);
-    if (progress < 1) requestAnimationFrame(step);
-    else span.textContent = target;
-  };
-  requestAnimationFrame(step);
+function toggleMobSub(el) {
+  const sub = el.nextElementSibling;
+  sub.classList.toggle('open');
 }
 
-document.querySelectorAll('[data-count]').forEach(el => {
-  let triggered = false;
+/* ── CONTACT POPUP ── */
+function openContact() {
+  const p = document.getElementById('contactPopup');
+  p.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeContact() {
+  document.getElementById('contactPopup').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+/* ── USE CASE CAROUSEL ── */
+let currentSlide = 0;
+const slides = document.querySelectorAll('.usecase-slide');
+const dots = document.querySelectorAll('.usecase-dot');
+const nums = ['01', '02', '03', '04'];
+
+function goToSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = n;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+  const numEl = document.getElementById('usecaseNum');
+  if (numEl) numEl.textContent = nums[n];
+}
+setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000);
+
+/* ── COUNTER ANIMATION ── */
+document.querySelectorAll('.counter').forEach(el => {
+  let done = false;
   ScrollTrigger.create({
-    trigger: el,
-    start: 'top 85%',
-    onEnter: () => { if (!triggered) { triggered = true; animateCount(el); } }
+    trigger: el, start: 'top 90%',
+    onEnter: () => {
+      if (done) return; done = true;
+      const target = +el.dataset.target;
+      const dur = 1600;
+      let startTs = null;
+      const step = ts => {
+        if (!startTs) startTs = ts;
+        const p = Math.min((ts - startTs) / dur, 1);
+        el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(step);
+    }
   });
 });
 
-/* ── FADE-UP REVEAL ── */
-gsap.utils.toArray('.wedo-stat,.partner-cell,.impact-num-item,.impact-logo-cell,.award-photo,.cs-slide-card').forEach((el, i) => {
+/* ── FADE-UP REVEALS ── */
+gsap.utils.toArray('.cap-card,.industry-card,.platform-card,.why-card,.proof-cell,.partner-cell').forEach((el, i) => {
   gsap.from(el, {
-    opacity: 0, y: 30,
-    duration: 0.7,
-    delay: (i % 3) * 0.1,
+    opacity: 0, y: 24, duration: 0.65,
+    delay: (i % 4) * 0.08,
     ease: 'power2.out',
+    scrollTrigger: { trigger: el, start: 'top 90%', once: true }
+  });
+});
+
+gsap.utils.toArray('.h2,.h1,.founder-quote,.partners-right-title').forEach(el => {
+  gsap.from(el, {
+    opacity: 0, y: 32, duration: 0.85, ease: 'power3.out',
     scrollTrigger: { trigger: el, start: 'top 88%', once: true }
   });
 });
 
-/* ── SWIPER CASE STUDIES ── */
-const csSwiper = new Swiper('#csSwiper', {
-  slidesPerView: 1.15,
-  spaceBetween: 20,
-  loop: true,
-  navigation: { nextEl: '#csNext', prevEl: '#csPrev' },
-  breakpoints: {
-    640: { slidesPerView: 1.5 },
-    900: { slidesPerView: 2.2 },
-    1200: { slidesPerView: 3 }
-  }
-});
-document.getElementById('csPrev').addEventListener('click', () => csSwiper.slidePrev());
-document.getElementById('csNext').addEventListener('click', () => csSwiper.slideNext());
-
 /* ── FOOTER SCRAMBLE ── */
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 ScrollTrigger.create({
-  trigger: '#footerBig',
-  start: 'top 85%',
-  once: true,
+  trigger: '#footerBig', start: 'top 88%', once: true,
   onEnter: () => {
     const el = document.getElementById('footerBig');
     const orig = el.textContent;
-    let frame = 0;
-    const totalFrames = Math.floor(600 / (1000/30));
+    let frame = 0, total = 18;
     const iv = setInterval(() => {
-      let out = '';
-      if (frame < totalFrames * 0.5) {
-        for (let i = 0; i < orig.length; i++) out += orig[i] === ' ' ? ' ' : CHARS[Math.floor(Math.random() * CHARS.length)];
+      if (frame < total * 0.5) {
+        el.textContent = orig.split('').map(c => c === ' ' ? ' ' : CHARS[Math.floor(Math.random()*CHARS.length)]).join('');
       } else {
-        const revealed = Math.floor(((frame - totalFrames * 0.5) / (totalFrames * 0.5)) * orig.length);
-        for (let i = 0; i < orig.length; i++) out += i < revealed ? orig[i] : (orig[i] === ' ' ? ' ' : CHARS[Math.floor(Math.random() * CHARS.length)]);
+        const rev = Math.floor(((frame - total*0.5)/(total*0.5)) * orig.length);
+        el.textContent = orig.split('').map((c,i) => i < rev ? c : (c === ' ' ? ' ' : CHARS[Math.floor(Math.random()*CHARS.length)])).join('');
       }
-      el.textContent = out;
-      if (++frame >= totalFrames) { clearInterval(iv); el.textContent = orig; }
+      if (++frame >= total) { clearInterval(iv); el.textContent = orig; }
     }, 1000/30);
   }
-});
-
-/* ── SECTION REVEAL ── */
-gsap.utils.toArray('.wedo-headline,.section-title,.impact-headline,.awards-big-title,.cta-headline').forEach(el => {
-  gsap.from(el, {
-    opacity: 0, y: 40, duration: 0.9, ease: 'power3.out',
-    scrollTrigger: { trigger: el, start: 'top 85%', once: true }
-  });
 });
 </script>
 </body>

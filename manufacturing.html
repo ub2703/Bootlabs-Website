@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manufacturing — BootLabs</title>
+<style>
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;}
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
+a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{font-family:NHD,sans-serif;cursor:pointer;}
+:root{--blue:#0066FF;--cyan:#26a8ff;--border:rgba(255,255,255,.08);--border-blue:rgba(0,102,255,.35);--dim:rgba(255,255,255,.45);--mid:rgba(255,255,255,.7);--glass:rgba(255,255,255,.03);--r:20px;}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
+.eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
+.btn-primary:hover{background:#0055dd;transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mob-sub{padding:12px 0 4px;display:none;flex-direction:column;gap:10px;}
+.mob-sub.open{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
+.navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
+.navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
+.nav-logo img{height:28px;width:auto;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{font-size:13px;color:var(--mid);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.05);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:240px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.simple-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:13px;color:var(--mid);transition:background .2s,color .2s;}
+.simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
+.mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-num{font-size:10px;letter-spacing:.1em;color:var(--dim);margin-bottom:4px;}
+.mega-item-title{font-size:14px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:"";position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.1) 0%,transparent 65%);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 16px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:32px;}
+.hero-h1{font-size:clamp(36px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
+.hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:48px;}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
+.footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+.footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
+.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);white-space:nowrap;line-height:1;}
+.footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+@media(max-width:768px){
+  .container{padding:0 18px;}
+  .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
+  .nav-hamburger{display:flex;}
+  .hero{padding:120px 0 72px;}
+  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-bot{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:480px){
+  .container{padding:0 14px;}
+  .navbar{width:calc(100% - 16px);padding:9px 12px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ MOBILE MENU ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mob-nav-links">
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="ai-engineering.html" onclick="closeMobileMenu()">AI Engineering</a>
+        <a href="platform-engineering.html" onclick="closeMobileMenu()">Platform Engineering</a>
+        <a href="cloud-devops.html" onclick="closeMobileMenu()">Cloud &amp; DevOps Engineering</a>
+        <a href="software-engineering.html" onclick="closeMobileMenu()">Software Engineering</a>
+        <a href="security-engineering.html" onclick="closeMobileMenu()">Security Engineering</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Solutions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="resilient-operations-center.html" onclick="closeMobileMenu()">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" onclick="closeMobileMenu()">AI in SDLC</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Industries <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="manufacturing.html" onclick="closeMobileMenu()">Manufacturing</a>
+        <a href="automotive.html" onclick="closeMobileMenu()">Automotive</a>
+        <a href="financial-services.html" onclick="closeMobileMenu()">Financial Services</a>
+        <a href="qsr.html" onclick="closeMobileMenu()">QSR</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="sailor.html" onclick="closeMobileMenu()">Sailor</a>
+        <a href="guardian.html" onclick="closeMobileMenu()">Guardian</a>
+      </div>
+    </div>
+    <a class="mob-nav-link" href="index.html#partners" onclick="closeMobileMenu()">Partners</a>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="white-papers.html" onclick="closeMobileMenu()">White Papers</a>
+        <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </nav>
+  <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="ai-engineering.html" class="mega-item">
+<div class="mega-item-title">AI Engineering</div><div class="mega-item-subs">Enterprise GenAI · AI Agents · AIOps · Managed Services</div></a>
+        <a href="platform-engineering.html" class="mega-item">
+<div class="mega-item-title">Platform Engineering</div><div class="mega-item-subs">IDP · Self-Service Infra · Platform Governance · Multi-Cloud</div></a>
+        <a href="cloud-devops.html" class="mega-item">
+<div class="mega-item-title">Cloud &amp; DevOps Engineering</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Observability &amp; SRE</div></a>
+        <a href="software-engineering.html" class="mega-item">
+<div class="mega-item-title">Software Engineering</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="security-engineering.html" class="mega-item" style="grid-column:span 2;">
+<div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · Vulnerability Management · CSPM · Security Automation</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="resilient-operations-center.html" class="simple-item">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" class="simple-item">AI in SDLC</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#industry" class="nav-link">Industries <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="manufacturing.html" class="simple-item">Manufacturing</a>
+        <a href="automotive.html" class="simple-item">Automotive</a>
+        <a href="financial-services.html" class="simple-item">Financial Services</a>
+        <a href="qsr.html" class="simple-item">QSR</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#platforms" class="nav-link">Platforms <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="sailor.html" class="simple-item">Sailor</a>
+        <a href="guardian.html" class="simple-item">Guardian</a>
+      </div>
+    </div>
+    <a href="index.html#partners" class="nav-link">Partners</a>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="case-studies.html" class="simple-item">Case Studies</a>
+        <a href="white-papers.html" class="simple-item">White Papers</a>
+        <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">Industries</div>
+      <h1 class="hero-h1">Manufacturing</h1>
+      <p class="hero-sub">AI-powered production planning, procurement automation, and supply chain visibility for manufacturers.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <a href="index.html" class="btn-outline">Back to Home</a>
+      </div>
+      <p style="margin-top:48px;font-size:13px;color:var(--dim);border:1px solid var(--border);display:inline-block;padding:10px 20px;border-radius:100px;">Full page coming soon — contact us to learn more</p>
+    </div>
+  </div>
+</section>
+
+<div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
+  <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
+    <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;">&#10005;</button>
+    <div style="font-size:22px;color:#fff;margin-bottom:24px;font-family:NHD;">Book a Discovery Call</div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Request</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
+      <div>
+        <div class="footer-col-head">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="ai-engineering.html">AI Engineering</a></li>
+          <li><a href="platform-engineering.html">Platform Engineering</a></li>
+          <li><a href="cloud-devops.html">Cloud &amp; DevOps</a></li>
+          <li><a href="software-engineering.html">Software Engineering</a></li>
+          <li><a href="security-engineering.html">Security Engineering</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Platforms</div>
+        <ul class="footer-col-links">
+          <li><a href="sailor.html">Sailor</a></li>
+          <li><a href="guardian.html">Guardian</a></li>
+        </ul>
+        <div class="footer-col-head" style="margin-top:28px;">Industries</div>
+        <ul class="footer-col-links">
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="financial-services.html">BFSI</a></li>
+          <li><a href="qsr.html">QSR &amp; Retail</a></li>
+          <li><a href="automotive.html">Automotive</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="blog.html">Insights</a></li>
+          <li><a href="index.html#partners">Partners</a></li>
+          <li><a href="#" onclick="openContact();return false;">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
+    <div class="footer-bot">
+      <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
+function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
+function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
+function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
+function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
+</script>
+</body>
+</html>
