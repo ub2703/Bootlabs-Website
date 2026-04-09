@@ -84,13 +84,28 @@ input,textarea{box-sizing:border-box;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
 /* ══ HERO ══ */
-.svc-hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;}
-.svc-hero::before{content:"";position:absolute;bottom:-100px;left:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,102,255,.12) 0%,transparent 65%);pointer-events:none;}
-.svc-hero-inner{position:relative;z-index:1;max-width:860px;}
+.svc-hero{padding:140px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.svc-hero::before{content:"";position:absolute;bottom:-100px;left:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,102,255,.14) 0%,transparent 65%);pointer-events:none;}
+.svc-hero::after{content:"";position:absolute;top:0;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(38,168,255,.06) 0%,transparent 65%);pointer-events:none;}
+.svc-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.svc-hero-left{}
 .svc-hero-eyebrow{margin-bottom:28px;}
-.svc-hero-h1{font-size:clamp(40px,6vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:28px;}
-.svc-hero-sub{font-size:19px;line-height:1.75;color:var(--mid);max-width:680px;margin-bottom:40px;}
+.svc-hero-h1{font-size:clamp(38px,5.5vw,68px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:28px;}
+.svc-hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:40px;}
 .svc-hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+/* hero visual */
+.svc-hero-visual{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--border);box-shadow:0 32px 80px rgba(0,0,0,.5);}
+.svc-hero-visual img{width:100%;height:420px;object-fit:cover;display:block;}
+.svc-hero-visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,102,255,.15) 0%,transparent 60%);pointer-events:none;}
+/* floating badges on the visual */
+.hero-badge-float{
+  position:absolute;display:flex;align-items:center;gap:10px;
+  background:rgba(6,6,14,.88);border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(16px);border-radius:12px;padding:12px 16px;
+}
+.hero-badge-float-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.hero-badge-float-text{font-size:13px;color:#fff;}
+.hero-badge-float-sub{font-size:11px;color:var(--dim);margin-top:2px;}
 
 /* ══ STAT STRIP ══ */
 .svc-stat-strip{background:#0a0a12;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0;}
@@ -105,15 +120,43 @@ input,textarea{box-sizing:border-box;}
 .offerings-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
 .offerings-header{margin-bottom:56px;}
 .offerings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
-.offering-card{background:#080810;padding:40px 36px;position:relative;overflow:hidden;transition:background .3s;}
+.offering-card{background:#080810;padding:40px 36px;position:relative;overflow:hidden;transition:background .3s;display:flex;flex-direction:column;}
 .offering-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 0% 100%,rgba(0,102,255,.08) 0%,transparent 60%);opacity:0;transition:opacity .3s;}
 .offering-card:hover{background:#090918;}
 .offering-card:hover::before{opacity:1;}
-.offering-card-num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
-.offering-card-title{font-size:20px;color:#fff;margin-bottom:14px;line-height:1.2;}
-.offering-card-desc{font-size:14px;color:var(--mid);line-height:1.7;}
-.offering-card-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--cyan);margin-top:16px;transition:gap .2s;}
+.offering-card-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,102,255,.1);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:20px;flex-shrink:0;}
+.offering-card-icon svg{width:20px;height:20px;fill:none;stroke:var(--cyan);stroke-width:1.5;}
+.offering-card-title{font-size:19px;color:#fff;margin-bottom:12px;line-height:1.25;}
+.offering-card-desc{font-size:14px;color:var(--mid);line-height:1.72;flex:1;}
+.offering-card-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--cyan);margin-top:18px;transition:gap .2s;}
 .offering-card-link:hover{gap:10px;}
+/* all cards same tone */
+
+/* ══ EXPERTISE STACK ══ */
+.expertise-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.expertise-header{margin-bottom:56px;}
+.expertise-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.expertise-col{background:#06060a;padding:40px 36px;}
+.expertise-col-head{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:28px;display:flex;align-items:center;gap:10px;}
+.expertise-col-head::before{content:"";display:block;width:24px;height:1px;background:var(--cyan);}
+.expertise-tags{display:flex;flex-wrap:wrap;gap:10px;}
+.expertise-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;border-radius:100px;
+  font-size:13px;color:var(--mid);
+  border:1px solid var(--border);background:rgba(255,255,255,.02);
+  transition:border-color .2s,color .2s,background .2s;cursor:default;
+}
+.expertise-tag:hover{border-color:var(--border-blue);color:#fff;background:rgba(0,102,255,.06);}
+.expertise-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+/* featured model logos row */
+.model-logo-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
+.model-logo{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:8px;
+  font-size:12px;font-weight:500;color:#fff;
+  border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);
+}
 
 /* ══ PROCESS ══ */
 .process-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
@@ -133,14 +176,14 @@ input,textarea{box-sizing:border-box;}
 .tab-btn.active{background:var(--blue);color:#fff;}
 .tab-btn:hover:not(.active){color:#fff;background:rgba(255,255,255,.06);}
 .tab-panel{display:none;}
-.tab-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
-.tab-points{display:flex;flex-direction:column;gap:16px;margin-bottom:32px;}
+.tab-panel.active{display:block;}
+.tab-panel-inner{max-width:760px;}
+.tab-panel-title{font-size:22px;color:#fff;margin-bottom:24px;font-weight:400;line-height:1.3;}
+.tab-points{display:flex;flex-direction:column;gap:12px;}
 .tab-point{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-radius:14px;background:rgba(255,255,255,.02);border:1px solid var(--border);}
 .tab-point-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));flex-shrink:0;margin-top:6px;}
 .tab-point-text{font-size:15px;color:var(--mid);line-height:1.6;}
-.tab-metric-card{border:1px solid var(--border-blue);border-radius:var(--r);padding:32px 36px;background:rgba(0,102,255,.04);text-align:center;}
-.tab-metric-num{font-size:64px;font-weight:400;color:var(--cyan);line-height:1;margin-bottom:10px;}
-.tab-metric-label{font-size:15px;color:var(--mid);}
+.tab-point-text strong{color:#fff;font-weight:400;}
 
 /* ══ CASE STUDIES ══ */
 .case-studies-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
@@ -185,9 +228,10 @@ input,textarea{box-sizing:border-box;}
 /* ══ RESPONSIVE ══ */
 @media(max-width:1100px){
   .container{padding:0 32px;}
+  .svc-hero-inner{grid-template-columns:1fr;gap:48px;}
+  .svc-hero-visual{max-width:600px;}
   .offerings-grid{grid-template-columns:repeat(2,1fr);}
-  .tab-panel.active{grid-template-columns:1fr;}
-  .tab-metric-card{max-width:360px;}
+  .expertise-cols{grid-template-columns:1fr 1fr;}
   .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
   .footer-brand{grid-column:span 2;}
   .process-steps{grid-template-columns:1fr 1fr;gap:40px;}
@@ -200,17 +244,20 @@ input,textarea{box-sizing:border-box;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .svc-hero{padding:120px 0 72px;}
+  .svc-hero{padding:110px 0 64px;}
+  .svc-hero-inner{grid-template-columns:1fr;}
   .svc-hero-h1{font-size:clamp(32px,8vw,52px);}
   .svc-hero-sub{font-size:16px;}
+  .svc-hero-visual{display:none;}
   .svc-stat-inner{flex-wrap:wrap;}
   .svc-stat-item{flex:1 1 45%;border-right:none;border-bottom:1px solid var(--border);}
   .svc-stat-item:last-child{border-bottom:none;}
   .offerings-grid{grid-template-columns:1fr;border-radius:14px;}
+  .expertise-cols{grid-template-columns:1fr;border-radius:14px;}
   .process-steps{grid-template-columns:1fr 1fr;}
   .tab-nav{flex-wrap:wrap;border-radius:14px;width:100%;}
   .tab-btn{flex:1;text-align:center;}
-  .tab-panel.active{grid-template-columns:1fr;}
+  .tab-panel-inner{max-width:100%;}
   .cs-grid{grid-template-columns:1fr;}
   .footer{padding:56px 0 28px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
@@ -383,18 +430,41 @@ input,textarea{box-sizing:border-box;}
 <section class="svc-hero">
   <div class="container">
     <div class="svc-hero-inner">
-      <div class="eyebrow svc-hero-eyebrow">AI Engineering</div>
-      <h1 class="svc-hero-h1">Production AI.<br>Not Proof of Concepts.</h1>
-      <p class="svc-hero-sub">We design, build, and operationalise enterprise AI systems — from GenAI platforms and intelligent agents to AIOps and managed AI services. Every system we ship runs in production.</p>
-      <div class="svc-hero-btns">
-        <button class="btn-primary" onclick="openContact()">
-          Book a Discovery Call
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
-        <a href="resilient-operations-center.html" class="btn-outline">
-          Explore ROC Platform
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+      <!-- Left: text -->
+      <div class="svc-hero-left">
+        <div class="eyebrow svc-hero-eyebrow">AI Engineering</div>
+        <h1 class="svc-hero-h1">AI That Ships to Production.<br>Then Gets Smarter.</h1>
+        <p class="svc-hero-sub">We architect, build, and operationalise enterprise AI — GenAI platforms, autonomous agents, MLOps pipelines, and AIOps — engineered for scale, compliance, and continuous improvement from day one.</p>
+        <div class="svc-hero-btns">
+          <button class="btn-primary" onclick="openContact()">
+            Book a Discovery Call
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <a href="resilient-operations-center.html" class="btn-outline">
+            Explore ROC
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Right: visual -->
+      <div class="svc-hero-visual">
+        <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&auto=format&fit=crop&q=80" alt="AI Engineering" loading="lazy">
+        <div class="svc-hero-visual-overlay"></div>
+        <!-- floating status cards -->
+        <div class="hero-badge-float" style="bottom:80px;left:20px;">
+          <div class="hero-badge-float-dot" style="background:#22c55e;box-shadow:0 0 8px #22c55e;"></div>
+          <div>
+            <div class="hero-badge-float-text">50+ AI models deployed</div>
+            <div class="hero-badge-float-sub">across enterprise production</div>
+          </div>
+        </div>
+        <div class="hero-badge-float" style="top:24px;right:20px;">
+          <div class="hero-badge-float-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan);"></div>
+          <div>
+            <div class="hero-badge-float-text">90 days to production</div>
+            <div class="hero-badge-float-sub">avg. GenAI deployment time</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -413,12 +483,12 @@ input,textarea{box-sizing:border-box;}
         <span class="svc-stat-label">to Production</span>
       </div>
       <div class="svc-stat-item">
-        <span class="svc-stat-num">30<span>+</span></span>
-        <span class="svc-stat-label">Enterprise Clients</span>
+        <span class="svc-stat-num">9<span>+</span></span>
+        <span class="svc-stat-label">AI Frameworks &amp; Platforms</span>
       </div>
       <div class="svc-stat-item">
-        <span class="svc-stat-num">3</span>
-        <span class="svc-stat-label">Proprietary AI Platforms</span>
+        <span class="svc-stat-num">15<span>+</span></span>
+        <span class="svc-stat-label">LLMs Deployed in Production</span>
       </div>
     </div>
   </div>
@@ -430,40 +500,128 @@ input,textarea{box-sizing:border-box;}
     <div class="offerings-header">
       <div class="eyebrow" style="margin-bottom:20px;">Capabilities</div>
       <h2 class="h2">What we offer.</h2>
-      <p class="body-l" style="max-width:560px;margin-top:20px;">Six production-grade AI engineering capabilities — designed to cover the full lifecycle from model to operations.</p>
+      <p class="body-l" style="max-width:600px;margin-top:20px;">Six production-grade AI engineering capabilities — covering the full lifecycle from strategy to live operations.</p>
     </div>
     <div class="offerings-grid">
+
+      <!-- 1. AI Consulting -->
       <div class="offering-card">
-        <div class="offering-card-num">01</div>
-        <div class="offering-card-title">Enterprise GenAI Platforms</div>
-        <p class="offering-card-desc">Custom LLM-powered platforms with RAG, fine-tuning, and enterprise-grade guardrails. Built for your data, your compliance requirements, and your users.</p>
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <div class="offering-card-title">AI Consulting</div>
+        <p class="offering-card-desc">From technology feasibility assessments and build-vs-buy analysis to ROI modelling and C-suite AI roadmaps — we help enterprises answer "where, how, and how much" before a single line of code is written.</p>
       </div>
+
+      <!-- 2. E2E Agentic Development -->
       <div class="offering-card">
-        <div class="offering-card-num">02</div>
-        <div class="offering-card-title">AI Agents &amp; Knowledge Assistants</div>
-        <p class="offering-card-desc">Multi-agent systems, knowledge graphs, and context-aware automation that handle complex workflows — autonomously and reliably at enterprise scale.</p>
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="offering-card-title">E2E Agentic Development &amp; Deployment</div>
+        <p class="offering-card-desc">Full-lifecycle development of autonomous AI agents and multi-agent systems — from architecture and orchestration design through to production deployment, observability, and reliability engineering.</p>
       </div>
+
+      <!-- 3. ROC -->
       <div class="offering-card">
-        <div class="offering-card-num">03</div>
-        <div class="offering-card-title">AIOps &amp; Intelligent Automation</div>
-        <p class="offering-card-desc">AI-driven monitoring, incident prediction, and automated remediation that keeps your operations running — before issues become outages.</p>
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="offering-card-title">Resilient Operations Center</div>
+        <p class="offering-card-desc">Our AI-native operations intelligence platform that unifies monitoring, incident management, and predictive analytics into a single pane of glass. AIOps with real-time response, not dashboards.</p>
+        <a href="resilient-operations-center.html" class="offering-card-link">Explore ROC <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
+
+      <!-- 4. MLOps -->
       <div class="offering-card">
-        <div class="offering-card-num">04</div>
-        <div class="offering-card-title">AI-enabled Managed Services</div>
-        <p class="offering-card-desc">Ongoing AI model management, retraining pipelines, and performance monitoring — so your models stay accurate and production-ready long after go-live.</p>
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="offering-card-title">MLOps &amp; Model Lifecycle</div>
+        <p class="offering-card-desc">End-to-end ML pipelines, experiment tracking, model registries, and automated drift detection. We give your data science teams a production-grade foundation — from notebook to continuous retraining.</p>
       </div>
+
+      <!-- 5. AI in SDLC -->
       <div class="offering-card">
-        <div class="offering-card-num">05</div>
-        <div class="offering-card-title">Resilient Operations Center (ROC)</div>
-        <p class="offering-card-desc">Unified operations intelligence platform that links monitoring, incident management, and predictive analytics into a single AI-native pane of glass.</p>
-        <a href="resilient-operations-center.html" class="offering-card-link">Explore ROC →</a>
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="offering-card-title">AI in SDLC</div>
+        <p class="offering-card-desc">Embedding AI across the entire software development lifecycle — from AI-assisted requirements and design to code generation, automated testing, and intelligent release pipelines that ship faster with fewer defects.</p>
+        <a href="ai-in-sdlc.html" class="offering-card-link">Explore AI in SDLC <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
+
+      <!-- 6. Kore AI -->
       <div class="offering-card">
-        <div class="offering-card-num">06</div>
-        <div class="offering-card-title">MLOps &amp; Model Lifecycle Management</div>
-        <p class="offering-card-desc">End-to-end ML pipelines, model registries, and drift detection that give your data science teams a production-grade foundation from experiment to deployment.</p>
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="offering-card-title">Kore AI Implementation</div>
+        <p class="offering-card-desc">Certified Kore.ai implementation partner delivering enterprise conversational AI, intelligent virtual assistants, and contact centre automation — connected to your enterprise data and workflows.</p>
       </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ AI EXPERTISE & TECHNOLOGY STACK ══ -->
+<section class="expertise-section">
+  <div class="container">
+    <div class="expertise-header">
+      <div class="eyebrow" style="margin-bottom:20px;">Technology Depth</div>
+      <h2 class="h2">AI models, strategies &amp; frameworks we work with.</h2>
+      <p class="body-l" style="max-width:620px;margin-top:20px;">Deep expertise across the full AI/ML ecosystem — from foundation models and reasoning strategies to production frameworks.</p>
+    </div>
+    <div class="expertise-cols">
+
+      <!-- Col 1: Foundation Models -->
+      <div class="expertise-col">
+        <div class="expertise-col-head">Foundation Models</div>
+        <div class="expertise-tags">
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>OpenAI GPT-4o / o1</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Anthropic Claude 3.5</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Google Gemini 1.5 Pro</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Meta Llama 3.1 / 3.2</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Mistral Large</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>AWS Bedrock</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Azure OpenAI Service</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Cohere Command R+</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Google Vertex AI</span>
+        </div>
+      </div>
+
+      <!-- Col 2: AI Strategies -->
+      <div class="expertise-col" style="background:#080810;">
+        <div class="expertise-col-head">AI Strategies</div>
+        <div class="expertise-tags">
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Retrieval Augmented Generation (RAG)</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Agentic AI &amp; Multi-Agent</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Fine-tuning &amp; RLHF</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Prompt Engineering</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Model Distillation</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Vector Search &amp; Embeddings</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Guardrails &amp; AI Safety</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Structured Output &amp; Tool Use</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Long Context &amp; Reasoning</span>
+        </div>
+      </div>
+
+      <!-- Col 3: Frameworks & Skills -->
+      <div class="expertise-col">
+        <div class="expertise-col-head">Frameworks &amp; Skills</div>
+        <div class="expertise-tags">
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>LangChain &amp; LangGraph</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>LlamaIndex</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Kore.ai Platform</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>AutoGen &amp; CrewAI</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Haystack</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>HuggingFace Transformers</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>MLflow &amp; Weights &amp; Biases</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Ray / Anyscale</span>
+          <span class="expertise-tag"><span class="expertise-tag-dot"></span>Pinecone / Weaviate / pgvector</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -520,76 +678,64 @@ input,textarea{box-sizing:border-box;}
 
     <!-- Manufacturing -->
     <div class="tab-panel active">
-      <div class="tab-content-left">
-        <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">AIOps for Predictive Maintenance</h3>
+      <div class="tab-panel-inner">
+        <div class="tab-panel-title">AIOps for Predictive Maintenance</div>
         <div class="tab-points">
           <div class="tab-point">
             <div class="tab-point-dot"></div>
-            <div class="tab-point-text">AI-driven anomaly detection on production line sensor data — catching faults before failure occurs</div>
+            <div class="tab-point-text">AI-driven anomaly detection on production line sensor data — catching faults before failure occurs, not after</div>
           </div>
           <div class="tab-point">
             <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Predictive maintenance models cutting unplanned downtime by up to 60% across critical assets</div>
+            <div class="tab-point-text">Predictive maintenance models correlating sensor patterns with failure history — clients see <strong>up to 60% reduction in unplanned downtime</strong> within the first quarter</div>
           </div>
           <div class="tab-point">
             <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Automated work order generation and parts procurement triggered by AI risk scores</div>
+            <div class="tab-point-text">Automated work order generation and parts procurement triggered by AI risk scores — removing manual intervention entirely</div>
           </div>
         </div>
-      </div>
-      <div class="tab-metric-card">
-        <div class="tab-metric-num">60%</div>
-        <div class="tab-metric-label">reduction in unplanned downtime through AIOps and predictive maintenance</div>
       </div>
     </div>
 
     <!-- Financial Services -->
     <div class="tab-panel">
-      <div class="tab-content-left">
-        <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">GenAI for Document Processing</h3>
+      <div class="tab-panel-inner">
+        <div class="tab-panel-title">GenAI for Document Processing &amp; Compliance</div>
         <div class="tab-points">
           <div class="tab-point">
             <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Enterprise GenAI pipeline automating KYC, loan documentation, and regulatory filing workflows</div>
+            <div class="tab-point-text">Enterprise GenAI pipeline automating KYC, loan documentation, and regulatory filing end-to-end — <strong>60% less processing time</strong> vs manual workflows</div>
           </div>
           <div class="tab-point">
             <div class="tab-point-dot"></div>
-            <div class="tab-point-text">RAG-based knowledge assistants giving compliance teams instant access to policy and regulatory content</div>
+            <div class="tab-point-text">RAG-based knowledge assistants giving compliance teams instant access to policy, regulation, and audit history across millions of documents</div>
           </div>
           <div class="tab-point">
             <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Human-in-the-loop guardrails ensuring accuracy and auditability across all AI-generated outputs</div>
+            <div class="tab-point-text">Human-in-the-loop guardrails ensuring accuracy and auditability across all AI-generated outputs — deployed in <strong>90 days</strong></div>
           </div>
         </div>
-      </div>
-      <div class="tab-metric-card">
-        <div class="tab-metric-num">60%</div>
-        <div class="tab-metric-label">reduction in document processing time across KYC and compliance workflows</div>
       </div>
     </div>
 
     <!-- QSR -->
     <div class="tab-panel">
-      <div class="tab-content-left">
-        <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Demand Forecasting AI</h3>
+      <div class="tab-panel-inner">
+        <div class="tab-panel-title">Demand Forecasting &amp; Intelligent Operations</div>
         <div class="tab-points">
           <div class="tab-point">
             <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Outlet-level demand forecasting models trained on historical sales, weather, and footfall data</div>
+            <div class="tab-point-text">Outlet-level demand forecasting models trained on sales, weather, events, and footfall — <strong>35% reduction in food waste</strong> per outlet</div>
           </div>
           <div class="tab-point">
             <div class="tab-point-dot"></div>
-            <div class="tab-point-text">AI-driven inventory replenishment reducing food waste and stockout events simultaneously</div>
+            <div class="tab-point-text">AI-driven inventory replenishment simultaneously reducing waste and eliminating stockout events across hundreds of locations</div>
           </div>
           <div class="tab-point">
             <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Real-time menu recommendations and upsell engines powered by contextual AI</div>
+            <div class="tab-point-text">Real-time menu recommendations and contextual upsell engines — driving a <strong>12% increase in average order value</strong></div>
           </div>
         </div>
-      </div>
-      <div class="tab-metric-card">
-        <div class="tab-metric-num">35%</div>
-        <div class="tab-metric-label">reduction in food waste with AI-powered outlet-level demand forecasting</div>
       </div>
     </div>
   </div>

@@ -103,13 +103,15 @@ input,textarea{box-sizing:border-box;}
 /* ══ OFFERING CARDS ══ */
 .offerings-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
 .offerings-header{margin-bottom:56px;}
-.offerings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
-.offering-card{background:#080810;padding:40px 36px;position:relative;overflow:hidden;transition:background .3s;}
+.offerings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.offering-card{background:#080810;padding:40px 36px;position:relative;overflow:hidden;transition:background .3s;display:flex;flex-direction:column;}
 .offering-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 0% 100%,rgba(0,102,255,.08) 0%,transparent 60%);opacity:0;transition:opacity .3s;}
 .offering-card:hover{background:#090918;}
 .offering-card:hover::before{opacity:1;}
 .offering-card-num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
-.offering-card-title{font-size:20px;color:#fff;margin-bottom:14px;line-height:1.2;}
+.offering-card-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,102,255,.1);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:20px;flex-shrink:0;}
+.offering-card-icon svg{width:20px;height:20px;}
+.offering-card-title{font-size:19px;color:#fff;margin-bottom:12px;line-height:1.25;}
 .offering-card-desc{font-size:14px;color:var(--mid);line-height:1.7;}
 
 /* ══ PROCESS ══ */
@@ -182,7 +184,7 @@ input,textarea{box-sizing:border-box;}
 /* ══ RESPONSIVE ══ */
 @media(max-width:1100px){
   .container{padding:0 32px;}
-  .offerings-grid{grid-template-columns:1fr;}
+  .offerings-grid{grid-template-columns:repeat(2,1fr);}
   .tab-panel.active{grid-template-columns:1fr;}
   .tab-metric-card{max-width:360px;}
   .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
@@ -381,8 +383,8 @@ input,textarea{box-sizing:border-box;}
   <div class="container">
     <div class="svc-hero-inner">
       <div class="eyebrow svc-hero-eyebrow">Platform Engineering</div>
-      <h1 class="svc-hero-h1">Developer Platforms<br>That Actually Ship.</h1>
-      <p class="svc-hero-sub">We build Internal Developer Platforms (IDPs) and self-service infrastructure that make your engineering teams 3&times; more productive — with full governance, observability, and AI integration built in.</p>
+      <h1 class="svc-hero-h1">Enterprise Platforms.<br>Engineered in Layers.</h1>
+      <p class="svc-hero-sub">From multi-cloud orchestrators and internal developer platforms to API layers and governance frameworks — we design the platform architecture that modern enterprises scale on. Not tools. Foundations.</p>
       <div class="svc-hero-btns">
         <button class="btn-primary" onclick="openContact()">
           Book a Discovery Call
@@ -402,20 +404,20 @@ input,textarea{box-sizing:border-box;}
   <div class="container">
     <div class="svc-stat-inner">
       <div class="svc-stat-item">
-        <span class="svc-stat-num">20<span>+</span></span>
-        <span class="svc-stat-label">IDPs Built</span>
-      </div>
-      <div class="svc-stat-item">
-        <span class="svc-stat-num" style="font-size:18px;color:var(--cyan);">3&times;</span>
-        <span class="svc-stat-label">Developer Velocity</span>
-      </div>
-      <div class="svc-stat-item">
-        <span class="svc-stat-num" style="font-size:18px;color:var(--cyan);">100%</span>
-        <span class="svc-stat-label">IaC-driven</span>
+        <span class="svc-stat-num">25<span>+</span></span>
+        <span class="svc-stat-label">Enterprise Platforms Built</span>
       </div>
       <div class="svc-stat-item">
         <span class="svc-stat-num">7</span>
-        <span class="svc-stat-label">Cloud Providers</span>
+        <span class="svc-stat-label">Cloud &amp; Hybrid Providers</span>
+      </div>
+      <div class="svc-stat-item">
+        <span class="svc-stat-num" style="font-size:18px;color:var(--cyan);">100%</span>
+        <span class="svc-stat-label">Infrastructure as Code</span>
+      </div>
+      <div class="svc-stat-item">
+        <span class="svc-stat-num" style="font-size:18px;color:var(--cyan);">3&times;</span>
+        <span class="svc-stat-label">Faster Developer Velocity</span>
       </div>
     </div>
   </div>
@@ -427,28 +429,50 @@ input,textarea{box-sizing:border-box;}
     <div class="offerings-header">
       <div class="eyebrow" style="margin-bottom:20px;">Capabilities</div>
       <h2 class="h2">What we offer.</h2>
-      <p class="body-l" style="max-width:560px;margin-top:20px;">Four platform engineering capabilities that turn your infrastructure into a competitive advantage for developer teams.</p>
+      <p class="body-l" style="max-width:600px;margin-top:20px;">Enterprise platform engineering across every layer — from cloud orchestration and API gateways to developer platforms and governance frameworks.</p>
     </div>
     <div class="offerings-grid">
       <div class="offering-card">
-        <div class="offering-card-num">01</div>
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/><rect x="2" y="17" width="20" height="4" rx="1"/></svg>
+        </div>
+        <div class="offering-card-title">Platform Architecture &amp; Layered Design</div>
+        <p class="offering-card-desc">We design enterprise platforms as layered systems — infrastructure layer, orchestration layer, API layer, developer experience layer — with clear boundaries, contracts, and upgrade paths. Built like MPaaS, not like a monolith.</p>
+      </div>
+      <div class="offering-card">
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+        </div>
+        <div class="offering-card-title">Multi-Cloud Orchestration</div>
+        <p class="offering-card-desc">Unified control planes across AWS, Azure, GCP, and on-prem — with a single governance model, consistent developer experience, and intelligent workload placement. We have built multi-cloud orchestrators like MPaaS for some of India's largest enterprises.</p>
+      </div>
+      <div class="offering-card">
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
         <div class="offering-card-title">Internal Developer Platforms (IDP)</div>
-        <p class="offering-card-desc">Golden paths, self-service provisioning, and developer portals built on Backstage or Port. We design IDPs that teams actually use — with workflows that reduce friction from day one.</p>
+        <p class="offering-card-desc">Self-service provisioning, golden paths, and developer portals built on Backstage or Port — backed by Terraform, Crossplane, and GitOps. IDPs that teams actually adopt because they remove friction, not add it.</p>
       </div>
       <div class="offering-card">
-        <div class="offering-card-num">02</div>
-        <div class="offering-card-title">Self-Service Infrastructure</div>
-        <p class="offering-card-desc">Terraform, Crossplane, and GitOps-driven infrastructure automation that lets developers provision what they need — without raising a ticket or waiting for an ops team to respond.</p>
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <div class="offering-card-title">API Layer &amp; Integration Platforms</div>
+        <p class="offering-card-desc">API gateways, event-driven integration fabrics, and service mesh layers that connect enterprise systems cleanly. We design API-first architectures that decouple teams, enable reuse, and make third-party integrations composable.</p>
       </div>
       <div class="offering-card">
-        <div class="offering-card-num">03</div>
-        <div class="offering-card-title">Platform Governance &amp; Automation</div>
-        <p class="offering-card-desc">Policy as code, cost governance, and compliance automation enforced at the platform layer. Ship fast without compromising on security posture or spending hygiene.</p>
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="offering-card-title">Platform Governance &amp; FinOps</div>
+        <p class="offering-card-desc">Policy as code, cost governance, and compliance automation enforced at the platform layer — not bolted on after. Guardrails that let engineering teams move fast without creating security or spending sprawl.</p>
       </div>
       <div class="offering-card">
-        <div class="offering-card-num">04</div>
-        <div class="offering-card-title">Multi-Cloud Platform Engineering</div>
-        <p class="offering-card-desc">Unified control planes across AWS, Azure, GCP, and on-prem. One developer experience, one governance model, many clouds — without the complexity that usually comes with it.</p>
+        <div class="offering-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="offering-card-title">Platform Observability &amp; SRE</div>
+        <p class="offering-card-desc">Full-stack observability — metrics, logs, traces, and SLOs — wired into the platform layer so every service inherits reliability by default. We embed SRE practices into platform design, not just incident response.</p>
       </div>
     </div>
   </div>

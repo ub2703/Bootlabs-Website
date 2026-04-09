@@ -254,7 +254,10 @@ input,textarea{box-sizing:border-box;}
 .industry-icon{font-size:28px;margin-bottom:20px;}
 .industry-name{font-size:18px;font-weight:500;color:#fff;margin-bottom:8px;}
 .industry-stat{font-size:36px;line-height:1;color:var(--cyan);margin:20px 0 8px;font-weight:400;}
-.industry-stat-label{font-size:15px;color:var(--mid);margin-bottom:24px;flex:1;line-height:1.6;}
+.industry-stat-label{font-size:14px;color:var(--mid);margin-bottom:20px;line-height:1.6;}
+.industry-use-cases{display:flex;flex-direction:column;gap:6px;margin-bottom:24px;flex:1;}
+.industry-use-case{font-size:12px;color:var(--dim);display:flex;align-items:center;gap:8px;line-height:1.4;}
+.industry-use-case::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--blue);flex-shrink:0;}
 .industry-arrow{font-size:12px;color:var(--cyan);display:flex;align-items:center;gap:6px;opacity:0;transform:translateX(-4px);transition:all .25s;}
 .industry-card:hover .industry-arrow{opacity:1;transform:none;}
 
@@ -889,26 +892,50 @@ input,textarea{box-sizing:border-box;}
       <div class="industry-card">
         <div class="industry-name">Manufacturing</div>
         <div class="industry-stat">40%</div>
-        <div class="industry-stat-label">reduction in inventory carrying costs through AI-driven production planning, procurement automation, and real-time supply chain visibility</div>
-        <a href="#" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <div class="industry-stat-label">reduction in inventory carrying costs through AI-driven production planning and supply chain visibility</div>
+        <div class="industry-use-cases">
+          <div class="industry-use-case">Predictive maintenance &amp; AIOps</div>
+          <div class="industry-use-case">AI quality control &amp; defect detection</div>
+          <div class="industry-use-case">Procurement &amp; demand forecasting</div>
+          <div class="industry-use-case">Connected factory &amp; OT/IT integration</div>
+        </div>
+        <a href="manufacturing.html" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
       <div class="industry-card">
         <div class="industry-name">Automotive</div>
         <div class="industry-stat">3×</div>
-        <div class="industry-stat-label">faster issue resolution across customer, dealer, and vendor support with AI-powered service platforms and unified data layers</div>
-        <a href="#" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <div class="industry-stat-label">faster issue resolution across customer, dealer, and vendor support with AI-powered service platforms</div>
+        <div class="industry-use-cases">
+          <div class="industry-use-case">Dealer &amp; customer AI support platforms</div>
+          <div class="industry-use-case">Connected vehicle data pipelines</div>
+          <div class="industry-use-case">ADAS &amp; sensor data engineering</div>
+          <div class="industry-use-case">Warranty &amp; aftersales intelligence</div>
+        </div>
+        <a href="automotive.html" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
       <div class="industry-card">
         <div class="industry-name">Financial Services</div>
         <div class="industry-stat">60%</div>
-        <div class="industry-stat-label">reduction in document processing time — from KYC to claims — with cloud-native AI pipelines and intelligent customer support automation</div>
-        <a href="#" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <div class="industry-stat-label">reduction in document processing time — from KYC to claims — with cloud-native AI pipelines</div>
+        <div class="industry-use-cases">
+          <div class="industry-use-case">KYC &amp; compliance automation</div>
+          <div class="industry-use-case">Fraud detection &amp; risk intelligence</div>
+          <div class="industry-use-case">GenAI for wealth &amp; advisory</div>
+          <div class="industry-use-case">Core banking modernisation</div>
+        </div>
+        <a href="financial-services.html" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
       <div class="industry-card">
         <div class="industry-name">QSR</div>
         <div class="industry-stat">25%</div>
-        <div class="industry-stat-label">improvement in in-store throughput with AI-powered order flow optimisation, kitchen display intelligence, and demand forecasting at outlet level</div>
-        <a href="#" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <div class="industry-stat-label">improvement in in-store throughput with AI-powered order flow optimisation and kitchen display intelligence</div>
+        <div class="industry-use-cases">
+          <div class="industry-use-case">Outlet-level demand forecasting</div>
+          <div class="industry-use-case">AI drive-thru &amp; kiosk optimisation</div>
+          <div class="industry-use-case">Loyalty &amp; personalisation engines</div>
+          <div class="industry-use-case">Supply chain &amp; wastage reduction</div>
+        </div>
+        <a href="qsr.html" class="industry-arrow">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
   </div>
@@ -922,39 +949,30 @@ input,textarea{box-sizing:border-box;}
       <div class="usecase-left">
         <div class="usecase-slides">
           <div class="usecase-slide active" data-slide="0">
-            <p class="usecase-q">Is your cloud bill growing faster than <em>your revenue?</em></p>
-            <p class="usecase-answer">Most enterprises overpay by 30–40% because cloud was provisioned for peak, not for reality. Our FinOps and platform engineering teams right-size infrastructure, automate resource governance, and build cost-aware CI/CD pipelines — so you stop paying for idle capacity.</p>
+            <p class="usecase-q">You have Datadog, Splunk, PagerDuty — and incidents still take <em>hours to diagnose.</em></p>
+            <p class="usecase-answer">Monitoring tools tell you what broke. They don't tell you why, or what to do next. Our Resilient Operations Center connects every signal across your stack — logs, metrics, traces, CMDB — and uses AI to surface root cause and recommended fix in minutes, not hours. Less noise. Faster resolution. Fewer 3am war rooms.</p>
             <div class="usecase-tags">
-              <span class="usecase-tag">Cloud & DevOps</span>
-              <span class="usecase-tag">FinOps</span>
-              <span class="usecase-tag">Platform Engineering</span>
+              <span class="usecase-tag">ROC</span>
+              <span class="usecase-tag">AIOps</span>
+              <span class="usecase-tag">Incident Management</span>
             </div>
           </div>
           <div class="usecase-slide" data-slide="1">
-            <p class="usecase-q">How long does it take your team to <em>ship a production release?</em></p>
-            <p class="usecase-answer">If it takes more than a day, your DevOps pipeline is costing you competitive advantage. We build fully automated CI/CD platforms with GitOps, Kubernetes-native deployments, and SRE-grade observability — cutting release cycles from weeks to hours.</p>
+            <p class="usecase-q">Your developers use AI for autocomplete. Are you getting <em>the full productivity lift?</em></p>
+            <p class="usecase-answer">Copilot in your IDE is the tip of the iceberg. We embed AI across the entire SDLC — from AI-assisted requirements and automated architecture reviews, to test generation, intelligent code review, and release intelligence. Teams that do this ship 40% faster and catch defects three sprints earlier.</p>
             <div class="usecase-tags">
-              <span class="usecase-tag">DevOps</span>
-              <span class="usecase-tag">Kubernetes</span>
-              <span class="usecase-tag">SRE</span>
+              <span class="usecase-tag">AI in SDLC</span>
+              <span class="usecase-tag">Developer Productivity</span>
+              <span class="usecase-tag">Platform Engineering</span>
             </div>
           </div>
           <div class="usecase-slide" data-slide="2">
-            <p class="usecase-q">How many hours does your compliance team spend on <em>manual document reviews?</em></p>
-            <p class="usecase-answer">Our Enterprise GenAI platform ingests regulatory frameworks, policy documents, and audit trails to automate compliance checks at scale. Financial services clients have cut manual review time by 60% while improving audit accuracy.</p>
+            <p class="usecase-q">Your support team is answering the same <em>emails and chats on repeat.</em></p>
+            <p class="usecase-answer">Typically 60–70% of tier-1 and tier-2 queries are repetitive and resolvable by AI. We build enterprise-grade conversational AI on Kore.ai that handles customer support across chat, email, and voice — with full context from your CRM, escalation logic, and sentiment-aware handoffs to human agents when it matters.</p>
             <div class="usecase-tags">
-              <span class="usecase-tag">Financial Services</span>
-              <span class="usecase-tag">GenAI</span>
-              <span class="usecase-tag">Compliance</span>
-            </div>
-          </div>
-          <div class="usecase-slide" data-slide="3">
-            <p class="usecase-q">Are your production lines going down <em>without warning?</em></p>
-            <p class="usecase-answer">We build AIOps platforms that connect to your SCADA, ERP, and sensor data to predict equipment failures before they happen. Manufacturers using our predictive maintenance stack have cut unplanned downtime by 40% within the first quarter.</p>
-            <div class="usecase-tags">
-              <span class="usecase-tag">Manufacturing</span>
-              <span class="usecase-tag">AIOps</span>
-              <span class="usecase-tag">Predictive Maintenance</span>
+              <span class="usecase-tag">Customer Support AI</span>
+              <span class="usecase-tag">Kore AI</span>
+              <span class="usecase-tag">Conversational AI</span>
             </div>
           </div>
         </div>
@@ -962,7 +980,6 @@ input,textarea{box-sizing:border-box;}
           <div class="usecase-dot active" onclick="goToSlide(0)"></div>
           <div class="usecase-dot" onclick="goToSlide(1)"></div>
           <div class="usecase-dot" onclick="goToSlide(2)"></div>
-          <div class="usecase-dot" onclick="goToSlide(3)"></div>
         </div>
       </div>
       <div class="usecase-right">
