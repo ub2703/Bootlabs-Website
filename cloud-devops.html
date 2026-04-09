@@ -170,6 +170,18 @@ input,textarea{box-sizing:border-box;}
 .svc-cta-h2{font-size:clamp(32px,4.5vw,56px);font-weight:400;color:#fff;margin-bottom:20px;line-height:1.1;}
 .svc-cta-sub{font-size:18px;color:var(--mid);line-height:1.75;margin-bottom:40px;}
 
+/* ══ PARTNERSHIPS ══ */
+.partnerships-section{padding:48px 0;background:#080810;border-top:1px solid var(--border);}
+.partnerships-inner{display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
+.partnerships-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);white-space:nowrap;flex-shrink:0;}
+.partnerships-divider{width:1px;height:36px;background:var(--border);flex-shrink:0;}
+.partnerships-cards{display:flex;gap:14px;flex-wrap:wrap;flex:1;}
+.partner-card{display:flex;align-items:center;gap:14px;padding:14px 22px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.02);transition:border-color .3s,background .3s;}
+.partner-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.04);}
+.partner-card-logo{width:32px;height:32px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.partner-card-name{font-size:14px;color:#fff;line-height:1.2;}
+.partner-card-tier{font-size:11px;color:var(--cyan);margin-top:3px;}
+
 /* ══ FOOTER ══ */
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
 .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
@@ -447,6 +459,65 @@ input,textarea{box-sizing:border-box;}
     </div>
   </div>
 </div>
+
+<!-- ══ CLOUD PARTNERSHIPS ══ -->
+<section class="partnerships-section">
+  <div class="container">
+    <div class="partnerships-inner">
+      <div class="partnerships-label">Cloud Partners</div>
+      <div class="partnerships-divider"></div>
+      <div class="partnerships-cards">
+
+        <!-- AWS -->
+        <div class="partner-card">
+          <div class="partner-card-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+              <path d="M11.5 22.5c0 .6.1 1.1.2 1.5.2.4.4.8.7 1.2.1.1.1.2.1.3 0 .2-.1.3-.3.5l-1 .7c-.1.1-.3.1-.4.1-.2 0-.3-.1-.5-.2-.2-.2-.4-.5-.6-.8-.2-.3-.3-.6-.5-1-.9 1.1-2 1.6-3.4 1.6-1 0-1.7-.3-2.3-.8-.5-.5-.8-1.2-.8-2.1 0-.9.3-1.7.9-2.2.6-.6 1.4-.8 2.5-.8.3 0 .7 0 1 .1.4 0 .8.1 1.2.2v-.8c0-.8-.2-1.3-.5-1.6-.3-.3-.8-.5-1.6-.5-.3 0-.7 0-1 .1-.4.1-.7.2-1 .3h-.3c-.2 0-.3-.1-.3-.4v-.6c0-.2 0-.3.1-.4.1-.1.2-.2.4-.2.3-.1.7-.3 1.2-.4.5-.1 1-.2 1.6-.2 1.2 0 2 .3 2.6.8.5.5.8 1.3.8 2.4v3.2zm-4.7 1.7c.3 0 .7-.1 1-.2.4-.1.7-.4.9-.7.2-.2.3-.5.3-.8V22c-.3-.1-.6-.1-.9-.2-.3 0-.6-.1-.9-.1-.6 0-1.1.1-1.4.4-.3.2-.5.6-.5 1.1 0 .4.1.8.4 1 .2.3.6.4 1.1.4zm7.7 1c-.2 0-.3 0-.4-.1-.1-.1-.2-.2-.2-.4l-2.5-8.3c0-.2-.1-.3-.1-.4 0-.2.1-.3.3-.3h1.3c.2 0 .4 0 .4.1.1.1.2.2.2.4l1.8 7 1.7-7c0-.2.1-.3.2-.4.1-.1.2-.1.4-.1h1c.2 0 .4 0 .4.1.1.1.2.2.2.4l1.7 7.1 1.8-7.1c0-.2.1-.3.2-.4.1-.1.3-.1.4-.1h1.2c.2 0 .3.1.3.3 0 .1 0 .2-.1.4l-2.6 8.3c0 .2-.1.3-.2.4-.1.1-.2.1-.4.1h-1.1c-.2 0-.4 0-.4-.1-.1-.1-.2-.2-.2-.4l-1.7-6.8-1.7 6.8c0 .2-.1.3-.2.4-.1.1-.3.1-.4.1h-1.1zm14 .3c-.7 0-1.3-.1-2-.3-.6-.2-1.1-.4-1.4-.7-.2-.1-.2-.3-.2-.4v-.7c0-.2.1-.4.3-.4h.2c.1 0 .2 0 .3.1.4.2.8.4 1.2.5.5.1.9.2 1.4.2.7 0 1.3-.1 1.7-.4.4-.2.6-.6.6-1 0-.3-.1-.6-.3-.8-.2-.2-.6-.4-1.2-.6l-1.8-.5c-.9-.3-1.6-.6-2-1.1-.4-.5-.7-1-.7-1.7 0-.5.1-.9.3-1.3.2-.4.5-.7.8-1 .3-.3.7-.5 1.2-.6.5-.1 1-.2 1.5-.2.3 0 .6 0 .9.1.3 0 .6.1.9.2.3.1.5.2.7.3.2.1.4.2.5.3.2.1.3.2.3.3 0 .1.1.2.1.4v.6c0 .2-.1.4-.3.4-.1 0-.2 0-.4-.1-.7-.3-1.4-.5-2.2-.5-.7 0-1.2.1-1.5.3-.3.2-.5.5-.5.9 0 .3.1.6.4.8.2.2.7.4 1.4.7l1.7.5c.9.3 1.5.6 1.9 1.1.4.4.6 1 .6 1.6 0 .5-.1 1-.3 1.4-.2.4-.5.8-.9 1-.4.3-.8.5-1.3.6-.5.2-1.1.3-1.7.3z" fill="#FF9900"/>
+              <path d="M28.6 29.5c-3.5 2.6-8.6 4-13 4-6.1 0-11.7-2.3-15.8-6 -.3-.3 0-.7.4-.5 4.5 2.6 10 4.2 15.8 4.2 3.9 0 8.1-.8 12-2.4.6-.3 1 .4.6.7z" fill="#FF9900"/>
+              <path d="M30.1 27.8c-.4-.5-2.8-.2-3.9-.1-.3 0-.4-.2-.1-.5 1.9-1.3 5-.9 5.4-.5.4.5-.1 3.6-1.9 5.1-.3.2-.5.1-.4-.2.4-1 1.3-3.3.9-3.8z" fill="#FF9900"/>
+            </svg>
+          </div>
+          <div>
+            <div class="partner-card-name">Amazon Web Services</div>
+            <div class="partner-card-tier">Advanced Tier Partner</div>
+          </div>
+        </div>
+
+        <!-- Azure -->
+        <div class="partner-card">
+          <div class="partner-card-logo">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+              <path d="M13.4 3h7.7L12 27.3H4.3L13.4 3z" fill="#0078D4"/>
+              <path d="M20.5 3h-7l9.8 13.4L27.7 27.3H20l-7.3-10.1L20.5 3z" fill="#0078D4" opacity=".7"/>
+              <path d="M12 27.3l8.5-14.7 7.2 14.7H12z" fill="#50E6FF" opacity=".9"/>
+            </svg>
+          </div>
+          <div>
+            <div class="partner-card-name">Microsoft Azure</div>
+            <div class="partner-card-tier">Solutions Partner</div>
+          </div>
+        </div>
+
+        <!-- GCP -->
+        <div class="partner-card">
+          <div class="partner-card-logo">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+              <path d="M19.8 10.4h.9l2.6-2.6.1-1.1A11.8 11.8 0 0 0 4.7 13c.2-.1 1.5-.1 1.5-.1l5.2-.9s.3-.5.5-.4a6.6 6.6 0 0 1 7.9-1.2z" fill="#EA4335"/>
+              <path d="M27 13a11.8 11.8 0 0 0-3.6-5.3l-3.7 3.7a6.6 6.6 0 0 1 2.4 5.2v.7a3.3 3.3 0 1 1 0 6.6h-6.6l-.7.7v4l.7.6H22a8.6 8.6 0 0 0 5-15.5z" fill="#4285F4"/>
+              <path d="M9.7 29h6.6v-4.7H9.7a3.3 3.3 0 0 1-1.4-.3l-1 .3-2.6 2.6-.2 1a8.5 8.5 0 0 0 5.2 1.1z" fill="#34A853"/>
+              <path d="M9.7 11.8A8.6 8.6 0 0 0 4.5 27l3.8-3.8a3.3 3.3 0 1 1 4.4-4.4L16.5 15a8.6 8.6 0 0 0-6.8-3.2z" fill="#FBBC05"/>
+            </svg>
+          </div>
+          <div>
+            <div class="partner-card-name">Google Cloud</div>
+            <div class="partner-card-tier">Partner</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ══ WHAT WE OFFER ══ -->
 <section class="offerings-section">
