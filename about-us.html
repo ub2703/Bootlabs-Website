@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — BootLabs</title>
+<style>
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;height:auto;}
+ul{list-style:none;}
+button{font-family:NHD,sans-serif;cursor:pointer;}
+input,textarea{box-sizing:border-box;}
+
+:root{
+  --blue:#0066FF;--cyan:#26a8ff;
+  --border:rgba(255,255,255,.08);
+  --border-blue:rgba(0,102,255,.35);
+  --dim:rgba(255,255,255,.45);
+  --mid:rgba(255,255,255,.7);
+  --glass:rgba(255,255,255,.03);
+  --r:20px;
+}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
+.eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
+.h2{font-size:clamp(28px,4vw,56px);font-weight:400;line-height:1.1;}
+.body-l{font-size:18px;line-height:1.75;color:var(--mid);}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;font-weight:400;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
+.btn-primary:hover{background:#0055dd;box-shadow:0 8px 32px rgba(0,102,255,.5);transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;transition:transform .2s;}
+.btn-primary:hover svg{transform:translateX(3px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ══ MOBILE MENU ══ */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mob-sub{padding:12px 0 4px;display:none;flex-direction:column;gap:10px;}
+.mob-sub.open{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
+
+/* ══ NAVBAR ══ */
+.navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
+.navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
+.nav-logo img{height:28px;width:auto;display:block;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{font-size:13px;color:var(--mid);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.05);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:240px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.simple-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:13px;color:var(--mid);text-decoration:none;transition:background .2s,color .2s;}
+.simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
+.mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-title{font-size:14px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;transition:background .2s;}
+.nav-hamburger:hover{background:rgba(255,255,255,.06);}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ══ HERO ══ */
+.about-hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;text-align:center;}
+.about-hero::before{content:"";position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.12) 0%,transparent 65%);pointer-events:none;}
+.about-hero-inner{position:relative;z-index:1;max-width:780px;margin:0 auto;}
+.about-hero .eyebrow{justify-content:center;}
+.about-h1{font-size:clamp(36px,5vw,68px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:24px;margin-top:20px;}
+.about-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:48px;}
+.hero-stat-pills{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;}
+.hero-stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid var(--border);border-radius:100px;font-size:13px;color:var(--mid);background:rgba(255,255,255,.02);}
+.hero-stat-pill span{color:#fff;font-size:15px;}
+
+/* ══ FOUNDER'S VOICE ══ */
+.founder-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.founder-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.founder-quote{font-size:22px;line-height:1.65;color:#fff;font-style:italic;position:relative;padding-left:28px;}
+.founder-quote::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:3px;background:linear-gradient(to bottom,var(--blue),var(--cyan));border-radius:2px;}
+.founder-name{font-size:16px;color:#fff;margin-top:32px;font-style:normal;}
+.founder-title{font-size:13px;color:var(--cyan);margin-top:4px;font-style:normal;}
+.founder-avatar-wrap{display:flex;align-items:center;justify-content:center;}
+.founder-avatar{width:100%;max-width:420px;aspect-ratio:1;border-radius:20px;background:linear-gradient(135deg,rgba(0,102,255,.12),rgba(38,168,255,.06));border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;overflow:hidden;}
+.founder-avatar::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(0,102,255,.18) 0%,transparent 65%);pointer-events:none;}
+.founder-initials{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,rgba(0,102,255,.4),rgba(38,168,255,.25));border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;font-weight:500;letter-spacing:.04em;position:relative;z-index:1;box-shadow:0 0 40px rgba(0,102,255,.25);}
+.founder-avatar-name{font-size:16px;color:#fff;position:relative;z-index:1;}
+.founder-avatar-role{font-size:12px;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;position:relative;z-index:1;}
+.founder-avatar-glow{position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:240px;height:240px;background:radial-gradient(circle,rgba(0,102,255,.2) 0%,transparent 65%);pointer-events:none;}
+
+/* ══ VISION + PILLARS ══ */
+.vision-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.vision-statement{font-size:clamp(20px,2.5vw,32px);line-height:1.5;color:#fff;max-width:800px;margin:0 auto 64px;text-align:center;}
+.vision-statement span{color:var(--cyan);}
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.pillar-card{background:#06060a;padding:36px 28px;transition:background .3s;}
+.pillar-card:hover{background:#090918;}
+.pillar-icon{width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.08);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.pillar-icon svg{width:20px;height:20px;fill:none;stroke:var(--cyan);stroke-width:1.5;}
+.pillar-title{font-size:16px;color:#fff;margin-bottom:10px;}
+.pillar-body{font-size:13px;color:var(--mid);line-height:1.7;}
+
+/* ══ TIMELINE ══ */
+.timeline-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.timeline{position:relative;max-width:900px;margin:56px auto 0;display:flex;flex-direction:column;gap:0;}
+.timeline::before{content:"";position:absolute;left:120px;top:0;bottom:0;width:1px;background:var(--border);}
+.timeline-item{display:grid;grid-template-columns:120px 1fr;gap:32px;padding:32px 0;position:relative;}
+.timeline-item:not(:last-child){border-bottom:1px solid var(--border);}
+.timeline-year{font-size:13px;color:var(--cyan);font-weight:500;padding-top:4px;text-align:right;padding-right:32px;}
+.timeline-dot{position:absolute;left:112px;top:36px;width:16px;height:16px;border-radius:50%;background:#080810;border:2px solid var(--border-blue);box-shadow:0 0 8px rgba(0,102,255,.3);}
+.timeline-title{font-size:16px;color:#fff;margin-bottom:8px;}
+.timeline-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ══ TEAM ══ */
+.team-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.team-intro{max-width:600px;margin-bottom:56px;}
+.team-intro .h2{margin:16px 0 16px;}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.team-card{border:1px solid var(--border);border-radius:20px;padding:28px 24px;background:var(--glass);transition:border-color .3s;}
+.team-card:hover{border-color:var(--border-blue);}
+.team-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,rgba(0,102,255,.3),rgba(38,168,255,.2));border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--cyan);font-weight:500;margin-bottom:16px;letter-spacing:.02em;}
+.team-name{font-size:15px;color:#fff;margin-bottom:4px;}
+.team-title{font-size:13px;color:var(--mid);line-height:1.5;}
+.team-linkedin{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);margin-top:12px;transition:color .2s;}
+.team-linkedin:hover{color:var(--cyan);}
+.team-linkedin svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.5;}
+
+/* ══ OFFICES ══ */
+.offices-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.offices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.office-card{border:1px solid var(--border);border-radius:20px;padding:36px 32px;background:var(--glass);transition:border-color .3s;}
+.office-card:hover{border-color:var(--border-blue);}
+.office-flag{font-size:28px;margin-bottom:16px;}
+.office-city{font-size:20px;color:#fff;margin-bottom:4px;}
+.office-country{font-size:12px;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;}
+.office-address{font-size:13px;color:var(--mid);line-height:1.8;}
+.office-contact{margin-top:16px;display:flex;flex-direction:column;gap:6px;}
+.office-contact a{font-size:13px;color:var(--mid);transition:color .2s;}
+.office-contact a:hover{color:var(--cyan);}
+
+/* ══ CAREERS CTA ══ */
+.careers-cta{padding:100px 0;background:#06060a;border-top:1px solid var(--border);position:relative;overflow:hidden;}
+.careers-cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(0,102,255,.08) 0%,transparent 65%);pointer-events:none;}
+.careers-cta-inner{text-align:center;max-width:600px;margin:0 auto;position:relative;z-index:1;}
+.careers-cta-inner .eyebrow{justify-content:center;margin-bottom:20px;}
+.careers-h2{font-size:clamp(28px,4vw,48px);font-weight:400;line-height:1.1;color:#fff;margin-bottom:16px;}
+.careers-sub{font-size:18px;color:var(--mid);line-height:1.75;margin-bottom:36px;}
+
+/* ══ FOOTER ══ */
+.footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;width:auto;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
+.footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+.footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
+.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);white-space:nowrap;line-height:1;overflow:hidden;}
+.footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+
+/* ══ CONTACT POPUP ══ */
+.contact-popup{display:none;position:fixed;inset:0;z-index:900;align-items:center;justify-content:center;padding:20px;}
+.contact-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);}
+.contact-modal{position:relative;z-index:1;background:#0c0c18;border:1px solid var(--border);border-radius:24px;padding:48px 40px;width:100%;max-width:480px;box-shadow:0 40px 80px rgba(0,0,0,.6);}
+.contact-modal-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:32px;}
+.contact-modal-title{font-size:24px;color:#fff;}
+.contact-modal-sub{font-size:14px;color:var(--mid);margin-top:6px;}
+.contact-close{width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;color:var(--mid);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,color .2s;flex-shrink:0;}
+.contact-close:hover{border-color:var(--cyan);color:#fff;}
+.contact-form{display:flex;flex-direction:column;gap:16px;}
+.contact-field{display:flex;flex-direction:column;gap:6px;}
+.contact-field label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);}
+.contact-field input,.contact-field textarea{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-family:NHD,sans-serif;font-size:14px;color:#fff;outline:none;transition:border-color .2s;}
+.contact-field input:focus,.contact-field textarea:focus{border-color:var(--border-blue);}
+.contact-field textarea{resize:vertical;min-height:80px;}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  .container{padding:0 32px;}
+  .pillars-grid{grid-template-columns:repeat(2,1fr);}
+  .team-grid{grid-template-columns:repeat(2,1fr);}
+  .founder-inner{grid-template-columns:1fr;gap:56px;}
+  .founder-avatar-wrap{order:-1;}
+  .founder-avatar{max-width:320px;}
+  .timeline::before{left:90px;}
+  .timeline-item{grid-template-columns:90px 1fr;}
+  .timeline-dot{left:82px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
+  .footer-brand{grid-column:span 2;}
+}
+@media(max-width:768px){
+  .container{padding:0 18px;}
+  .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
+  .nav-hamburger{display:flex;}
+  .about-hero{padding:120px 0 72px;}
+  .pillars-grid{grid-template-columns:1fr;border-radius:14px;}
+  .offices-grid{grid-template-columns:1fr;}
+  .timeline::before{display:none;}
+  .timeline-item{grid-template-columns:1fr;gap:8px;}
+  .timeline-year{text-align:left;padding-right:0;}
+  .timeline-dot{display:none;}
+  .footer{padding:56px 0 28px;}
+  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-brand{grid-column:span 1;}
+  .footer-bot{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:480px){
+  .container{padding:0 14px;}
+  .navbar{width:calc(100% - 16px);padding:9px 12px;}
+  .nav-logo img{height:22px;}
+  .team-grid{grid-template-columns:1fr;}
+  .footer-legal{flex-wrap:wrap;gap:12px;}
+  .mob-nav-link{font-size:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ MOBILE MENU ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mob-nav-links">
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="ai-engineering.html" onclick="closeMobileMenu()">AI Engineering</a>
+        <a href="platform-engineering.html" onclick="closeMobileMenu()">Platform Engineering</a>
+        <a href="cloud-devops.html" onclick="closeMobileMenu()">Cloud &amp; DevOps Engineering</a>
+        <a href="software-engineering.html" onclick="closeMobileMenu()">Software Engineering</a>
+        <a href="security-engineering.html" onclick="closeMobileMenu()">Security Engineering</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Solutions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="resilient-operations-center.html" onclick="closeMobileMenu()">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" onclick="closeMobileMenu()">AI in SDLC</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Industries <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="manufacturing.html" onclick="closeMobileMenu()">Manufacturing</a>
+        <a href="automotive.html" onclick="closeMobileMenu()">Automotive</a>
+        <a href="financial-services.html" onclick="closeMobileMenu()">Financial Services</a>
+        <a href="qsr.html" onclick="closeMobileMenu()">QSR</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="sailor.html" onclick="closeMobileMenu()">Sailor</a>
+        <a href="guardian.html" onclick="closeMobileMenu()">Guardian</a>
+      </div>
+    </div>
+    <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
+    <a class="mob-nav-link" href="about-us.html" style="color:var(--cyan);" onclick="closeMobileMenu()">About Us</a>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="white-papers.html" onclick="closeMobileMenu()">White Papers</a>
+        <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </nav>
+  <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI Engineering</div><div class="mega-item-subs">Enterprise GenAI · AI Agents · AIOps · Managed Services</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">Platform Engineering</div><div class="mega-item-subs">IDP · Self-Service Infra · Platform Governance · Multi-Cloud</div></a>
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">Cloud &amp; DevOps Engineering</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Observability &amp; SRE</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Software Engineering</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="security-engineering.html" class="mega-item" style="grid-column:span 2;"><div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · Vulnerability Management · CSPM · Security Automation</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="resilient-operations-center.html" class="simple-item">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" class="simple-item">AI in SDLC</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#industry" class="nav-link">Industries <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="manufacturing.html" class="simple-item">Manufacturing</a>
+        <a href="automotive.html" class="simple-item">Automotive</a>
+        <a href="financial-services.html" class="simple-item">Financial Services</a>
+        <a href="qsr.html" class="simple-item">QSR</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#platforms" class="nav-link">Platforms <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="sailor.html" class="simple-item">Sailor</a>
+        <a href="guardian.html" class="simple-item">Guardian</a>
+      </div>
+    </div>
+    <a href="partnerships.html" class="nav-link">Partners</a>
+    <a href="about-us.html" class="nav-link" style="color:var(--cyan);">About Us</a>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="case-studies.html" class="simple-item">Case Studies</a>
+        <a href="white-papers.html" class="simple-item">White Papers</a>
+        <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     1. HERO
+════════════════════════════════════════════ -->
+<section class="about-hero">
+  <div class="container">
+    <div class="about-hero-inner">
+      <div class="eyebrow">About BootLabs</div>
+      <h1 class="about-h1">Tomorrow's Enterprises Take Shape in Our Labs</h1>
+      <p class="about-sub">To stay ahead in tomorrow's world, enterprises must move at the speed of change. At BootLabs, we redefine how enterprises evolve — providing agile solutions that break through barriers and help businesses accelerate without compromise.</p>
+      <div class="hero-stat-pills">
+        <div class="hero-stat-pill"><span>200+</span> Team Members</div>
+        <div class="hero-stat-pill"><span>30+</span> Enterprise Clients</div>
+        <div class="hero-stat-pill"><span>4</span> Global Offices</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     2. FOUNDER'S VOICE
+════════════════════════════════════════════ -->
+<section class="founder-section">
+  <div class="container">
+    <div class="founder-inner">
+      <div class="founder-content">
+        <div class="eyebrow" style="margin-bottom:32px;">Founder's Voice</div>
+        <blockquote class="founder-quote">
+          "BootLabs is built on one belief — that the right technology, in the right hands, at the right time, changes what enterprises are capable of. We don't just deliver solutions; we build the capability for our clients to move faster, operate safer, and innovate continuously. AI is not a feature we've added to our offering — it runs through everything we do, from how we build software to how we run operations."
+        </blockquote>
+        <div class="founder-name">Ramkumar Sambasivan</div>
+        <div class="founder-title">Founder &amp; CEO, BootLabs</div>
+      </div>
+      <div class="founder-avatar-wrap">
+        <div class="founder-avatar">
+          <div class="founder-initials">RS</div>
+          <div class="founder-avatar-name">Ramkumar Sambasivan</div>
+          <div class="founder-avatar-role">Founder &amp; CEO</div>
+          <div class="founder-avatar-glow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     3. VISION + 4 PILLARS
+════════════════════════════════════════════ -->
+<section class="vision-section">
+  <div class="container">
+    <div class="eyebrow" style="justify-content:center;margin-bottom:28px;">Our Vision</div>
+    <p class="vision-statement">
+      To be the <span>Go-To Tech Innovation Partner</span> empowering customers to achieve success and long-term self-sustainability with the right technologies.
+    </p>
+    <div class="pillars-grid">
+      <!-- Pillar 1: Go-To Partner -->
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="pillar-title">Go-To Partner</div>
+        <p class="pillar-body">Trusted and preferred partner clients seek for technology challenges and new opportunities.</p>
+      </div>
+      <!-- Pillar 2: Tech Innovation -->
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+          </svg>
+        </div>
+        <div class="pillar-title">Tech Innovation</div>
+        <p class="pillar-body">Solve real business problems through innovative and effective technology solutions.</p>
+      </div>
+      <!-- Pillar 3: Client Empowerment -->
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="pillar-title">Client Empowerment</div>
+        <p class="pillar-body">Equip clients to thrive independently, reducing reliance on continuous support.</p>
+      </div>
+      <!-- Pillar 4: Right Technology -->
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="6"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
+        </div>
+        <div class="pillar-title">Right Technology</div>
+        <p class="pillar-body">Selecting technologies that perfectly fit customer needs — not just following trends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     4. OUR STORY — TIMELINE
+════════════════════════════════════════════ -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:16px;">Our Story</div>
+    <h2 class="h2" style="margin-top:16px;">From a Vision to a Global Lab</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-year">2019</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">The Foundations</div>
+          <p class="timeline-body">Ramkumar founded BootLabs with a vision to simplify cloud adoption with the right tools and technology.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2020</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Cloud Consulting</div>
+          <p class="timeline-body">Began helping businesses scale with efficient cloud solutions and accelerating digital transformation through modern DevOps practices.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2021</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Pioneering Cloud for Early Clients</div>
+          <p class="timeline-body">Delivered a multi-cloud orchestration solution migrating 150+ applications. Established partnerships with Mahindra &amp; Mahindra and Thoughtworks.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Platform Engineering</div>
+          <p class="timeline-body">Launched Sailor — a multi-cloud orchestrator built for enterprise scale. Team grew to 50+ engineers.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Stepping into AI</div>
+          <p class="timeline-body">Ventured into AI platforms and GenAI. Launched Guardian — a unified vulnerability management platform with AI-driven remediation.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Expansion Beyond Borders</div>
+          <p class="timeline-body">Opened new offices in Mumbai and UAE. Engineering center established in Bangalore. Global customer base across US, Europe, and Philippines.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Expanding Horizons</div>
+          <p class="timeline-body">Strengthened OEM partnerships for global AI adoption. Launched AI-enabled Managed Services (AIMS).</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2026 &amp; Beyond</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">A Global AI Engineering Force</div>
+          <p class="timeline-body">200+ member team, serving 30+ clients including major financial services institutions and government entities. Continuing to push the frontier of AI-native enterprise transformation.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     5. TEAM SECTION
+════════════════════════════════════════════ -->
+<section class="team-section">
+  <div class="container">
+    <div class="team-intro">
+      <div class="eyebrow" style="margin-bottom:16px;">The Team</div>
+      <h2 class="h2">People Who Build the Future</h2>
+      <p class="body-l" style="margin-top:16px;">Our leadership brings together deep expertise in AI, cloud, platform engineering, and enterprise transformation — united by a shared mission to make technology work for people.</p>
+    </div>
+    <div class="team-grid">
+
+      <!-- 1. Ramkumar Sambasivan -->
+      <div class="team-card">
+        <div class="team-avatar">RS</div>
+        <div class="team-name">Ramkumar Sambasivan</div>
+        <div class="team-title">Founder &amp; Chief Executive Officer</div>
+        <a href="#" class="team-linkedin">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- 2. Karthick Dharman -->
+      <div class="team-card">
+        <div class="team-avatar">KD</div>
+        <div class="team-name">Karthick Dharman</div>
+        <div class="team-title">Chief Technology Officer</div>
+        <a href="#" class="team-linkedin">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- 3. Samaya Ramesh Radhakrishnan -->
+      <div class="team-card">
+        <div class="team-avatar">SR</div>
+        <div class="team-name">Samaya Ramesh Radhakrishnan</div>
+        <div class="team-title">EVP, Cloud Technologies</div>
+        <a href="#" class="team-linkedin">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- 4. Hemant Kalra -->
+      <div class="team-card">
+        <div class="team-avatar">HK</div>
+        <div class="team-name">Hemant Kalra</div>
+        <div class="team-title">EVP, Emerging Technologies</div>
+        <a href="#" class="team-linkedin">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- 5. Utkarsh Bhatnagar -->
+      <div class="team-card">
+        <div class="team-avatar">UB</div>
+        <div class="team-name">Utkarsh Bhatnagar</div>
+        <div class="team-title">Director, Growth</div>
+        <a href="#" class="team-linkedin">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- 6. Kristopher Sequeira -->
+      <div class="team-card">
+        <div class="team-avatar">KS</div>
+        <div class="team-name">Kristopher Sequeira</div>
+        <div class="team-title">Director, Sales &amp; Partnerships</div>
+        <a href="#" class="team-linkedin">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- 7. Roja M V -->
+      <div class="team-card">
+        <div class="team-avatar">RM</div>
+        <div class="team-name">Roja M V</div>
+        <div class="team-title">Finance</div>
+        <a href="#" class="team-linkedin">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- 8. Mohanlal Selvaraj -->
+      <div class="team-card">
+        <div class="team-avatar">MS</div>
+        <div class="team-name">Mohanlal Selvaraj</div>
+        <div class="team-title">Human Resources</div>
+        <a href="#" class="team-linkedin">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     6. GLOBAL OFFICES
+════════════════════════════════════════════ -->
+<section class="offices-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:16px;">Global Presence</div>
+    <h2 class="h2" style="margin-top:16px;">Find Us Around the World</h2>
+    <div class="offices-grid">
+
+      <!-- Bengaluru -->
+      <div class="office-card">
+        <div class="office-flag">🇮🇳</div>
+        <div class="office-city">Bengaluru</div>
+        <div class="office-country">India</div>
+        <div class="office-address">Sumadhura Capitol Towers, 8th Floor, Tower-2,<br>158, Kadugodi, Bengaluru,<br>Karnataka 560066</div>
+        <div class="office-contact">
+          <a href="tel:+919600843184">+91-9600843184</a>
+          <a href="mailto:hello@bootlabstech.com">hello@bootlabstech.com</a>
+        </div>
+      </div>
+
+      <!-- Mumbai -->
+      <div class="office-card">
+        <div class="office-flag">🇮🇳</div>
+        <div class="office-city">Mumbai</div>
+        <div class="office-country">India</div>
+        <div class="office-address">Unit No. 328, Plot No. 15,<br>The Centrium – 3rd Floor, L.B.S. Marg,<br>Kurla West, Mumbai – 400070,<br>Maharashtra</div>
+      </div>
+
+      <!-- Dubai -->
+      <div class="office-card">
+        <div class="office-flag">🇦🇪</div>
+        <div class="office-city">Dubai</div>
+        <div class="office-country">UAE</div>
+        <div class="office-address">Meydan Grandstand, 6th Floor,<br>Meydan Road, Nad Al Sheba,<br>Dubai, U.A.E</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     7. CAREERS CTA
+════════════════════════════════════════════ -->
+<section class="careers-cta">
+  <div class="container">
+    <div class="careers-cta-inner">
+      <div class="eyebrow">Careers</div>
+      <h2 class="careers-h2">Begin Your AI Career at BootLabs</h2>
+      <p class="careers-sub">Unlock new possibilities with BootLabs. Find your role today and build the future with us.</p>
+      <a href="https://www.linkedin.com/company/bootlabstech/jobs/" target="_blank" class="btn-primary">
+        See Open Roles
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
+      <div>
+        <div class="footer-col-head">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="ai-engineering.html">AI Engineering</a></li>
+          <li><a href="platform-engineering.html">Platform Engineering</a></li>
+          <li><a href="cloud-devops.html">Cloud &amp; DevOps</a></li>
+          <li><a href="software-engineering.html">Software Engineering</a></li>
+          <li><a href="security-engineering.html">Security Engineering</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Platforms</div>
+        <ul class="footer-col-links">
+          <li><a href="sailor.html">Sailor</a></li>
+          <li><a href="guardian.html">Guardian</a></li>
+        </ul>
+        <div class="footer-col-head" style="margin-top:28px;">Industries</div>
+        <ul class="footer-col-links">
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="financial-services.html">BFSI</a></li>
+          <li><a href="qsr.html">QSR &amp; Retail</a></li>
+          <li><a href="automotive.html">Automotive</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="blog.html">Insights</a></li>
+          <li><a href="partnerships.html">Partners</a></li>
+          <li><a href="#" onclick="openContact();return false;">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
+    <div class="footer-bot">
+      <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ CONTACT POPUP ══ -->
+<div class="contact-popup" id="contactPopup" onclick="if(event.target===this)closeContact()">
+  <div class="contact-backdrop" onclick="closeContact()"></div>
+  <div class="contact-modal">
+    <div class="contact-modal-head">
+      <div>
+        <div class="contact-modal-title">Book a Discovery Call</div>
+        <div class="contact-modal-sub">Tell us about your challenge — we'll be in touch within 24 hours.</div>
+      </div>
+      <button class="contact-close" onclick="closeContact()">&#x2715;</button>
+    </div>
+    <form class="contact-form" onsubmit="return false;">
+      <div class="contact-field">
+        <label for="contact-name">Name</label>
+        <input type="text" id="contact-name" placeholder="Your full name" autocomplete="name">
+      </div>
+      <div class="contact-field">
+        <label for="contact-email">Work Email</label>
+        <input type="email" id="contact-email" placeholder="you@company.com" autocomplete="email">
+      </div>
+      <div class="contact-field">
+        <label for="contact-company">Company</label>
+        <input type="text" id="contact-company" placeholder="Your company name" autocomplete="organization">
+      </div>
+      <div class="contact-field">
+        <label for="contact-message">How can we help?</label>
+        <textarea id="contact-message" placeholder="Briefly describe your challenge or goal..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:4px;">
+        Send Request
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
+function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
+function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
+function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
+function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
+</script>
+</body>
+</html>
