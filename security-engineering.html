@@ -83,13 +83,33 @@ input,textarea{box-sizing:border-box;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
 /* ══ HERO ══ */
-.svc-hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;}
-.svc-hero::before{content:"";position:absolute;bottom:-100px;left:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,102,255,.12) 0%,transparent 65%);pointer-events:none;}
-.svc-hero-inner{position:relative;z-index:1;max-width:860px;}
+.svc-hero{padding:140px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.svc-hero::before{content:"";position:absolute;bottom:-100px;left:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,102,255,.14) 0%,transparent 65%);pointer-events:none;}
+.svc-hero::after{content:"";position:absolute;top:0;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(38,168,255,.06) 0%,transparent 65%);pointer-events:none;}
+.svc-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.svc-hero-left{}
 .svc-hero-eyebrow{margin-bottom:28px;}
-.svc-hero-h1{font-size:clamp(40px,6vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:28px;}
-.svc-hero-sub{font-size:19px;line-height:1.75;color:var(--mid);max-width:680px;margin-bottom:40px;}
+.svc-hero-h1{font-size:clamp(38px,5.5vw,68px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:28px;}
+.svc-hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:40px;}
 .svc-hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+/* hero visual */
+.svc-hero-visual{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--border);box-shadow:0 32px 80px rgba(0,0,0,.5);}
+.svc-hero-visual img{width:100%;height:420px;object-fit:cover;display:block;}
+.svc-hero-visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,102,255,.15) 0%,transparent 60%);pointer-events:none;}
+.hero-badge-float{position:absolute;display:flex;align-items:center;gap:10px;background:rgba(6,6,14,.88);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(16px);border-radius:12px;padding:12px 16px;}
+.hero-badge-float-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.hero-badge-float-text{font-size:13px;color:#fff;}
+.hero-badge-float-sub{font-size:11px;color:var(--dim);margin-top:2px;}
+
+/* ══ TOOLS SECTION ══ */
+.tools-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.tools-header{margin-bottom:56px;}
+.tools-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.tools-col{background:#06060a;padding:36px 32px;}
+.tools-col-head{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px;}
+.tools-tags{display:flex;flex-wrap:wrap;gap:10px;}
+.tools-tag{display:inline-flex;align-items:center;padding:8px 15px;border-radius:100px;font-size:13px;color:var(--mid);border:1px solid var(--border);background:rgba(255,255,255,.02);transition:border-color .2s,color .2s;}
+.tools-tag:hover{border-color:var(--border-blue);color:#fff;}
 
 /* ══ STAT STRIP ══ */
 .svc-stat-strip{background:#0a0a12;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0;}
@@ -130,14 +150,12 @@ input,textarea{box-sizing:border-box;}
 .tab-btn.active{background:var(--blue);color:#fff;}
 .tab-btn:hover:not(.active){color:#fff;background:rgba(255,255,255,.06);}
 .tab-panel{display:none;}
-.tab-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+.tab-panel.active{display:block;max-width:760px;}
 .tab-points{display:flex;flex-direction:column;gap:16px;margin-bottom:32px;}
 .tab-point{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-radius:14px;background:rgba(255,255,255,.02);border:1px solid var(--border);}
 .tab-point-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));flex-shrink:0;margin-top:6px;}
 .tab-point-text{font-size:15px;color:var(--mid);line-height:1.6;}
-.tab-metric-card{border:1px solid var(--border-blue);border-radius:var(--r);padding:32px 36px;background:rgba(0,102,255,.04);text-align:center;}
-.tab-metric-num{font-size:64px;font-weight:400;color:var(--cyan);line-height:1;margin-bottom:10px;}
-.tab-metric-label{font-size:15px;color:var(--mid);}
+.tab-point-text strong{color:#fff;font-weight:400;}
 
 /* ══ CASE STUDIES ══ */
 .case-studies-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
@@ -182,9 +200,10 @@ input,textarea{box-sizing:border-box;}
 /* ══ RESPONSIVE ══ */
 @media(max-width:1100px){
   .container{padding:0 32px;}
+  .svc-hero-inner{grid-template-columns:1fr;gap:48px;}
+  .svc-hero-visual{max-width:600px;}
   .offerings-grid{grid-template-columns:1fr;}
-  .tab-panel.active{grid-template-columns:1fr;}
-  .tab-metric-card{max-width:360px;}
+  .tools-cols{grid-template-columns:1fr;}
   .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
   .footer-brand{grid-column:span 2;}
   .process-steps{grid-template-columns:1fr 1fr;gap:40px;}
@@ -197,9 +216,11 @@ input,textarea{box-sizing:border-box;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .svc-hero{padding:120px 0 72px;}
+  .svc-hero{padding:110px 0 64px;}
+  .svc-hero-inner{grid-template-columns:1fr;}
   .svc-hero-h1{font-size:clamp(32px,8vw,52px);}
   .svc-hero-sub{font-size:16px;}
+  .svc-hero-visual{display:none;}
   .svc-stat-inner{flex-wrap:wrap;}
   .svc-stat-item{flex:1 1 45%;border-right:none;border-bottom:1px solid var(--border);}
   .svc-stat-item:last-child{border-bottom:none;}
@@ -207,7 +228,6 @@ input,textarea{box-sizing:border-box;}
   .process-steps{grid-template-columns:1fr 1fr;}
   .tab-nav{flex-wrap:wrap;border-radius:14px;width:100%;}
   .tab-btn{flex:1;text-align:center;}
-  .tab-panel.active{grid-template-columns:1fr;}
   .cs-grid{grid-template-columns:1fr;}
   .footer{padding:56px 0 28px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
@@ -380,18 +400,40 @@ input,textarea{box-sizing:border-box;}
 <section class="svc-hero">
   <div class="container">
     <div class="svc-hero-inner">
-      <div class="eyebrow svc-hero-eyebrow">Security Engineering</div>
-      <h1 class="svc-hero-h1">Security That Moves<br>As Fast As Your Code.</h1>
-      <p class="svc-hero-sub">We embed security into every layer of your engineering stack — from code pipelines to cloud infrastructure — so you ship fast without compromising your security posture.</p>
-      <div class="svc-hero-btns">
-        <button class="btn-primary" onclick="openContact()">
-          Book a Discovery Call
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
-        <a href="guardian.html" class="btn-outline">
-          Explore Guardian Platform
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+      <!-- Left: text -->
+      <div class="svc-hero-left">
+        <div class="eyebrow svc-hero-eyebrow">Security Engineering</div>
+        <h1 class="svc-hero-h1">Security That Moves<br>As Fast As Your Code.</h1>
+        <p class="svc-hero-sub">From cloud security posture and threat detection to pipeline hardening and automated response — we embed security into every layer of your infrastructure so your teams ship fast without leaving doors open.</p>
+        <div class="svc-hero-btns">
+          <button class="btn-primary" onclick="openContact()">
+            Book a Discovery Call
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <a href="guardian.html" class="btn-outline">
+            Explore Guardian Platform
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Right: visual -->
+      <div class="svc-hero-visual">
+        <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&auto=format&fit=crop&q=80" alt="Security Engineering" loading="lazy">
+        <div class="svc-hero-visual-overlay"></div>
+        <div class="hero-badge-float" style="bottom:80px;left:20px;">
+          <div class="hero-badge-float-dot" style="background:#22c55e;box-shadow:0 0 8px #22c55e;"></div>
+          <div>
+            <div class="hero-badge-float-text">0 breaches in production</div>
+            <div class="hero-badge-float-sub">across all engagements</div>
+          </div>
+        </div>
+        <div class="hero-badge-float" style="top:24px;right:20px;">
+          <div class="hero-badge-float-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan);"></div>
+          <div>
+            <div class="hero-badge-float-text">100% DevSecOps delivery</div>
+            <div class="hero-badge-float-sub">security built in, not bolted on</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -454,6 +496,58 @@ input,textarea{box-sizing:border-box;}
   </div>
 </section>
 
+<!-- ══ TOOLS & PLATFORMS ══ -->
+<section class="tools-section">
+  <div class="container">
+    <div class="tools-header">
+      <div class="eyebrow" style="margin-bottom:20px;">Our Stack</div>
+      <h2 class="h2">Tools we work with.</h2>
+      <p class="body-l" style="max-width:600px;margin-top:20px;">We work across the leading cloud security, threat detection, and pipeline hardening platforms — so we meet your stack where it is.</p>
+    </div>
+    <div class="tools-cols">
+      <div class="tools-col">
+        <div class="tools-col-head">Cloud Security Posture</div>
+        <div class="tools-tags">
+          <span class="tools-tag">Prisma Cloud</span>
+          <span class="tools-tag">Wiz</span>
+          <span class="tools-tag">AWS Security Hub</span>
+          <span class="tools-tag">Microsoft Defender for Cloud</span>
+          <span class="tools-tag">GCP Security Command Center</span>
+          <span class="tools-tag">Checkov</span>
+          <span class="tools-tag">OPA / Gatekeeper</span>
+          <span class="tools-tag">AWS GuardDuty</span>
+        </div>
+      </div>
+      <div class="tools-col">
+        <div class="tools-col-head">Detection & Automated Response</div>
+        <div class="tools-tags">
+          <span class="tools-tag">Splunk SIEM</span>
+          <span class="tools-tag">Elastic Security</span>
+          <span class="tools-tag">CrowdStrike Falcon</span>
+          <span class="tools-tag">Falco</span>
+          <span class="tools-tag">Palo Alto XSOAR</span>
+          <span class="tools-tag">SentinelOne</span>
+          <span class="tools-tag">AWS CloudTrail</span>
+          <span class="tools-tag">HashiCorp Vault</span>
+        </div>
+      </div>
+      <div class="tools-col">
+        <div class="tools-col-head">Pipeline & Code Security</div>
+        <div class="tools-tags">
+          <span class="tools-tag">Snyk</span>
+          <span class="tools-tag">Trivy</span>
+          <span class="tools-tag">Aqua Security</span>
+          <span class="tools-tag">Checkmarx</span>
+          <span class="tools-tag">SonarQube</span>
+          <span class="tools-tag">Semgrep</span>
+          <span class="tools-tag">Qualys</span>
+          <span class="tools-tag">Tenable</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ HOW WE DELIVER (D.A.B.O.T) ══ -->
 <section class="process-section">
   <div class="container">
@@ -505,51 +599,39 @@ input,textarea{box-sizing:border-box;}
 
     <!-- Financial Services -->
     <div class="tab-panel active">
-      <div class="tab-content-left">
-        <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">CSPM for Regulatory Compliance</h3>
-        <div class="tab-points">
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Cloud Security Posture Management deployed across multi-cloud environments with automated CIS benchmark enforcement and real-time compliance dashboards for regulators</div>
-          </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">DevSecOps pipeline integration eliminating critical and high CVEs from production releases — reducing security review cycles from weeks to hours</div>
-          </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Automated SOAR playbooks cutting mean time to respond (MTTR) for security incidents by 70% with zero manual triage for low-risk events</div>
-          </div>
+      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Cloud Security Posture for Regulatory Compliance</h3>
+      <div class="tab-points">
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Cloud Security Posture Management deployed across multi-cloud environments with automated CIS benchmark enforcement and <strong>real-time compliance dashboards</strong> for regulators</div>
         </div>
-      </div>
-      <div class="tab-metric-card">
-        <div class="tab-metric-num">0</div>
-        <div class="tab-metric-label">critical vulnerabilities in production across all post-engagement releases</div>
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Pipeline security integration eliminating critical and high CVEs from production releases — reducing security review cycles <strong>from weeks to hours</strong>, with <strong>zero critical vulnerabilities</strong> post-engagement</div>
+        </div>
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Automated detection and response playbooks cutting MTTR for security incidents by <strong>70%</strong> — with zero manual triage for low-risk events</div>
+        </div>
       </div>
     </div>
 
     <!-- Automotive -->
     <div class="tab-panel">
-      <div class="tab-content-left">
-        <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">DevSecOps for Connected Vehicle Platform</h3>
-        <div class="tab-points">
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Security-first CI/CD pipeline for connected vehicle software — container scanning, SAST, and secrets management integrated into every release cycle</div>
-          </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Vulnerability management program covering 200+ microservices with automated triage, risk scoring, and patch SLA tracking across three engineering squads</div>
-          </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">ISO 27001 compliance achieved within 6 months of engagement — enabling expansion into regulated automotive markets in Europe and the Middle East</div>
-          </div>
+      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Pipeline Security for Connected Vehicle Platform</h3>
+      <div class="tab-points">
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Security-first CI/CD pipeline for connected vehicle software — container scanning, SAST, and secrets management integrated into <strong>every release cycle</strong> across 200+ microservices</div>
         </div>
-      </div>
-      <div class="tab-metric-card">
-        <div class="tab-metric-num">6mo</div>
-        <div class="tab-metric-label">from engagement start to ISO 27001 certification</div>
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Vulnerability management with automated triage, risk scoring, and patch SLA tracking across three engineering squads — <strong>no manual overhead</strong> on the security team</div>
+        </div>
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">ISO 27001 compliance achieved within <strong>6 months of engagement</strong> — unlocking expansion into regulated automotive markets across Europe and the Middle East</div>
+        </div>
       </div>
     </div>
   </div>
