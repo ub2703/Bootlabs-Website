@@ -83,13 +83,23 @@ input,textarea{box-sizing:border-box;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
 /* ══ HERO ══ */
-.svc-hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;}
-.svc-hero::before{content:"";position:absolute;bottom:-100px;left:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,102,255,.12) 0%,transparent 65%);pointer-events:none;}
-.svc-hero-inner{position:relative;z-index:1;max-width:860px;}
+.svc-hero{padding:140px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.svc-hero::before{content:"";position:absolute;bottom:-100px;left:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,102,255,.14) 0%,transparent 65%);pointer-events:none;}
+.svc-hero::after{content:"";position:absolute;top:0;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(38,168,255,.06) 0%,transparent 65%);pointer-events:none;}
+.svc-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.svc-hero-left{}
 .svc-hero-eyebrow{margin-bottom:28px;}
-.svc-hero-h1{font-size:clamp(40px,6vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:28px;}
-.svc-hero-sub{font-size:19px;line-height:1.75;color:var(--mid);max-width:680px;margin-bottom:40px;}
+.svc-hero-h1{font-size:clamp(38px,5.5vw,68px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:28px;}
+.svc-hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:40px;}
 .svc-hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+/* hero visual */
+.svc-hero-visual{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--border);box-shadow:0 32px 80px rgba(0,0,0,.5);}
+.svc-hero-visual img{width:100%;height:420px;object-fit:cover;display:block;}
+.svc-hero-visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,102,255,.15) 0%,transparent 60%);pointer-events:none;}
+.hero-badge-float{position:absolute;display:flex;align-items:center;gap:10px;background:rgba(6,6,14,.88);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(16px);border-radius:12px;padding:12px 16px;}
+.hero-badge-float-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.hero-badge-float-text{font-size:13px;color:#fff;}
+.hero-badge-float-sub{font-size:11px;color:var(--dim);margin-top:2px;}
 
 /* ══ STAT STRIP ══ */
 .svc-stat-strip{background:#0a0a12;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0;}
@@ -130,14 +140,12 @@ input,textarea{box-sizing:border-box;}
 .tab-btn.active{background:var(--blue);color:#fff;}
 .tab-btn:hover:not(.active){color:#fff;background:rgba(255,255,255,.06);}
 .tab-panel{display:none;}
-.tab-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+.tab-panel.active{display:block;max-width:760px;}
 .tab-points{display:flex;flex-direction:column;gap:16px;margin-bottom:32px;}
 .tab-point{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-radius:14px;background:rgba(255,255,255,.02);border:1px solid var(--border);}
 .tab-point-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));flex-shrink:0;margin-top:6px;}
 .tab-point-text{font-size:15px;color:var(--mid);line-height:1.6;}
-.tab-metric-card{border:1px solid var(--border-blue);border-radius:var(--r);padding:32px 36px;background:rgba(0,102,255,.04);text-align:center;}
-.tab-metric-num{font-size:64px;font-weight:400;color:var(--cyan);line-height:1;margin-bottom:10px;}
-.tab-metric-label{font-size:15px;color:var(--mid);}
+.tab-point-text strong{color:#fff;font-weight:400;}
 
 /* ══ CASE STUDIES ══ */
 .case-studies-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
@@ -182,9 +190,9 @@ input,textarea{box-sizing:border-box;}
 /* ══ RESPONSIVE ══ */
 @media(max-width:1100px){
   .container{padding:0 32px;}
+  .svc-hero-inner{grid-template-columns:1fr;gap:48px;}
+  .svc-hero-visual{max-width:600px;}
   .offerings-grid{grid-template-columns:1fr;}
-  .tab-panel.active{grid-template-columns:1fr;}
-  .tab-metric-card{max-width:360px;}
   .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
   .footer-brand{grid-column:span 2;}
   .process-steps{grid-template-columns:1fr 1fr;gap:40px;}
@@ -197,9 +205,11 @@ input,textarea{box-sizing:border-box;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .svc-hero{padding:120px 0 72px;}
+  .svc-hero{padding:110px 0 64px;}
+  .svc-hero-inner{grid-template-columns:1fr;}
   .svc-hero-h1{font-size:clamp(32px,8vw,52px);}
   .svc-hero-sub{font-size:16px;}
+  .svc-hero-visual{display:none;}
   .svc-stat-inner{flex-wrap:wrap;}
   .svc-stat-item{flex:1 1 45%;border-right:none;border-bottom:1px solid var(--border);}
   .svc-stat-item:last-child{border-bottom:none;}
@@ -207,7 +217,6 @@ input,textarea{box-sizing:border-box;}
   .process-steps{grid-template-columns:1fr 1fr;}
   .tab-nav{flex-wrap:wrap;border-radius:14px;width:100%;}
   .tab-btn{flex:1;text-align:center;}
-  .tab-panel.active{grid-template-columns:1fr;}
   .cs-grid{grid-template-columns:1fr;}
   .footer{padding:56px 0 28px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
@@ -380,18 +389,40 @@ input,textarea{box-sizing:border-box;}
 <section class="svc-hero">
   <div class="container">
     <div class="svc-hero-inner">
-      <div class="eyebrow svc-hero-eyebrow">Cloud &amp; DevOps Engineering</div>
-      <h1 class="svc-hero-h1">Cloud Infrastructure<br>Built to Last.</h1>
-      <p class="svc-hero-sub">From cloud architecture and migration to Kubernetes platforms and SRE practices — we build cloud infrastructure that is observable, resilient, and cost-efficient from day one.</p>
-      <div class="svc-hero-btns">
-        <button class="btn-primary" onclick="openContact()">
-          Book a Discovery Call
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
-        <a href="sailor.html" class="btn-outline">
-          Explore Sailor Platform
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+      <!-- Left: text -->
+      <div class="svc-hero-left">
+        <div class="eyebrow svc-hero-eyebrow">Cloud &amp; DevOps Engineering</div>
+        <h1 class="svc-hero-h1">Cloud Infrastructure<br>Built to Last.</h1>
+        <p class="svc-hero-sub">From cloud architecture and migration to Kubernetes platforms and SRE practices — we build cloud infrastructure that is observable, resilient, and cost-efficient from day one.</p>
+        <div class="svc-hero-btns">
+          <button class="btn-primary" onclick="openContact()">
+            Book a Discovery Call
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <a href="sailor.html" class="btn-outline">
+            Explore Sailor Platform
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Right: visual -->
+      <div class="svc-hero-visual">
+        <img src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=900&auto=format&fit=crop&q=80" alt="Cloud & DevOps Engineering" loading="lazy">
+        <div class="svc-hero-visual-overlay"></div>
+        <div class="hero-badge-float" style="bottom:80px;left:20px;">
+          <div class="hero-badge-float-dot" style="background:#22c55e;box-shadow:0 0 8px #22c55e;"></div>
+          <div>
+            <div class="hero-badge-float-text">40+ cloud migrations</div>
+            <div class="hero-badge-float-sub">zero-downtime cutover</div>
+          </div>
+        </div>
+        <div class="hero-badge-float" style="top:24px;right:20px;">
+          <div class="hero-badge-float-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan);"></div>
+          <div>
+            <div class="hero-badge-float-text">99.9% SLA commitment</div>
+            <div class="hero-badge-float-sub">across all managed infra</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -412,10 +443,6 @@ input,textarea{box-sizing:border-box;}
       <div class="svc-stat-item">
         <span class="svc-stat-num" style="font-size:18px;color:var(--cyan);">30–40%</span>
         <span class="svc-stat-label">Cost Reduction</span>
-      </div>
-      <div class="svc-stat-item">
-        <span class="svc-stat-num">15<span>+</span></span>
-        <span class="svc-stat-label">Kubernetes Clusters</span>
       </div>
     </div>
   </div>
@@ -505,51 +532,39 @@ input,textarea{box-sizing:border-box;}
 
     <!-- Financial Services -->
     <div class="tab-panel active">
-      <div class="tab-content-left">
-        <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Cloud-Native Data Pipelines for Compliance</h3>
-        <div class="tab-points">
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Cloud-native data pipelines on AWS replacing legacy batch processes — enabling real-time regulatory reporting and compliance dashboards</div>
-          </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Kubernetes-native workloads with full observability stack — reducing MTTD and MTTR for production incidents by 65%</div>
-          </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Infrastructure right-sizing and RI optimisation delivering 40% reduction in monthly cloud spend</div>
-          </div>
+      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Cloud-Native Data Pipelines for Compliance</h3>
+      <div class="tab-points">
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Cloud-native data pipelines on AWS replacing legacy batch processes — enabling real-time regulatory reporting and compliance dashboards</div>
         </div>
-      </div>
-      <div class="tab-metric-card">
-        <div class="tab-metric-num">40%</div>
-        <div class="tab-metric-label">infrastructure cost reduction through cloud right-sizing and RI optimisation</div>
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Kubernetes-native workloads with full observability stack — reducing MTTD and MTTR for production incidents by <strong>65%</strong></div>
+        </div>
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Infrastructure right-sizing and RI optimisation delivering <strong>40% reduction</strong> in monthly cloud spend</div>
+        </div>
       </div>
     </div>
 
     <!-- Manufacturing -->
     <div class="tab-panel">
-      <div class="tab-content-left">
-        <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Hybrid Cloud for OT/IT Convergence</h3>
-        <div class="tab-points">
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Hybrid cloud architecture bridging OT systems and IT cloud workloads with secure, low-latency connectivity</div>
-          </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Edge Kubernetes clusters processing sensor data at the plant — reducing cloud egress costs by 50%</div>
-          </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Unified SRE observability across on-prem and cloud tiers with automated alerting and runbooks</div>
-          </div>
+      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Hybrid Cloud for OT/IT Convergence</h3>
+      <div class="tab-points">
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Hybrid cloud architecture bridging OT systems and IT cloud workloads with secure, low-latency connectivity</div>
         </div>
-      </div>
-      <div class="tab-metric-card">
-        <div class="tab-metric-num">50%</div>
-        <div class="tab-metric-label">reduction in cloud egress costs with edge-first Kubernetes architecture</div>
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Edge Kubernetes clusters processing sensor data at the plant — reducing cloud egress costs by <strong>50%</strong></div>
+        </div>
+        <div class="tab-point">
+          <div class="tab-point-dot"></div>
+          <div class="tab-point-text">Unified SRE observability across on-prem and cloud tiers with automated alerting and runbooks</div>
+        </div>
       </div>
     </div>
   </div>
