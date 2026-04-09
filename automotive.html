@@ -20,6 +20,8 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;transition:all .2s;}
 .btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ── MOBILE MENU ── */
 .mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
 .mobile-menu.open{display:flex;}
 .mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
@@ -28,6 +30,8 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .mob-sub.open{display:flex;}
 .mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
 .mob-cta{margin-top:32px;}
+
+/* ── NAVBAR ── */
 .navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
 .navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
 .nav-logo img{height:28px;width:auto;}
@@ -47,7 +51,6 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
 .mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
 .mega-item:hover{background:rgba(0,102,255,.08);}
-.mega-item-num{font-size:10px;letter-spacing:.1em;color:var(--dim);margin-bottom:4px;}
 .mega-item-title{font-size:14px;color:#fff;margin-bottom:4px;}
 .mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
 .nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
@@ -56,13 +59,101 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-hamburger.open span:nth-child(2){opacity:0;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-.hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;text-align:center;}
-.hero::before{content:"";position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.1) 0%,transparent 65%);pointer-events:none;}
-.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 16px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:32px;}
-.hero-h1{font-size:clamp(36px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
-.hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:48px;}
-.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* ── HERO ── */
+.svc-hero{padding:140px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.svc-hero::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 800px 600px at 70% 50%,rgba(0,102,255,.07) 0%,transparent 70%);pointer-events:none;}
+.svc-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1;}
+.svc-hero-left{display:flex;flex-direction:column;gap:28px;}
+.svc-hero-h1{font-size:clamp(32px,4.2vw,62px);font-weight:400;line-height:1.06;letter-spacing:-.025em;color:#fff;}
+.svc-hero-sub{font-size:17px;line-height:1.75;color:var(--mid);}
+.svc-hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.svc-hero-visual{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;}
+.svc-hero-visual img{width:100%;height:100%;object-fit:cover;}
+.svc-hero-visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,102,255,.2) 0%,transparent 60%);}
+.hero-badge-float{position:absolute;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(6,6,10,.85);border:1px solid rgba(255,255,255,.1);border-radius:12px;backdrop-filter:blur(16px);}
+.hero-badge-float-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.hero-badge-float-text{font-size:13px;color:#fff;font-weight:500;}
+.hero-badge-float-sub{font-size:11px;color:var(--dim);}
+.badge-bl{bottom:24px;left:24px;}
+.badge-tr{top:24px;right:24px;}
+
+/* ── STAT STRIP ── */
+.stat-strip{padding:56px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#06060a;}
+.stat-strip-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.stat-item{display:flex;flex-direction:column;gap:6px;padding:0 32px;border-right:1px solid var(--border);}
+.stat-item:first-child{padding-left:0;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-size:clamp(36px,4vw,56px);font-weight:400;line-height:1;letter-spacing:-.03em;color:#fff;}
+.stat-num span{color:var(--cyan);}
+.stat-label{font-size:13px;color:var(--mid);line-height:1.5;}
+
+/* ── SECTION COMMON ── */
+.section{padding:96px 0;}
+.section-head{margin-bottom:56px;}
+.section-title{font-size:clamp(28px,3.5vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;color:#fff;margin-top:16px;}
+.section-sub{font-size:16px;color:var(--mid);line-height:1.7;margin-top:16px;max-width:600px;}
+
+/* ── LANDSCAPE / PAIN POINTS ── */
+.landscape-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:var(--r);overflow:hidden;}
+.landscape-card{background:#06060a;padding:40px 36px;display:flex;flex-direction:column;gap:16px;transition:background .2s;}
+.landscape-card:hover{background:#0a0a14;}
+.landscape-card-num{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+.landscape-card-title{font-size:20px;font-weight:500;color:#fff;line-height:1.3;}
+.landscape-card-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ── WHAT WE BUILD ── */
+.build-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.build-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:40px;display:flex;flex-direction:column;gap:20px;transition:border-color .2s,background .2s;}
+.build-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.03);}
+.build-card-icon{width:48px;height:48px;border-radius:12px;background:rgba(0,102,255,.12);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.build-card-icon svg{width:22px;height:22px;stroke:var(--cyan);fill:none;stroke-width:1.5;}
+.build-card-title{font-size:19px;font-weight:500;color:#fff;line-height:1.3;}
+.build-card-body{font-size:14px;color:var(--mid);line-height:1.75;flex:1;}
+.build-card-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);padding:4px 12px;border:1px solid rgba(38,168,255,.2);border-radius:100px;background:rgba(38,168,255,.05);}
+
+/* ── TRENDS ── */
+.trends-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.trend-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:36px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s;}
+.trend-card:hover{border-color:rgba(255,255,255,.14);}
+.trend-card-num{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+.trend-card-title{font-size:18px;font-weight:500;color:#fff;line-height:1.3;}
+.trend-card-body{font-size:14px;color:var(--mid);line-height:1.75;}
+.trend-card-bar{height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:2px;margin-top:auto;opacity:.5;}
+
+/* ── CASE STUDY ── */
+.case-study-wrap{background:linear-gradient(135deg,rgba(0,102,255,.06) 0%,rgba(38,168,255,.03) 100%);border:1px solid var(--border-blue);border-radius:24px;padding:64px;position:relative;overflow:hidden;}
+.case-study-wrap::before{content:"";position:absolute;top:-120px;right:-120px;width:480px;height:480px;background:radial-gradient(circle,rgba(0,102,255,.08) 0%,transparent 70%);pointer-events:none;}
+.case-study-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;}
+.case-study-industry{font-size:13px;color:var(--dim);margin-bottom:4px;}
+.case-study-title{font-size:clamp(22px,2.8vw,36px);font-weight:400;color:#fff;line-height:1.2;letter-spacing:-.02em;margin-bottom:24px;max-width:680px;}
+.case-study-body{font-size:15px;color:var(--mid);line-height:1.8;max-width:700px;margin-bottom:48px;}
+.case-study-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+.cs-metric{display:flex;flex-direction:column;gap:6px;}
+.cs-metric-num{font-size:clamp(32px,3vw,48px);font-weight:400;letter-spacing:-.03em;line-height:1;}
+.cs-metric-num.blue{color:var(--blue);}
+.cs-metric-num.cyan{color:var(--cyan);}
+.cs-metric-num.white{color:#fff;}
+.cs-metric-label{font-size:13px;color:var(--mid);line-height:1.5;}
+
+/* ── HOW WE ENGAGE ── */
+.engage-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:var(--r);overflow:hidden;margin-top:48px;}
+.engage-step{background:#06060a;padding:40px 36px;display:flex;flex-direction:column;gap:16px;position:relative;}
+.engage-step-num{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+.engage-step-title{font-size:19px;font-weight:500;color:#fff;line-height:1.3;}
+.engage-step-body{font-size:14px;color:var(--mid);line-height:1.75;}
+.engage-step-connector{position:absolute;top:40px;right:-1px;width:2px;height:40px;background:linear-gradient(180deg,var(--border-blue),transparent);display:none;}
+
+/* ── CTA SECTION ── */
+.cta-section{padding:96px 0;background:#06060a;position:relative;overflow:hidden;}
+.cta-section::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 900px 500px at 50% 50%,rgba(0,102,255,.08) 0%,transparent 70%);pointer-events:none;}
+.cta-inner{position:relative;z-index:1;text-align:center;max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:24px;}
+.cta-h2{font-size:clamp(28px,3.5vw,52px);font-weight:400;line-height:1.1;letter-spacing:-.025em;color:#fff;}
+.cta-sub{font-size:16px;color:var(--mid);line-height:1.75;}
+.cta-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px;}
+
+/* ── FOOTER ── */
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
 .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
 .footer-brand img{height:26px;margin-bottom:18px;}
@@ -78,19 +169,40 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .footer-legal{display:flex;gap:20px;}
 .footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .svc-hero-inner{grid-template-columns:1fr;gap:48px;}
+  .svc-hero-visual{max-width:640px;}
+  .landscape-grid{grid-template-columns:1fr;}
+  .build-grid{grid-template-columns:1fr;}
+  .trends-grid{grid-template-columns:1fr;}
+  .engage-steps{grid-template-columns:1fr;}
+  .case-study-metrics{grid-template-columns:1fr 1fr;}
+}
 @media(max-width:768px){
   .container{padding:0 18px;}
   .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .hero{padding:120px 0 72px;}
+  .svc-hero{padding:120px 0 64px;}
+  .stat-strip-inner{grid-template-columns:repeat(2,1fr);gap:32px;}
+  .stat-item{padding:0;border-right:none;}
+  .section{padding:64px 0;}
+  .build-card{padding:28px;}
+  .case-study-wrap{padding:36px 28px;}
+  .case-study-metrics{grid-template-columns:1fr;}
+  .cta-section{padding:72px 0;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:480px){
   .container{padding:0 14px;}
   .navbar{width:calc(100% - 16px);padding:9px 12px;}
+  .stat-strip-inner{grid-template-columns:1fr 1fr;}
+  .landscape-card{padding:28px 22px;}
+  .engage-step{padding:28px 22px;}
 }
 </style>
 </head>
@@ -152,16 +264,11 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
     <div class="nav-item">
       <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="mega-menu">
-        <a href="ai-engineering.html" class="mega-item">
-<div class="mega-item-title">AI Engineering</div><div class="mega-item-subs">Enterprise GenAI · AI Agents · AIOps · Managed Services</div></a>
-        <a href="platform-engineering.html" class="mega-item">
-<div class="mega-item-title">Platform Engineering</div><div class="mega-item-subs">IDP · Self-Service Infra · Platform Governance · Multi-Cloud</div></a>
-        <a href="cloud-devops.html" class="mega-item">
-<div class="mega-item-title">Cloud &amp; DevOps Engineering</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Observability &amp; SRE</div></a>
-        <a href="software-engineering.html" class="mega-item">
-<div class="mega-item-title">Software Engineering</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
-        <a href="security-engineering.html" class="mega-item" style="grid-column:span 2;">
-<div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · Vulnerability Management · CSPM · Security Automation</div></a>
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI Engineering</div><div class="mega-item-subs">Enterprise GenAI · AI Agents · AIOps · Managed Services</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">Platform Engineering</div><div class="mega-item-subs">IDP · Self-Service Infra · Platform Governance · Multi-Cloud</div></a>
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">Cloud &amp; DevOps Engineering</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Observability &amp; SRE</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Software Engineering</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="security-engineering.html" class="mega-item" style="grid-column:span 2;"><div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · Vulnerability Management · CSPM · Security Automation</div></a>
       </div>
     </div>
     <div class="nav-item">
@@ -203,33 +310,296 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   </div>
 </nav>
 
-<!-- ══ HERO ══ -->
-<section class="hero">
+<!-- ══ SECTION 1: HERO ══ -->
+<section class="svc-hero">
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-badge">Industries</div>
-      <h1 class="hero-h1">Automotive</h1>
-      <p class="hero-sub">AI-driven customer, dealer, and vendor support platforms for the automotive sector.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        <a href="index.html" class="btn-outline">Back to Home</a>
+    <div class="svc-hero-inner">
+      <!-- Left column -->
+      <div class="svc-hero-left">
+        <div class="eyebrow">Automotive</div>
+        <h1 class="svc-hero-h1">Software-Defined Vehicles Need Software-Defined Engineering.</h1>
+        <p class="svc-hero-sub">From ADAS data pipelines and OTA update infrastructure to crashtest analytics and SDV platforms — we build the engineering systems that modern automotive companies run on.</p>
+        <div class="svc-hero-btns">
+          <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <a href="ai-engineering.html" class="btn-outline">Explore AI Engineering</a>
+        </div>
       </div>
-      <p style="margin-top:48px;font-size:13px;color:var(--dim);border:1px solid var(--border);display:inline-block;padding:10px 20px;border-radius:100px;">Full page coming soon — contact us to learn more</p>
+      <!-- Right column — visual -->
+      <div class="svc-hero-visual">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&auto=format&fit=crop&q=80" alt="Automotive engineering" loading="eager">
+        <div class="svc-hero-visual-overlay"></div>
+        <!-- Badge bottom-left -->
+        <div class="hero-badge-float badge-bl">
+          <div class="hero-badge-float-dot" style="background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.6);"></div>
+          <div>
+            <div class="hero-badge-float-text">2&times; faster release cycles</div>
+            <div class="hero-badge-float-sub">for automotive software teams</div>
+          </div>
+        </div>
+        <!-- Badge top-right -->
+        <div class="hero-badge-float badge-tr">
+          <div class="hero-badge-float-dot" style="background:var(--cyan);box-shadow:0 0 8px rgba(38,168,255,.6);"></div>
+          <div>
+            <div class="hero-badge-float-text">ISO 26262 aware</div>
+            <div class="hero-badge-float-sub">functional safety engineering</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ══ SECTION 2: STAT STRIP ══ -->
+<div class="stat-strip">
+  <div class="container">
+    <div class="stat-strip-inner">
+      <div class="stat-item">
+        <div class="stat-num">2<span>&times;</span></div>
+        <div class="stat-label">Faster Software Release</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">150<span>+</span></div>
+        <div class="stat-label">Apps Migrated</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">30<span>%</span></div>
+        <div class="stat-label">Infrastructure Cost Reduction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" style="color:#22c55e;">Zero</div>
+        <div class="stat-label">Downtime Cutover</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 3: THE LANDSCAPE ══ -->
+<section class="section" style="padding-bottom:0;">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">The Landscape</div>
+      <h2 class="section-title">What makes automotive software uniquely hard.</h2>
+      <p class="section-sub">Three structural challenges that distinguish automotive engineering from every other industry.</p>
+    </div>
+    <div class="landscape-grid">
+      <div class="landscape-card">
+        <div class="landscape-card-num">01</div>
+        <div class="landscape-card-title">The SDV Transition</div>
+        <div class="landscape-card-body">The industry is shifting from hardware-defined vehicles to software-defined ones. That means automotive OEMs now need to operate like software companies — with continuous delivery, OTA updates, and feature-based revenue models. Most aren't built for it yet.</div>
+      </div>
+      <div class="landscape-card">
+        <div class="landscape-card-num">02</div>
+        <div class="landscape-card-title">Safety + Speed Tension</div>
+        <div class="landscape-card-body">Automotive software has to be certifiably safe (ISO 26262, ASPICE) and fast to ship. These two requirements pull in opposite directions. Getting both right requires engineering discipline that most digital agencies simply don't have.</div>
+      </div>
+      <div class="landscape-card">
+        <div class="landscape-card-num">03</div>
+        <div class="landscape-card-title">Data at Vehicle Scale</div>
+        <div class="landscape-card-body">Modern vehicles generate terabytes of sensor, telemetry, and diagnostic data per day. Building the ingestion, processing, and analytics infrastructure to turn that into insight — at the scale of millions of vehicles — is a fundamentally hard data engineering problem.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 4: WHAT WE BUILD HERE ══ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">What We Build Here</div>
+      <h2 class="section-title">Four engineering domains we own end-to-end.</h2>
+      <p class="section-sub">Specialised platforms and infrastructure built specifically for automotive programmes — not adapted from generic cloud work.</p>
+    </div>
+    <div class="build-grid">
+
+      <!-- Card 1 -->
+      <div class="build-card">
+        <div class="build-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <div class="build-card-title">ADAS &amp; Vehicle Data Platforms</div>
+        <div class="build-card-body">We build the cloud-side infrastructure for ADAS and autonomous driving programmes — ingesting, labelling, and processing sensor data from cameras, LiDAR, and radar at scale.</div>
+        <div class="build-card-tags">
+          <span class="tag">Data Ingestion Pipelines</span>
+          <span class="tag">ADAS Analytics</span>
+          <span class="tag">Label Studio Integration</span>
+          <span class="tag">Telematics</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="build-card">
+        <div class="build-card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+        </div>
+        <div class="build-card-title">OTA Update Infrastructure</div>
+        <div class="build-card-body">Over-the-air update platforms that manage ECU software delivery to fleets of vehicles — with rollback, phased rollout, compliance signing, and full audit trails.</div>
+        <div class="build-card-tags">
+          <span class="tag">OTA Delivery</span>
+          <span class="tag">ECU Management</span>
+          <span class="tag">Fleet Rollback</span>
+          <span class="tag">Compliance Signing</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="build-card">
+        <div class="build-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="build-card-title">Crashtest &amp; Safety Analytics</div>
+        <div class="build-card-body">We built a crashtest analytics platform for a leading global OEM — processing collision simulation data, generating compliance reports, and reducing test cycle time significantly.</div>
+        <div class="build-card-tags">
+          <span class="tag">Simulation Data Processing</span>
+          <span class="tag">Safety Reporting</span>
+          <span class="tag">NCAP Compliance</span>
+          <span class="tag">Test Automation</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="build-card">
+        <div class="build-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="build-card-title">SDV Platform Engineering</div>
+        <div class="build-card-body">Internal developer platforms purpose-built for automotive software teams — enabling cross-domain teams to develop, test, and deploy vehicle software independently, without infra bottlenecks.</div>
+        <div class="build-card-tags">
+          <span class="tag">IDP for Automotive</span>
+          <span class="tag">Multi-Domain CI/CD</span>
+          <span class="tag">AUTOSAR Toolchain</span>
+          <span class="tag">Software Factory</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 5: INDUSTRY TRENDS ══ -->
+<section class="section" style="background:rgba(255,255,255,.01);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Industry Trends</div>
+      <h2 class="section-title">The forces reshaping automotive engineering now.</h2>
+      <p class="section-sub">Understanding these shifts is how we stay ahead — and how we help you do the same.</p>
+    </div>
+    <div class="trends-grid">
+
+      <div class="trend-card">
+        <div class="trend-card-num">Trend 01</div>
+        <div class="trend-card-title">Software-Defined Vehicle (SDV) Mainstream</div>
+        <div class="trend-card-body">By 2030, software will account for over 30% of a vehicle's total value. OEMs that don't build software engineering capability now — internal platforms, delivery pipelines, DevOps culture — will be dependent on Tier-1 suppliers for every feature change.</div>
+        <div class="trend-card-bar"></div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-card-num">Trend 02</div>
+        <div class="trend-card-title">Centralised E/E Architecture</div>
+        <div class="trend-card-body">The move from distributed ECUs to zone-based and central compute architectures is creating massive software consolidation challenges. Legacy code written for 100+ ECUs needs to be rearchitected for 3–5 high-performance compute domains.</div>
+        <div class="trend-card-bar"></div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-card-num">Trend 03</div>
+        <div class="trend-card-title">AI in the Development Loop</div>
+        <div class="trend-card-body">AI is entering automotive development — from AI-assisted test case generation to ML models that predict defect injection points in complex AUTOSAR configurations. The teams that adopt these tools first will ship safer software, faster.</div>
+        <div class="trend-card-bar"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 6: REAL OUTCOMES ══ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Real Outcomes</div>
+      <h2 class="section-title">Work we've delivered for automotive OEMs.</h2>
+    </div>
+    <div class="case-study-wrap">
+      <div class="case-study-label">Case Study</div>
+      <div class="case-study-industry">Leading Global Automotive OEM</div>
+      <h3 class="case-study-title">Crashtest Analytics Platform — From Manual Reports to Automated Safety Intelligence</h3>
+      <p class="case-study-body">A top-5 global automotive OEM was processing crashtest simulation data through manual Excel workflows and overnight batch reports. We built a cloud-native analytics platform that processes collision simulation outputs in real time, automatically generates NCAP-compliance reports, and flags safety deviations before they reach physical testing.</p>
+      <div class="case-study-metrics">
+        <div class="cs-metric">
+          <div class="cs-metric-num blue">60%</div>
+          <div class="cs-metric-label">Reduction in Report Generation Time</div>
+        </div>
+        <div class="cs-metric">
+          <div class="cs-metric-num cyan">100+</div>
+          <div class="cs-metric-label">Simulation Types Automated</div>
+        </div>
+        <div class="cs-metric">
+          <div class="cs-metric-num white">3&times;</div>
+          <div class="cs-metric-label">Faster Safety Sign-Off</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 7: HOW WE ENGAGE ══ -->
+<section class="section" style="background:rgba(255,255,255,.01);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">How We Engage</div>
+      <h2 class="section-title">Three phases. No wasted months.</h2>
+      <p class="section-sub">We move fast and validate everything before scaling. Each phase ships something real.</p>
+    </div>
+    <div class="engage-steps">
+
+      <div class="engage-step">
+        <div class="engage-step-num">Phase 01</div>
+        <div class="engage-step-title">Engineering Discovery</div>
+        <div class="engage-step-body">We map your current software delivery landscape — tools, teams, gaps, and where safety and speed are in conflict. We look at your SDV roadmap and where engineering bottlenecks will emerge.</div>
+      </div>
+
+      <div class="engage-step">
+        <div class="engage-step-num">Phase 02</div>
+        <div class="engage-step-title">Platform Architecture</div>
+        <div class="engage-step-body">We design the engineering platform — from CI/CD pipelines to OTA infrastructure to data architecture — tailored to automotive domain requirements including toolchain integration and safety constraints.</div>
+      </div>
+
+      <div class="engage-step">
+        <div class="engage-step-num">Phase 03</div>
+        <div class="engage-step-title">Incremental Delivery</div>
+        <div class="engage-step-body">We ship in modules. First: visibility and tooling. Then: automation and intelligence. Then: platform self-service for your teams. Each phase is validated before the next begins.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 8: CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="eyebrow" style="justify-content:center;">Get Started</div>
+      <h2 class="cta-h2">Building the next generation of automotive software?</h2>
+      <p class="cta-sub">Talk to engineers who've shipped for OEMs before. Discovery session is free, focused, and specific to your programme.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <a href="case-studies.html" class="btn-outline">See Case Studies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT POPUP ══ -->
 <div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
   <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
     <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;">&#10005;</button>
     <div style="font-size:22px;color:#fff;margin-bottom:24px;font-family:NHD;">Book a Discovery Call</div>
-    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
-    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
-    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;" onfocus="this.style.borderColor='var(--border-blue)'" onblur="this.style.borderColor='var(--border)'"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;" onfocus="this.style.borderColor='var(--border-blue)'" onblur="this.style.borderColor='var(--border)'"></div>
+    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;" onfocus="this.style.borderColor='var(--border-blue)'" onblur="this.style.borderColor='var(--border)'"></div>
     <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Request</button>
   </div>
 </div>
 
+<!-- ══ FOOTER ══ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-top">
@@ -287,6 +657,7 @@ function closeMobileMenu(){document.getElementById('mobileMenu').classList.remov
 function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
 function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
 function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeContact();closeMobileMenu();}});
 </script>
 </body>
 </html>

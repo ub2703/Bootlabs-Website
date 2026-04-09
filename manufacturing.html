@@ -20,6 +20,8 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;transition:all .2s;}
 .btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ── Mobile Menu ── */
 .mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
 .mobile-menu.open{display:flex;}
 .mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
@@ -28,6 +30,8 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .mob-sub.open{display:flex;}
 .mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
 .mob-cta{margin-top:32px;}
+
+/* ── Navbar ── */
 .navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
 .navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
 .nav-logo img{height:28px;width:auto;}
@@ -56,13 +60,98 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-hamburger.open span:nth-child(2){opacity:0;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-.hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;text-align:center;}
-.hero::before{content:"";position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.1) 0%,transparent 65%);pointer-events:none;}
-.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 16px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:32px;}
-.hero-h1{font-size:clamp(36px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
-.hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:48px;}
-.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* ── Hero ── */
+.svc-hero{padding:140px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.svc-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.svc-hero-left{}
+.svc-hero-eyebrow{margin-bottom:24px;}
+.svc-hero-h1{font-size:clamp(36px,4.5vw,64px);font-weight:400;line-height:1.05;letter-spacing:-.02em;margin-bottom:20px;}
+.svc-hero-sub{font-size:17px;line-height:1.75;color:var(--mid);margin-bottom:36px;max-width:480px;}
+.svc-hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.svc-hero-visual{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;}
+.svc-hero-visual img{width:100%;height:100%;object-fit:cover;}
+.svc-hero-visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,102,255,.2) 0%,transparent 60%);}
+.hero-badge-float{position:absolute;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(6,6,10,.85);border:1px solid rgba(255,255,255,.1);border-radius:12px;backdrop-filter:blur(16px);}
+.hero-badge-float-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.hero-badge-float-text{font-size:13px;color:#fff;font-weight:500;}
+.hero-badge-float-sub{font-size:11px;color:var(--dim);}
+.hero-badge-bl{bottom:24px;left:24px;}
+.hero-badge-tr{top:24px;right:24px;}
+
+/* ── Stat Strip ── */
+.svc-stat-strip{background:#080810;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.svc-stat-inner{display:flex;align-items:stretch;}
+.svc-stat-item{flex:1;padding:32px 24px;display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--border);}
+.svc-stat-item:last-child{border-right:none;}
+.svc-stat-num{font-size:36px;letter-spacing:-.02em;color:#fff;}
+.svc-stat-num span{font-size:20px;color:var(--cyan);}
+.svc-stat-label{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;}
+
+/* ── Landscape Section ── */
+.landscape-section{padding:100px 0;background:#06060a;}
+.landscape-section .section-header{max-width:640px;}
+.landscape-section .section-sub{font-size:16px;color:var(--mid);line-height:1.75;margin-top:16px;}
+.landscape-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:56px;}
+.landscape-card{background:#06060a;padding:40px 36px;}
+.landscape-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,102,255,.08);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.landscape-title{font-size:18px;color:#fff;margin-bottom:12px;}
+.landscape-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ── Offerings Section ── */
+.offerings-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.offerings-section .section-header{max-width:640px;}
+.offerings-section .section-sub{font-size:16px;color:var(--mid);line-height:1.75;margin-top:16px;}
+.offerings-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:56px;}
+.offering-card{background:#080810;padding:40px 36px;}
+.offering-num{font-size:11px;letter-spacing:.12em;color:var(--dim);margin-bottom:16px;}
+.offering-title{font-size:20px;color:#fff;margin-bottom:14px;}
+.offering-body{font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:20px;}
+.offering-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.offering-tag{font-size:12px;color:var(--dim);padding:4px 12px;border:1px solid var(--border);border-radius:100px;}
+
+/* ── Trends Section ── */
+.trends-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.trends-section .section-header{max-width:640px;}
+.trends-section .section-sub{font-size:16px;color:var(--mid);line-height:1.75;margin-top:16px;}
+.trends-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.trend-card{padding:32px;border:1px solid var(--border);border-radius:20px;background:var(--glass);transition:border-color .3s;}
+.trend-card:hover{border-color:var(--border-blue);}
+.trend-year{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;}
+.trend-title{font-size:18px;color:#fff;margin-bottom:12px;}
+.trend-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ── Case Study Section ── */
+.cs-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cs-section .section-header{max-width:640px;}
+.cs-section .section-sub{font-size:16px;color:var(--mid);line-height:1.75;margin-top:16px;}
+.cs-card{border:1px solid var(--border);border-radius:20px;padding:48px;background:var(--glass);margin-top:56px;}
+.cs-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:24px;}
+.cs-industry{font-size:13px;color:var(--dim);margin-bottom:8px;}
+.cs-title{font-size:28px;color:#fff;margin-bottom:16px;}
+.cs-body{font-size:15px;color:var(--mid);line-height:1.8;max-width:700px;margin-bottom:32px;}
+.cs-metrics{display:flex;gap:48px;flex-wrap:wrap;}
+.cs-metric-num{font-size:32px;color:#fff;letter-spacing:-.02em;}
+.cs-metric-num span{color:var(--cyan);}
+.cs-metric-label{font-size:12px;color:var(--dim);margin-top:4px;}
+
+/* ── Process Section ── */
+.process-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.process-section .section-header{max-width:640px;}
+.process-section .section-sub{font-size:16px;color:var(--mid);line-height:1.75;margin-top:16px;}
+.process-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;position:relative;}
+.process-step{padding:36px;border:1px solid var(--border);border-radius:20px;background:var(--glass);}
+.process-step-num{font-size:11px;letter-spacing:.14em;color:var(--cyan);margin-bottom:16px;}
+.process-step-title{font-size:20px;color:#fff;margin-bottom:12px;}
+.process-step-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ── CTA Section ── */
+.cta-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cta-inner{text-align:center;max-width:640px;margin:0 auto;}
+.cta-h2{font-size:clamp(28px,4vw,48px);color:#fff;margin-bottom:16px;letter-spacing:-.02em;}
+.cta-sub{font-size:17px;color:var(--mid);line-height:1.75;margin-bottom:40px;}
+
+/* ── Footer ── */
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
 .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
 .footer-brand img{height:26px;margin-bottom:18px;}
@@ -78,13 +167,30 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .footer-legal{display:flex;gap:20px;}
 .footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
+
+/* ── Responsive ── */
+@media(max-width:1100px){
+  .svc-hero-inner{grid-template-columns:1fr;}
+  .svc-hero-visual{display:none;}
+  .landscape-grid{grid-template-columns:repeat(2,1fr);}
+  .trends-grid{grid-template-columns:repeat(2,1fr);}
+  .process-steps{grid-template-columns:repeat(2,1fr);}
+}
 @media(max-width:768px){
   .container{padding:0 18px;}
   .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .hero{padding:120px 0 72px;}
+  .landscape-grid{grid-template-columns:1fr;}
+  .offerings-grid{grid-template-columns:1fr;}
+  .trends-grid{grid-template-columns:1fr;}
+  .process-steps{grid-template-columns:1fr;}
+  .svc-hero-visual{display:none;}
+  .svc-stat-inner{flex-direction:column;}
+  .svc-stat-item{border-right:none;border-bottom:1px solid var(--border);}
+  .svc-stat-item:last-child{border-bottom:none;}
+  .cs-metrics{gap:28px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
@@ -153,15 +259,20 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
       <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="mega-menu">
         <a href="ai-engineering.html" class="mega-item">
-<div class="mega-item-title">AI Engineering</div><div class="mega-item-subs">Enterprise GenAI · AI Agents · AIOps · Managed Services</div></a>
+          <div class="mega-item-title">AI Engineering</div><div class="mega-item-subs">Enterprise GenAI · AI Agents · AIOps · Managed Services</div>
+        </a>
         <a href="platform-engineering.html" class="mega-item">
-<div class="mega-item-title">Platform Engineering</div><div class="mega-item-subs">IDP · Self-Service Infra · Platform Governance · Multi-Cloud</div></a>
+          <div class="mega-item-title">Platform Engineering</div><div class="mega-item-subs">IDP · Self-Service Infra · Platform Governance · Multi-Cloud</div>
+        </a>
         <a href="cloud-devops.html" class="mega-item">
-<div class="mega-item-title">Cloud &amp; DevOps Engineering</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Observability &amp; SRE</div></a>
+          <div class="mega-item-title">Cloud &amp; DevOps Engineering</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Observability &amp; SRE</div>
+        </a>
         <a href="software-engineering.html" class="mega-item">
-<div class="mega-item-title">Software Engineering</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+          <div class="mega-item-title">Software Engineering</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div>
+        </a>
         <a href="security-engineering.html" class="mega-item" style="grid-column:span 2;">
-<div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · Vulnerability Management · CSPM · Security Automation</div></a>
+          <div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · Vulnerability Management · CSPM · Security Automation</div>
+        </a>
       </div>
     </div>
     <div class="nav-item">
@@ -204,21 +315,280 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 </nav>
 
 <!-- ══ HERO ══ -->
-<section class="hero">
+<section class="svc-hero">
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-badge">Industries</div>
-      <h1 class="hero-h1">Manufacturing</h1>
-      <p class="hero-sub">AI-powered production planning, procurement automation, and supply chain visibility for manufacturers.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        <a href="index.html" class="btn-outline">Back to Home</a>
+    <div class="svc-hero-inner">
+      <div class="svc-hero-left">
+        <div class="eyebrow svc-hero-eyebrow">Manufacturing</div>
+        <h1 class="svc-hero-h1">Engineering Systems That Don't Stop.</h1>
+        <p class="svc-hero-sub">From OT/IT convergence to AI-powered production intelligence — we help manufacturers build the digital infrastructure that drives output, cuts downtime, and keeps every line compliant.</p>
+        <div class="svc-hero-btns">
+          <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <a href="platform-engineering.html" class="btn-outline">Explore Platform Engineering</a>
+        </div>
       </div>
-      <p style="margin-top:48px;font-size:13px;color:var(--dim);border:1px solid var(--border);display:inline-block;padding:10px 20px;border-radius:100px;">Full page coming soon — contact us to learn more</p>
+      <div class="svc-hero-visual">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&auto=format&fit=crop&q=80" alt="Manufacturing floor with digital systems">
+        <div class="svc-hero-visual-overlay"></div>
+        <!-- Badge bottom-left -->
+        <div class="hero-badge-float hero-badge-bl">
+          <div class="hero-badge-float-dot" style="background:#22c55e;"></div>
+          <div>
+            <div class="hero-badge-float-text">30% downtime reduction</div>
+            <div class="hero-badge-float-sub">across client plants</div>
+          </div>
+        </div>
+        <!-- Badge top-right -->
+        <div class="hero-badge-float hero-badge-tr">
+          <div class="hero-badge-float-dot" style="background:var(--cyan);"></div>
+          <div>
+            <div class="hero-badge-float-text">Industry 4.0 ready</div>
+            <div class="hero-badge-float-sub">OT/IT converged stacks</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ══ STAT STRIP ══ -->
+<div class="svc-stat-strip">
+  <div class="container">
+    <div class="svc-stat-inner">
+      <div class="svc-stat-item">
+        <div class="svc-stat-num">30<span>%</span></div>
+        <div class="svc-stat-label">Downtime Reduction</div>
+      </div>
+      <div class="svc-stat-item">
+        <div class="svc-stat-num">40<span>%</span></div>
+        <div class="svc-stat-label">Faster Procurement Cycles</div>
+      </div>
+      <div class="svc-stat-item">
+        <div class="svc-stat-num">3<span>×</span></div>
+        <div class="svc-stat-label">Supply Chain Visibility</div>
+      </div>
+      <div class="svc-stat-item">
+        <div class="svc-stat-num">Day <span>1</span></div>
+        <div class="svc-stat-label">Compliance Readiness</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ THE LANDSCAPE ══ -->
+<section class="landscape-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow" style="margin-bottom:20px;">The Challenge</div>
+      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;">What makes manufacturing hard to engineer for</h2>
+      <p class="section-sub">Manufacturing sits at the intersection of legacy OT infrastructure, modern cloud platforms, and relentless operational pressure. The engineering complexity is real.</p>
+    </div>
+    <div class="landscape-grid">
+      <!-- Card 1 -->
+      <div class="landscape-card">
+        <div class="landscape-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5">
+            <rect x="2" y="7" width="6" height="10" rx="1"/><rect x="16" y="7" width="6" height="10" rx="1"/>
+            <path d="M8 12h8"/><circle cx="12" cy="12" r="2"/>
+          </svg>
+        </div>
+        <div class="landscape-title">The OT/IT Divide</div>
+        <p class="landscape-body">Shop-floor systems speak a different language from cloud platforms. SCADA, PLCs, and legacy MES were never built to talk to APIs, pipelines, or dashboards — and bridging them requires more than middleware.</p>
+      </div>
+      <!-- Card 2 -->
+      <div class="landscape-card">
+        <div class="landscape-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5">
+            <circle cx="12" cy="12" r="9"/><line x1="12" y1="7" x2="12" y2="12"/><line x1="12" y1="12" x2="16" y2="14"/>
+            <path d="M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42"/>
+          </svg>
+        </div>
+        <div class="landscape-title">Unplanned Downtime</div>
+        <p class="landscape-body">Every hour a line is down costs far more than just lost output. Without predictive intelligence across machines, sensors, and maintenance logs, downtime remains reactive — and expensive.</p>
+      </div>
+      <!-- Card 3 -->
+      <div class="landscape-card">
+        <div class="landscape-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5">
+            <path d="M3 6h18M3 12h12M3 18h8"/><circle cx="19" cy="17" r="3"/><path d="M21.5 19.5l-1.5-1.5"/>
+          </svg>
+        </div>
+        <div class="landscape-title">Supply Chain Opacity</div>
+        <p class="landscape-body">Tier-2 and Tier-3 visibility is still largely missing. Manufacturers can see their immediate suppliers but not the disruptions building two levels down — until it's too late.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT WE BUILD HERE ══ -->
+<section class="offerings-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow" style="margin-bottom:20px;">What We Build</div>
+      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;">Services mapped to manufacturing</h2>
+      <p class="section-sub">Each engagement is scoped around real operational problems — not product catalogues. Here's where we focus.</p>
+    </div>
+    <div class="offerings-grid">
+      <!-- Offering 1 -->
+      <div class="offering-card">
+        <div class="offering-num">01</div>
+        <div class="offering-title">OT/IT Convergence &amp; IIoT Platforms</div>
+        <p class="offering-body">We connect shop-floor assets — PLCs, SCADA, sensors — to cloud-native data pipelines, enabling real-time visibility from machine to management.</p>
+        <div class="offering-tags">
+          <span class="offering-tag">IIoT Integration</span>
+          <span class="offering-tag">Edge Computing</span>
+          <span class="offering-tag">SCADA Connectivity</span>
+          <span class="offering-tag">OPC-UA</span>
+        </div>
+      </div>
+      <!-- Offering 2 -->
+      <div class="offering-card">
+        <div class="offering-num">02</div>
+        <div class="offering-title">Predictive Maintenance &amp; AI Operations</div>
+        <p class="offering-body">We build ML models on sensor telemetry to predict equipment failure before it happens, shifting maintenance from reactive scheduling to condition-based intervention.</p>
+        <div class="offering-tags">
+          <span class="offering-tag">ML on Sensor Data</span>
+          <span class="offering-tag">Anomaly Detection</span>
+          <span class="offering-tag">Digital Twins</span>
+          <span class="offering-tag">AIOps</span>
+        </div>
+      </div>
+      <!-- Offering 3 -->
+      <div class="offering-card">
+        <div class="offering-num">03</div>
+        <div class="offering-title">Supply Chain Intelligence</div>
+        <p class="offering-body">End-to-end supply chain platforms with live inventory tracking, demand forecasting, and supplier risk scoring — built on cloud-native data architectures.</p>
+        <div class="offering-tags">
+          <span class="offering-tag">Demand Forecasting</span>
+          <span class="offering-tag">Supplier Risk</span>
+          <span class="offering-tag">ERP Integration</span>
+          <span class="offering-tag">Real-Time Inventory</span>
+        </div>
+      </div>
+      <!-- Offering 4 -->
+      <div class="offering-card">
+        <div class="offering-num">04</div>
+        <div class="offering-title">MES Modernisation &amp; Process Automation</div>
+        <p class="offering-body">Legacy MES replaced or extended with microservices-based production management systems — faster to update, easier to integrate, and built for multi-site scale.</p>
+        <div class="offering-tags">
+          <span class="offering-tag">MES Modernisation</span>
+          <span class="offering-tag">Process Automation</span>
+          <span class="offering-tag">Microservices</span>
+          <span class="offering-tag">SAP Integration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INDUSTRY TRENDS ══ -->
+<section class="trends-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow" style="margin-bottom:20px;">Industry Trends</div>
+      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;">Where manufacturing is heading</h2>
+      <p class="section-sub">The engineering decisions made today will determine which manufacturers lead the next decade. These are the forces shaping the roadmap.</p>
+    </div>
+    <div class="trends-grid">
+      <!-- Trend 1 -->
+      <div class="trend-card">
+        <div class="trend-year">Trend 01</div>
+        <div class="trend-title">Smart Factory &amp; Industry 4.0</div>
+        <p class="trend-body">The shift from connected machines to truly autonomous production is accelerating. By 2027, over 60% of large manufacturers will have deployed some form of AI-driven production optimisation — moving from data collection to real-time closed-loop control.</p>
+      </div>
+      <!-- Trend 2 -->
+      <div class="trend-card">
+        <div class="trend-year">Trend 02</div>
+        <div class="trend-title">Digital Twin Adoption</div>
+        <p class="trend-body">Digital twins are moving from pilot to mainstream. Manufacturers use them to simulate production lines, test changes without risk, and build predictive models that get smarter with every cycle — reducing physical trial costs significantly.</p>
+      </div>
+      <!-- Trend 3 -->
+      <div class="trend-card">
+        <div class="trend-year">Trend 03</div>
+        <div class="trend-title">Sustainability-Driven Engineering</div>
+        <p class="trend-body">Carbon reporting and ESG compliance are reshaping manufacturing IT. Scope 3 tracking, energy consumption monitoring, and sustainable procurement platforms are no longer optional — they're tied to customer contracts and regulatory requirements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REAL OUTCOMES ══ -->
+<section class="cs-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow" style="margin-bottom:20px;">Real Outcomes</div>
+      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;">What we've delivered</h2>
+      <p class="section-sub">One example from a live engagement. Names are confidential; results are real.</p>
+    </div>
+    <div class="cs-card">
+      <div class="cs-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Case Study
+      </div>
+      <div class="cs-industry">Tier-1 Automotive Parts Manufacturer</div>
+      <h3 class="cs-title">From Paper-Based Quality Checks to Real-Time Production Intelligence</h3>
+      <p class="cs-body">A leading automotive components manufacturer was running quality control on paper logs and end-of-shift manual entries. We built an IIoT data pipeline connecting 200+ machines to a cloud analytics platform — with real-time dashboards, automated anomaly alerts, and a predictive maintenance model trained on 3 years of sensor history.</p>
+      <div class="cs-metrics">
+        <div>
+          <div class="cs-metric-num">200<span>+</span></div>
+          <div class="cs-metric-label">Machines Connected</div>
+        </div>
+        <div>
+          <div class="cs-metric-num">35<span>%</span></div>
+          <div class="cs-metric-label">Reduction in Unplanned Downtime</div>
+        </div>
+        <div>
+          <div class="cs-metric-num">4<span>×</span></div>
+          <div class="cs-metric-label">Faster Defect Detection</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW WE ENGAGE ══ -->
+<section class="process-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow" style="margin-bottom:20px;">How We Engage</div>
+      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;">Our approach to manufacturing engagements</h2>
+      <p class="section-sub">We don't start with a solution deck. We start with your shop floor, your constraints, and a clear picture of where value actually lives.</p>
+    </div>
+    <div class="process-steps">
+      <!-- Step 1 -->
+      <div class="process-step">
+        <div class="process-step-num">Step 01</div>
+        <div class="process-step-title">Shop Floor Assessment</div>
+        <p class="process-step-body">We spend time on-site understanding your production flow, existing systems, connectivity gaps, and where manual processes are creating risk or delay.</p>
+      </div>
+      <!-- Step 2 -->
+      <div class="process-step">
+        <div class="process-step-num">Step 02</div>
+        <div class="process-step-title">Architecture &amp; Roadmap</div>
+        <p class="process-step-body">We design the convergence architecture — OT to IT, edge to cloud, sensor to dashboard — scoped to your current state and built for future scale.</p>
+      </div>
+      <!-- Step 3 -->
+      <div class="process-step">
+        <div class="process-step-num">Step 03</div>
+        <div class="process-step-title">Build, Connect, Optimise</div>
+        <p class="process-step-body">We ship in phases — early wins in visibility, then intelligence, then automation. Each phase proves value before the next begins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-h2">Ready to engineer a smarter factory?</h2>
+      <p class="cta-sub">Talk to an engineer who has connected shop floors to cloud platforms before. We start with a no-cost discovery session.</p>
+      <button class="btn-primary" onclick="openContact()" style="font-size:15px;padding:16px 36px;">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT POPUP ══ -->
 <div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
   <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
     <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;">&#10005;</button>
@@ -230,6 +600,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   </div>
 </div>
 
+<!-- ══ FOOTER ══ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-top">

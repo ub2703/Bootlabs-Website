@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QSR & Retail — BootLabs</title>
+<title>QSR &amp; Hospitality — BootLabs</title>
 <style>
 @font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;}
 @font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;}
@@ -20,6 +20,8 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;transition:all .2s;}
 .btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ── MOBILE MENU ── */
 .mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
 .mobile-menu.open{display:flex;}
 .mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
@@ -28,6 +30,8 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .mob-sub.open{display:flex;}
 .mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
 .mob-cta{margin-top:32px;}
+
+/* ── NAVBAR ── */
 .navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
 .navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
 .nav-logo img{height:28px;width:auto;}
@@ -47,7 +51,6 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
 .mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
 .mega-item:hover{background:rgba(0,102,255,.08);}
-.mega-item-num{font-size:10px;letter-spacing:.1em;color:var(--dim);margin-bottom:4px;}
 .mega-item-title{font-size:14px;color:#fff;margin-bottom:4px;}
 .mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
 .nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
@@ -56,13 +59,108 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-hamburger.open span:nth-child(2){opacity:0;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-.hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;text-align:center;}
-.hero::before{content:"";position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.1) 0%,transparent 65%);pointer-events:none;}
-.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 16px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:32px;}
-.hero-h1{font-size:clamp(36px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
-.hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:48px;}
-.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* ── HERO ── */
+.svc-hero{padding:140px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.svc-hero::before{content:"";position:absolute;bottom:-120px;right:-80px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.08) 0%,transparent 65%);pointer-events:none;}
+.svc-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.svc-hero-copy{position:relative;z-index:1;}
+.svc-hero-eyebrow{margin-bottom:24px;}
+.svc-hero-h1{font-size:clamp(32px,4vw,60px);font-weight:400;line-height:1.08;letter-spacing:-.025em;color:#fff;margin-bottom:24px;}
+.svc-hero-sub{font-size:17px;line-height:1.75;color:var(--mid);margin-bottom:40px;max-width:520px;}
+.svc-hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+.svc-hero-visual{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;}
+.svc-hero-visual img{width:100%;height:100%;object-fit:cover;}
+.svc-hero-visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,102,255,.2) 0%,transparent 60%);}
+.hero-badge-float{position:absolute;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(6,6,10,.85);border:1px solid rgba(255,255,255,.1);border-radius:12px;backdrop-filter:blur(16px);}
+.hero-badge-float-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.hero-badge-float-text{font-size:13px;color:#fff;font-weight:500;}
+.hero-badge-float-sub{font-size:11px;color:var(--dim);}
+.hero-badge-float.badge-bl{bottom:24px;left:24px;}
+.hero-badge-float.badge-tr{top:24px;right:24px;}
+
+/* ── STAT STRIP ── */
+.stat-strip{padding:56px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stat-strip-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.stat-item{padding:0 32px;border-right:1px solid var(--border);text-align:center;}
+.stat-item:first-child{padding-left:0;text-align:left;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-size:clamp(36px,4vw,56px);font-weight:400;letter-spacing:-.03em;line-height:1;color:#fff;margin-bottom:8px;}
+.stat-num span{color:var(--cyan);}
+.stat-label{font-size:13px;color:var(--dim);line-height:1.5;}
+
+/* ── LANDSCAPE (Pain cards) ── */
+.landscape{padding:100px 0;}
+.section-header{margin-bottom:64px;}
+.section-header .eyebrow{margin-bottom:16px;}
+.section-h2{font-size:clamp(28px,3.5vw,48px);font-weight:400;letter-spacing:-.02em;line-height:1.15;color:#fff;max-width:560px;}
+.section-sub{font-size:16px;color:var(--mid);margin-top:16px;max-width:560px;line-height:1.7;}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.pain-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:40px;transition:border-color .2s,background .2s;}
+.pain-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.04);}
+.pain-card-icon{width:48px;height:48px;border-radius:12px;background:rgba(0,102,255,.1);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
+.pain-card-icon svg{width:22px;height:22px;fill:none;stroke:var(--cyan);stroke-width:1.5;}
+.pain-card-title{font-size:18px;font-weight:500;color:#fff;margin-bottom:14px;line-height:1.3;}
+.pain-card-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ── WHAT WE BUILD ── */
+.build-section{padding:100px 0;background:linear-gradient(180deg,#06060a 0%,#080810 50%,#06060a 100%);}
+.build-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:64px;}
+.build-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:48px;transition:border-color .2s,background .2s;position:relative;overflow:hidden;}
+.build-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,102,255,.4),transparent);opacity:0;transition:opacity .3s;}
+.build-card:hover{border-color:rgba(0,102,255,.3);background:rgba(0,102,255,.03);}
+.build-card:hover::before{opacity:1;}
+.build-card-num{font-size:11px;letter-spacing:.14em;color:var(--dim);margin-bottom:20px;}
+.build-card-title{font-size:22px;font-weight:500;color:#fff;margin-bottom:16px;line-height:1.25;}
+.build-card-body{font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:28px;}
+.build-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.build-tag{font-size:11px;letter-spacing:.08em;color:var(--cyan);padding:5px 12px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);}
+
+/* ── TRENDS ── */
+.trends-section{padding:100px 0;}
+.trends-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px;}
+.trend-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:40px;transition:border-color .2s;}
+.trend-card:hover{border-color:rgba(255,255,255,.15);}
+.trend-card-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;}
+.trend-card-title{font-size:20px;font-weight:500;color:#fff;margin-bottom:14px;line-height:1.3;}
+.trend-card-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ── OUTCOMES ── */
+.outcomes-section{padding:100px 0;background:linear-gradient(180deg,#06060a 0%,#080810 100%);}
+.case-study-block{margin-top:64px;border:1px solid var(--border);border-radius:24px;overflow:hidden;}
+.case-study-header{padding:48px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:32px;justify-content:space-between;flex-wrap:wrap;}
+.case-study-industry{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;}
+.case-study-title{font-size:clamp(20px,2.5vw,30px);font-weight:400;color:#fff;line-height:1.3;max-width:560px;}
+.case-study-body{padding:48px;background:rgba(255,255,255,.015);}
+.case-study-text{font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:48px;max-width:700px;}
+.case-study-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+.cs-metric{padding:0 32px;border-right:1px solid var(--border);}
+.cs-metric:first-child{padding-left:0;}
+.cs-metric:last-child{border-right:none;}
+.cs-metric-num{font-size:clamp(32px,3.5vw,48px);font-weight:400;color:#fff;letter-spacing:-.03em;line-height:1;margin-bottom:8px;}
+.cs-metric-num span{color:var(--cyan);}
+.cs-metric-label{font-size:13px;color:var(--dim);}
+
+/* ── HOW WE ENGAGE ── */
+.engage-section{padding:100px 0;}
+.engage-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px;}
+.engage-step{padding:40px;border:1px solid var(--border);border-radius:var(--r);background:var(--glass);position:relative;transition:border-color .2s;}
+.engage-step:hover{border-color:var(--border-blue);}
+.engage-step-num{width:40px;height:40px;border-radius:50%;border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--cyan);margin-bottom:24px;}
+.engage-step-title{font-size:19px;font-weight:500;color:#fff;margin-bottom:14px;line-height:1.3;}
+.engage-step-body{font-size:14px;color:var(--mid);line-height:1.75;}
+.engage-connector{display:none;}
+
+/* ── CTA ── */
+.cta-section{padding:100px 0;}
+.cta-inner{border:1px solid var(--border);border-radius:24px;padding:80px 64px;text-align:center;position:relative;overflow:hidden;background:rgba(0,102,255,.03);}
+.cta-inner::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,rgba(0,102,255,.12) 0%,transparent 60%);pointer-events:none;}
+.cta-eyebrow{justify-content:center;margin-bottom:24px;}
+.cta-h2{font-size:clamp(28px,4vw,52px);font-weight:400;letter-spacing:-.02em;color:#fff;max-width:640px;margin:0 auto 24px;line-height:1.15;}
+.cta-sub{font-size:17px;color:var(--mid);max-width:520px;margin:0 auto 48px;line-height:1.7;}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+
+/* ── FOOTER ── */
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
 .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
 .footer-brand img{height:26px;margin-bottom:18px;}
@@ -78,19 +176,47 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .footer-legal{display:flex;gap:20px;}
 .footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .svc-hero-inner{grid-template-columns:1fr;gap:48px;}
+  .svc-hero-visual{max-width:640px;}
+  .pain-grid{grid-template-columns:repeat(2,1fr);}
+  .build-grid{grid-template-columns:repeat(2,1fr);}
+  .trends-grid{grid-template-columns:repeat(2,1fr);}
+  .engage-steps{grid-template-columns:repeat(2,1fr);}
+  .stat-strip-inner{grid-template-columns:repeat(2,1fr);gap:32px;}
+  .stat-item{border-right:none;text-align:left;padding:0;}
+}
 @media(max-width:768px){
   .container{padding:0 18px;}
   .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .hero{padding:120px 0 72px;}
+  .svc-hero{padding:120px 0 60px;}
+  .svc-hero-visual{display:none;}
+  .pain-grid{grid-template-columns:1fr;}
+  .build-grid{grid-template-columns:1fr;}
+  .trends-grid{grid-template-columns:1fr;}
+  .engage-steps{grid-template-columns:1fr;}
+  .case-study-metrics{grid-template-columns:1fr;gap:24px;}
+  .cs-metric{padding:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:24px;}
+  .cs-metric:last-child{border-bottom:none;}
+  .case-study-header{flex-direction:column;gap:16px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
+  .cta-inner{padding:48px 28px;}
+  .stat-strip-inner{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:480px){
   .container{padding:0 14px;}
   .navbar{width:calc(100% - 16px);padding:9px 12px;}
+  .stat-strip-inner{grid-template-columns:1fr;}
+  .cta-inner{padding:40px 20px;}
+  .build-card{padding:32px;}
+  .pain-card{padding:28px;}
+  .engage-step{padding:28px;}
 }
 </style>
 </head>
@@ -153,15 +279,25 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
       <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="mega-menu">
         <a href="ai-engineering.html" class="mega-item">
-<div class="mega-item-title">AI Engineering</div><div class="mega-item-subs">Enterprise GenAI · AI Agents · AIOps · Managed Services</div></a>
+          <div class="mega-item-title">AI Engineering</div>
+          <div class="mega-item-subs">Enterprise GenAI · AI Agents · AIOps · Managed Services</div>
+        </a>
         <a href="platform-engineering.html" class="mega-item">
-<div class="mega-item-title">Platform Engineering</div><div class="mega-item-subs">IDP · Self-Service Infra · Platform Governance · Multi-Cloud</div></a>
+          <div class="mega-item-title">Platform Engineering</div>
+          <div class="mega-item-subs">IDP · Self-Service Infra · Platform Governance · Multi-Cloud</div>
+        </a>
         <a href="cloud-devops.html" class="mega-item">
-<div class="mega-item-title">Cloud &amp; DevOps Engineering</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Observability &amp; SRE</div></a>
+          <div class="mega-item-title">Cloud &amp; DevOps Engineering</div>
+          <div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Observability &amp; SRE</div>
+        </a>
         <a href="software-engineering.html" class="mega-item">
-<div class="mega-item-title">Software Engineering</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+          <div class="mega-item-title">Software Engineering</div>
+          <div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div>
+        </a>
         <a href="security-engineering.html" class="mega-item" style="grid-column:span 2;">
-<div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · Vulnerability Management · CSPM · Security Automation</div></a>
+          <div class="mega-item-title">Security Engineering</div>
+          <div class="mega-item-subs">DevSecOps · Vulnerability Management · CSPM · Security Automation</div>
+        </a>
       </div>
     </div>
     <div class="nav-item">
@@ -203,33 +339,265 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   </div>
 </nav>
 
-<!-- ══ HERO ══ -->
-<section class="hero">
+<!-- ══ SECTION 1: HERO ══ -->
+<section class="svc-hero">
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-badge">Industries</div>
-      <h1 class="hero-h1">QSR & Retail</h1>
-      <p class="hero-sub">In-store optimisation, demand forecasting, and AI-powered order flow for quick service restaurants and retail.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        <a href="index.html" class="btn-outline">Back to Home</a>
+    <div class="svc-hero-inner">
+      <div class="svc-hero-copy">
+        <div class="eyebrow svc-hero-eyebrow">QSR &amp; Hospitality</div>
+        <h1 class="svc-hero-h1">Technology That Moves as Fast as Your Kitchen.</h1>
+        <p class="svc-hero-sub">From unified ordering platforms and loyalty systems to AI-driven demand forecasting and peak-load infrastructure — we build the technology that scales with every rush hour.</p>
+        <div class="svc-hero-btns">
+          <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <a href="software-engineering.html" class="btn-outline">Explore Software Engineering</a>
+        </div>
       </div>
-      <p style="margin-top:48px;font-size:13px;color:var(--dim);border:1px solid var(--border);display:inline-block;padding:10px 20px;border-radius:100px;">Full page coming soon — contact us to learn more</p>
+      <div class="svc-hero-visual">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=900&auto=format&fit=crop&q=80" alt="QSR kitchen technology" loading="eager">
+        <div class="svc-hero-visual-overlay"></div>
+        <div class="hero-badge-float badge-bl">
+          <div class="hero-badge-float-dot" style="background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.5);"></div>
+          <div>
+            <div class="hero-badge-float-text">3&times; order throughput</div>
+            <div class="hero-badge-float-sub">during peak hours</div>
+          </div>
+        </div>
+        <div class="hero-badge-float badge-tr">
+          <div class="hero-badge-float-dot" style="background:var(--cyan);box-shadow:0 0 8px rgba(38,168,255,.5);"></div>
+          <div>
+            <div class="hero-badge-float-text">99.9% uptime</div>
+            <div class="hero-badge-float-sub">across ordering channels</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
-  <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
-    <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;">&#10005;</button>
-    <div style="font-size:22px;color:#fff;margin-bottom:24px;font-family:NHD;">Book a Discovery Call</div>
-    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
-    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
-    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
-    <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Request</button>
+<!-- ══ SECTION 2: STAT STRIP ══ -->
+<section class="stat-strip">
+  <div class="container">
+    <div class="stat-strip-inner">
+      <div class="stat-item">
+        <div class="stat-num"><span>3&times;</span></div>
+        <div class="stat-label">Peak Order Throughput</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span>99.9%</span></div>
+        <div class="stat-label">Uptime SLA</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span>25%</span></div>
+        <div class="stat-label">Reduction in Food Waste</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span>40%</span></div>
+        <div class="stat-label">Faster Menu Deployment</div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
+<!-- ══ SECTION 3: THE LANDSCAPE ══ -->
+<section class="landscape">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">The Landscape</div>
+      <h2 class="section-h2" style="margin-top:16px;">What makes QSR technology uniquely hard</h2>
+      <p class="section-sub">The QSR technology stack sits at the intersection of consumer-grade reliability expectations and enterprise-grade complexity. Here is where it breaks.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="pain-card-title">Peak Load is Not Negotiable</div>
+        <div class="pain-card-body">A QSR platform that goes down at 1pm on a Friday doesn't get a second chance. The load variance between a Tuesday morning and a Saturday lunch rush can be 10&times; — and the system has to handle both without pre-provisioned over-spend.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="pain-card-title">Channel Fragmentation</div>
+        <div class="pain-card-body">Modern QSR customers order via app, kiosk, drive-through, aggregators (Swiggy, Zomato, Uber Eats), and in-store POS — all at the same time. Keeping inventory, menu state, and pricing consistent across all channels in real time is a genuinely hard engineering problem.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card-icon">
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        </div>
+        <div class="pain-card-title">Data Sitting Unused</div>
+        <div class="pain-card-body">Most QSR brands have years of transaction, location, and weather data that could drive better demand forecasting, smarter procurement, and reduced wastage. But it sits in disconnected PoS systems and spreadsheets — untouched.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 4: WHAT WE BUILD ══ -->
+<section class="build-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">What We Build Here</div>
+      <h2 class="section-h2" style="margin-top:16px;">Four capabilities that transform QSR operations</h2>
+      <p class="section-sub">End-to-end engineering across ordering, intelligence, loyalty, and infrastructure — built for the pace and pressure of the QSR environment.</p>
+    </div>
+    <div class="build-grid">
+      <div class="build-card">
+        <div class="build-card-num">01</div>
+        <div class="build-card-title">Unified Ordering &amp; POS Platforms</div>
+        <div class="build-card-body">Multi-channel ordering platforms that unify in-store POS, kiosk, mobile app, and third-party aggregator orders into a single kitchen management feed — with real-time inventory deduction and prep-time optimisation.</div>
+        <div class="build-tags">
+          <span class="build-tag">Multi-Channel POS</span>
+          <span class="build-tag">Kitchen Display Integration</span>
+          <span class="build-tag">Aggregator APIs</span>
+          <span class="build-tag">Real-Time Inventory</span>
+        </div>
+      </div>
+      <div class="build-card">
+        <div class="build-card-num">02</div>
+        <div class="build-card-title">AI Demand Forecasting &amp; Menu Intelligence</div>
+        <div class="build-card-body">ML models trained on historical sales, weather, local events, and promotions to predict demand by item and location — reducing over-ordering, improving throughput, and dynamically adjusting menu availability.</div>
+        <div class="build-tags">
+          <span class="build-tag">Demand Forecasting</span>
+          <span class="build-tag">Menu Optimisation</span>
+          <span class="build-tag">Waste Reduction</span>
+          <span class="build-tag">Promotion Analytics</span>
+        </div>
+      </div>
+      <div class="build-card">
+        <div class="build-card-num">03</div>
+        <div class="build-card-title">Loyalty &amp; Customer Data Platforms</div>
+        <div class="build-card-body">Loyalty platforms that go beyond points — combining transaction history, app behaviour, and location signals to drive personalised offers, re-engagement campaigns, and LTV prediction.</div>
+        <div class="build-tags">
+          <span class="build-tag">CDP</span>
+          <span class="build-tag">Personalisation Engine</span>
+          <span class="build-tag">Push Campaigns</span>
+          <span class="build-tag">LTV Modelling</span>
+        </div>
+      </div>
+      <div class="build-card">
+        <div class="build-card-num">04</div>
+        <div class="build-card-title">Elastic Cloud Infrastructure</div>
+        <div class="build-card-body">Auto-scaling cloud infrastructure built for 10&times; traffic spikes — load-tested against your busiest day, with zero-downtime deployments and real-time observability across every ordering channel.</div>
+        <div class="build-tags">
+          <span class="build-tag">Auto-Scaling</span>
+          <span class="build-tag">Load Testing</span>
+          <span class="build-tag">CDN Optimisation</span>
+          <span class="build-tag">Kubernetes</span>
+          <span class="build-tag">Observability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 5: INDUSTRY TRENDS ══ -->
+<section class="trends-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">Industry Trends</div>
+      <h2 class="section-h2" style="margin-top:16px;">Where the QSR technology landscape is heading</h2>
+      <p class="section-sub">The brands that invest in the right technology now will be the ones with structural advantages two years from today.</p>
+    </div>
+    <div class="trends-grid">
+      <div class="trend-card">
+        <div class="trend-card-label">Trend 01</div>
+        <div class="trend-card-title">AI-Driven Menu &amp; Pricing</div>
+        <div class="trend-card-body">Dynamic pricing and AI-optimised menus are moving from fast-casual experiments to mainstream QSR strategy. Chains that can adjust item availability, pricing, and promotion in real time based on demand signals will improve margin without touching footfall.</div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-card-label">Trend 02</div>
+        <div class="trend-card-title">Ghost Kitchens &amp; Virtual Brands</div>
+        <div class="trend-card-body">The ghost kitchen model is creating a new infrastructure challenge: one kitchen, multiple brands, all with separate ordering flows, POS integrations, and SLAs. The technology layer tying it together needs to be robust, real-time, and brand-aware.</div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-card-label">Trend 03</div>
+        <div class="trend-card-title">Sustainability as a Tech Problem</div>
+        <div class="trend-card-body">Food waste, carbon reporting, and sustainable procurement are becoming board-level concerns in QSR. The brands that can track Scope 3 emissions, optimise supply chain sustainability, and prove it to regulators and customers will have a competitive edge that compounds.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 6: REAL OUTCOMES ══ -->
+<section class="outcomes-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">Real Outcomes</div>
+      <h2 class="section-h2" style="margin-top:16px;">What we have delivered for QSR operators</h2>
+    </div>
+    <div class="case-study-block">
+      <div class="case-study-header">
+        <div>
+          <div class="case-study-industry">Leading QSR Chain — South Asia</div>
+          <div class="case-study-title">From Fragmented Channels to Unified Digital Ordering at Scale</div>
+        </div>
+        <a href="case-studies.html" class="btn-outline" style="flex-shrink:0;">View Case Studies</a>
+      </div>
+      <div class="case-study-body">
+        <p class="case-study-text">A major QSR operator running 400+ outlets across South Asia had six separate ordering platforms — each with its own inventory sync logic and no real-time visibility into kitchen load. We consolidated all channels into a single unified ordering platform, built a real-time inventory feed from PoS to kitchen display, and migrated to auto-scaling cloud infrastructure — all delivered in parallel with live operations.</p>
+        <div class="case-study-metrics">
+          <div class="cs-metric">
+            <div class="cs-metric-num"><span>400</span>+</div>
+            <div class="cs-metric-label">Outlets Unified</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-num"><span>3&times;</span></div>
+            <div class="cs-metric-label">Peak Throughput Capacity</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-num"><span>99.9%</span></div>
+            <div class="cs-metric-label">Uptime Since Launch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 7: HOW WE ENGAGE ══ -->
+<section class="engage-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">How We Engage</div>
+      <h2 class="section-h2" style="margin-top:16px;">A structured path from audit to live platform</h2>
+      <p class="section-sub">We start where you are, not where we wish you were. Every engagement begins with a clear-eyed assessment of your current state.</p>
+    </div>
+    <div class="engage-steps">
+      <div class="engage-step">
+        <div class="engage-step-num">01</div>
+        <div class="engage-step-title">Channel &amp; Data Audit</div>
+        <div class="engage-step-body">We map your current ordering channels, integration points, and data architecture — identifying where inventory state diverges, where load capacity breaks down, and where customer data is being wasted.</div>
+      </div>
+      <div class="engage-step">
+        <div class="engage-step-num">02</div>
+        <div class="engage-step-title">Platform Architecture</div>
+        <div class="engage-step-body">We design the target-state ordering and data platform — unified, cloud-native, and built to handle your peak load with room to grow. We scope integration complexity with every third-party system you rely on.</div>
+      </div>
+      <div class="engage-step">
+        <div class="engage-step-num">03</div>
+        <div class="engage-step-title">Phased Rollout</div>
+        <div class="engage-step-body">We migrate outlet by outlet, channel by channel — minimising disruption to live operations. Each phase is tested against real load before cutover. You're never down during a meal rush.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 8: CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="eyebrow cta-eyebrow">Get Started</div>
+      <h2 class="cta-h2">Ready to build technology your kitchen can rely on?</h2>
+      <p class="cta-sub">Talk to engineers who understand that in QSR, latency isn't an IT metric — it's a customer experience. We start with a free channel audit.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <a href="case-studies.html" class="btn-outline">See More Case Studies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-top">
@@ -256,8 +624,8 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <div class="footer-col-head" style="margin-top:28px;">Industries</div>
         <ul class="footer-col-links">
           <li><a href="manufacturing.html">Manufacturing</a></li>
-          <li><a href="financial-services.html">BFSI</a></li>
-          <li><a href="qsr.html">QSR &amp; Retail</a></li>
+          <li><a href="financial-services.html">Financial Services</a></li>
+          <li><a href="qsr.html">QSR &amp; Hospitality</a></li>
           <li><a href="automotive.html">Automotive</a></li>
         </ul>
       </div>
@@ -280,13 +648,55 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   </div>
 </footer>
 
+<!-- ══ CONTACT POPUP ══ -->
+<div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
+  <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
+    <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;">&#10005;</button>
+    <div style="font-size:22px;color:#fff;margin-bottom:8px;font-family:NHD;">Book a Discovery Call</div>
+    <div style="font-size:13px;color:var(--dim);margin-bottom:28px;">Tell us a bit about your project and we'll be in touch within one business day.</div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label>
+      <input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='rgba(0,102,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.08)'">
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label>
+      <input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='rgba(0,102,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.08)'">
+    </div>
+    <div style="margin-bottom:20px;">
+      <label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label>
+      <input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='rgba(0,102,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.08)'">
+    </div>
+    <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Request <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+  </div>
+</div>
+
 <script>
-window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
-function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
-function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
-function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
-function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
-function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
+window.addEventListener('scroll',function(){
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
+});
+function toggleMobileMenu(){
+  var m=document.getElementById('mobileMenu');
+  var h=document.getElementById('hamburger');
+  var open=m.classList.toggle('open');
+  h.classList.toggle('open',open);
+  document.body.style.overflow=open?'hidden':'';
+}
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow='';
+}
+function toggleMobSub(el){
+  el.nextElementSibling.classList.toggle('open');
+}
+function openContact(){
+  document.getElementById('contactPopup').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeContact(){
+  document.getElementById('contactPopup').style.display='none';
+  document.body.style.overflow='';
+}
 </script>
 </body>
 </html>
