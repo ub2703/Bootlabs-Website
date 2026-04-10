@@ -454,6 +454,19 @@ input,textarea{box-sizing:border-box;}
 .footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
 
+/* ══ TESTIMONIALS ══ */
+.testi-section{padding:120px 0;background:#06060a;border-top:1px solid var(--border);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.testi-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:40px 36px;display:flex;flex-direction:column;gap:0;transition:border-color .3s,background .3s;position:relative;overflow:hidden;}
+.testi-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.testi-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.02);}
+.testi-card:hover::before{transform:scaleX(1);}
+.testi-open-quote{font-size:64px;line-height:.8;color:var(--blue);margin-bottom:16px;font-family:Georgia,serif;opacity:.6;}
+.testi-text{font-size:15px;color:var(--mid);line-height:1.8;flex:1;margin-bottom:32px;}
+.testi-bar{width:32px;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));margin-bottom:20px;}
+.testi-name{font-size:14px;color:#fff;font-weight:500;}
+.testi-role{font-size:13px;color:var(--dim);margin-top:5px;line-height:1.5;}
+
 /* ══════════════════════
    RESPONSIVE
 ══════════════════════ */
@@ -471,6 +484,7 @@ input,textarea{box-sizing:border-box;}
   .platforms-grid,.platforms-grid--two,.platforms-grid--three{grid-template-columns:1fr 1fr;}
   .usecase-inner{grid-template-columns:1fr;gap:40px;}
   .usecase-right{display:none;}
+  .testi-grid{grid-template-columns:1fr 1fr;}
 }
 
 /* ── TABLET PORTRAIT / MOBILE ── */
@@ -591,6 +605,9 @@ input,textarea{box-sizing:border-box;}
   /* mobile menu */
   .mob-nav-link{font-size:20px;}
   .mobile-menu-cta{font-size:15px !important;}
+
+  /* testimonials */
+  .testi-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -1086,6 +1103,41 @@ input,textarea{box-sizing:border-box;}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="testi-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Client Voices</div>
+    <h2 class="h2">What our clients say.</h2>
+    <div class="testi-grid">
+
+      <div class="testi-card">
+        <div class="testi-open-quote">"</div>
+        <p class="testi-text">I want to thank the BootLabs team for working with us during the migration process to GCP. Team was always available and helped us to resolve any questions we had about the services. Some of the demos created by the team were instrumental for us to go live faster. Really happy with the ongoing support and wish the team all success.</p>
+        <div class="testi-bar"></div>
+        <div class="testi-name">Sanjay Chavan</div>
+        <div class="testi-role">VP &amp; Head Enterprise Applications</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-open-quote">"</div>
+        <p class="testi-text">Partnering with BootLabs has been a productivity powerhouse for M&amp;M. The pre-trained models in GenAI are like having a team of AI experts on hand. They've streamlined workflows across departments, allowing employees to focus on higher-level tasks and significantly boosting overall productivity. I'm confident this is just the beginning, and we will continue to unlock new levels of efficiency.</p>
+        <div class="testi-bar"></div>
+        <div class="testi-name">Abhishek Sukhwal</div>
+        <div class="testi-role">Head of Infrastructure<br>Mahindra &amp; Mahindra</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-open-quote">"</div>
+        <p class="testi-text">With BootLabs and Google's innovative GenAI solutions, we were able to explore the true potential of GenAI beyond mere hype. Through our use case, we've successfully tapped into conversational data, enabling us to gain invaluable customer insights. I am confident that this success will propel us towards even greater heights of customer satisfaction and operational excellence.</p>
+        <div class="testi-bar"></div>
+        <div class="testi-name">Shalin Jain</div>
+        <div class="testi-role">Products<br>Ather Energy</div>
+      </div>
+
     </div>
   </div>
 </section>
