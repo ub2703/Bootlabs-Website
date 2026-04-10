@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI — BootLabs</title>
+<style>
+/* ── FONTS ── */
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;height:auto;}
+ul{list-style:none;}
+button{font-family:NHD,sans-serif;cursor:pointer;}
+input,textarea{box-sizing:border-box;}
+
+/* ── VARS ── */
+:root{
+  --blue:#0066FF;--cyan:#26a8ff;
+  --border:rgba(255,255,255,.08);
+  --border-blue:rgba(0,102,255,.35);
+  --dim:rgba(255,255,255,.45);
+  --mid:rgba(255,255,255,.7);
+  --glass:rgba(255,255,255,.03);
+  --r:20px;
+}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
+.eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;font-weight:400;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
+.btn-primary:hover{background:#0055dd;box-shadow:0 8px 32px rgba(0,102,255,.5);transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;transition:transform .2s;}
+.btn-primary:hover svg{transform:translateX(3px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ══ MOBILE MENU ══ */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mob-sub{padding:12px 0 4px;display:none;flex-direction:column;gap:10px;}
+.mob-sub.open{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
+
+/* ══ NAVBAR ══ */
+.navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
+.navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
+.nav-logo img{height:28px;width:auto;display:block;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{font-size:13px;color:var(--mid);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.05);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:240px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.simple-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:13px;color:var(--mid);text-decoration:none;transition:background .2s,color .2s;}
+.simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
+.mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-title{font-size:14px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;transition:background .2s;}
+.nav-hamburger:hover{background:rgba(255,255,255,.06);}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ══ HERO ══ */
+.svc-hero{padding:140px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.svc-hero::before{content:"";position:absolute;top:0;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.08) 0%,transparent 65%);pointer-events:none;}
+.svc-hero::after{content:"";position:absolute;bottom:-100px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(38,168,255,.05) 0%,transparent 65%);pointer-events:none;}
+.svc-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.svc-hero-eyebrow{margin-bottom:28px;}
+.svc-hero-h1{font-size:clamp(36px,4.5vw,64px);font-weight:400;line-height:1.05;letter-spacing:-.02em;margin-bottom:20px;}
+.svc-hero-sub{font-size:17px;line-height:1.75;color:var(--mid);margin-bottom:36px;max-width:480px;}
+.svc-hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.svc-hero-visual{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;}
+.svc-hero-visual img{width:100%;height:100%;object-fit:cover;}
+.svc-hero-visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,102,255,.25) 0%,transparent 60%);}
+.hero-badge-float{position:absolute;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(6,6,10,.85);border:1px solid rgba(255,255,255,.1);border-radius:12px;backdrop-filter:blur(16px);}
+.hero-badge-float-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.hero-badge-float-text{font-size:13px;color:#fff;font-weight:500;}
+.hero-badge-float-sub{font-size:11px;color:var(--dim);}
+.hero-badge-bl{bottom:24px;left:24px;}
+.hero-badge-tr{top:24px;right:24px;}
+
+/* ══ STAT STRIP ══ */
+.svc-stat-strip{background:#080810;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.svc-stat-inner{display:flex;align-items:stretch;}
+.svc-stat-item{flex:1;padding:32px 24px;display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--border);}
+.svc-stat-item:last-child{border-right:none;}
+.svc-stat-num{font-size:36px;letter-spacing:-.02em;color:#fff;}
+.svc-stat-num span{font-size:20px;color:var(--cyan);}
+.svc-stat-label{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;}
+
+/* ══ EXPLAINER ══ */
+.explainer-section{padding:100px 0;background:#06060a;}
+.explainer-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.explainer-left h2{font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.15;margin-bottom:24px;}
+.explainer-left p{font-size:16px;color:var(--mid);line-height:1.8;margin-bottom:16px;}
+.explainer-left p:last-child{margin-bottom:0;}
+.explainer-right{display:flex;flex-direction:column;gap:16px;}
+.explainer-point{display:flex;gap:16px;padding:20px 24px;border:1px solid var(--border);border-radius:14px;background:var(--glass);transition:border-color .3s;}
+.explainer-point:hover{border-color:var(--border-blue);}
+.explainer-point-icon{width:36px;height:36px;border-radius:10px;background:rgba(0,102,255,.08);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.explainer-point-icon svg{width:18px;height:18px;fill:none;stroke:var(--cyan);stroke-width:1.5;}
+.explainer-point-title{font-size:14px;color:#fff;margin-bottom:4px;font-weight:500;}
+.explainer-point-body{font-size:13px;color:var(--mid);line-height:1.65;}
+
+/* ══ OFFERINGS ══ */
+.offerings-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.offerings-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:56px;}
+.offering-card{background:#080810;padding:40px 36px;}
+.offering-num{font-size:11px;letter-spacing:.12em;color:var(--dim);margin-bottom:16px;}
+.offering-title{font-size:20px;color:#fff;margin-bottom:14px;}
+.offering-body{font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:20px;}
+.offering-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.offering-tag{font-size:12px;color:var(--dim);padding:4px 12px;border:1px solid var(--border);border-radius:100px;}
+
+/* ══ USE CASES ══ */
+.usecases-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.usecases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.usecase-card{padding:32px;border:1px solid var(--border);border-radius:20px;background:var(--glass);transition:border-color .3s;}
+.usecase-card:hover{border-color:var(--border-blue);}
+.usecase-industry{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;}
+.usecase-title{font-size:17px;color:#fff;margin-bottom:12px;}
+.usecase-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.usecase-list li{font-size:13px;color:var(--mid);display:flex;gap:8px;line-height:1.5;}
+.usecase-list li::before{content:"→";color:var(--cyan);flex-shrink:0;}
+
+/* ══ ARCHITECTURE ══ */
+.arch-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.arch-stack{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:56px;}
+.arch-layer{background:#080810;padding:32px 36px;}
+.arch-layer-head{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.arch-layer-badge{font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:100px;}
+.arch-layer-title{font-size:16px;color:#fff;}
+.arch-layer-desc{font-size:14px;color:var(--mid);margin-bottom:16px;line-height:1.7;}
+.arch-layer-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.arch-layer-tag{font-size:12px;color:var(--mid);padding:6px 14px;border:1px solid var(--border);border-radius:8px;background:rgba(255,255,255,.02);}
+
+/* ══ PROCESS ══ */
+.process-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.process-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;}
+.process-step{padding:36px;border:1px solid var(--border);border-radius:20px;background:var(--glass);}
+.process-step-num{font-size:11px;letter-spacing:.14em;color:var(--cyan);margin-bottom:16px;}
+.process-step-title{font-size:20px;color:#fff;margin-bottom:12px;}
+.process-step-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ══ CTA ══ */
+.cta-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cta-inner{text-align:center;max-width:640px;margin:0 auto;}
+.cta-h2{font-size:clamp(28px,4vw,48px);color:#fff;margin-bottom:16px;letter-spacing:-.02em;font-weight:400;line-height:1.15;}
+.cta-sub{font-size:17px;color:var(--mid);line-height:1.75;margin-bottom:40px;}
+
+/* ══ FOOTER ══ */
+.footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
+.footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+.footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
+.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);white-space:nowrap;line-height:1;}
+.footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  .svc-hero-inner{grid-template-columns:1fr;}
+  .svc-hero-visual{display:none;}
+  .explainer-inner{grid-template-columns:1fr;gap:48px;}
+  .usecases-grid{grid-template-columns:repeat(2,1fr);}
+  .process-steps{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .container{padding:0 18px;}
+  .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
+  .nav-hamburger{display:flex;}
+  .svc-hero-visual{display:none;}
+  .svc-stat-inner{flex-direction:column;}
+  .svc-stat-item{border-right:none;border-bottom:1px solid var(--border);}
+  .svc-stat-item:last-child{border-bottom:none;}
+  .offerings-grid{grid-template-columns:1fr;}
+  .usecases-grid{grid-template-columns:1fr;}
+  .process-steps{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-bot{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:480px){
+  .container{padding:0 14px;}
+  .navbar{width:calc(100% - 16px);padding:9px 12px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ MOBILE MENU ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mob-nav-links">
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="cloud-devops.html" onclick="closeMobileMenu()">DevOps / Cloud</a>
+        <a href="platform-engineering.html" onclick="closeMobileMenu()">Cloud Reliability / SRE</a>
+        <a href="software-engineering.html" onclick="closeMobileMenu()">Full Stack Development</a>
+        <a href="ai-engineering.html" onclick="closeMobileMenu()">AI &amp; ML</a>
+        <a href="agentic-ai.html" onclick="closeMobileMenu()" style="color:var(--cyan);">Agentic AI</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Solutions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="resilient-operations-center.html" onclick="closeMobileMenu()">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" onclick="closeMobileMenu()">AI in SDLC</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Industries <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="manufacturing.html" onclick="closeMobileMenu()">Manufacturing</a>
+        <a href="automotive.html" onclick="closeMobileMenu()">Automotive</a>
+        <a href="financial-services.html" onclick="closeMobileMenu()">Financial Services</a>
+        <a href="qsr.html" onclick="closeMobileMenu()">QSR</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="sailor.html" onclick="closeMobileMenu()">Sailor</a>
+        <a href="guardian.html" onclick="closeMobileMenu()">Guardian</a>
+      </div>
+    </div>
+    <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
+    <a class="mob-nav-link" href="about-us.html" onclick="closeMobileMenu()">About Us</a>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="white-papers.html" onclick="closeMobileMenu()">White Papers</a>
+        <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </nav>
+  <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">DevOps / Cloud</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Infrastructure as Code</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">Cloud Reliability / SRE</div><div class="mega-item-subs">Observability · SLOs &amp; SLAs · Incident Management · Platform Resilience</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Full Stack Development</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI &amp; ML</div><div class="mega-item-subs">ML Engineering · MLOps · Model Training · Data Pipelines</div></a>
+        <a href="agentic-ai.html" class="mega-item" style="grid-column:span 2;background:rgba(0,102,255,.08);"><div class="mega-item-title" style="color:var(--cyan);">Agentic AI</div><div class="mega-item-subs">AI Agents · Multi-Agent Systems · RAG · Autonomous Workflows · LLMOps</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="resilient-operations-center.html" class="simple-item">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" class="simple-item">AI in SDLC</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#industry" class="nav-link">Industries <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="manufacturing.html" class="simple-item">Manufacturing</a>
+        <a href="automotive.html" class="simple-item">Automotive</a>
+        <a href="financial-services.html" class="simple-item">Financial Services</a>
+        <a href="qsr.html" class="simple-item">QSR</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#platforms" class="nav-link">Platforms <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="sailor.html" class="simple-item">Sailor</a>
+        <a href="guardian.html" class="simple-item">Guardian</a>
+      </div>
+    </div>
+    <a href="partnerships.html" class="nav-link">Partners</a>
+    <a href="about-us.html" class="nav-link">About Us</a>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="case-studies.html" class="simple-item">Case Studies</a>
+        <a href="white-papers.html" class="simple-item">White Papers</a>
+        <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="svc-hero">
+  <div class="container">
+    <div class="svc-hero-inner">
+      <div class="svc-hero-left">
+        <div class="eyebrow svc-hero-eyebrow">Agentic AI</div>
+        <h1 class="svc-hero-h1">Agents That Work. Systems That Think.</h1>
+        <p class="svc-hero-sub">We build production-grade AI agent systems — from single-purpose task agents to multi-agent orchestration frameworks — grounded in your enterprise data and governed for real-world use.</p>
+        <div class="svc-hero-btns">
+          <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <a href="ai-engineering.html" class="btn-outline">Explore AI &amp; ML</a>
+        </div>
+      </div>
+      <div class="svc-hero-visual">
+        <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&auto=format&fit=crop&q=80" alt="Agentic AI — neural network visualization">
+        <div class="svc-hero-visual-overlay"></div>
+        <div class="hero-badge-float hero-badge-bl">
+          <div class="hero-badge-float-dot" style="background:#22c55e;box-shadow:0 0 8px #22c55e;"></div>
+          <div>
+            <div class="hero-badge-float-text">Production AI agents</div>
+            <div class="hero-badge-float-sub">not just prototypes</div>
+          </div>
+        </div>
+        <div class="hero-badge-float hero-badge-tr">
+          <div class="hero-badge-float-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan);"></div>
+          <div>
+            <div class="hero-badge-float-text">Human-in-the-loop</div>
+            <div class="hero-badge-float-sub">governance by design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAT STRIP ══ -->
+<div class="svc-stat-strip">
+  <div class="container">
+    <div class="svc-stat-inner">
+      <div class="svc-stat-item">
+        <div class="svc-stat-num">5<span>+</span></div>
+        <div class="svc-stat-label">Agent Types Deployed</div>
+      </div>
+      <div class="svc-stat-item">
+        <div class="svc-stat-num" style="font-size:22px;letter-spacing:-.01em;">PLM · ERP · DMS</div>
+        <div class="svc-stat-label">Systems Integrated</div>
+      </div>
+      <div class="svc-stat-item">
+        <div class="svc-stat-num">24<span>/7</span></div>
+        <div class="svc-stat-label">Autonomous Coverage</div>
+      </div>
+      <div class="svc-stat-item">
+        <div class="svc-stat-num" style="font-size:28px;">Zero</div>
+        <div class="svc-stat-label">Hallucinations Policy (Human-in-Loop)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WHAT IS AGENTIC AI ══ -->
+<section class="explainer-section">
+  <div class="container">
+    <div class="explainer-inner">
+      <div class="explainer-left">
+        <div class="eyebrow" style="margin-bottom:20px;">What is Agentic AI</div>
+        <h2>Beyond chatbots. Beyond automation.</h2>
+        <p>Agentic AI refers to AI systems that can autonomously plan, decide, use tools, and take multi-step actions to accomplish goals — not just respond to prompts. An agent doesn't just answer a question; it looks things up, reasons across sources, drafts a response, checks it against rules, and acts.</p>
+        <p>The difference between a chatbot and an agent is the difference between a search box and a colleague. Agents work. They complete tasks, handle exceptions, escalate when needed, and get better over time.</p>
+      </div>
+      <div class="explainer-right">
+        <!-- Point 1 -->
+        <div class="explainer-point">
+          <div class="explainer-point-icon">
+            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div>
+            <div class="explainer-point-title">Grounded in your data</div>
+            <div class="explainer-point-body">Agents that hallucinate are useless in enterprise contexts. Every agent we build is RAG-grounded in your actual systems — PLM, ERP, DMS, CRM — not in generic training data.</div>
+          </div>
+        </div>
+        <!-- Point 2 -->
+        <div class="explainer-point">
+          <div class="explainer-point-icon">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div>
+            <div class="explainer-point-title">Tool-using &amp; action-capable</div>
+            <div class="explainer-point-body">Our agents don't just generate text — they call APIs, query databases, trigger workflows, and interact with enterprise systems in controlled, auditable ways.</div>
+          </div>
+        </div>
+        <!-- Point 3 -->
+        <div class="explainer-point">
+          <div class="explainer-point-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="explainer-point-title">Human-in-the-loop by default</div>
+            <div class="explainer-point-body">Read-only before write. Explanation before action. Approval before consequence. Every agent is designed with the assumption that a human should stay in control.</div>
+          </div>
+        </div>
+        <!-- Point 4 -->
+        <div class="explainer-point">
+          <div class="explainer-point-icon">
+            <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div>
+            <div class="explainer-point-title">Governed &amp; observable</div>
+            <div class="explainer-point-body">Full audit trails, role-based access, confidence scoring, safety gates, and model observability — because enterprise AI without governance is a liability.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT WE BUILD ══ -->
+<section class="offerings-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">What We Build</div>
+    <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;max-width:640px;">Four types of agentic AI solutions we deliver</h2>
+    <div class="offerings-grid">
+      <div class="offering-card">
+        <div class="offering-num">01</div>
+        <div class="offering-title">Task &amp; Knowledge Agents</div>
+        <p class="offering-body">Single-purpose agents that handle specific enterprise tasks end-to-end — answering complex queries across systems, processing documents, generating drafts, checking compliance, and handling routine decisions autonomously.</p>
+        <div class="offering-tags">
+          <span class="offering-tag">RAG</span>
+          <span class="offering-tag">LLM Agents</span>
+          <span class="offering-tag">Knowledge Retrieval</span>
+          <span class="offering-tag">Document Processing</span>
+          <span class="offering-tag">Enterprise Q&amp;A</span>
+        </div>
+      </div>
+      <div class="offering-card">
+        <div class="offering-num">02</div>
+        <div class="offering-title">Multi-Agent Orchestration</div>
+        <p class="offering-body">Complex workflows that require multiple agents working together — a research agent, a reasoning agent, a writing agent, a validation agent — coordinated by an orchestration layer that manages state, routing, and escalation.</p>
+        <div class="offering-tags">
+          <span class="offering-tag">Agent Orchestration</span>
+          <span class="offering-tag">LangGraph</span>
+          <span class="offering-tag">AutoGen</span>
+          <span class="offering-tag">State Management</span>
+          <span class="offering-tag">Agent Routing</span>
+        </div>
+      </div>
+      <div class="offering-card">
+        <div class="offering-num">03</div>
+        <div class="offering-title">Tool-Using &amp; Action Agents</div>
+        <p class="offering-body">Agents that go beyond text — they call your APIs, query databases, trigger workflows, create tickets, update records, and interact with enterprise systems in controlled, auditable ways. Built with strict permission boundaries and human approval gates.</p>
+        <div class="offering-tags">
+          <span class="offering-tag">Tool Use</span>
+          <span class="offering-tag">API Integration</span>
+          <span class="offering-tag">ERP/CRM Actions</span>
+          <span class="offering-tag">Workflow Triggers</span>
+          <span class="offering-tag">Approval Gates</span>
+        </div>
+      </div>
+      <div class="offering-card">
+        <div class="offering-num">04</div>
+        <div class="offering-title">LLMOps &amp; Agent Infrastructure</div>
+        <p class="offering-body">The platform layer that makes agents reliable in production — model routing, fallback chains, prompt versioning, cost tracking, latency monitoring, safety filters, and continuous evaluation against golden test sets.</p>
+        <div class="offering-tags">
+          <span class="offering-tag">LLMOps</span>
+          <span class="offering-tag">Prompt Management</span>
+          <span class="offering-tag">Cost Optimization</span>
+          <span class="offering-tag">Safety Filters</span>
+          <span class="offering-tag">Continuous Evaluation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AGENT USE CASES ══ -->
+<section class="usecases-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Agent Use Cases</div>
+    <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;max-width:640px;">Agents deployed across industries</h2>
+    <p style="font-size:16px;color:var(--mid);line-height:1.75;margin-top:16px;max-width:600px;">These aren't POCs. These are production deployments, grounded in real enterprise data, solving real operational problems.</p>
+    <div class="usecases-grid">
+      <!-- Manufacturing -->
+      <div class="usecase-card">
+        <div class="usecase-industry">Manufacturing</div>
+        <div class="usecase-title">Supply Chain &amp; Procurement Agents</div>
+        <ul class="usecase-list">
+          <li>Tender / RFP response agent</li>
+          <li>BOM visualisation agent</li>
+          <li>24/7 vendor support AI</li>
+          <li>Vendor performance scoring</li>
+        </ul>
+      </div>
+      <!-- Automotive -->
+      <div class="usecase-card">
+        <div class="usecase-industry">Automotive</div>
+        <div class="usecase-title">Service &amp; Aftermarket Agents</div>
+        <ul class="usecase-list">
+          <li>Multimodal troubleshooting AI</li>
+          <li>Voice-based service booking</li>
+          <li>24/7 customer vehicle query AI</li>
+          <li>Warranty claim processing agent</li>
+        </ul>
+      </div>
+      <!-- Financial Services -->
+      <div class="usecase-card">
+        <div class="usecase-industry">Financial Services</div>
+        <div class="usecase-title">Risk &amp; Compliance Agents</div>
+        <ul class="usecase-list">
+          <li>Real-time fraud scoring agent</li>
+          <li>Compliance audit assistant</li>
+          <li>Regulatory query AI</li>
+          <li>Transaction anomaly explainer</li>
+        </ul>
+      </div>
+      <!-- QSR & Retail -->
+      <div class="usecase-card">
+        <div class="usecase-industry">QSR &amp; Retail</div>
+        <div class="usecase-title">Customer &amp; Operations Agents</div>
+        <ul class="usecase-list">
+          <li>AI order management assistant</li>
+          <li>Loyalty personalisation agent</li>
+          <li>Demand forecasting agent</li>
+          <li>Staff scheduling AI</li>
+        </ul>
+      </div>
+      <!-- Enterprise -->
+      <div class="usecase-card">
+        <div class="usecase-industry">Enterprise</div>
+        <div class="usecase-title">Workforce &amp; Knowledge Agents</div>
+        <ul class="usecase-list">
+          <li>Secure enterprise RAG platform</li>
+          <li>AI ticketing system</li>
+          <li>JD &amp; CV match agent</li>
+          <li>HR policy Q&amp;A assistant</li>
+        </ul>
+      </div>
+      <!-- Software Teams -->
+      <div class="usecase-card">
+        <div class="usecase-industry">Software Teams</div>
+        <div class="usecase-title">Developer Productivity Agents</div>
+        <ul class="usecase-list">
+          <li>Code review agent</li>
+          <li>Test case generation AI</li>
+          <li>Incident diagnosis assistant</li>
+          <li>Release notes generator</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW WE BUILD AGENTS — 4-LAYER ARCHITECTURE ══ -->
+<section class="arch-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Architecture</div>
+    <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;max-width:640px;">How we build agents that enterprise teams can trust.</h2>
+    <p style="font-size:16px;color:var(--mid);line-height:1.75;margin-top:16px;max-width:600px;">Agentic AI only works in the enterprise if it's grounded in your actual data and governed from the start. We build upward from your systems of record — with governance at every layer.</p>
+    <div class="arch-stack">
+      <!-- Layer 4 -->
+      <div class="arch-layer">
+        <div class="arch-layer-head">
+          <span class="arch-layer-badge" style="color:var(--cyan);background:rgba(38,168,255,.08);border:1px solid var(--border-blue);">Layer 4</span>
+          <span class="arch-layer-title">Interaction, Governance &amp; Control</span>
+        </div>
+        <p class="arch-layer-desc">Ensuring responsible AI deployment with human oversight, transparent audit trails, and safety gates at every action boundary.</p>
+        <div class="arch-layer-tags">
+          <span class="arch-layer-tag">Human-in-the-Loop Approvals</span>
+          <span class="arch-layer-tag">Explainability</span>
+          <span class="arch-layer-tag">Read-Only by Default</span>
+          <span class="arch-layer-tag">Role-Based Access &amp; Audit Logs</span>
+          <span class="arch-layer-tag">Safety Gates</span>
+          <span class="arch-layer-tag">Confidence Thresholds</span>
+        </div>
+      </div>
+      <!-- Layer 3 -->
+      <div class="arch-layer">
+        <div class="arch-layer-head">
+          <span class="arch-layer-badge" style="color:var(--cyan);background:rgba(38,168,255,.08);border:1px solid var(--border-blue);">Layer 3</span>
+          <span class="arch-layer-title">Intelligence &amp; Reasoning Layer</span>
+        </div>
+        <p class="arch-layer-desc">The only layer where GenAI components reside — combining LLMs with enterprise-specific business logic, domain rules, and multi-step reasoning across sources.</p>
+        <div class="arch-layer-tags">
+          <span class="arch-layer-tag">Large Language Models (LLMs)</span>
+          <span class="arch-layer-tag">Agent Orchestration (LangGraph / AutoGen)</span>
+          <span class="arch-layer-tag">Deterministic Business Logic</span>
+          <span class="arch-layer-tag">Domain Rules</span>
+          <span class="arch-layer-tag">Cross-system Reasoning</span>
+          <span class="arch-layer-tag">Confidence Scoring</span>
+        </div>
+      </div>
+      <!-- Layer 2 -->
+      <div class="arch-layer">
+        <div class="arch-layer-head">
+          <span class="arch-layer-badge" style="color:var(--cyan);background:rgba(38,168,255,.08);border:1px solid var(--border-blue);">Layer 2</span>
+          <span class="arch-layer-title">Data Context &amp; Knowledge Fabric</span>
+        </div>
+        <p class="arch-layer-desc">Normalising and enriching fragmented enterprise data — structured records, documents, SOPs, contracts, logs — into a unified knowledge base the agents can reason over.</p>
+        <div class="arch-layer-tags">
+          <span class="arch-layer-tag">Vector Embeddings &amp; Semantic Search</span>
+          <span class="arch-layer-tag">Structured Data Models</span>
+          <span class="arch-layer-tag">Unstructured Knowledge (SOPs, manuals, policies)</span>
+          <span class="arch-layer-tag">Context Enrichment</span>
+          <span class="arch-layer-tag">Clause-level Indexing &amp; Retrieval</span>
+        </div>
+      </div>
+      <!-- Layer 1 -->
+      <div class="arch-layer">
+        <div class="arch-layer-head">
+          <span class="arch-layer-badge" style="color:var(--dim);background:rgba(255,255,255,.04);border:1px solid var(--border);">Layer 1</span>
+          <span class="arch-layer-title">Enterprise Systems of Record</span>
+        </div>
+        <p class="arch-layer-desc">The authoritative sources. Agents never own the truth — they read from these systems. We integrate, never replace.</p>
+        <div class="arch-layer-tags">
+          <span class="arch-layer-tag">PLM — Design intent, BOMs, change orders</span>
+          <span class="arch-layer-tag">ERP — Procurement, cost data, vendor contracts</span>
+          <span class="arch-layer-tag">DMS — Field failures, warranties, repair histories</span>
+          <span class="arch-layer-tag">CRM — Customer records, interaction history</span>
+          <span class="arch-layer-tag">ITSM — Tickets, incidents, SLA records</span>
+          <span class="arch-layer-tag">HR Systems — Policies, org structures, talent data</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══ -->
+<section class="process-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">How We Engage</div>
+    <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;max-width:640px;">From use case to production in three steps</h2>
+    <p style="font-size:16px;color:var(--mid);line-height:1.75;margin-top:16px;max-width:600px;">We don't start with a technology pitch. We start by understanding what decision or task costs your team the most time — and design backward from there.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-step-num">Step 01</div>
+        <div class="process-step-title">Agent Blueprint</div>
+        <p class="process-step-body">We map the use case, define the data sources, identify integration points, and design the agent's decision logic — including where human-in-the-loop approval is required.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">Step 02</div>
+        <div class="process-step-title">Build &amp; Ground</div>
+        <p class="process-step-body">We build the agent, connect it to your data sources, and test it exhaustively against real enterprise scenarios — including adversarial inputs, edge cases, and hallucination probes.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">Step 03</div>
+        <div class="process-step-title">Deploy &amp; Govern</div>
+        <p class="process-step-body">We deploy with full LLMOps infrastructure — cost tracking, latency monitoring, prompt versioning, safety filters — and run it through ROC for 24/7 operational oversight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-h2">Ready to put agents to work in your enterprise?</h2>
+      <p class="cta-sub">Talk to our agent engineering team. We'll map 2–3 use cases that can go to production in 90 days.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-primary" onclick="openContact()" style="font-size:15px;padding:16px 36px;">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <a href="ai-engineering.html" class="btn-outline" style="font-size:15px;padding:16px 36px;">Explore AI &amp; ML</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT POPUP ══ -->
+<div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
+  <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
+    <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;">&#10005;</button>
+    <div style="font-size:22px;color:#fff;margin-bottom:24px;font-family:NHD;">Book a Discovery Call</div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Request</button>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
+      <div>
+        <div class="footer-col-head">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="cloud-devops.html">DevOps / Cloud</a></li>
+          <li><a href="platform-engineering.html">Cloud Reliability / SRE</a></li>
+          <li><a href="software-engineering.html">Full Stack Development</a></li>
+          <li><a href="ai-engineering.html">AI &amp; ML</a></li>
+          <li><a href="agentic-ai.html">Agentic AI</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Platforms</div>
+        <ul class="footer-col-links">
+          <li><a href="sailor.html">Sailor</a></li>
+          <li><a href="guardian.html">Guardian</a></li>
+        </ul>
+        <div class="footer-col-head" style="margin-top:28px;">Industries</div>
+        <ul class="footer-col-links">
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="financial-services.html">BFSI</a></li>
+          <li><a href="qsr.html">QSR &amp; Retail</a></li>
+          <li><a href="automotive.html">Automotive</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="blog.html">Insights</a></li>
+          <li><a href="partnerships.html">Partners</a></li>
+          <li><a href="#" onclick="openContact();return false;">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
+    <div class="footer-bot">
+      <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
+function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
+function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
+function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
+function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
+</script>
+</body>
+</html>
