@@ -37,14 +37,14 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-logo img{height:28px;width:auto;}
 .nav-center{display:flex;align-items:center;gap:4px;}
 .nav-item{position:relative;}
-.nav-link{font-size:13px;color:var(--mid);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
-.nav-link:hover{color:#fff;background:rgba(255,255,255,.05);}
+.nav-link{font-size:15px;color:rgba(255,255,255,.92);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
 .nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
 .nav-item:hover .nav-link svg{transform:rotate(180deg);}
 .simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:240px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
 .simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
 .nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
-.simple-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:13px;color:var(--mid);transition:background .2s,color .2s;}
+.simple-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:15px;color:rgba(255,255,255,.88);transition:background .2s,color .2s;}
 .simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
 .mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
 .mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
@@ -86,7 +86,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .stat-item:last-child{border-right:none;}
 .stat-num{font-size:clamp(36px,4vw,56px);font-weight:400;line-height:1;letter-spacing:-.03em;color:#fff;}
 .stat-num span{color:var(--cyan);}
-.stat-label{font-size:13px;color:var(--mid);line-height:1.5;}
+.stat-label{font-size:15px;color:rgba(255,255,255,.88);line-height:1.5;}
 
 /* ── SECTION COMMON ── */
 .section{padding:96px 0;}
@@ -135,7 +135,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .cs-metric-num.blue{color:var(--blue);}
 .cs-metric-num.cyan{color:var(--cyan);}
 .cs-metric-num.white{color:#fff;}
-.cs-metric-label{font-size:13px;color:var(--mid);line-height:1.5;}
+.cs-metric-label{font-size:15px;color:rgba(255,255,255,.88);line-height:1.5;}
 
 /* ── HOW WE ENGAGE ── */
 .engage-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:var(--r);overflow:hidden;margin-top:48px;}
@@ -495,10 +495,10 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <div style="font-size:18px;color:#fff;margin-bottom:12px;">Service &amp; Repairs AI</div>
         <p style="font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:16px;">Transforming how technicians and customers interact with vehicle service:</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Multimodal troubleshooting AI (tractor &amp; auto)</li>
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Voice-based service booking &amp; requests</li>
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>24×7 conversational support for vehicle queries</li>
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Warranty claim processing agent</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Multimodal troubleshooting AI (tractor &amp; auto)</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Voice-based service booking &amp; requests</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>24×7 conversational support for vehicle queries</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Warranty claim processing agent</li>
         </ul>
       </div>
       <div style="background:#06060a;padding:40px 36px;">
@@ -508,10 +508,10 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <div style="font-size:18px;color:#fff;margin-bottom:12px;">Knowledge &amp; Compliance</div>
         <p style="font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:16px;">Unlocking institutional knowledge trapped in documents and experts:</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Secure enterprise RAG platform</li>
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Inspection checklist extraction agent</li>
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Statutory compliance &amp; inspection failure prevention</li>
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>AI modelling guidelines assistant</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Secure enterprise RAG platform</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Inspection checklist extraction agent</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Statutory compliance &amp; inspection failure prevention</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>AI modelling guidelines assistant</li>
         </ul>
       </div>
       <div style="background:#06060a;padding:40px 36px;">
@@ -521,10 +521,10 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <div style="font-size:18px;color:#fff;margin-bottom:12px;">Workforce &amp; Operations</div>
         <p style="font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:16px;">Reducing operational friction and tribal knowledge risk:</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>AI ticketing system for employees</li>
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>JD &amp; CV match agent for hiring</li>
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Intelligent asset &amp; contract lifecycle agent</li>
-          <li style="font-size:13px;color:var(--mid);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Vendor performance scoring agent</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>AI ticketing system for employees</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>JD &amp; CV match agent for hiring</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Intelligent asset &amp; contract lifecycle agent</li>
+          <li style="font-size:15px;color:rgba(255,255,255,.88);display:flex;gap:8px;"><span style="color:var(--cyan);flex-shrink:0;">→</span>Vendor performance scoring agent</li>
         </ul>
       </div>
     </div>
