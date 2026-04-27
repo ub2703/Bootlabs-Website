@@ -11,43 +11,40 @@
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
 :root{--blue:#0066FF;--cyan:#26a8ff;--border:rgba(255,255,255,.08);--border-blue:rgba(0,102,255,.35);--dim:rgba(255,255,255,.45);--mid:rgba(255,255,255,.7);--glass:rgba(255,255,255,.03);--r:20px;}
-a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;height:auto;}
-ul{list-style:none;}button{font-family:NHD,sans-serif;cursor:pointer;}input,textarea{box-sizing:border-box;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;height:auto;}
+button{font-family:NHD,sans-serif;cursor:pointer;}
 .container{max-width:1280px;margin:0 auto;padding:0 48px;}
-.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
-.eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
-.h2{font-size:clamp(28px,3.5vw,48px);font-weight:400;line-height:1.1;}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;font-family:NHD,sans-serif;cursor:pointer;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
-.btn-primary:hover{background:#0052cc;transform:translateY(-1px);}
-.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;transition:transform .2s;}
-.btn-primary:hover svg{transform:translateX(3px);}
+.btn-primary:hover{background:#0052cc;box-shadow:0 4px 32px rgba(0,102,255,.5);transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;font-family:NHD,sans-serif;cursor:pointer;transition:all .2s;}
 .btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
 
-/* ══ MOBILE MENU ══ */
+/* ── MOBILE MENU ── */
 .mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
 .mobile-menu.open{display:flex;}
 .mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
-.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
-.mob-sub{padding:12px 0 4px;display:none;flex-direction:column;gap:10px;}
-.mob-sub.open{display:flex;}
+.mob-nav-link{font-size:22px;color:#fff;padding:14px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+.mob-sub{padding:10px 0 4px;display:none;flex-direction:column;gap:8px;}
+.mob-nav-links .open .mob-sub{display:flex;}
 .mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
 .mob-cta{margin-top:32px;}
 
-/* ══ NAVBAR ══ */
+/* ── NAVBAR ── */
 .navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
 .navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
-.nav-logo img{height:28px;width:auto;display:block;}
+.nav-logo img{height:28px;width:auto;}
 .nav-center{display:flex;align-items:center;gap:4px;}
 .nav-item{position:relative;}
-.nav-link{font-size:15px;color:rgba(255,255,255,.92);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link{font-size:15px;color:rgba(255,255,255,.9);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
 .nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
 .nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
 .nav-item:hover .nav-link svg{transform:rotate(180deg);}
 .simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:240px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
 .simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
 .nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
-.simple-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:15px;color:rgba(255,255,255,.88);transition:background .2s,color .2s;}
+.simple-item{display:flex;align-items:center;padding:11px 14px;border-radius:10px;font-size:15px;color:rgba(255,255,255,.88);transition:background .2s,color .2s;}
 .simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
 .mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
 .mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
@@ -57,152 +54,152 @@ ul{list-style:none;}button{font-family:NHD,sans-serif;cursor:pointer;}input,text
 .mega-item-title{font-size:15px;color:#fff;margin-bottom:4px;}
 .mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
 .nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;cursor:pointer;}
 .nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
 .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-hamburger.open span:nth-child(2){opacity:0;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
-/* ══ BREADCRUMB ══ */
-.breadcrumb{padding:32px 0 0;position:relative;z-index:1;}
-.breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);}
-.breadcrumb-inner a{color:var(--dim);transition:color .2s;}
-.breadcrumb-inner a:hover{color:#fff;}
-.breadcrumb-sep{color:var(--dim);opacity:.4;}
+/* ── CASE STUDY PAGE ── */
+.cs-detail-hero{padding:160px 0 0;background:#06060a;position:relative;overflow:hidden;}
+.cs-detail-hero::before{content:"";position:absolute;top:-200px;right:-100px;width:700px;height:700px;background:radial-gradient(ellipse,rgba(0,102,255,.08) 0%,transparent 65%);pointer-events:none;}
+.cs-breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);margin-bottom:32px;transition:color .2s;}
+.cs-breadcrumb:hover{color:#fff;}
+.cs-breadcrumb svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
+.cs-tag-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
+.cs-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px;border:1px solid var(--border-blue);color:var(--cyan);background:rgba(0,102,255,.06);}
+.cs-tag.industry{border-color:rgba(255,255,255,.12);color:var(--mid);background:rgba(255,255,255,.03);}
+.cs-detail-h1{font-size:clamp(32px,4.5vw,64px);font-weight:400;line-height:1.06;letter-spacing:-.01em;max-width:900px;margin-bottom:20px;}
+.cs-detail-intro{font-size:18px;color:var(--mid);line-height:1.75;max-width:680px;}
+.cs-hero-img{width:100%;height:480px;object-fit:cover;border-radius:20px;margin-top:60px;display:block;}
 
-/* ══ HERO ══ */
-.cs-hero{padding:120px 0 80px;background:#06060a;position:relative;overflow:hidden;}
-.cs-hero::before{content:"";position:absolute;bottom:-120px;left:-200px;width:800px;height:800px;background:radial-gradient(circle,rgba(0,102,255,.12) 0%,transparent 65%);pointer-events:none;}
-.cs-hero::after{content:"";position:absolute;top:-80px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(38,168,255,.06) 0%,transparent 65%);pointer-events:none;}
-.cs-hero-inner{position:relative;z-index:1;max-width:900px;}
-.cs-hero-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
-.cs-hero-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:5px 14px;background:rgba(0,102,255,.06);}
-.cs-hero-pill-plain{display:inline-flex;align-items:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);border-radius:100px;padding:5px 14px;}
-.cs-hero-h1{font-size:clamp(32px,4.5vw,62px);font-weight:400;line-height:1.07;letter-spacing:-.02em;color:#fff;margin-bottom:28px;}
-.cs-hero-sub{font-size:18px;line-height:1.8;color:var(--mid);max-width:720px;margin-bottom:40px;}
-.cs-hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+.cs-details-strip{display:grid;grid-template-columns:repeat(3,1fr);padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:0 0 80px;gap:0;}
+.cs-detail-col{padding:0 40px 0 0;border-right:1px solid var(--border);}
+.cs-detail-col:first-child{padding-left:0;}
+.cs-detail-col:last-child{border-right:none;padding-right:0;padding-left:40px;}
+.cs-detail-col:nth-child(2){padding:0 40px;}
+.cs-detail-col-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.cs-detail-col-value{font-size:16px;color:#fff;line-height:1.4;}
 
-/* ══ METRICS STRIP ══ */
-.cs-metrics-strip{background:#0a0a12;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.cs-metrics-inner{display:flex;align-items:stretch;}
-.cs-metric-item{display:flex;flex-direction:column;justify-content:center;padding:28px 48px;flex:1;border-right:1px solid var(--border);}
-.cs-metric-item:last-child{border-right:none;}
-.cs-metric-val{font-size:40px;font-weight:400;color:#fff;line-height:1;letter-spacing:-.02em;margin-bottom:8px;}
-.cs-metric-val span{color:var(--cyan);}
-.cs-metric-label{font-size:13px;color:var(--dim);line-height:1.4;}
+.cs-overview-section{padding:0 0 80px;}
+.cs-overview-grid{display:grid;grid-template-columns:1fr 380px;gap:64px;align-items:start;}
+.cs-overview-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px;}
+.cs-overview-h2{font-size:clamp(24px,2.5vw,36px);font-weight:400;margin-bottom:24px;line-height:1.2;}
+.cs-overview-text{font-size:16px;color:var(--mid);line-height:1.8;}
+.cs-snapshot-card{background:#0a0a14;border:1px solid var(--border);border-radius:var(--r);padding:32px;}
+.cs-snapshot-title{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
+.cs-snapshot-row{display:flex;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid var(--border);}
+.cs-snapshot-row:last-child{border-bottom:none;}
+.cs-snapshot-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.cs-snapshot-value{font-size:14px;color:#fff;}
 
-/* ══ BODY LAYOUT ══ */
-.cs-body{padding:88px 0;background:#06060a;border-top:1px solid var(--border);}
-.cs-body-grid{display:grid;grid-template-columns:1fr 320px;gap:80px;align-items:start;}
-.cs-main{}
-.cs-sidebar{}
+.cs-challenges-section{padding:80px 0;background:#080812;border-top:1px solid var(--border);}
+.cs-section-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;}
+.cs-section-h2{font-size:clamp(24px,3vw,40px);font-weight:400;line-height:1.1;margin-bottom:48px;}
+.cs-challenge-list{display:flex;flex-direction:column;gap:0;}
+.cs-challenge-item{display:grid;grid-template-columns:80px 1fr;gap:0;padding:36px 0;border-bottom:1px solid var(--border);}
+.cs-challenge-item:first-child{border-top:1px solid var(--border);}
+.cs-challenge-num{font-size:48px;font-weight:400;color:rgba(0,102,255,.15);line-height:1;padding-top:4px;}
+.cs-challenge-content{}
+.cs-challenge-title{font-size:18px;color:#fff;font-weight:500;margin-bottom:10px;}
+.cs-challenge-desc{font-size:15px;color:var(--mid);line-height:1.75;}
 
-/* ══ ABOUT CLIENT SIDEBAR ══ */
-.cs-sidebar-card{border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;background:rgba(255,255,255,.02);position:sticky;top:108px;}
-.cs-sidebar-head{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:24px;}
-.cs-sidebar-row{display:flex;flex-direction:column;gap:4px;padding:16px 0;border-bottom:1px solid var(--border);}
-.cs-sidebar-row:last-child{border-bottom:none;padding-bottom:0;}
-.cs-sidebar-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
-.cs-sidebar-val{font-size:14px;color:#fff;line-height:1.5;}
+.cs-approach-section{padding:80px 0;background:#06060a;border-top:1px solid var(--border);}
+.cs-approach-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.cs-approach-card{background:#06060a;padding:40px 36px;position:relative;transition:background .2s;}
+.cs-approach-card:hover{background:#080818;}
+.cs-approach-num{font-size:64px;font-weight:400;color:rgba(0,102,255,.1);line-height:.8;margin-bottom:16px;}
+.cs-approach-title{font-size:18px;color:#fff;font-weight:500;margin-bottom:12px;}
+.cs-approach-desc{font-size:15px;color:var(--mid);line-height:1.75;}
 
-/* ══ SECTION BLOCKS ══ */
-.cs-section{margin-bottom:72px;}
-.cs-section-eyebrow{margin-bottom:20px;}
-.cs-section-title{font-size:clamp(22px,2.5vw,32px);font-weight:400;color:#fff;line-height:1.15;margin-bottom:16px;}
-.cs-section-lead{font-size:17px;line-height:1.8;color:var(--mid);margin-bottom:40px;}
+.cs-results-section{padding:80px 0;background:#080812;border-top:1px solid var(--border);}
+.cs-results-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:48px;}
+.cs-result-cell{background:#080812;padding:44px 36px;}
+.cs-result-num{font-size:clamp(48px,5vw,72px);font-weight:400;color:#fff;letter-spacing:-.03em;line-height:1;}
+.cs-result-num span{color:var(--cyan);}
+.cs-result-label{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-top:10px;}
+.cs-results-narrative{font-size:17px;color:var(--mid);line-height:1.8;max-width:860px;}
 
-/* ══ CHALLENGE CARDS ══ */
-.cs-challenge-grid{display:grid;grid-template-columns:1fr;gap:16px;}
-.cs-challenge-card{border:1px solid var(--border);border-radius:16px;padding:28px 28px;background:var(--glass);transition:border-color .25s,background .25s;}
-.cs-challenge-card:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.04);}
-.cs-challenge-num{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
-.cs-challenge-title{font-size:17px;color:#fff;font-weight:500;margin-bottom:10px;}
-.cs-challenge-desc{font-size:15px;color:var(--mid);line-height:1.7;}
+.cs-impact-section{padding:80px 0;background:#06060a;border-top:1px solid var(--border);}
+.cs-impact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;}
+.cs-impact-card{border:1px solid var(--border);border-radius:var(--r);padding:36px;background:var(--glass);transition:border-color .3s;}
+.cs-impact-card:hover{border-color:var(--border-blue);}
+.cs-impact-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,102,255,.12);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.cs-impact-icon svg{width:20px;height:20px;stroke:var(--cyan);fill:none;stroke-width:2;}
+.cs-impact-title{font-size:17px;color:#fff;font-weight:500;margin-bottom:8px;}
+.cs-impact-desc{font-size:14px;color:var(--mid);line-height:1.7;}
 
-/* ══ APPROACH CARDS ══ */
-.cs-approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.cs-approach-card{border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;background:var(--glass);position:relative;overflow:hidden;transition:border-color .3s,background .3s;}
-.cs-approach-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
-.cs-approach-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.03);}
-.cs-approach-card:hover::after{transform:scaleX(1);}
-.cs-approach-num{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
-.cs-approach-title{font-size:17px;color:#fff;font-weight:500;margin-bottom:12px;line-height:1.3;}
-.cs-approach-desc{font-size:15px;color:var(--mid);line-height:1.7;}
+.cs-related-section{padding:80px 0 100px;background:#06060a;border-top:1px solid var(--border);}
+.cs-related-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.cs-related-left h2{font-size:clamp(24px,3vw,40px);font-weight:400;margin-bottom:16px;}
+.cs-related-left p{font-size:16px;color:var(--mid);line-height:1.7;margin-bottom:32px;}
+.cs-related-services{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+.cs-related-tag{font-size:13px;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:8px 18px;transition:background .2s;}
+.cs-related-tag:hover{background:rgba(0,102,255,.08);}
 
-/* ══ RESULTS ══ */
-.cs-results-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px;}
-.cs-result-card{border:1px solid var(--border-blue);border-radius:var(--r);padding:32px 28px;background:rgba(0,102,255,.04);}
-.cs-result-val{font-size:48px;font-weight:400;color:#fff;line-height:1;letter-spacing:-.02em;margin-bottom:10px;}
-.cs-result-val span{color:var(--cyan);}
-.cs-result-label{font-size:14px;color:var(--mid);line-height:1.5;}
-.cs-result-narrative{font-size:17px;line-height:1.85;color:var(--mid);padding:32px;border:1px solid var(--border);border-radius:var(--r);background:var(--glass);}
-
-/* ══ TAGS ══ */
-.cs-tags-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;}
-.cs-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border:1px solid var(--border);border-radius:100px;color:var(--dim);}
-
-/* ══ CTA SECTION ══ */
-.cs-cta-section{padding:100px 0;background:linear-gradient(135deg,#06060a 0%,#07091a 60%,#06060a 100%);border-top:1px solid var(--border);position:relative;overflow:hidden;text-align:center;}
-.cs-cta-section::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(0,102,255,.1) 0%,transparent 65%);pointer-events:none;}
-.cs-cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;}
-.cs-cta-h2{font-size:clamp(28px,4vw,52px);font-weight:400;color:#fff;margin-bottom:18px;line-height:1.1;}
-.cs-cta-sub{font-size:17px;color:var(--mid);line-height:1.75;margin-bottom:40px;}
-.cs-cta-related{margin-top:48px;display:inline-flex;align-items:center;gap:12px;font-size:13px;color:var(--dim);}
-.cs-cta-related a{color:var(--cyan);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;}
-.cs-cta-related a:hover{gap:10px;}
-
-/* ══ FOOTER ══ */
+/* ── FOOTER ── */
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
 .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px;margin-bottom:64px;}
-.footer-brand img{height:26px;width:auto;margin-bottom:18px;}
-.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
+.footer-brand img{height:26px;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:260px;}
 .footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
-.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
 .footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
 .footer-col-links a:hover{color:#fff;}
 .footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
-.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);white-space:nowrap;line-height:1;}
+.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.08);white-space:nowrap;line-height:1;}
 .footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
 .footer-copy{font-size:12px;color:var(--dim);}
 .footer-legal{display:flex;gap:20px;}
 .footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
 
-/* ══ RESPONSIVE ══ */
+/* ── CONTACT POPUP ── */
+.contact-popup{display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);}
+.contact-popup-box{background:#0d0d18;border:1px solid var(--border);border-radius:var(--r);padding:48px;max-width:480px;width:90%;position:relative;}
+.contact-popup-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--dim);cursor:pointer;font-size:20px;line-height:1;transition:color .2s;}
+.contact-popup-close:hover{color:#fff;}
+.contact-popup h3{font-size:24px;font-weight:400;margin-bottom:8px;}
+.contact-popup p{font-size:14px;color:var(--mid);margin-bottom:32px;}
+.contact-form{display:flex;flex-direction:column;gap:16px;}
+.contact-input{background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:14px 18px;color:#fff;font-family:NHD,sans-serif;font-size:15px;outline:none;transition:border-color .2s;width:100%;}
+.contact-input::placeholder{color:var(--dim);}
+.contact-input:focus{border-color:var(--border-blue);}
+.contact-textarea{resize:vertical;min-height:100px;}
+
+/* ── RESPONSIVE ── */
 @media(max-width:1100px){
-  .container{padding:0 32px;}
-  .cs-body-grid{grid-template-columns:1fr;gap:56px;}
-  .cs-sidebar-card{position:static;}
-  .cs-approach-grid{grid-template-columns:1fr;}
-  .cs-results-grid{grid-template-columns:1fr 1fr;}
-  .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
+  .cs-overview-grid{grid-template-columns:1fr;gap:40px;}
+  .cs-related-inner{grid-template-columns:1fr;}
 }
 @media(max-width:768px){
-  .container{padding:0 18px;}
-  .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
+  .container{padding:0 20px;}
+  .navbar{top:10px;width:calc(100% - 24px);padding:10px 16px;border-radius:60px;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .cs-hero{padding:110px 0 60px;}
-  .cs-metrics-inner{flex-wrap:wrap;}
-  .cs-metric-item{flex:1 1 45%;border-right:none;border-bottom:1px solid var(--border);}
-  .cs-metric-item:last-child{border-bottom:none;}
+  .cs-detail-hero{padding:120px 0 0;}
+  .cs-hero-img{height:280px;}
+  .cs-details-strip{grid-template-columns:1fr;gap:24px;}
+  .cs-detail-col{border-right:none;border-bottom:1px solid var(--border);padding:0 0 20px!important;}
+  .cs-detail-col:last-child{border-bottom:none;}
+  .cs-challenge-item{grid-template-columns:60px 1fr;}
+  .cs-challenge-num{font-size:36px;}
   .cs-approach-grid{grid-template-columns:1fr;}
-  .cs-results-grid{grid-template-columns:1fr;}
+  .cs-results-metrics{grid-template-columns:1fr;}
+  .cs-impact-grid{grid-template-columns:1fr;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:480px){
-  .container{padding:0 14px;}
+  .container{padding:0 16px;}
   .navbar{width:calc(100% - 16px);padding:9px 12px;}
-  .cs-metric-item{flex:1 1 100%;}
-  .cs-result-val{font-size:38px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ MOBILE MENU ══ -->
+<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <nav class="mob-nav-links">
     <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
@@ -214,16 +211,19 @@ ul{list-style:none;}button{font-family:NHD,sans-serif;cursor:pointer;}input,text
         <a href="agentic-ai.html" onclick="closeMobileMenu()">Agentic AI</a>
       </div>
     </div>
-    <a class="mob-nav-link" href="partnerships.html">Partners</a>
-    <a class="mob-nav-link" href="about-us.html">About Us</a>
+    <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
+    <a class="mob-nav-link" href="about-us.html" onclick="closeMobileMenu()">About Us</a>
     <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-      <div class="mob-sub"><a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a><a href="blog.html" onclick="closeMobileMenu()">Blog</a></div>
+      <div class="mob-sub">
+        <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
+      </div>
     </div>
   </nav>
   <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
 </div>
 
-<!-- ══ NAVBAR ══ -->
+<!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
   <div class="nav-center">
@@ -241,7 +241,10 @@ ul{list-style:none;}button{font-family:NHD,sans-serif;cursor:pointer;}input,text
     <a href="about-us.html" class="nav-link">About Us</a>
     <div class="nav-item">
       <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
-      <div class="simple-menu"><a href="case-studies.html" class="simple-item">Case Studies</a><a href="blog.html" class="simple-item">Blog</a></div>
+      <div class="simple-menu">
+        <a href="case-studies.html" class="simple-item">Case Studies</a>
+        <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
+      </div>
     </div>
   </div>
   <div class="nav-right">
@@ -250,230 +253,279 @@ ul{list-style:none;}button{font-family:NHD,sans-serif;cursor:pointer;}input,text
   </div>
 </nav>
 
-<!-- ══ HERO ══ -->
-<section class="cs-hero">
+<!-- 1. PAGE HERO -->
+<section class="cs-detail-hero">
   <div class="container">
-    <div class="breadcrumb">
-      <div class="breadcrumb-inner">
-        <a href="index.html">Home</a>
-        <span class="breadcrumb-sep">/</span>
-        <a href="case-studies.html">Case Studies</a>
-        <span class="breadcrumb-sep">/</span>
-        <span style="color:var(--mid);">DEWA — DevSecOps</span>
-      </div>
+    <a href="case-studies.html" class="cs-breadcrumb">
+      <svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Case Studies
+    </a>
+    <div class="cs-tag-row">
+      <span class="cs-tag industry">Government &amp; Energy</span>
+      <span class="cs-tag">Azure DevOps</span>
+      <span class="cs-tag">DevSecOps</span>
+      <span class="cs-tag">Multi-Stack CI/CD</span>
     </div>
-    <div class="cs-hero-inner" style="padding-top:48px;">
-      <div class="cs-hero-meta">
-        <span class="cs-hero-pill">Government &amp; Energy Utilities</span>
-        <span class="cs-hero-pill-plain">DevSecOps</span>
-        <span class="cs-hero-pill-plain">Azure DevOps</span>
-        <span class="cs-hero-pill-plain">Multi-Stack CI/CD</span>
-        <span class="cs-hero-pill-plain">Compliance</span>
+    <h1 class="cs-detail-h1">Unified DevSecOps Across a Diverse Technology Estate for Dubai's Largest Utility</h1>
+    <p class="cs-detail-intro">DEWA runs one of the most technologically diverse IT estates in the Middle East — Java, .NET, Python, Angular, Oracle, legacy systems, all on Azure DevOps. BootLabs built one framework that governs all of it.</p>
+    <img class="cs-hero-img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1400&auto=format&fit=crop&q=80" alt="Dubai DEWA DevSecOps">
+  </div>
+</section>
+
+<!-- 2. KEY DETAILS STRIP -->
+<section style="background:#06060a;">
+  <div class="container">
+    <div class="cs-details-strip">
+      <div class="cs-detail-col">
+        <div class="cs-detail-col-label">Industry</div>
+        <div class="cs-detail-col-value">Government &amp; Energy Utilities</div>
       </div>
-      <h1 class="cs-hero-h1">Unified DevSecOps Across a Diverse Technology Estate — Dubai's Largest Utility</h1>
-      <p class="cs-hero-sub">DEWA runs one of the most technologically diverse IT estates in the region — Java, .NET, Python, Angular, Oracle, legacy systems, all on Azure DevOps. BootLabs built a unified DevSecOps framework that brought every stack under a single, security-first delivery standard.</p>
-      <div class="cs-hero-btns">
-        <button class="btn-primary" onclick="openContact()">Discuss Your Project <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        <a href="case-studies.html" class="btn-outline">All Case Studies</a>
+      <div class="cs-detail-col">
+        <div class="cs-detail-col-label">Services</div>
+        <div class="cs-detail-col-value">Azure DevOps, DevSecOps, Multi-Stack CI/CD</div>
+      </div>
+      <div class="cs-detail-col">
+        <div class="cs-detail-col-label">Location</div>
+        <div class="cs-detail-col-value">Dubai, UAE</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ METRICS STRIP ══ -->
-<div class="cs-metrics-strip">
+<!-- 3. OVERVIEW -->
+<section style="background:#06060a;">
   <div class="container">
-    <div class="cs-metrics-inner">
-      <div class="cs-metric-item">
-        <div class="cs-metric-val">10<span>+</span></div>
-        <div class="cs-metric-label">Technology Stacks Unified</div>
-      </div>
-      <div class="cs-metric-item">
-        <div class="cs-metric-val">60<span>%</span></div>
-        <div class="cs-metric-label">Faster Delivery Cycles</div>
-      </div>
-      <div class="cs-metric-item">
-        <div class="cs-metric-val">100<span>%</span></div>
-        <div class="cs-metric-label">Pipeline Security Coverage</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ BODY ══ -->
-<section class="cs-body">
-  <div class="container">
-    <div class="cs-body-grid">
-
-      <!-- Main Content -->
-      <div class="cs-main">
-
-        <!-- Challenges -->
-        <div class="cs-section">
-          <div class="eyebrow cs-section-eyebrow">The Challenge</div>
-          <h2 class="cs-section-title">A world-class utility — built on a decade of technology complexity</h2>
-          <p class="cs-section-lead">DEWA's engineering estate reflected the growth of a major government utility: technology choices made across different teams, different eras, and different vendor relationships. The estate was technically sound in parts, but ungoverned as a whole — and the compliance mandate of a critical national infrastructure operator demanded something much more rigorous.</p>
-          <div class="cs-challenge-grid">
-            <div class="cs-challenge-card">
-              <div class="cs-challenge-num">Challenge 01</div>
-              <div class="cs-challenge-title">Extreme Technology Diversity</div>
-              <div class="cs-challenge-desc">DEWA's engineering estate spanned Java enterprise applications, .NET services, Python microservices, Angular and React frontends, Oracle PL/SQL stored procedures, SQL Server, and legacy components — all requiring different build, test, and deploy toolchains. No two teams followed the same pipeline.</div>
+    <div class="cs-overview-section">
+      <div class="cs-overview-grid">
+        <div>
+          <div class="cs-overview-eyebrow">The Challenge</div>
+          <h2 class="cs-overview-h2">A world-class utility built on decades of technology complexity</h2>
+          <p class="cs-overview-text">DEWA's IT estate reflects the complexity of an organisation that has grown through decades of technology evolution. Java enterprise applications sit alongside .NET microservices, Python automation scripts, Angular frontends, Oracle PL/SQL procedures, SQL Server databases, and legacy components that predate modern DevOps entirely. Each system had its own delivery process. Some teams had sophisticated Azure DevOps pipelines. Others were deploying via scripts or manual steps. None had a consistent security standard, and as a critical government utility, regulatory and audit requirements were strict. The challenge wasn't just to standardise — it was to do so across a technology estate where no two systems looked the same, without disrupting ongoing delivery.</p>
+        </div>
+        <div>
+          <div class="cs-snapshot-card">
+            <div class="cs-snapshot-title">Client Snapshot</div>
+            <div class="cs-snapshot-row">
+              <span class="cs-snapshot-label">Client</span>
+              <span class="cs-snapshot-value">DEWA — Dubai Electricity &amp; Water Authority</span>
             </div>
-            <div class="cs-challenge-card">
-              <div class="cs-challenge-num">Challenge 02</div>
-              <div class="cs-challenge-title">No Unified DevOps Governance</div>
-              <div class="cs-challenge-desc">Teams used ad-hoc Azure DevOps pipelines built independently, with no shared templates, no common security gates, and no environment promotion policies. Each team had reinvented the wheel — inconsistently.</div>
+            <div class="cs-snapshot-row">
+              <span class="cs-snapshot-label">Industry</span>
+              <span class="cs-snapshot-value">Government Utility</span>
             </div>
-            <div class="cs-challenge-card">
-              <div class="cs-challenge-num">Challenge 03</div>
-              <div class="cs-challenge-title">Government-Grade Compliance Requirements</div>
-              <div class="cs-challenge-desc">As a critical government utility, DEWA required rigorous security controls, complete audit trails for every deployment, and demonstrable compliance with regulatory frameworks. Manual processes could not meet this standard at scale.</div>
+            <div class="cs-snapshot-row">
+              <span class="cs-snapshot-label">Scale</span>
+              <span class="cs-snapshot-value">Millions of customers, critical infrastructure</span>
+            </div>
+            <div class="cs-snapshot-row">
+              <span class="cs-snapshot-label">Tech Estate</span>
+              <span class="cs-snapshot-value">10+ languages &amp; frameworks</span>
+            </div>
+            <div class="cs-snapshot-row">
+              <span class="cs-snapshot-label">CI/CD</span>
+              <span class="cs-snapshot-value">Azure DevOps</span>
             </div>
           </div>
         </div>
-
-        <!-- Approach -->
-        <div class="cs-section">
-          <div class="eyebrow cs-section-eyebrow">Our Approach</div>
-          <h2 class="cs-section-title">One framework. Every stack. Zero compromise on security.</h2>
-          <p class="cs-section-lead">Rather than imposing a single technology on a diverse estate, BootLabs designed around DEWA's existing platform — Azure DevOps — and built a framework that could accommodate every stack natively, with consistent governance and security controls throughout.</p>
-          <div class="cs-approach-grid">
-            <div class="cs-approach-card">
-              <div class="cs-approach-num">01 — Foundation</div>
-              <div class="cs-approach-title">Universal Pipeline Templates on Azure DevOps</div>
-              <div class="cs-approach-desc">Designed a library of reusable Azure DevOps pipeline templates covering every technology stack in DEWA's estate — Java (Maven/Gradle), .NET (MSBuild), Python (pip/Poetry), Angular/React (npm), PL/SQL (Flyway), and container-based workloads. One framework, every stack.</div>
-            </div>
-            <div class="cs-approach-card">
-              <div class="cs-approach-num">02 — Security</div>
-              <div class="cs-approach-title">Security Gates for Every Stack</div>
-              <div class="cs-approach-desc">Embedded SAST (SonarQube), DAST (OWASP ZAP), and SCA (WhiteSource/Mend) into every pipeline template — with stack-appropriate configurations. Security findings block promotion automatically, with severity-tiered enforcement policies.</div>
-            </div>
-            <div class="cs-approach-card">
-              <div class="cs-approach-num">03 — Governance</div>
-              <div class="cs-approach-title">Centralised Governance &amp; Secrets Management</div>
-              <div class="cs-approach-desc">Built centralised pipeline governance on top of Azure DevOps: mandatory approval gates, environment promotion policies, branch protection rules, and Azure Key Vault integration for secrets across all teams and stacks.</div>
-            </div>
-            <div class="cs-approach-card">
-              <div class="cs-approach-num">04 — Compliance</div>
-              <div class="cs-approach-title">Automated Compliance Reporting</div>
-              <div class="cs-approach-desc">Every pipeline execution auto-generates a compliance artefact: security scan results, approvals, deployment manifest, and audit log — meeting government audit requirements with zero manual effort.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Results -->
-        <div class="cs-section">
-          <div class="eyebrow cs-section-eyebrow">The Results</div>
-          <h2 class="cs-section-title">A unified delivery platform — government-grade, from day one</h2>
-          <div class="cs-results-grid">
-            <div class="cs-result-card">
-              <div class="cs-result-val">10<span>+</span></div>
-              <div class="cs-result-label">Technology stacks unified under a single DevSecOps framework</div>
-            </div>
-            <div class="cs-result-card">
-              <div class="cs-result-val">60<span>%</span></div>
-              <div class="cs-result-label">Reduction in delivery cycle time across teams</div>
-            </div>
-            <div class="cs-result-card">
-              <div class="cs-result-val">100<span>%</span></div>
-              <div class="cs-result-label">Pipeline security compliance — every team, every stack, every deployment</div>
-            </div>
-            <div class="cs-result-card">
-              <div class="cs-result-val" style="font-size:36px;">Zero</div>
-              <div class="cs-result-label">Manual steps in compliance reporting — fully automated audit trails</div>
-            </div>
-          </div>
-          <div class="cs-result-narrative">
-            What had been a collection of independent, inconsistently secured pipelines became a unified delivery platform — with government-grade security and audit capability built in. Teams that previously spent days on manual compliance preparation now point auditors to automatically generated reports. The framework became the organisation's standard for all new development going forward.
-          </div>
-        </div>
-
-        <!-- Tags -->
-        <div class="cs-tags-row">
-          <span class="cs-tag">Azure DevOps</span>
-          <span class="cs-tag">DevSecOps</span>
-          <span class="cs-tag">Government</span>
-          <span class="cs-tag">Multi-Stack CI/CD</span>
-          <span class="cs-tag">Compliance Automation</span>
-          <span class="cs-tag">DEWA</span>
-        </div>
-
-      </div><!-- /cs-main -->
-
-      <!-- Sidebar -->
-      <aside class="cs-sidebar">
-        <div class="cs-sidebar-card">
-          <div class="cs-sidebar-head">About the Client</div>
-          <div class="cs-sidebar-row">
-            <div class="cs-sidebar-label">Client</div>
-            <div class="cs-sidebar-val">DEWA — Dubai Electricity and Water Authority</div>
-          </div>
-          <div class="cs-sidebar-row">
-            <div class="cs-sidebar-label">Industry</div>
-            <div class="cs-sidebar-val">Government &amp; Energy Utilities</div>
-          </div>
-          <div class="cs-sidebar-row">
-            <div class="cs-sidebar-label">Location</div>
-            <div class="cs-sidebar-val">Dubai, UAE</div>
-          </div>
-          <div class="cs-sidebar-row">
-            <div class="cs-sidebar-label">Scale</div>
-            <div class="cs-sidebar-val">One of the Middle East's largest utilities, serving millions of customers, critical infrastructure mandate</div>
-          </div>
-          <div class="cs-sidebar-row">
-            <div class="cs-sidebar-label">Technology Estate</div>
-            <div class="cs-sidebar-val">10+ languages and frameworks, Azure DevOps as the CI/CD platform</div>
-          </div>
-          <div style="margin-top:24px;">
-            <button class="btn-primary" style="width:100%;justify-content:center;" onclick="openContact()">Book a Discovery Call</button>
-          </div>
-        </div>
-      </aside>
-
-    </div><!-- /cs-body-grid -->
-  </div>
-</section>
-
-<!-- ══ CTA ══ -->
-<section class="cs-cta-section">
-  <div class="container">
-    <div class="cs-cta-inner">
-      <div class="eyebrow" style="justify-content:center;margin-bottom:20px;">Work with BootLabs</div>
-      <h2 class="cs-cta-h2">Ready to unify your delivery platform?</h2>
-      <p class="cs-cta-sub">Whether you're managing a diverse estate or building from scratch, BootLabs can design and implement a DevSecOps framework that matches your scale and compliance requirements.</p>
-      <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-      <div class="cs-cta-related">
-        Related service:
-        <a href="cloud-devops.html">DevOps / Cloud <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ CONTACT POPUP ══ -->
-<div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
-  <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
-    <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;">&#10005;</button>
-    <div style="font-size:22px;color:#fff;margin-bottom:24px;font-family:NHD;">Book a Discovery Call</div>
-    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;"></div>
-    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;"></div>
-    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;"></div>
-    <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Request</button>
+<!-- 4. BUSINESS CHALLENGES -->
+<section class="cs-challenges-section">
+  <div class="container">
+    <div class="cs-section-eyebrow">Business Challenges</div>
+    <h2 class="cs-section-h2">What was holding them back</h2>
+    <div class="cs-challenge-list">
+      <div class="cs-challenge-item">
+        <div class="cs-challenge-num">01</div>
+        <div class="cs-challenge-content">
+          <div class="cs-challenge-title">Extreme Technology Diversity</div>
+          <p class="cs-challenge-desc">10+ programming languages and frameworks, including legacy components. No two teams followed the same build, test, or deploy process. A single governance framework had to work for all of them.</p>
+        </div>
+      </div>
+      <div class="cs-challenge-item">
+        <div class="cs-challenge-num">02</div>
+        <div class="cs-challenge-content">
+          <div class="cs-challenge-title">Inconsistent Azure DevOps Usage</div>
+          <p class="cs-challenge-desc">Teams had built their own Azure DevOps pipelines independently — with no shared templates, no common security gates, no environment promotion policies. The platform was in place; the standardisation was not.</p>
+        </div>
+      </div>
+      <div class="cs-challenge-item">
+        <div class="cs-challenge-num">03</div>
+        <div class="cs-challenge-content">
+          <div class="cs-challenge-title">Government-Grade Compliance Requirements</div>
+          <p class="cs-challenge-desc">As critical infrastructure, DEWA required rigorous security controls, complete deployment audit trails, and demonstrable compliance with government regulatory frameworks — at scale and with zero manual overhead.</p>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- ══ FOOTER ══ -->
+<!-- 5. OUR APPROACH -->
+<section class="cs-approach-section">
+  <div class="container">
+    <div class="cs-section-eyebrow">Our Approach</div>
+    <h2 class="cs-section-h2">How we solved it</h2>
+    <div class="cs-approach-grid">
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">01</div>
+        <div class="cs-approach-title">Universal Pipeline Template Library</div>
+        <p class="cs-approach-desc">Designed a library of reusable Azure DevOps YAML pipeline templates covering every tech stack in DEWA's estate: Java (Maven/Gradle), .NET (MSBuild), Python (pip/Poetry), Angular/React (npm), PL/SQL (Flyway), and containerised workloads. One framework, every stack.</p>
+      </div>
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">02</div>
+        <div class="cs-approach-title">Security Gates for Every Stack</div>
+        <p class="cs-approach-desc">Embedded SAST (SonarQube), DAST (OWASP ZAP), and SCA (WhiteSource/Mend) into every pipeline template, with stack-appropriate scanning configurations. Findings block pipeline promotion automatically based on severity policy.</p>
+      </div>
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">03</div>
+        <div class="cs-approach-title">Centralised Governance on Azure DevOps</div>
+        <p class="cs-approach-desc">Built governance on top of the existing Azure DevOps tenant: mandatory approval gates, environment promotion policies, branch protection rules, Azure Key Vault integration for secrets — applied consistently across all pipelines and all teams.</p>
+      </div>
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">04</div>
+        <div class="cs-approach-title">Automated Compliance Reporting</div>
+        <p class="cs-approach-desc">Every pipeline execution auto-generates a compliance artefact: security scan results, approval records, deployment manifest, and full audit log — meeting government audit requirements with zero manual preparation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. RESULTS -->
+<section class="cs-results-section">
+  <div class="container">
+    <div class="cs-section-eyebrow">The Outcomes</div>
+    <h2 class="cs-section-h2">Results that proved the approach</h2>
+    <div class="cs-results-metrics">
+      <div class="cs-result-cell">
+        <div class="cs-result-num">10<span>+</span></div>
+        <div class="cs-result-label">Tech Stacks Unified</div>
+      </div>
+      <div class="cs-result-cell">
+        <div class="cs-result-num">60<span>%</span></div>
+        <div class="cs-result-label">Faster Delivery</div>
+      </div>
+      <div class="cs-result-cell">
+        <div class="cs-result-num">100<span>%</span></div>
+        <div class="cs-result-label">Pipeline Coverage</div>
+      </div>
+    </div>
+    <p class="cs-results-narrative">What had been a collection of independently managed, inconsistently secured pipelines became a unified delivery platform with government-grade security built in. Teams that spent days preparing compliance evidence now generate it automatically. The framework became DEWA's standard for all new development going forward.</p>
+  </div>
+</section>
+
+<!-- 7. BUSINESS IMPACT -->
+<section class="cs-impact-section">
+  <div class="container">
+    <div class="cs-section-eyebrow">Business Impact</div>
+    <h2 class="cs-section-h2">What changed for the organisation</h2>
+    <div class="cs-impact-grid">
+      <div class="cs-impact-card">
+        <div class="cs-impact-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="cs-impact-title">One Framework for All Stacks</div>
+        <p class="cs-impact-desc">Legacy COBOL and modern React applications now live under the same DevSecOps governance model — the first time in DEWA's history.</p>
+      </div>
+      <div class="cs-impact-card">
+        <div class="cs-impact-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="cs-impact-title">Government-Grade Audit Trail</div>
+        <p class="cs-impact-desc">Every deployment auto-generates a complete compliance record. Auditors receive reports, not spreadsheets.</p>
+      </div>
+      <div class="cs-impact-card">
+        <div class="cs-impact-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="cs-impact-title">Security Shifted Left</div>
+        <p class="cs-impact-desc">Vulnerabilities are caught before they reach staging. Mean time to detect security issues dropped from discovery-in-production to pre-commit detection.</p>
+      </div>
+      <div class="cs-impact-card">
+        <div class="cs-impact-icon">
+          <svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="cs-impact-title">Standard for Future Development</div>
+        <p class="cs-impact-desc">The pipeline template library became DEWA's mandatory standard for all new projects — ensuring no new technical debt enters the delivery process.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. RELATED SERVICES CTA -->
+<section class="cs-related-section">
+  <div class="container">
+    <div class="cs-related-inner">
+      <div class="cs-related-left">
+        <h2>Ready to unify your delivery platform?</h2>
+        <p>Whether you're managing a diverse estate or building from scratch, BootLabs can design and implement a DevSecOps framework that matches your scale and compliance requirements.</p>
+        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <div class="cs-related-services">
+          <a href="cloud-devops.html" class="cs-related-tag">DevOps / Cloud</a>
+        </div>
+      </div>
+      <div>
+        <div style="background:#080812;border:1px solid var(--border);border-radius:var(--r);padding:40px;">
+          <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;">Also read</div>
+          <a href="cs-devsecops-fs.html" style="display:block;padding:16px 0;border-bottom:1px solid var(--border);color:var(--mid);font-size:15px;line-height:1.5;transition:color .2s;">DevSecOps for Financial Services &rarr;</a>
+          <a href="cs-app-migration.html" style="display:block;padding:16px 0;color:var(--mid);font-size:15px;line-height:1.5;transition:color .2s;">150+ Applications Migrated, Zero Rollbacks &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="footer-top">
-      <div class="footer-brand"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"><p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p></div>
-      <div><div class="footer-col-head">Services</div><ul class="footer-col-links"><li><a href="cloud-devops.html">DevOps / Cloud</a></li><li><a href="platform-engineering.html">SRE</a></li><li><a href="software-engineering.html">Full Stack Development</a></li><li><a href="ai-engineering.html">AI &amp; ML</a></li><li><a href="agentic-ai.html">Agentic AI</a></li></ul></div>
-      <div><div class="footer-col-head">Company</div><ul class="footer-col-links"><li><a href="about-us.html">About Us</a></li><li><a href="case-studies.html">Case Studies</a></li><li><a href="partnerships.html">Partners</a></li><li><a href="#" onclick="openContact();return false;">Contact</a></li></ul></div>
+      <div class="footer-brand">
+        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
+      <div><div class="footer-col-head">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="cloud-devops.html">DevOps / Cloud</a></li>
+          <li><a href="platform-engineering.html">SRE</a></li>
+          <li><a href="software-engineering.html">Full Stack Development</a></li>
+          <li><a href="ai-engineering.html">AI &amp; ML</a></li>
+          <li><a href="agentic-ai.html">Agentic AI</a></li>
+        </ul>
+      </div>
+      <div><div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="partnerships.html">Partners</a></li>
+          <li><a href="#" onclick="openContact();return false;">Contact</a></li>
+        </ul>
+      </div>
     </div>
     <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
-    <div class="footer-bot"><div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+    <div class="footer-bot">
+      <div class="footer-copy">© 2026 BootLabs Technology. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
   </div>
 </footer>
+
+<!-- CONTACT POPUP -->
+<div class="contact-popup" id="contactPopup" onclick="if(event.target===this)closeContact()">
+  <div class="contact-popup-box">
+    <button class="contact-popup-close" onclick="closeContact()">&#215;</button>
+    <h3>Book a Discovery Call</h3>
+    <p>Tell us about your challenge and we'll set up a focused 30-minute session.</p>
+    <form class="contact-form" onsubmit="return false;">
+      <input class="contact-input" type="text" placeholder="Your name">
+      <input class="contact-input" type="email" placeholder="Work email">
+      <input class="contact-input" type="text" placeholder="Company">
+      <textarea class="contact-input contact-textarea" placeholder="What are you trying to solve?"></textarea>
+      <button class="btn-primary" style="justify-content:center;" type="submit">Send Message <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </form>
+  </div>
+</div>
 
 <script>
 window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
@@ -483,5 +535,6 @@ function closeMobileMenu(){document.getElementById('mobileMenu').classList.remov
 function openContact(){const p=document.getElementById('contactPopup');p.style.display='flex';document.body.style.overflow='hidden';}
 function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
 </script>
+
 </body>
 </html>

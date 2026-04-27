@@ -56,13 +56,6 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-hamburger.open span:nth-child(2){opacity:0;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-.hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;text-align:center;}
-.hero::before{content:"";position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.1) 0%,transparent 65%);pointer-events:none;}
-.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 16px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:32px;}
-.hero-h1{font-size:clamp(36px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
-.hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:48px;}
-.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
 .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
 .footer-brand img{height:26px;margin-bottom:18px;}
@@ -78,42 +71,89 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .footer-legal{display:flex;gap:20px;}
 .footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
-/* ══ CASE STUDY LISTING ══ */
-.cs-listing{padding:80px 0 100px;background:#06060a;border-top:1px solid var(--border);}
-.cs-listing-header{margin-bottom:56px;}
-.cs-listing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
-.cs-listing-card{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--r);padding:40px 36px;background:rgba(255,255,255,.02);position:relative;overflow:hidden;transition:border-color .3s,background .3s;}
-.cs-listing-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
-.cs-listing-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.03);}
-.cs-listing-card:hover::after{transform:scaleX(1);}
-.cs-listing-pill{display:inline-flex;align-items:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:5px 14px;background:rgba(0,102,255,.06);margin-bottom:24px;width:fit-content;}
-.cs-listing-title{font-size:20px;color:#fff;font-weight:400;line-height:1.25;margin-bottom:20px;}
-.cs-listing-metrics{display:flex;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:20px;flex-wrap:wrap;}
-.cs-listing-metric{display:flex;flex-direction:column;gap:4px;padding:14px 24px 14px 0;margin-right:24px;border-right:1px solid var(--border);}
-.cs-listing-metric:last-child{border-right:none;margin-right:0;}
-.cs-listing-metric-val{font-size:22px;color:#fff;line-height:1;letter-spacing:-.02em;}
-.cs-listing-metric-val span{color:var(--cyan);}
-.cs-listing-metric-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;}
-.cs-listing-desc{font-size:15px;color:var(--mid);line-height:1.7;flex:1;margin-bottom:24px;}
-.cs-listing-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--cyan);transition:gap .2s;}
-.cs-listing-link:hover{gap:10px;}
-@media(max-width:1100px){.cs-listing-grid{grid-template-columns:1fr 1fr;}}
+
+/* ══ PAGE HERO ══ */
+.cs-page-hero{padding:160px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.cs-page-hero::before{content:"";position:absolute;top:-200px;right:-200px;width:900px;height:900px;background:radial-gradient(ellipse,rgba(80,20,180,.2) 0%,transparent 65%);pointer-events:none;}
+.cs-hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:24px;}
+.cs-hero-h1{font-size:clamp(40px,5.5vw,80px);font-weight:400;line-height:1.04;letter-spacing:-.02em;color:#fff;max-width:800px;margin-bottom:24px;}
+.cs-hero-sub{font-size:18px;color:var(--mid);line-height:1.75;max-width:600px;}
+
+/* ══ FEATURED ══ */
+.cs-featured-section{padding:0 0 80px;background:#06060a;}
+.cs-featured-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:24px;}
+.cs-featured-card{display:grid;grid-template-columns:45% 55%;border-radius:20px;overflow:hidden;border:1px solid var(--border);text-decoration:none;transition:border-color .3s;}
+.cs-featured-card:hover{border-color:var(--border-blue);}
+.cs-featured-img{min-height:480px;overflow:hidden;}
+.cs-featured-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.cs-featured-card:hover .cs-featured-img img{transform:scale(1.03);}
+.cs-featured-content{background:#0a0a14;padding:56px 52px;display:flex;flex-direction:column;justify-content:space-between;}
+.cs-feat-top{display:flex;flex-direction:column;}
+.cs-feat-chips{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.cs-feat-chip{background:rgba(255,255,255,.08);border-radius:6px;padding:5px 14px;font-size:12px;color:#fff;}
+.cs-feat-date{font-size:13px;color:var(--dim);}
+.cs-feat-title{font-size:clamp(22px,2.5vw,32px);color:#fff;font-weight:400;line-height:1.2;margin-bottom:16px;}
+.cs-feat-excerpt{font-size:15px;color:var(--mid);line-height:1.75;}
+.cs-feat-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:40px;}
+.cs-feat-read-btn{background:#fff;color:#000;border-radius:100px;padding:12px 28px;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;transition:background .2s;}
+.cs-feat-read-btn:hover{background:#e8e8f0;}
+.cs-feat-read-btn span{color:var(--blue);font-size:10px;}
+.cs-feat-linkedin{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--dim);}
+
+/* ══ PROOF IN PRACTICE ══ */
+.cs-pip-section{padding:80px 0 100px;background:#06060a;border-top:1px solid var(--border);}
+.cs-pip-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:24px;}
+.cs-pip-left .cs-section-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;}
+.cs-pip-left h2{font-size:clamp(28px,3.5vw,48px);font-weight:400;line-height:1.1;color:#fff;}
+.cs-filter-bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.cs-filter-btn{background:#0f0f1a;border:1px solid var(--border);border-radius:100px;padding:10px 20px;color:var(--mid);font-size:14px;font-family:NHD,sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px;transition:border-color .2s;}
+.cs-filter-btn:hover{border-color:var(--border-blue);color:#fff;}
+.cs-filter-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;opacity:.5;}
+.cs-search-box{background:#0f0f1a;border:1px solid var(--border);border-radius:100px;padding:10px 20px;color:var(--dim);font-size:14px;display:flex;align-items:center;gap:8px;min-width:200px;}
+.cs-search-box input{background:none;border:none;outline:none;color:#fff;font-family:NHD,sans-serif;font-size:14px;width:100%;}
+.cs-search-box input::placeholder{color:var(--dim);}
+.cs-pg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.cs-pg-card{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:#080812;transition:border-color .3s,transform .3s;display:flex;flex-direction:column;}
+.cs-pg-card:hover{border-color:var(--border-blue);transform:translateY(-4px);}
+.cs-pg-card-img{width:100%;height:220px;object-fit:cover;display:block;}
+.cs-pg-card-body{padding:28px 28px 24px;flex:1;display:flex;flex-direction:column;}
+.cs-pg-card-chip{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:4px 12px;background:rgba(0,102,255,.06);display:inline-block;margin-bottom:14px;width:fit-content;}
+.cs-pg-card-title{font-size:18px;color:#fff;font-weight:400;line-height:1.3;margin-bottom:12px;}
+.cs-pg-card-desc{font-size:14px;color:var(--mid);line-height:1.65;margin-bottom:20px;flex:1;}
+.cs-pg-card-link{font-size:13px;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;}
+.cs-pg-card-link:hover{gap:10px;}
+.cs-pg-card-wide{grid-column:span 3;display:grid;grid-template-columns:40% 60%;}
+.cs-pg-card-wide .cs-pg-card-img{height:100%;min-height:260px;}
+.cs-pg-card-wide .cs-pg-card-body{padding:40px 44px;}
+.cs-pg-card-wide .cs-pg-card-title{font-size:22px;}
+
+/* ══ CTA ══ */
+.cs-cta-section{padding:80px 0 100px;background:#06060a;}
+.cs-cta-inner{border:1px solid var(--border-blue);border-radius:var(--r);padding:80px 64px;text-align:center;background:rgba(0,102,255,.03);position:relative;overflow:hidden;}
+.cs-cta-inner::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(0,102,255,.08) 0%,transparent 70%);pointer-events:none;}
+.cs-cta-h2{font-size:clamp(28px,3.5vw,48px);font-weight:400;margin-bottom:16px;position:relative;}
+.cs-cta-sub{font-size:17px;color:var(--mid);margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;position:relative;}
+
 @media(max-width:768px){
   .container{padding:0 18px;}
   .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .hero{padding:120px 0 72px;}
-  .cs-listing-grid{grid-template-columns:1fr;}
-  .cs-listing-card{padding:28px 24px;}
+  .cs-featured-card{grid-template-columns:1fr;}
+  .cs-featured-img{min-height:280px;}
+  .cs-featured-content{padding:32px 28px;}
+  .cs-pip-header{flex-direction:column;align-items:flex-start;}
+  .cs-pg-grid{grid-template-columns:1fr;}
+  .cs-pg-card-wide{grid-column:span 1;grid-template-columns:1fr;}
+  .cs-pg-card-wide .cs-pg-card-img{height:220px;}
+  .cs-cta-inner{padding:48px 28px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:480px){
   .container{padding:0 14px;}
   .navbar{width:calc(100% - 16px);padding:9px 12px;}
-  .cs-listing-metric-val{font-size:18px;}
 }
 </style>
 </head>
@@ -238,140 +278,124 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   </div>
 </nav>
 
-<!-- ══ HERO ══ -->
-<section class="hero">
+<!-- ══ PAGE HERO ══ -->
+<section class="cs-page-hero">
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-badge">Insights</div>
-      <h1 class="hero-h1">Case Studies</h1>
-      <p class="hero-sub">Deep-dive engagements and outcomes from BootLabs' most demanding enterprise projects.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        <a href="index.html" class="btn-outline">Back to Home</a>
+    <div class="cs-hero-eyebrow">Case Studies</div>
+    <h1 class="cs-hero-h1">Case studies that go beyond the test case</h1>
+    <p class="cs-hero-sub">A stream of fresh perspectives, technical deep dives, and expert commentary from the digital world</p>
+  </div>
+</section>
+
+<!-- ══ FEATURED CASE STUDY ══ -->
+<section class="cs-featured-section">
+  <div class="container">
+    <div class="cs-featured-label">Featured Case Study</div>
+    <a href="cs-app-migration.html" class="cs-featured-card">
+      <div class="cs-featured-img">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&auto=format&fit=crop&q=80" alt="150+ Applications Migrated">
       </div>
+      <div class="cs-featured-content">
+        <div class="cs-feat-top">
+          <div class="cs-feat-chips">
+            <span class="cs-feat-chip">Case Studies</span>
+            <span class="cs-feat-date">April 27, 2026</span>
+          </div>
+          <h2 class="cs-feat-title">150+ Applications Migrated in 12 Months — Zero Rollbacks, Enterprise DevSecOps Built from Scratch</h2>
+          <p class="cs-feat-excerpt">An automotive conglomerate migrated its entire application estate to the cloud in 12 months with no rollbacks — and built enterprise DevSecOps practices from the ground up simultaneously.</p>
+        </div>
+        <div class="cs-feat-bottom">
+          <button class="cs-feat-read-btn"><span>&#9670;</span> Read More &rarr;</button>
+          <div class="cs-feat-linkedin">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ══ PROOF IN PRACTICE ══ -->
+<section class="cs-pip-section">
+  <div class="container">
+    <div class="cs-pip-header">
+      <div class="cs-pip-left">
+        <div class="cs-section-eyebrow">Case Studies</div>
+        <h2>Proof in Practice</h2>
+      </div>
+      <div class="cs-filter-bar">
+        <button class="cs-filter-btn">
+          Industry
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <button class="cs-filter-btn">
+          Service
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="cs-search-box">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search case studies…">
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-pg-grid">
+
+      <!-- Card 1 -->
+      <a href="cs-cloud-platform.html" class="cs-pg-card">
+        <img class="cs-pg-card-img" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=700&auto=format&fit=crop&q=80" alt="Self-Service Cloud Platform">
+        <div class="cs-pg-card-body">
+          <span class="cs-pg-card-chip">Manufacturing &amp; Automotive</span>
+          <div class="cs-pg-card-title">Self-Service Cloud Platform That Accelerated Enterprise-Wide Transformation</div>
+          <div class="cs-pg-card-desc">A global manufacturer turned fragmented cloud adoption into a unified self-service platform — cutting provisioning time from weeks to hours.</div>
+          <span class="cs-pg-card-link">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="cs-devsecops-fs.html" class="cs-pg-card">
+        <img class="cs-pg-card-img" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=700&auto=format&fit=crop&q=80" alt="DevSecOps Transformation">
+        <div class="cs-pg-card-body">
+          <span class="cs-pg-card-chip">Financial Services</span>
+          <div class="cs-pg-card-title">DevSecOps Transformation for a Regulated Asset Management Enterprise</div>
+          <div class="cs-pg-card-desc">Security embedded at every stage of the delivery pipeline — making every deployment audit-ready from day one.</div>
+          <span class="cs-pg-card-link">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="cs-cloud-nbfc.html" class="cs-pg-card">
+        <img class="cs-pg-card-img" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=700&auto=format&fit=crop&q=80" alt="Cloud Migration NBFC">
+        <div class="cs-pg-card-body">
+          <span class="cs-pg-card-chip">NBFC &amp; Financial Services</span>
+          <div class="cs-pg-card-title">Cloud Migration &amp; DevOps Modernisation for a Tier-1 NBFC</div>
+          <div class="cs-pg-card-desc">On-premise to cloud-native — 40% cost reduction, 3&times; faster releases, zero downtime across the entire migration.</div>
+          <span class="cs-pg-card-link">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Card 4 — Full width (DEWA) -->
+      <a href="cs-devsecops-dewa.html" class="cs-pg-card cs-pg-card-wide">
+        <img class="cs-pg-card-img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&auto=format&fit=crop&q=80" alt="DEWA DevSecOps">
+        <div class="cs-pg-card-body">
+          <span class="cs-pg-card-chip">Government &amp; Energy — DEWA Dubai</span>
+          <div class="cs-pg-card-title">Unified DevSecOps Across a Diverse Technology Estate — Dubai's Largest Utility</div>
+          <div class="cs-pg-card-desc">10+ technology stacks unified under a single DevSecOps governance framework on Azure DevOps — 60% faster delivery across all teams.</div>
+          <span class="cs-pg-card-link">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
 
-<!-- ══ CASE STUDY LISTING ══ -->
-<section class="cs-listing">
+<!-- ══ CTA ══ -->
+<section class="cs-cta-section">
   <div class="container">
-    <div class="cs-listing-header">
-      <div class="eyebrow" style="margin-bottom:16px;">All Case Studies</div>
-      <h2 class="h2" style="max-width:640px;color:#fff;">Outcomes from BootLabs' most demanding enterprise engagements</h2>
-    </div>
-    <div class="cs-listing-grid">
-
-      <!-- Card 1 -->
-      <a href="cs-cloud-platform.html" class="cs-listing-card">
-        <div class="cs-listing-pill">Manufacturing &amp; Automotive</div>
-        <div class="cs-listing-title">Self-Service Cloud Platform That Accelerated Enterprise-Wide Transformation</div>
-        <div class="cs-listing-metrics">
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">20<span>×</span></div>
-            <div class="cs-listing-metric-label">Faster Adoption</div>
-          </div>
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">30<span>%</span></div>
-            <div class="cs-listing-metric-label">Cost Reduction</div>
-          </div>
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">2<span>×</span></div>
-            <div class="cs-listing-metric-label">Go-to-Market</div>
-          </div>
-        </div>
-        <div class="cs-listing-desc">A global manufacturer needed a platform that entire engineering teams could adopt on day one. BootLabs built a self-service cloud platform that turned infrastructure provisioning from weeks into minutes.</div>
-        <span class="cs-listing-link">Read case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </a>
-
-      <!-- Card 2 -->
-      <a href="cs-app-migration.html" class="cs-listing-card">
-        <div class="cs-listing-pill">Automotive &amp; Industrial</div>
-        <div class="cs-listing-title">150+ Applications Migrated in 12 Months — Zero Rollbacks</div>
-        <div class="cs-listing-metrics">
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">150<span>+</span></div>
-            <div class="cs-listing-metric-label">Apps Migrated</div>
-          </div>
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">0</div>
-            <div class="cs-listing-metric-label">Rollbacks</div>
-          </div>
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">50<span>%</span></div>
-            <div class="cs-listing-metric-label">Faster Innovation</div>
-          </div>
-        </div>
-        <div class="cs-listing-desc">An automotive and industrial enterprise migrated its entire application estate — over 150 workloads — to the cloud in 12 months with no rollbacks and no business disruption.</div>
-        <span class="cs-listing-link">Read case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </a>
-
-      <!-- Card 3 -->
-      <a href="cs-devsecops-fs.html" class="cs-listing-card">
-        <div class="cs-listing-pill">Financial Services</div>
-        <div class="cs-listing-title">DevSecOps Transformation for a Regulated Asset Management Enterprise</div>
-        <div class="cs-listing-metrics">
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">70<span>%</span></div>
-            <div class="cs-listing-metric-label">Faster Deploys</div>
-          </div>
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">100<span>%</span></div>
-            <div class="cs-listing-metric-label">Scan Coverage</div>
-          </div>
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val" style="font-size:16px;padding-top:3px;">Day 1</div>
-            <div class="cs-listing-metric-label">Audit-Ready</div>
-          </div>
-        </div>
-        <div class="cs-listing-desc">A regulated asset manager needed security embedded into every release — not bolted on after. BootLabs delivered a DevSecOps transformation that made every deployment audit-ready from day one.</div>
-        <span class="cs-listing-link">Read case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </a>
-
-      <!-- Card 4 -->
-      <a href="cs-cloud-nbfc.html" class="cs-listing-card">
-        <div class="cs-listing-pill">NBFC &amp; Financial Services</div>
-        <div class="cs-listing-title">Cloud Migration &amp; DevOps Modernisation for a Tier-1 NBFC</div>
-        <div class="cs-listing-metrics">
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">40<span>%</span></div>
-            <div class="cs-listing-metric-label">Cost Reduction</div>
-          </div>
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">3<span>×</span></div>
-            <div class="cs-listing-metric-label">Faster Releases</div>
-          </div>
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val" style="font-size:16px;padding-top:3px;">Zero</div>
-            <div class="cs-listing-metric-label">Downtime</div>
-          </div>
-        </div>
-        <div class="cs-listing-desc">A Tier-1 NBFC modernised its infrastructure and release pipeline simultaneously — achieving 40% cost reduction and tripling release velocity with zero downtime during the transition.</div>
-        <span class="cs-listing-link">Read case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </a>
-
-      <!-- Card 5 — spans full width -->
-      <a href="cs-devsecops-dewa.html" class="cs-listing-card" style="grid-column:span 2;">
-        <div class="cs-listing-pill">Government &amp; Energy (DEWA Dubai)</div>
-        <div class="cs-listing-title">Unified DevSecOps Across a Diverse Technology Estate — Dubai's Largest Utility</div>
-        <div class="cs-listing-metrics">
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">10<span>+</span></div>
-            <div class="cs-listing-metric-label">Stacks Unified</div>
-          </div>
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">60<span>%</span></div>
-            <div class="cs-listing-metric-label">Faster Delivery</div>
-          </div>
-          <div class="cs-listing-metric">
-            <div class="cs-listing-metric-val">100<span>%</span></div>
-            <div class="cs-listing-metric-label">Pipeline Coverage</div>
-          </div>
-        </div>
-        <div class="cs-listing-desc">DEWA runs one of the most technologically diverse IT estates in the region — Java, .NET, Python, Angular, Oracle, legacy systems, all on Azure DevOps. BootLabs built a unified DevSecOps framework that brought every stack under a single, security-first delivery standard.</div>
-        <span class="cs-listing-link">Read case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </a>
-
+    <div class="cs-cta-inner">
+      <h2 class="cs-cta-h2">Ready to become our next case study?</h2>
+      <p class="cs-cta-sub">30 minutes with our engineering leadership. We'll map your biggest challenge to a concrete outcome.</p>
+      <button class="btn-primary" onclick="openContact()" style="font-size:15px;padding:15px 32px;position:relative;">Book a Discovery Call &rarr;</button>
     </div>
   </div>
 </section>
@@ -421,7 +445,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
       <div>
         <div class="footer-col-head">Company</div>
         <ul class="footer-col-links">
-          <li><a href="#">About Us</a></li>
+          <li><a href="about-us.html">About Us</a></li>
           <li><a href="#">Careers</a></li>
           <li><a href="blog.html">Insights</a></li>
           <li><a href="partnerships.html">Partners</a></li>
