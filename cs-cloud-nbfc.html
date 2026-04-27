@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloud Migration &amp; DevOps for NBFC — BootLabs Case Study</title>
+<style>
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
+:root{--blue:#0066FF;--cyan:#26a8ff;--border:rgba(255,255,255,.08);--border-blue:rgba(0,102,255,.35);--dim:rgba(255,255,255,.45);--mid:rgba(255,255,255,.7);--glass:rgba(255,255,255,.03);--r:20px;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;height:auto;}
+button{font-family:NHD,sans-serif;cursor:pointer;}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
+.eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
+.h2{font-size:clamp(28px,3.5vw,48px);font-weight:400;line-height:1.1;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;font-family:NHD,sans-serif;cursor:pointer;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
+.btn-primary:hover{background:#0052cc;transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;font-family:NHD,sans-serif;cursor:pointer;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ── MOBILE MENU ── */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mob-sub{padding:12px 0 4px;display:none;flex-direction:column;gap:10px;}
+.mob-sub.open{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
+
+/* ── NAVBAR ── */
+.navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.85);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:60px;transition:background .3s,border-color .3s;}
+.navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
+.nav-logo img{height:28px;width:auto;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{font-size:15px;color:rgba(255,255,255,.92);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:240px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.simple-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:15px;color:rgba(255,255,255,.88);transition:background .2s,color .2s;}
+.simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
+.mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-title{font-size:15px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ── HERO ── */
+.hero{padding:140px 0 80px;background:linear-gradient(135deg,#06060a 60%,rgba(0,102,255,.06) 100%);position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;top:-60px;right:-80px;width:560px;height:560px;background:radial-gradient(circle,rgba(0,102,255,.09) 0%,transparent 65%);pointer-events:none;}
+.hero::after{content:"";position:absolute;bottom:-80px;left:5%;width:480px;height:480px;background:radial-gradient(circle,rgba(38,168,255,.05) 0%,transparent 65%);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:900px;}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);margin-bottom:28px;flex-wrap:wrap;}
+.breadcrumb a{color:var(--dim);transition:color .2s;}
+.breadcrumb a:hover{color:var(--cyan);}
+.breadcrumb-sep{color:var(--border);}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+.hero-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);padding:5px 14px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);}
+.hero-tag.tag-industry{color:var(--mid);border-color:var(--border);background:var(--glass);}
+.hero-h1{font-size:clamp(28px,3.8vw,52px);font-weight:400;line-height:1.1;letter-spacing:-.02em;color:#fff;margin-bottom:24px;max-width:820px;}
+.hero-intro{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:56px;max-width:680px;}
+.metrics-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.metric-cell{background:#06060a;padding:28px 32px;text-align:center;}
+.metric-num{font-size:clamp(28px,3vw,42px);font-weight:400;color:var(--cyan);line-height:1;margin-bottom:8px;letter-spacing:-.02em;}
+.metric-label{font-size:13px;color:var(--dim);line-height:1.4;}
+
+/* ── SECTIONS ── */
+.section{padding:88px 0;}
+.section-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
+.section-h2{font-size:clamp(26px,3vw,40px);font-weight:400;line-height:1.15;margin-bottom:20px;}
+.section-body{font-size:15px;color:var(--mid);line-height:1.8;}
+.section-body p+p{margin-top:14px;}
+
+/* ── ABOUT CLIENT ── */
+.client-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:32px;}
+.client-card-title{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
+.client-detail{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);}
+.client-detail:last-child{border-bottom:none;padding-bottom:0;}
+.client-detail-label{font-size:12px;color:var(--dim);min-width:90px;flex-shrink:0;padding-top:2px;}
+.client-detail-val{font-size:14px;color:#fff;line-height:1.5;}
+
+/* ── CHALLENGE CARDS ── */
+.challenge-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:36px;}
+.challenge-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:28px 32px;transition:border-color .25s;}
+.challenge-card:hover{border-color:var(--border-blue);}
+.challenge-card-num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+.challenge-card-title{font-size:17px;color:#fff;margin-bottom:8px;font-weight:400;}
+.challenge-card-body{font-size:14px;color:var(--mid);line-height:1.7;}
+
+/* ── APPROACH ── */
+.approach-section{background:rgba(255,255,255,.01);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:88px 0;}
+.approach-header{text-align:center;margin-bottom:56px;}
+.approach-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.approach-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:36px;transition:border-color .25s;}
+.approach-card:hover{border-color:var(--border-blue);}
+.approach-num{font-size:clamp(36px,4vw,52px);font-weight:400;color:var(--blue);opacity:.35;line-height:1;margin-bottom:16px;letter-spacing:-.02em;}
+.approach-title{font-size:18px;color:#fff;margin-bottom:10px;font-weight:400;}
+.approach-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ── RESULTS ── */
+.results-section{padding:88px 0;}
+.results-header{margin-bottom:56px;}
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:56px;}
+.result-cell{background:#06060a;padding:36px 28px;text-align:center;}
+.result-num{font-size:clamp(32px,3.5vw,52px);font-weight:400;color:var(--cyan);line-height:1;margin-bottom:10px;letter-spacing:-.02em;}
+.result-label{font-size:13px;color:var(--dim);line-height:1.5;}
+.result-desc{font-size:12px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.4;}
+
+/* ── QUOTE BLOCK ── */
+.quote-block{text-align:center;padding:48px;border:1px solid var(--border);border-radius:var(--r);background:var(--glass);position:relative;overflow:hidden;margin-bottom:56px;}
+.quote-block::before{content:"\201C";position:absolute;top:-10px;left:32px;font-size:120px;color:var(--blue);opacity:.18;font-family:Georgia,serif;line-height:1;}
+.quote-text{font-size:clamp(16px,2vw,22px);color:var(--mid);line-height:1.7;font-style:italic;max-width:760px;margin:0 auto;position:relative;z-index:1;}
+
+/* ── CTA SECTION ── */
+.cta-section{padding:88px 0;}
+.cta-inner{background:linear-gradient(135deg,rgba(0,102,255,.08) 0%,rgba(38,168,255,.04) 100%);border:1px solid var(--border-blue);border-radius:24px;padding:64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.cta-text-block{}
+.cta-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px;}
+.cta-h2{font-size:clamp(24px,3vw,38px);font-weight:400;line-height:1.2;margin-bottom:12px;}
+.cta-sub{font-size:15px;color:var(--mid);max-width:480px;line-height:1.7;}
+.cta-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;flex-shrink:0;}
+.related-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--cyan);padding:13px 24px;border:1px solid var(--border-blue);border-radius:100px;transition:all .2s;}
+.related-link:hover{background:rgba(0,102,255,.1);}
+.related-link svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
+.cta-links-col{display:flex;flex-direction:column;gap:10px;}
+
+/* ── FOOTER ── */
+.footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:260px;}
+.footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;}
+.footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+.footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
+.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);white-space:nowrap;line-height:1;}
+.footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .approach-grid{grid-template-columns:1fr;}
+  .results-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .container{padding:0 18px;}
+  .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
+  .nav-hamburger{display:flex;}
+  .hero{padding:110px 0 60px;}
+  .metrics-strip{grid-template-columns:1fr;}
+  .section-inner{grid-template-columns:1fr;gap:40px;}
+  .results-grid{grid-template-columns:repeat(2,1fr);}
+  .cta-inner{padding:36px 24px;}
+  .cta-actions{width:100%;}
+  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-bot{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:480px){
+  .container{padding:0 14px;}
+  .navbar{width:calc(100% - 16px);padding:9px 12px;}
+  .results-grid{grid-template-columns:1fr;}
+  .metrics-strip{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ MOBILE MENU ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mob-nav-links">
+    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="cloud-devops.html" onclick="closeMobileMenu()">DevOps / Cloud</a>
+        <a href="platform-engineering.html" onclick="closeMobileMenu()">SRE</a>
+        <a href="software-engineering.html" onclick="closeMobileMenu()">Full Stack Development</a>
+        <a href="ai-engineering.html" onclick="closeMobileMenu()">AI &amp; ML</a>
+        <a href="agentic-ai.html" onclick="closeMobileMenu()">Agentic AI</a>
+      </div>
+    </div>
+    <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
+    <a class="mob-nav-link" href="about-us.html" onclick="closeMobileMenu()">About Us</a>
+    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub"><a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a><a href="blog.html" onclick="closeMobileMenu()">Blog</a></div>
+    </div>
+  </nav>
+  <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">DevOps / Cloud</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Infrastructure Automation</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">SRE</div><div class="mega-item-subs">Observability · SLOs · Chaos Engineering · Service Mesh</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Full Stack Development</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI &amp; ML</div><div class="mega-item-subs">ML Engineering · MLOps · Production AI · Model Monitoring</div></a>
+        <a href="agentic-ai.html" class="mega-item" style="grid-column:span 2;"><div class="mega-item-title">Agentic AI</div><div class="mega-item-subs">Task Agents · Multi-Agent Orchestration · Tool-Using Agents · LLMOps</div></a>
+      </div>
+    </div>
+    <a href="partnerships.html" class="nav-link">Partners</a>
+    <a href="about-us.html" class="nav-link">About Us</a>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu"><a href="case-studies.html" class="simple-item">Case Studies</a><a href="blog.html" class="simple-item">Blog</a></div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="case-studies.html">Case Studies</a>
+        <span class="breadcrumb-sep">/</span>
+        <span style="color:var(--mid);">Cloud Migration · NBFC</span>
+      </div>
+      <div class="hero-tags">
+        <span class="hero-tag">Cloud Migration</span>
+        <span class="hero-tag">Kubernetes</span>
+        <span class="hero-tag">GitOps</span>
+        <span class="hero-tag">Observability</span>
+        <span class="hero-tag">SRE</span>
+        <span class="hero-tag tag-industry">NBFC &amp; Financial Services</span>
+      </div>
+      <h1 class="hero-h1">From On-Premise to Cloud-Native — DevOps Modernisation for a Tier-1 NBFC</h1>
+      <p class="hero-intro">A leading non-banking financial company was running critical applications on ageing on-premise infrastructure. BootLabs delivered a zero-downtime cloud migration and rebuilt how the engineering organisation delivers software.</p>
+      <div class="metrics-strip">
+        <div class="metric-cell">
+          <div class="metric-num">40%</div>
+          <div class="metric-label">Infrastructure Cost Reduction</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-num">3&times;</div>
+          <div class="metric-label">Faster Release Cycles</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-num">Zero</div>
+          <div class="metric-label">Unplanned Downtime</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTEXT SECTION ══ -->
+<section class="section">
+  <div class="container">
+    <div class="section-inner">
+
+      <!-- Left: About Client -->
+      <div>
+        <div class="section-label">About the Client</div>
+        <div class="client-card">
+          <div class="client-card-title">Client Profile</div>
+          <div class="client-detail">
+            <div class="client-detail-label">Organisation</div>
+            <div class="client-detail-val">A Leading Non-Banking Financial Company (NBFC)</div>
+          </div>
+          <div class="client-detail">
+            <div class="client-detail-label">Industry</div>
+            <div class="client-detail-val">Financial Services</div>
+          </div>
+          <div class="client-detail">
+            <div class="client-detail-label">Operations</div>
+            <div class="client-detail-val">Large loan book, customer-facing digital products, regulated operations</div>
+          </div>
+          <div class="client-detail">
+            <div class="client-detail-label">Scale</div>
+            <div class="client-detail-val">Thousands of daily transactions across multiple product lines</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Challenge Narrative -->
+      <div>
+        <div class="section-label">The Challenge</div>
+        <h2 class="section-h2">Legacy infrastructure holding back a growing business</h2>
+        <div class="section-body">
+          <p>For an NBFC operating at scale, the infrastructure is the business. Loan origination, customer onboarding, repayment processing — all of it depends on systems that need to be fast, reliable, and available around the clock. This firm's infrastructure was none of those things consistently.</p>
+          <p>On-premise hardware was approaching end-of-life. Engineering teams were operating in silos. Production incidents were invisible until customers reported them. The gap between where the platform was and where the business needed it to be was widening with every passing quarter.</p>
+        </div>
+
+        <div class="challenge-grid">
+          <div class="challenge-card">
+            <div class="challenge-card-num">Challenge 01</div>
+            <div class="challenge-card-title">Ageing Infrastructure, Rising Costs</div>
+            <div class="challenge-card-body">On-premise infrastructure was approaching end-of-life. Maintenance costs were increasing, hardware refresh cycles were unpredictable, and scaling capacity required weeks of procurement lead time.</div>
+          </div>
+          <div class="challenge-card">
+            <div class="challenge-card-num">Challenge 02</div>
+            <div class="challenge-card-title">Siloed Teams, Slow Releases</div>
+            <div class="challenge-card-body">No shared delivery platform meant each team operated its own release process. Release cycles were measured in weeks. Deployments required manual co-ordination, increasing the risk of human error.</div>
+          </div>
+          <div class="challenge-card">
+            <div class="challenge-card-num">Challenge 03</div>
+            <div class="challenge-card-title">No Production Observability</div>
+            <div class="challenge-card-body">Production incidents were typically reported by customers before engineering teams were aware. There was no metrics stack, no distributed tracing, and no structured log aggregation — making diagnosis slow and painful.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ APPROACH SECTION ══ -->
+<section class="approach-section">
+  <div class="container">
+    <div class="approach-header">
+      <div class="eyebrow" style="justify-content:center;margin-bottom:14px;">The Approach</div>
+      <h2 class="h2" style="text-align:center;">Phased migration. Zero risk. No big-bang cutovers.</h2>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-card">
+        <div class="approach-num">01</div>
+        <div class="approach-title">Migration Strategy &amp; Risk Planning</div>
+        <div class="approach-body">Assessed all applications for cloud readiness, defined migration priority based on risk and business criticality, and built a phased migration plan with full rollback capability for every workload. Every team knew what was moving, when, and what the fallback was.</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-num">02</div>
+        <div class="approach-title">Zero-Downtime Migration Execution</div>
+        <div class="approach-body">Migrated business-critical applications to cloud using blue-green deployment strategies, database replication with live sync, and traffic cutover with instant rollback capability. Not a single customer-facing service experienced unplanned downtime through the migration window.</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-num">03</div>
+        <div class="approach-title">Kubernetes Delivery Platform</div>
+        <div class="approach-body">Built a Kubernetes-native delivery platform: shared CI/CD pipelines, Helm-managed workloads, GitOps-driven deployments, and environment promotion gates from dev to production. Every team on a single platform — one way to ship, regardless of service or stack.</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-num">04</div>
+        <div class="approach-title">Full Observability Stack</div>
+        <div class="approach-body">Deployed end-to-end observability: Prometheus and Grafana for metrics and SLO dashboards, OpenTelemetry for distributed tracing, and centralised structured log aggregation with automated alerting. Production is now visible before customers ever notice a problem.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESULTS SECTION ══ -->
+<section class="results-section">
+  <div class="container">
+    <div class="results-header">
+      <div class="eyebrow" style="margin-bottom:14px;">Outcomes</div>
+      <h2 class="h2">A platform that grows with the business</h2>
+    </div>
+    <div class="results-grid">
+      <div class="result-cell">
+        <div class="result-num">40%</div>
+        <div class="result-label">Infrastructure cost reduction</div>
+        <div class="result-desc">from on-premise to right-sized cloud</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-num">3&times;</div>
+        <div class="result-label">Faster release cycles</div>
+        <div class="result-desc">from bi-weekly to multiple deploys per day</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-num">Zero</div>
+        <div class="result-label">Unplanned downtime</div>
+        <div class="result-desc">during or after migration</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-num">&lt;5min</div>
+        <div class="result-label">Mean time to detect</div>
+        <div class="result-desc">production incidents — down from hours</div>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p class="quote-text">The engineering organisation went from planning releases days in advance to shipping multiple times per day. Incidents that previously went undetected until customers called are now surfaced within minutes by automated SLO alerts. The infrastructure cost reduction funded the next phase of product investment.</p>
+    </div>
+
+    <div class="section-body" style="max-width:760px;font-size:15px;color:var(--mid);line-height:1.8;">
+      <p>The migration was not just a lift-and-shift. It was a re-platforming of how the entire engineering organisation operates. The Kubernetes delivery platform standardised how every team ships code. The observability stack gave engineering the visibility it never had on-premise. The cost savings created headroom for the next product build cycle — without waiting for a budget cycle to catch up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA SECTION ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-text-block">
+        <div class="cta-eyebrow">Plan your migration</div>
+        <h2 class="cta-h2">Move to cloud without the risk</h2>
+        <p class="cta-sub">Whether you're running on ageing hardware, planning a modernisation, or rebuilding your delivery platform — BootLabs designs and executes cloud migrations that deliver outcomes without gambling on uptime.</p>
+      </div>
+      <div class="cta-actions">
+        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <div class="cta-links-col">
+          <a href="cloud-devops.html" class="related-link">Explore DevOps / Cloud <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="platform-engineering.html" class="related-link">Explore SRE <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT POPUP ══ -->
+<div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
+  <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
+    <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;">&#10005;</button>
+    <div style="font-size:22px;color:#fff;margin-bottom:24px;font-family:NHD;">Book a Discovery Call</div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;"></div>
+    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;outline:none;"></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Request</button>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
+      <div>
+        <div class="footer-col-head">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="cloud-devops.html">DevOps / Cloud</a></li>
+          <li><a href="platform-engineering.html">SRE</a></li>
+          <li><a href="software-engineering.html">Full Stack Development</a></li>
+          <li><a href="ai-engineering.html">AI &amp; ML</a></li>
+          <li><a href="agentic-ai.html">Agentic AI</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="partnerships.html">Partners</a></li>
+          <li><a href="#" onclick="openContact();return false;">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
+    <div class="footer-bot">
+      <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
+function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
+function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
+function openContact(){const p=document.getElementById('contactPopup');p.style.display='flex';document.body.style.overflow='hidden';}
+function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
+</script>
+</body>
+</html>

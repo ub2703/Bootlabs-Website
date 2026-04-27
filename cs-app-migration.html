@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>150+ App Migration, Zero Rollbacks — BootLabs</title>
+<style>
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
+:root{--blue:#0066FF;--cyan:#26a8ff;--border:rgba(255,255,255,.08);--border-blue:rgba(0,102,255,.35);--dim:rgba(255,255,255,.45);--mid:rgba(255,255,255,.7);--glass:rgba(255,255,255,.03);--r:20px;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;height:auto;}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
+.eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
+.h1{font-size:clamp(36px,5vw,72px);font-weight:400;line-height:1.06;letter-spacing:-.01em;}
+.h2{font-size:clamp(28px,3.5vw,48px);font-weight:400;line-height:1.1;}
+.h3{font-size:clamp(20px,2vw,28px);font-weight:400;line-height:1.2;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;font-family:NHD,sans-serif;cursor:pointer;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
+.btn-primary:hover{background:#0052cc;box-shadow:0 4px 32px rgba(0,102,255,.5);transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;font-family:NHD,sans-serif;cursor:pointer;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ── MOBILE MENU ── */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:22px;color:#fff;padding:14px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+.mob-sub{padding:10px 0 4px;display:none;flex-direction:column;gap:8px;}
+.mob-nav-links .open .mob-sub{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
+
+/* ── NAVBAR ── */
+.navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
+.navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
+.nav-logo img{height:28px;width:auto;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{font-size:15px;color:rgba(255,255,255,.9);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:240px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.simple-item{display:flex;align-items:center;padding:11px 14px;border-radius:10px;font-size:15px;color:rgba(255,255,255,.88);transition:background .2s,color .2s;}
+.simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
+.mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-title{font-size:15px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;cursor:pointer;}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ── HERO ── */
+.cs-hero{position:relative;padding:160px 0 100px;overflow:hidden;background:#06060a;}
+.cs-hero::before{content:"";position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:1000px;height:700px;background:radial-gradient(ellipse at 50% 30%,rgba(0,102,255,.12) 0%,transparent 65%);pointer-events:none;}
+.cs-hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,102,255,.3),transparent);}
+/* Hero accent — a subtle grid pattern in background */
+.cs-hero-bg-accent{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse 70% 70% at 50% 0%,black 40%,transparent 100%);}
+.cs-hero-inner{position:relative;z-index:1;}
+.cs-breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);margin-bottom:28px;padding:7px 14px;border:1px solid var(--border);border-radius:100px;background:var(--glass);transition:color .2s,border-color .2s;}
+.cs-breadcrumb:hover{color:var(--cyan);border-color:var(--border-blue);}
+.cs-breadcrumb svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
+.cs-meta-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
+.cs-tag{display:inline-flex;align-items:center;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:100px;border:1px solid var(--border-blue);color:var(--cyan);background:rgba(0,102,255,.06);}
+.cs-tag-industry{border-color:rgba(38,168,255,.3);color:#26a8ff;background:rgba(38,168,255,.06);}
+.cs-hero-title{font-size:clamp(32px,4.2vw,62px);font-weight:400;line-height:1.07;letter-spacing:-.02em;max-width:920px;margin-bottom:28px;color:#fff;}
+.cs-hero-intro{font-size:18px;line-height:1.8;color:var(--mid);max-width:660px;margin-bottom:64px;}
+.cs-metrics-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 0;}
+.cs-metric{display:flex;flex-direction:column;gap:6px;padding:0 40px;}
+.cs-metric:not(:last-child){border-right:1px solid var(--border);}
+.cs-metric-number{font-size:clamp(36px,4vw,60px);font-weight:400;color:var(--cyan);line-height:1;letter-spacing:-.02em;}
+.cs-metric-label{font-size:13px;color:var(--dim);letter-spacing:.04em;}
+
+/* ── CONTEXT ── */
+.cs-context{padding:100px 0;}
+.cs-context-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:start;}
+.cs-about-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:36px;position:sticky;top:100px;}
+.cs-about-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:24px;display:flex;align-items:center;gap:8px;}
+.cs-about-label::before{content:"";display:block;width:20px;height:1px;background:var(--cyan);}
+.cs-about-row{display:flex;flex-direction:column;gap:4px;padding:16px 0;border-bottom:1px solid var(--border);}
+.cs-about-row:last-child{border-bottom:none;padding-bottom:0;}
+.cs-about-key{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+.cs-about-val{font-size:15px;color:#fff;line-height:1.5;}
+.cs-challenge-header{margin-bottom:40px;}
+.cs-challenge-header .eyebrow{margin-bottom:20px;}
+.cs-challenge-header h2{font-size:clamp(24px,3vw,38px);font-weight:400;line-height:1.15;margin-bottom:16px;}
+.cs-challenge-header p{font-size:16px;color:var(--mid);line-height:1.8;}
+.cs-challenge-cards{display:flex;flex-direction:column;gap:16px;margin-top:36px;}
+.cs-challenge-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:28px 32px;transition:border-color .25s,background .25s;position:relative;overflow:hidden;}
+.cs-challenge-card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,102,255,.04),transparent);opacity:0;transition:opacity .25s;}
+.cs-challenge-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.04);}
+.cs-challenge-card:hover::before{opacity:1;}
+.cs-challenge-card-num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+.cs-challenge-card h4{font-size:17px;font-weight:500;color:#fff;margin-bottom:10px;}
+.cs-challenge-card p{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ── SOLUTION ── */
+.cs-solution{padding:100px 0;background:linear-gradient(180deg,rgba(0,102,255,.03) 0%,transparent 100%);}
+.cs-solution-header{margin-bottom:60px;}
+.cs-solution-header .eyebrow{margin-bottom:20px;}
+.cs-solution-header h2{font-size:clamp(28px,3.5vw,48px);font-weight:400;line-height:1.1;max-width:640px;}
+.cs-solution-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.cs-approach-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:36px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s;}
+.cs-approach-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));opacity:0;transition:opacity .25s;}
+.cs-approach-card:hover{border-color:var(--border-blue);transform:translateY(-3px);}
+.cs-approach-card:hover::after{opacity:1;}
+.cs-approach-num{font-size:13px;letter-spacing:.14em;color:var(--blue);font-weight:500;margin-bottom:20px;opacity:.7;}
+.cs-approach-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,102,255,.1);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.cs-approach-icon svg{width:20px;height:20px;fill:none;stroke:var(--cyan);stroke-width:1.5;}
+.cs-approach-card h4{font-size:18px;font-weight:500;color:#fff;margin-bottom:12px;}
+.cs-approach-card p{font-size:14px;color:var(--mid);line-height:1.8;}
+
+/* ── RESULTS ── */
+.cs-results{padding:100px 0;}
+.cs-results-header{margin-bottom:60px;}
+.cs-results-header .eyebrow{margin-bottom:20px;}
+.cs-results-header h2{font-size:clamp(28px,3.5vw,48px);font-weight:400;line-height:1.1;}
+.cs-results-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:64px;}
+.cs-result-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:40px;position:relative;overflow:hidden;transition:border-color .25s;}
+.cs-result-card::before{content:"";position:absolute;top:-60px;right:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(0,102,255,.08),transparent 70%);pointer-events:none;}
+.cs-result-card:hover{border-color:var(--border-blue);}
+.cs-result-number{font-size:clamp(44px,5vw,72px);font-weight:400;color:var(--cyan);line-height:1;letter-spacing:-.03em;margin-bottom:8px;}
+/* Special zero result — visually distinct */
+.cs-result-card.cs-result-zero .cs-result-number{color:#fff;}
+.cs-result-card.cs-result-zero{border-color:rgba(255,255,255,.12);background:linear-gradient(135deg,rgba(255,255,255,.04),transparent);}
+.cs-result-label{font-size:14px;color:var(--mid);line-height:1.6;}
+.cs-results-narrative{background:linear-gradient(135deg,rgba(0,102,255,.06),rgba(38,168,255,.03));border:1px solid var(--border-blue);border-radius:var(--r);padding:48px;}
+.cs-results-narrative p{font-size:17px;color:var(--mid);line-height:1.9;}
+.cs-results-narrative p + p{margin-top:16px;}
+
+/* ── QUOTE ── */
+.cs-quote{padding:100px 0;background:linear-gradient(180deg,transparent,rgba(0,102,255,.04),transparent);}
+.cs-quote-inner{max-width:860px;margin:0 auto;text-align:center;position:relative;}
+.cs-quote-mark{font-size:120px;line-height:.8;color:var(--blue);opacity:.25;font-family:Georgia,serif;display:block;margin-bottom:8px;user-select:none;}
+.cs-quote-text{font-size:clamp(18px,2.2vw,26px);font-weight:400;line-height:1.65;color:#fff;margin-bottom:40px;letter-spacing:-.01em;}
+.cs-quote-divider{width:40px;height:1px;background:var(--border-blue);margin:0 auto 28px;}
+.cs-quote-attr{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.cs-quote-name{font-size:16px;font-weight:500;color:#fff;}
+.cs-quote-role{font-size:13px;color:var(--dim);}
+
+/* ── TAGS ── */
+.cs-tags-section{padding:48px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.cs-tags-inner{display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
+.cs-tags-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-right:4px;}
+.cs-pill{font-size:12px;padding:6px 14px;border:1px solid var(--border);border-radius:100px;color:var(--mid);background:var(--glass);}
+
+/* ── CTA ── */
+.cs-cta{padding:100px 0;text-align:center;position:relative;overflow:hidden;}
+.cs-cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(0,102,255,.1),transparent 65%);pointer-events:none;}
+.cs-cta-inner{position:relative;z-index:1;}
+.cs-cta-eyebrow{margin-bottom:24px;justify-content:center;}
+.cs-cta-eyebrow::before{display:none;}
+.cs-cta h2{font-size:clamp(28px,3.5vw,48px);font-weight:400;line-height:1.1;margin-bottom:16px;}
+.cs-cta p{font-size:17px;color:var(--mid);max-width:520px;margin:0 auto 40px;}
+.cs-cta-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.cs-related-label{font-size:12px;color:var(--dim);margin-top:24px;letter-spacing:.06em;}
+.cs-related-link{color:var(--cyan);text-decoration:underline;text-decoration-color:rgba(38,168,255,.3);}
+
+/* ── FOOTER ── */
+.footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:260px;}
+.footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.footer-col-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+.footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
+.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.08);white-space:nowrap;line-height:1;}
+.footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+
+/* ── CONTACT POPUP ── */
+.contact-popup{display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);}
+.contact-popup-box{background:#0d0d18;border:1px solid var(--border);border-radius:var(--r);padding:48px;max-width:480px;width:90%;position:relative;}
+.contact-popup-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--dim);cursor:pointer;font-size:20px;line-height:1;transition:color .2s;}
+.contact-popup-close:hover{color:#fff;}
+.contact-popup h3{font-size:24px;font-weight:400;margin-bottom:8px;}
+.contact-popup p{font-size:14px;color:var(--mid);margin-bottom:32px;}
+.contact-form{display:flex;flex-direction:column;gap:16px;}
+.contact-input{background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:14px 18px;color:#fff;font-family:NHD,sans-serif;font-size:15px;outline:none;transition:border-color .2s;width:100%;}
+.contact-input::placeholder{color:var(--dim);}
+.contact-input:focus{border-color:var(--border-blue);}
+.contact-textarea{resize:vertical;min-height:100px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .cs-context-grid{grid-template-columns:1fr;}
+  .cs-about-card{position:static;}
+}
+@media(max-width:768px){
+  .container{padding:0 20px;}
+  .navbar{top:10px;width:calc(100% - 24px);padding:10px 16px;border-radius:60px;}
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
+  .nav-hamburger{display:flex;}
+  .cs-hero{padding:120px 0 72px;}
+  .cs-metrics-strip{grid-template-columns:1fr;border:none;gap:0;}
+  .cs-metric{border-right:none!important;border-bottom:1px solid var(--border);padding:28px 0;}
+  .cs-metric:last-child{border-bottom:none;}
+  .cs-solution-grid{grid-template-columns:1fr;}
+  .cs-results-grid{grid-template-columns:1fr;}
+  .cs-quote-text{font-size:18px;}
+  .cs-quote-mark{font-size:80px;}
+  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-bot{flex-direction:column;align-items:flex-start;}
+  .cs-cta-btns{flex-direction:column;align-items:stretch;}
+  .cs-cta-btns a,.cs-cta-btns button{justify-content:center;}
+}
+@media(max-width:480px){
+  .container{padding:0 16px;}
+  .navbar{width:calc(100% - 16px);padding:9px 12px;}
+  .cs-hero-title{font-size:clamp(26px,7.5vw,40px);}
+  .cs-challenge-card{padding:22px 24px;}
+  .cs-approach-card{padding:28px;}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mob-nav-links">
+    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="cloud-devops.html" onclick="closeMobileMenu()">DevOps / Cloud</a>
+        <a href="platform-engineering.html" onclick="closeMobileMenu()">SRE</a>
+        <a href="software-engineering.html" onclick="closeMobileMenu()">Full Stack Development</a>
+        <a href="ai-engineering.html" onclick="closeMobileMenu()">AI &amp; ML</a>
+        <a href="agentic-ai.html" onclick="closeMobileMenu()">Agentic AI</a>
+      </div>
+    </div>
+    <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
+    <a class="mob-nav-link" href="about-us.html" onclick="closeMobileMenu()">About Us</a>
+    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </nav>
+  <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">DevOps / Cloud</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Infrastructure Automation</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">SRE</div><div class="mega-item-subs">Observability · SLOs · Chaos Engineering · Service Mesh</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Full Stack Development</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI &amp; ML</div><div class="mega-item-subs">ML Engineering · MLOps · Production AI · Model Monitoring</div></a>
+        <a href="agentic-ai.html" class="mega-item" style="grid-column:span 2;"><div class="mega-item-title">Agentic AI</div><div class="mega-item-subs">Task Agents · Multi-Agent Orchestration · Tool-Using Agents · LLMOps</div></a>
+      </div>
+    </div>
+    <a href="partnerships.html" class="nav-link">Partners</a>
+    <a href="about-us.html" class="nav-link">About Us</a>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="case-studies.html" class="simple-item">Case Studies</a>
+        <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="cs-hero">
+  <div class="cs-hero-bg-accent"></div>
+  <div class="container">
+    <div class="cs-hero-inner">
+      <a href="case-studies.html" class="cs-breadcrumb">
+        <svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Case Studies
+      </a>
+      <div class="cs-meta-tags">
+        <span class="cs-tag cs-tag-industry">Automotive &amp; Industrial</span>
+        <span class="cs-tag">Cloud Migration</span>
+        <span class="cs-tag">DevSecOps</span>
+        <span class="cs-tag">Kubernetes</span>
+      </div>
+      <h1 class="cs-hero-title">150+ Applications Migrated in 12 Months — Zero Rollbacks, Enterprise DevSecOps Built from the Ground Up</h1>
+      <p class="cs-hero-intro">A large multi-business conglomerate needed to migrate 150+ applications on an accelerated timeline, with virtually no DevSecOps foundation in place. BootLabs delivered the migration and transformed how the entire organisation ships software.</p>
+      <div class="cs-metrics-strip">
+        <div class="cs-metric">
+          <span class="cs-metric-number">150+</span>
+          <span class="cs-metric-label">Apps Migrated</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-number">0</span>
+          <span class="cs-metric-label">Rollbacks</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-number">50%</span>
+          <span class="cs-metric-label">Faster Innovation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTEXT ══ -->
+<section class="cs-context">
+  <div class="container">
+    <div class="cs-context-grid">
+
+      <!-- About card -->
+      <div>
+        <div class="cs-about-card">
+          <div class="cs-about-label">About the Client</div>
+          <div class="cs-about-row">
+            <span class="cs-about-key">Client</span>
+            <span class="cs-about-val">A Large Multi-Business Conglomerate</span>
+          </div>
+          <div class="cs-about-row">
+            <span class="cs-about-key">Industry</span>
+            <span class="cs-about-val">Automotive &amp; Industrial</span>
+          </div>
+          <div class="cs-about-row">
+            <span class="cs-about-key">Scale</span>
+            <span class="cs-about-val">150+ group companies, multiple technology stacks, thousands of engineers</span>
+          </div>
+          <div class="cs-about-row">
+            <span class="cs-about-key">Challenge Scope</span>
+            <span class="cs-about-val">Large-scale cloud migration + DevSecOps transformation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Challenge -->
+      <div>
+        <div class="cs-challenge-header">
+          <div class="eyebrow">The Challenge</div>
+          <h2>150+ applications, an accelerated deadline, and no DevSecOps foundation</h2>
+          <p>The client needed to move fast — but the combination of scale, legacy complexity, and an immature DevSecOps practice made every decision high-risk. The programme had to succeed with no room for rollbacks and no tolerance for downtime.</p>
+        </div>
+        <div class="cs-challenge-cards">
+          <div class="cs-challenge-card">
+            <div class="cs-challenge-card-num">Challenge 01</div>
+            <h4>Scale &amp; Complexity of Migration</h4>
+            <p>150+ applications spanning legacy monoliths, microservices, and multi-tier systems across different technology stacks and teams — all requiring migration on an accelerated, minimum-risk timeline.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <div class="cs-challenge-card-num">Challenge 02</div>
+            <h4>No DevSecOps Foundation</h4>
+            <p>Limited DevSecOps setup meant applications were not cloud-ready. Manual deployments, no automated security scanning, and no secrets management created risk at every stage of the programme.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <div class="cs-challenge-card-num">Challenge 03</div>
+            <h4>Zero Downtime Requirements</h4>
+            <p>Database migrations required zero downtime. End-to-end observability — monitoring, logging, and alerting — needed to be in place from the moment workloads went live.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOLUTION ══ -->
+<section class="cs-solution">
+  <div class="container">
+    <div class="cs-solution-header">
+      <div class="eyebrow">Our Approach</div>
+      <h2>A migration factory, built with security and observability at every layer</h2>
+    </div>
+    <div class="cs-solution-grid">
+
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">01</div>
+        <div class="cs-approach-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+        </div>
+        <h4>Modernisation Pathfinding</h4>
+        <p>Assessed each application and defined a modernisation path: containerise, re-platform, or refactor. Built a migration factory approach to run parallel workstreams without cross-team dependency — enabling safe, high-velocity delivery across 150+ apps.</p>
+      </div>
+
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">02</div>
+        <div class="cs-approach-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h4>Enterprise DevSecOps Induction</h4>
+        <p>Inducted DevSecOps across the organisation: automated security scanning in CI/CD, secrets management, templatised rollback strategies, and container security policies standardised across all teams — transforming a high-risk programme into a controlled one.</p>
+      </div>
+
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">03</div>
+        <div class="cs-approach-icon">
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        </div>
+        <h4>Container-Native Deployment</h4>
+        <p>Deployed applications to Kubernetes with automated containerised pipelines, GitOps workflows, and Helm-managed rollout strategies — ensuring repeatability and auditability at every step. Every deployment was version-controlled and reproducible.</p>
+      </div>
+
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">04</div>
+        <div class="cs-approach-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h4>Observability from Day One</h4>
+        <p>Deployed full-stack observability covering metrics, logs, and alerts across all migrated workloads — so the operations team had visibility from the moment each application went live. No workload went to production without its observability stack in place.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESULTS ══ -->
+<section class="cs-results">
+  <div class="container">
+    <div class="cs-results-header">
+      <div class="eyebrow">Results</div>
+      <h2>150+ migrations completed. Zero rollbacks. An organisation transformed.</h2>
+    </div>
+    <div class="cs-results-grid">
+      <div class="cs-result-card">
+        <div class="cs-result-number">150+</div>
+        <div class="cs-result-label">Applications migrated within 12 months — on schedule, across all technology stacks and business units</div>
+      </div>
+      <div class="cs-result-card cs-result-zero">
+        <div class="cs-result-number">0</div>
+        <div class="cs-result-label">Rollbacks across the entire migration programme — an exceptional outcome at this scale and complexity</div>
+      </div>
+      <div class="cs-result-card">
+        <div class="cs-result-number">50%</div>
+        <div class="cs-result-label">Faster innovation velocity post-migration, as teams shipped with automated, repeatable pipelines rather than manual processes</div>
+      </div>
+      <div class="cs-result-card">
+        <div class="cs-result-number">100%</div>
+        <div class="cs-result-label">Organisation covered by DevSecOps practice by programme end — transforming how thousands of engineers develop and ship software</div>
+      </div>
+    </div>
+    <div class="cs-results-narrative">
+      <p>Every application migrated on schedule, with zero rollbacks — an extraordinary outcome for a programme of this scale and complexity. Parallel workstreams, templatised deployments, and enforced observability standards meant that each migration built on the last, compounding quality and speed throughout the programme.</p>
+      <p>Beyond the migration itself, the DevSecOps practice that was built matured and scaled to cover the entire engineering organisation, fundamentally changing how teams develop and ship software. The migration was the beginning, not the end, of the transformation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUOTE ══ -->
+<section class="cs-quote">
+  <div class="container">
+    <div class="cs-quote-inner">
+      <span class="cs-quote-mark">&ldquo;</span>
+      <p class="cs-quote-text">I want to thank the BootLabs team for working with us during the migration process. The team was always available and helped us resolve any questions we had. Some of the demos created by the team were instrumental for us to go live faster. Really happy with the ongoing support.</p>
+      <div class="cs-quote-divider"></div>
+      <div class="cs-quote-attr">
+        <span class="cs-quote-name">Sanjay Chavan</span>
+        <span class="cs-quote-role">VP &amp; Head Enterprise Applications</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TAGS ══ -->
+<section class="cs-tags-section">
+  <div class="container">
+    <div class="cs-tags-inner">
+      <span class="cs-tags-label">Topics</span>
+      <span class="cs-pill">Cloud Migration</span>
+      <span class="cs-pill">DevSecOps</span>
+      <span class="cs-pill">Kubernetes</span>
+      <span class="cs-pill">Container Native</span>
+      <span class="cs-pill">Observability</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cs-cta">
+  <div class="container">
+    <div class="cs-cta-inner">
+      <div class="eyebrow cs-cta-eyebrow">Start Your Migration</div>
+      <h2>Move fast. Move safely. With BootLabs.</h2>
+      <p>Whether you're migrating 10 applications or 200, we bring the methodology, tooling, and engineering expertise to get you there — on time, with zero rollbacks.</p>
+      <div class="cs-cta-btns">
+        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <a href="cloud-devops.html" class="btn-outline">Explore DevOps / Cloud</a>
+      </div>
+      <p class="cs-related-label">Related service: <a href="cloud-devops.html" class="cs-related-link">DevOps / Cloud Engineering</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
+      <div><div class="footer-col-head">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="cloud-devops.html">DevOps / Cloud</a></li>
+          <li><a href="platform-engineering.html">SRE</a></li>
+          <li><a href="software-engineering.html">Full Stack Development</a></li>
+          <li><a href="ai-engineering.html">AI &amp; ML</a></li>
+          <li><a href="agentic-ai.html">Agentic AI</a></li>
+        </ul>
+      </div>
+      <div><div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="partnerships.html">Partners</a></li>
+          <li><a href="#" onclick="openContact();return false;">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
+    <div class="footer-bot">
+      <div class="footer-copy">© 2026 BootLabs Technology. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ CONTACT POPUP ══ -->
+<div class="contact-popup" id="contactPopup" onclick="if(event.target===this)closeContact()">
+  <div class="contact-popup-box">
+    <button class="contact-popup-close" onclick="closeContact()">&#215;</button>
+    <h3>Book a Discovery Call</h3>
+    <p>Tell us about your challenge and we'll set up a focused 30-minute session.</p>
+    <form class="contact-form" onsubmit="return false;">
+      <input class="contact-input" type="text" placeholder="Your name">
+      <input class="contact-input" type="email" placeholder="Work email">
+      <input class="contact-input" type="text" placeholder="Company">
+      <textarea class="contact-input contact-textarea" placeholder="What are you trying to solve?"></textarea>
+      <button class="btn-primary" style="justify-content:center;" type="submit">Send Message <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </form>
+  </div>
+</div>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
+function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
+function toggleMobSub(el){el.parentElement.classList.toggle('open');}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
+function openContact(){const p=document.getElementById('contactPopup');p.style.display='flex';document.body.style.overflow='hidden';}
+function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
+</script>
+
+</body>
+</html>

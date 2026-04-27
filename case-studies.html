@@ -78,6 +78,26 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .footer-legal{display:flex;gap:20px;}
 .footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
+/* ══ CASE STUDY LISTING ══ */
+.cs-listing{padding:80px 0 100px;background:#06060a;border-top:1px solid var(--border);}
+.cs-listing-header{margin-bottom:56px;}
+.cs-listing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.cs-listing-card{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--r);padding:40px 36px;background:rgba(255,255,255,.02);position:relative;overflow:hidden;transition:border-color .3s,background .3s;}
+.cs-listing-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.cs-listing-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.03);}
+.cs-listing-card:hover::after{transform:scaleX(1);}
+.cs-listing-pill{display:inline-flex;align-items:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:5px 14px;background:rgba(0,102,255,.06);margin-bottom:24px;width:fit-content;}
+.cs-listing-title{font-size:20px;color:#fff;font-weight:400;line-height:1.25;margin-bottom:20px;}
+.cs-listing-metrics{display:flex;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:20px;flex-wrap:wrap;}
+.cs-listing-metric{display:flex;flex-direction:column;gap:4px;padding:14px 24px 14px 0;margin-right:24px;border-right:1px solid var(--border);}
+.cs-listing-metric:last-child{border-right:none;margin-right:0;}
+.cs-listing-metric-val{font-size:22px;color:#fff;line-height:1;letter-spacing:-.02em;}
+.cs-listing-metric-val span{color:var(--cyan);}
+.cs-listing-metric-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;}
+.cs-listing-desc{font-size:15px;color:var(--mid);line-height:1.7;flex:1;margin-bottom:24px;}
+.cs-listing-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--cyan);transition:gap .2s;}
+.cs-listing-link:hover{gap:10px;}
+@media(max-width:1100px){.cs-listing-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:768px){
   .container{padding:0 18px;}
   .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
@@ -85,12 +105,15 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
   .hero{padding:120px 0 72px;}
+  .cs-listing-grid{grid-template-columns:1fr;}
+  .cs-listing-card{padding:28px 24px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:480px){
   .container{padding:0 14px;}
   .navbar{width:calc(100% - 16px);padding:9px 12px;}
+  .cs-listing-metric-val{font-size:18px;}
 }
 </style>
 </head>
@@ -226,7 +249,129 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
         <a href="index.html" class="btn-outline">Back to Home</a>
       </div>
-      <p style="margin-top:48px;font-size:13px;color:var(--dim);border:1px solid var(--border);display:inline-block;padding:10px 20px;border-radius:100px;">Full page coming soon — contact us to learn more</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CASE STUDY LISTING ══ -->
+<section class="cs-listing">
+  <div class="container">
+    <div class="cs-listing-header">
+      <div class="eyebrow" style="margin-bottom:16px;">All Case Studies</div>
+      <h2 class="h2" style="max-width:640px;color:#fff;">Outcomes from BootLabs' most demanding enterprise engagements</h2>
+    </div>
+    <div class="cs-listing-grid">
+
+      <!-- Card 1 -->
+      <a href="cs-cloud-platform.html" class="cs-listing-card">
+        <div class="cs-listing-pill">Manufacturing &amp; Automotive</div>
+        <div class="cs-listing-title">Self-Service Cloud Platform That Accelerated Enterprise-Wide Transformation</div>
+        <div class="cs-listing-metrics">
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">20<span>×</span></div>
+            <div class="cs-listing-metric-label">Faster Adoption</div>
+          </div>
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">30<span>%</span></div>
+            <div class="cs-listing-metric-label">Cost Reduction</div>
+          </div>
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">2<span>×</span></div>
+            <div class="cs-listing-metric-label">Go-to-Market</div>
+          </div>
+        </div>
+        <div class="cs-listing-desc">A global manufacturer needed a platform that entire engineering teams could adopt on day one. BootLabs built a self-service cloud platform that turned infrastructure provisioning from weeks into minutes.</div>
+        <span class="cs-listing-link">Read case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="cs-app-migration.html" class="cs-listing-card">
+        <div class="cs-listing-pill">Automotive &amp; Industrial</div>
+        <div class="cs-listing-title">150+ Applications Migrated in 12 Months — Zero Rollbacks</div>
+        <div class="cs-listing-metrics">
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">150<span>+</span></div>
+            <div class="cs-listing-metric-label">Apps Migrated</div>
+          </div>
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">0</div>
+            <div class="cs-listing-metric-label">Rollbacks</div>
+          </div>
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">50<span>%</span></div>
+            <div class="cs-listing-metric-label">Faster Innovation</div>
+          </div>
+        </div>
+        <div class="cs-listing-desc">An automotive and industrial enterprise migrated its entire application estate — over 150 workloads — to the cloud in 12 months with no rollbacks and no business disruption.</div>
+        <span class="cs-listing-link">Read case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="cs-devsecops-fs.html" class="cs-listing-card">
+        <div class="cs-listing-pill">Financial Services</div>
+        <div class="cs-listing-title">DevSecOps Transformation for a Regulated Asset Management Enterprise</div>
+        <div class="cs-listing-metrics">
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">70<span>%</span></div>
+            <div class="cs-listing-metric-label">Faster Deploys</div>
+          </div>
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">100<span>%</span></div>
+            <div class="cs-listing-metric-label">Scan Coverage</div>
+          </div>
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val" style="font-size:16px;padding-top:3px;">Day 1</div>
+            <div class="cs-listing-metric-label">Audit-Ready</div>
+          </div>
+        </div>
+        <div class="cs-listing-desc">A regulated asset manager needed security embedded into every release — not bolted on after. BootLabs delivered a DevSecOps transformation that made every deployment audit-ready from day one.</div>
+        <span class="cs-listing-link">Read case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <!-- Card 4 -->
+      <a href="cs-cloud-nbfc.html" class="cs-listing-card">
+        <div class="cs-listing-pill">NBFC &amp; Financial Services</div>
+        <div class="cs-listing-title">Cloud Migration &amp; DevOps Modernisation for a Tier-1 NBFC</div>
+        <div class="cs-listing-metrics">
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">40<span>%</span></div>
+            <div class="cs-listing-metric-label">Cost Reduction</div>
+          </div>
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">3<span>×</span></div>
+            <div class="cs-listing-metric-label">Faster Releases</div>
+          </div>
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val" style="font-size:16px;padding-top:3px;">Zero</div>
+            <div class="cs-listing-metric-label">Downtime</div>
+          </div>
+        </div>
+        <div class="cs-listing-desc">A Tier-1 NBFC modernised its infrastructure and release pipeline simultaneously — achieving 40% cost reduction and tripling release velocity with zero downtime during the transition.</div>
+        <span class="cs-listing-link">Read case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <!-- Card 5 — spans full width -->
+      <a href="cs-devsecops-dewa.html" class="cs-listing-card" style="grid-column:span 2;">
+        <div class="cs-listing-pill">Government &amp; Energy (DEWA Dubai)</div>
+        <div class="cs-listing-title">Unified DevSecOps Across a Diverse Technology Estate — Dubai's Largest Utility</div>
+        <div class="cs-listing-metrics">
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">10<span>+</span></div>
+            <div class="cs-listing-metric-label">Stacks Unified</div>
+          </div>
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">60<span>%</span></div>
+            <div class="cs-listing-metric-label">Faster Delivery</div>
+          </div>
+          <div class="cs-listing-metric">
+            <div class="cs-listing-metric-val">100<span>%</span></div>
+            <div class="cs-listing-metric-label">Pipeline Coverage</div>
+          </div>
+        </div>
+        <div class="cs-listing-desc">DEWA runs one of the most technologically diverse IT estates in the region — Java, .NET, Python, Angular, Oracle, legacy systems, all on Azure DevOps. BootLabs built a unified DevSecOps framework that brought every stack under a single, security-first delivery standard.</div>
+        <span class="cs-listing-link">Read case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
     </div>
   </div>
 </section>
