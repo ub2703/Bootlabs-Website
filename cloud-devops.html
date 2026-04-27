@@ -132,6 +132,23 @@ input,textarea{box-sizing:border-box;}
 .process-step-title{font-size:16px;color:#fff;margin-bottom:10px;font-weight:500;}
 .process-step-desc{font-size:15px;color:var(--dim);line-height:1.6;}
 
+/* ══ CASE STUDIES GRID ══ */
+.cs-case-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cs-case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px;}
+.cs-case-card{background:#06060a;border:1px solid var(--border);border-radius:var(--r);padding:44px 40px;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden;transition:border-color .3s,background .3s;}
+.cs-case-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.cs-case-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.02);}
+.cs-case-card:hover::after{transform:scaleX(1);}
+.cs-case-industry{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:5px 14px;margin-bottom:28px;width:fit-content;}
+.cs-case-title{font-size:22px;color:#fff;line-height:1.25;margin-bottom:16px;font-weight:400;}
+.cs-case-challenge{font-size:15px;color:var(--dim);line-height:1.7;margin-bottom:28px;flex:1;}
+.cs-case-metrics{display:flex;gap:32px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:24px;}
+.cs-case-metric-val{font-size:32px;color:#fff;letter-spacing:-.02em;line-height:1;}
+.cs-case-metric-val span{font-size:18px;color:var(--cyan);}
+.cs-case-metric-label{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;}
+.cs-case-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.cs-case-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border);border-radius:100px;color:var(--dim);}
+
 /* ══ INDUSTRY TABS ══ */
 .industry-tabs-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
 .industry-tabs-header{margin-bottom:48px;}
@@ -210,6 +227,7 @@ input,textarea{box-sizing:border-box;}
   .process-steps{grid-template-columns:1fr 1fr;gap:40px;}
   .process-steps::before{display:none;}
   .cs-grid{grid-template-columns:1fr 1fr;}
+  .cs-case-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
   .container{padding:0 18px;}
@@ -230,6 +248,9 @@ input,textarea{box-sizing:border-box;}
   .tab-nav{flex-wrap:wrap;border-radius:14px;width:100%;}
   .tab-btn{flex:1;text-align:center;}
   .cs-grid{grid-template-columns:1fr;}
+  .cs-case-grid{grid-template-columns:1fr;}
+  .cs-case-metrics{gap:20px;}
+  .cs-case-metric-val{font-size:26px;}
   .footer{padding:56px 0 28px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
   .footer-brand{grid-column:span 1;}
@@ -596,86 +617,125 @@ input,textarea{box-sizing:border-box;}
   </div>
 </section>
 
-<!-- ══ INDUSTRY APPLICATIONS ══ -->
-<section class="industry-tabs-section">
+<!-- ══ CASE STUDIES ══ -->
+<section class="cs-case-section">
   <div class="container">
-    <div class="industry-tabs-header">
-      <div class="eyebrow" style="margin-bottom:20px;">Industry Depth</div>
-      <h2 class="h2">Real outcomes, by industry.</h2>
-    </div>
-    <div class="tab-nav">
-      <button class="tab-btn active" onclick="switchTab(0)">Financial Services</button>
-      <button class="tab-btn" onclick="switchTab(1)">Manufacturing</button>
-    </div>
+    <div class="eyebrow" style="margin-bottom:20px;">Client Stories</div>
+    <h2 class="h2">Outcomes that speak for themselves.</h2>
+    <div class="cs-case-grid">
 
-    <!-- Financial Services -->
-    <div class="tab-panel active">
-      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Cloud-Native Data Pipelines for Compliance</h3>
-      <div class="tab-points">
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Cloud-native data pipelines on AWS replacing legacy batch processes — enabling real-time regulatory reporting and compliance dashboards</div>
+      <!-- Card 1: Platform Engineering / Cloud Governance (M&M mPaaS) -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">Manufacturing &amp; Automotive</div>
+        <div class="cs-case-title">Self-Service Cloud Platform That Accelerated Enterprise Transformation</div>
+        <p class="cs-case-challenge">One of India's largest automotive manufacturers faced fragmented cloud adoption — multiple teams running different strategies, creating governance gaps, compliance complexity, and inconsistent security postures. Speed-to-market was suffering.</p>
+        <div class="cs-case-metrics">
+          <div>
+            <div class="cs-case-metric-val">20<span>×</span></div>
+            <div class="cs-case-metric-label">Faster Cloud Adoption</div>
+          </div>
+          <div>
+            <div class="cs-case-metric-val">30<span>%</span></div>
+            <div class="cs-case-metric-label">Cloud Cost Reduction</div>
+          </div>
+          <div>
+            <div class="cs-case-metric-val">2<span>×</span></div>
+            <div class="cs-case-metric-label">Faster Go-to-Market</div>
+          </div>
         </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Kubernetes-native workloads with full observability stack — reducing MTTD and MTTR for production incidents by <strong>65%</strong></div>
-        </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Infrastructure right-sizing and RI optimisation delivering <strong>40% reduction</strong> in monthly cloud spend</div>
+        <p class="cs-case-challenge" style="margin-bottom:20px;">BootLabs built a self-service Platform-as-a-Service that automated provisioning, compliance and governance across the entire organisation. Teams could spin up landing zones and onboard applications from a single control pane — with security, scalability, and cost controls baked in. The platform handled 1 lakh product bookings in 30 minutes at launch — the highest-ever single-day load in the Indian automotive sector.</p>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Platform Engineering</span>
+          <span class="cs-case-tag">Cloud Governance</span>
+          <span class="cs-case-tag">DevOps Automation</span>
+          <span class="cs-case-tag">FinOps</span>
         </div>
       </div>
-    </div>
 
-    <!-- Manufacturing -->
-    <div class="tab-panel">
-      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Hybrid Cloud for OT/IT Convergence</h3>
-      <div class="tab-points">
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Hybrid cloud architecture bridging OT systems and IT cloud workloads with secure, low-latency connectivity</div>
+      <!-- Card 2: 150+ App Migration + DevSecOps (M&M migration) -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">Automotive &amp; Industrial</div>
+        <div class="cs-case-title">150+ Application Migration with Enterprise-Wide DevSecOps</div>
+        <p class="cs-case-challenge">A large multi-business conglomerate needed to migrate 150+ applications — many of them legacy, spread across multiple technology stacks — on an accelerated timeline with minimal risk. DevSecOps was largely absent, making the migration significantly more complex.</p>
+        <div class="cs-case-metrics">
+          <div>
+            <div class="cs-case-metric-val">150<span>+</span></div>
+            <div class="cs-case-metric-label">Apps Migrated</div>
+          </div>
+          <div>
+            <div class="cs-case-metric-val">0</div>
+            <div class="cs-case-metric-label">Rollbacks in 1 Year</div>
+          </div>
+          <div>
+            <div class="cs-case-metric-val">50<span>%</span></div>
+            <div class="cs-case-metric-label">Faster Innovation</div>
+          </div>
         </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Edge Kubernetes clusters processing sensor data at the plant — reducing cloud egress costs by <strong>50%</strong></div>
-        </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Unified SRE observability across on-prem and cloud tiers with automated alerting and runbooks</div>
+        <p class="cs-case-challenge" style="margin-bottom:20px;">BootLabs defined the modernisation path with a container-native approach. We inducted enterprise-wide DevSecOps practices, automated containerised deployments with rollback strategies, implemented secrets management, and delivered end-to-end observability across the migrated estate. DevSecOps then scaled across the full organisation.</p>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Cloud Migration</span>
+          <span class="cs-case-tag">DevSecOps</span>
+          <span class="cs-case-tag">Kubernetes</span>
+          <span class="cs-case-tag">Observability</span>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- ══ CASE STUDY HIGHLIGHT ══ -->
-<section class="case-studies-section">
-  <div class="container">
-    <div class="case-studies-header">
-      <div class="eyebrow" style="margin-bottom:20px;">Proof Points</div>
-      <h2 class="h2">Featured outcomes.</h2>
-    </div>
-    <div class="cs-grid">
-      <div class="cs-card">
-        <div class="cs-client">Mahindra &amp; Mahindra</div>
-        <div class="cs-metric">150+</div>
-        <p class="cs-desc">Applications migrated to cloud and DevOps fully automated end-to-end for one of India's largest conglomerates. BootLabs standardised infrastructure provisioning, built CI/CD pipelines across business units, and delivered a unified DevOps platform that cut release cycle times dramatically.</p>
-        <div class="cs-tags">
-          <span class="cs-tag">Manufacturing</span>
-          <span class="cs-tag">Cloud Migration</span>
-          <span class="cs-tag">DevOps Automation</span>
+      <!-- Card 3: Mirae Asset - DevSecOps -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">Financial Services &amp; Asset Management</div>
+        <div class="cs-case-title">DevSecOps Transformation for a Regulated Financial Enterprise</div>
+        <p class="cs-case-challenge">A leading asset management firm had fragmented CI/CD pipelines with no centralised security controls. Vulnerability scanning happened post-deployment, compliance audits were manual, and different teams operated entirely different release processes — creating regulatory exposure.</p>
+        <div class="cs-case-metrics">
+          <div>
+            <div class="cs-case-metric-val">70<span>%</span></div>
+            <div class="cs-case-metric-label">Faster Deployments</div>
+          </div>
+          <div>
+            <div class="cs-case-metric-val">100<span>%</span></div>
+            <div class="cs-case-metric-label">Security Scan Coverage</div>
+          </div>
+          <div>
+            <div class="cs-case-metric-val">Day<span> 1</span></div>
+            <div class="cs-case-metric-label">Audit Readiness</div>
+          </div>
+        </div>
+        <p class="cs-case-challenge" style="margin-bottom:20px;">BootLabs implemented a unified DevSecOps pipeline with automated SAST/DAST scanning, container security policies, secrets management, and compliance-as-code across all teams. Security gates were embedded into every CI/CD stage — shifting left from post-deployment fixes to pre-commit prevention.</p>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">DevSecOps</span>
+          <span class="cs-case-tag">Financial Services</span>
+          <span class="cs-case-tag">CI/CD Security</span>
+          <span class="cs-case-tag">Compliance Automation</span>
         </div>
       </div>
-      <div class="cs-card">
-        <div class="cs-client">Large BFSI Enterprise</div>
-        <div class="cs-metric">30%↓</div>
-        <p class="cs-desc">Managed services cost significantly reduced by layering AIOps on top of existing cloud operations — automating incident triage, reducing L1/L2 ticket volume, and shifting the ops model from reactive firefighting to predictive intervention. Engineering headcount freed for product work.</p>
-        <div class="cs-tags">
-          <span class="cs-tag">Financial Services</span>
-          <span class="cs-tag">Managed Services</span>
-          <span class="cs-tag">AIOps</span>
+
+      <!-- Card 4: Mahindra Finance - Cloud Migration + DevOps -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">NBFC &amp; Financial Services</div>
+        <div class="cs-case-title">Cloud Migration &amp; DevOps Modernisation for a Tier-1 NBFC</div>
+        <p class="cs-case-challenge">A leading non-banking financial company was running on ageing on-premise infrastructure with manual, error-prone release processes. Teams operated in silos with no shared delivery platform, limited visibility into production health, and release cycles measured in weeks.</p>
+        <div class="cs-case-metrics">
+          <div>
+            <div class="cs-case-metric-val">40<span>%</span></div>
+            <div class="cs-case-metric-label">Infra Cost Reduction</div>
+          </div>
+          <div>
+            <div class="cs-case-metric-val">3<span>×</span></div>
+            <div class="cs-case-metric-label">Faster Release Cycles</div>
+          </div>
+          <div>
+            <div class="cs-case-metric-val">0</div>
+            <div class="cs-case-metric-label">Downtime Migrations</div>
+          </div>
+        </div>
+        <p class="cs-case-challenge" style="margin-bottom:20px;">BootLabs migrated business-critical applications to cloud with zero downtime, built a Kubernetes-native delivery platform with unified CI/CD, and deployed a full observability stack covering metrics, distributed traces, and structured logs. Teams went from bi-weekly releases to multiple deploys per day.</p>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Cloud Migration</span>
+          <span class="cs-case-tag">NBFC</span>
+          <span class="cs-case-tag">Kubernetes</span>
+          <span class="cs-case-tag">Observability</span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -801,14 +861,7 @@ function closeContact() {
   document.body.style.overflow = '';
 }
 
-const tabPanels = document.querySelectorAll('.tab-panel');
-const tabBtns = document.querySelectorAll('.tab-btn');
-function switchTab(n) {
-  tabPanels.forEach((p, i) => p.classList.toggle('active', i === n));
-  tabBtns.forEach((b, i) => b.classList.toggle('active', i === n));
-}
-
-gsap.utils.toArray('.offering-card,.cs-card,.process-step,.tab-point').forEach((el, i) => {
+gsap.utils.toArray('.offering-card,.cs-case-card,.process-step').forEach((el, i) => {
   gsap.from(el, {
     opacity: 0, y: 24, duration: 0.65,
     delay: (i % 4) * 0.08,
