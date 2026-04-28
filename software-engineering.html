@@ -231,7 +231,29 @@ input,textarea{box-sizing:border-box;}
   .svc-stat-item{flex:1 1 100%;}
   .footer-legal{flex-wrap:wrap;gap:12px;}
   .mob-nav-link{font-size:20px;}
+  .cs-case-grid{grid-template-columns:1fr;}
+  .cs-case-metrics{gap:20px;}
 }
+/* ══ CASE STUDIES SECTION ══ */
+.cs-case-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cs-case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px;}
+.cs-case-card{background:#06060a;border:1px solid var(--border);border-radius:var(--r);padding:44px 40px;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden;transition:border-color .3s,background .3s;}
+.cs-case-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.cs-case-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.02);}
+.cs-case-card:hover::after{transform:scaleX(1);}
+.cs-case-industry{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:5px 14px;margin-bottom:28px;width:fit-content;}
+.cs-case-title{font-size:22px;color:#fff;line-height:1.25;margin-bottom:16px;font-weight:400;}
+.cs-case-challenge{font-size:15px;color:var(--dim);line-height:1.7;margin-bottom:28px;flex:1;}
+.cs-case-metrics{display:flex;gap:32px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:24px;}
+.cs-case-metric{display:flex;flex-direction:column;gap:4px;}
+.cs-case-metric-val{font-size:32px;color:#fff;letter-spacing:-.02em;line-height:1;}
+.cs-case-metric-val span{font-size:18px;color:var(--cyan);}
+.cs-case-metric-label{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;}
+.cs-case-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.cs-case-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border);border-radius:100px;color:var(--dim);}
+.cs-case-link{font-size:13px;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;}
+.cs-case-link:hover{gap:10px;}
+.cs-case-link svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
 </style>
 </head>
 <body>
@@ -524,116 +546,94 @@ input,textarea{box-sizing:border-box;}
   </div>
 </section>
 
-<!-- ══ INDUSTRY APPLICATIONS ══ -->
-<section class="industry-tabs-section">
+<!-- ══ CASE STUDIES ══ -->
+<section class="cs-case-section">
   <div class="container">
-    <div class="industry-tabs-header">
-      <div class="eyebrow" style="margin-bottom:20px;">Industry Depth</div>
-      <h2 class="h2">Real outcomes, by industry.</h2>
-    </div>
-    <div class="tab-nav">
-      <button class="tab-btn active" onclick="switchTab(0)">Enterprise SaaS</button>
-      <button class="tab-btn" onclick="switchTab(1)">Automotive</button>
-      <button class="tab-btn" onclick="switchTab(2)">Travel</button>
-    </div>
+    <div class="eyebrow" style="margin-bottom:20px;">Case Studies</div>
+    <h2 class="h2">Software we've shipped that's in production.</h2>
+    <div class="cs-case-grid">
 
-    <!-- Tackbot -->
-    <div class="tab-panel active">
-      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Unified Enterprise Ticketing Platform</h3>
-      <div class="tab-points">
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Built a US-based enterprise SaaS product that lets teams <strong>log, track, and manage tickets across Jira, ServiceNow, Zendesk, and more from a single interface</strong> — eliminating context-switching across tools</div>
+      <!-- Card 1 — Enterprise SaaS Ticketing -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">Enterprise SaaS</div>
+        <div class="cs-case-title">Unified Enterprise Ticketing Platform Built From the Ground Up</div>
+        <div class="cs-case-challenge">A US SaaS startup needed their core product built — a single interface letting enterprise teams manage tickets across Jira, ServiceNow, Zendesk and 10+ ITSM tools simultaneously, with enterprise-grade SSO, RBAC, and compliance from day one.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">10<span>+</span></div>
+            <div class="cs-case-metric-label">ITSM platforms integrated</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">3<span>×</span></div>
+            <div class="cs-case-metric-label">faster enterprise onboarding</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">0</div>
+            <div class="cs-case-metric-label">re-instruments on scale-up</div>
+          </div>
         </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">API-first integration layer connecting <strong>10+ ticketing and ITSM platforms</strong> with bi-directional sync, field mapping, and workflow automation — built to support enterprise compliance requirements</div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Product Engineering</span>
+          <span class="cs-case-tag">SaaS</span>
+          <span class="cs-case-tag">API Integration</span>
         </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Scalable multi-tenant architecture on AWS — designed for enterprise rollout with <strong>SSO, RBAC, and audit logging</strong> built into the core product from day one</div>
-        </div>
+        <a href="cs-saas-ticketing.html" class="cs-case-link">Read case study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
-    </div>
 
-    <!-- Automotive -->
-    <div class="tab-panel">
-      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Crashtest Analytics Platform</h3>
-      <div class="tab-points">
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Built a crash test analytics platform for a <strong>leading automotive OEM</strong> — ingesting high-volume sensor and telemetry data from physical crash tests into a structured, queryable data layer</div>
+      <!-- Card 2 — Crashtest Analytics -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">Automotive</div>
+        <div class="cs-case-title">Crash Test Analytics Platform That Cut Compliance Reporting from Weeks to Hours</div>
+        <div class="cs-case-challenge">A leading automotive OEM had no structured way to query crash test sensor data or produce NCAP compliance reports — safety engineers were working from Excel. We built the platform that changed that.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">90<span>%</span></div>
+            <div class="cs-case-metric-label">reduction in report time</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">10<span>+</span></div>
+            <div class="cs-case-metric-label">regulatory frameworks automated</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">100<span>%</span></div>
+            <div class="cs-case-metric-label">sensor data traceability</div>
+          </div>
         </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Interactive analytics dashboards enabling safety engineers to <strong>slice test results by impact zone, vehicle variant, and regulatory standard</strong> — replacing manual Excel-based reporting</div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Automotive</span>
+          <span class="cs-case-tag">Data Engineering</span>
+          <span class="cs-case-tag">Analytics</span>
         </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Automated compliance reporting mapped to <strong>NCAP and regional safety frameworks</strong>, cutting report generation time from weeks to hours</div>
-        </div>
+        <a href="cs-crashtest-analytics.html" class="cs-case-link">Read case study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
-    </div>
 
-    <!-- Travel -->
-    <div class="tab-panel">
-      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Booking & Management Platform Overhaul</h3>
-      <div class="tab-points">
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">End-to-end revamp of booking and reservation management for a <strong>leading holiday and travel company</strong> — migrating from a legacy monolith to a microservices-based platform handling real-time availability across hundreds of properties</div>
+      <!-- Card 3 — Travel Booking Platform -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">Travel &amp; Hospitality</div>
+        <div class="cs-case-title">Booking Platform Modernisation From Legacy Monolith to Real-Time Microservices</div>
+        <div class="cs-case-challenge">A leading UK holiday group was running on a legacy monolith that couldn't handle real-time availability across 300+ properties. We rebuilt the platform end-to-end — booking UX, dynamic pricing, and unified back-office operations portal.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">300<span>+</span></div>
+            <div class="cs-case-metric-label">properties in real-time</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">35<span>%</span></div>
+            <div class="cs-case-metric-label">drop in checkout abandonment</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">0</div>
+            <div class="cs-case-metric-label">downtime during migration</div>
+          </div>
         </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">New customer-facing booking experience with <strong>dynamic pricing, package bundling, and instant confirmation</strong> — significantly reducing drop-off at the checkout stage</div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Travel &amp; Hospitality</span>
+          <span class="cs-case-tag">Modernisation</span>
+          <span class="cs-case-tag">Microservices</span>
         </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Unified back-office management portal giving operations teams <strong>real-time visibility into bookings, modifications, and cancellations</strong> across all channels and properties</div>
-        </div>
+        <a href="cs-travel-booking.html" class="cs-case-link">Read case study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- ══ CASE STUDY HIGHLIGHT ══ -->
-<section class="case-studies-section">
-  <div class="container">
-    <div class="case-studies-header">
-      <div class="eyebrow" style="margin-bottom:20px;">Proof Points</div>
-      <h2 class="h2">Featured outcomes.</h2>
-    </div>
-    <div class="cs-grid">
-      <div class="cs-card">
-        <div class="cs-client">US Enterprise SaaS Client</div>
-        <p class="cs-desc">Built a unified enterprise ticketing product from the ground up — a single platform that lets teams log and manage tickets across Jira, ServiceNow, Zendesk, and 10+ other tools simultaneously. Multi-tenant, SSO-ready, and built for enterprise compliance from day one.</p>
-        <div class="cs-tags">
-          <span class="cs-tag">Product Engineering</span>
-          <span class="cs-tag">SaaS</span>
-          <span class="cs-tag">API Integration</span>
-        </div>
-        <a href="#" class="cs-link">Read case study →</a>
-      </div>
-      <div class="cs-card">
-        <div class="cs-client">Leading Automotive OEM</div>
-        <p class="cs-desc">Designed and built a crash test analytics platform that transforms raw sensor data from physical tests into structured, queryable insights — with automated compliance reporting to NCAP standards. Cut report generation from weeks to hours.</p>
-        <div class="cs-tags">
-          <span class="cs-tag">Automotive</span>
-          <span class="cs-tag">Data Engineering</span>
-          <span class="cs-tag">Analytics</span>
-        </div>
-        <a href="#" class="cs-link">Read case study →</a>
-      </div>
-      <div class="cs-card">
-        <div class="cs-client">Leading Holiday & Travel Company</div>
-        <p class="cs-desc">Full platform overhaul of booking and reservation management — migrating from a legacy monolith to real-time microservices handling availability across hundreds of properties. New booking UX, dynamic pricing, and a unified back-office operations portal.</p>
-        <div class="cs-tags">
-          <span class="cs-tag">Travel & Hospitality</span>
-          <span class="cs-tag">Modernisation</span>
-          <span class="cs-tag">Microservices</span>
-        </div>
-        <a href="#" class="cs-link">Read case study →</a>
-      </div>
     </div>
   </div>
 </section>
@@ -759,14 +759,7 @@ function closeContact() {
   document.body.style.overflow = '';
 }
 
-const tabPanels = document.querySelectorAll('.tab-panel');
-const tabBtns = document.querySelectorAll('.tab-btn');
-function switchTab(n) {
-  tabPanels.forEach((p, i) => p.classList.toggle('active', i === n));
-  tabBtns.forEach((b, i) => b.classList.toggle('active', i === n));
-}
-
-gsap.utils.toArray('.offering-card,.cs-card,.process-step,.tab-point').forEach((el, i) => {
+gsap.utils.toArray('.offering-card,.cs-case-card,.process-step').forEach((el, i) => {
   gsap.from(el, {
     opacity: 0, y: 24, duration: 0.65,
     delay: (i % 4) * 0.08,
