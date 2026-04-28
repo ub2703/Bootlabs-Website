@@ -63,6 +63,21 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .hero-h1{font-size:clamp(36px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
 .hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:48px;}
 .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+/* ══ BLOG LISTING ══ */
+.blog-listing{padding:80px 0 100px;background:#06060a;}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.blog-card{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:#080812;transition:border-color .3s,transform .3s;display:flex;flex-direction:column;text-decoration:none;}
+.blog-card:hover{border-color:var(--border-blue);transform:translateY(-4px);}
+.blog-card-img{width:100%;height:220px;object-fit:cover;display:block;}
+.blog-card-body{padding:28px 28px 24px;flex:1;display:flex;flex-direction:column;}
+.blog-card-chip{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:4px 12px;background:rgba(0,102,255,.06);display:inline-block;margin-bottom:14px;width:fit-content;}
+.blog-card-title{font-size:18px;color:#fff;font-weight:400;line-height:1.3;margin-bottom:12px;}
+.blog-card-desc{font-size:14px;color:var(--mid);line-height:1.65;margin-bottom:20px;flex:1;}
+.blog-card-meta{font-size:12px;color:var(--dim);}
+.blog-card-link{font-size:13px;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;margin-top:16px;transition:gap .2s;}
+.blog-card-link:hover{gap:10px;}
+@media(max-width:900px){.blog-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.blog-grid{grid-template-columns:1fr;}}
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
 .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
 .footer-brand img{height:26px;margin-bottom:18px;}
@@ -220,13 +235,28 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="hero-inner">
       <div class="hero-badge">Insights</div>
-      <h1 class="hero-h1">Blog & Press Releases</h1>
+      <h1 class="hero-h1">Blog &amp; Press Releases</h1>
       <p class="hero-sub">Perspectives, announcements, and engineering insights from the BootLabs team.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        <a href="index.html" class="btn-outline">Back to Home</a>
-      </div>
-      <p style="margin-top:48px;font-size:13px;color:var(--dim);border:1px solid var(--border);display:inline-block;padding:10px 20px;border-radius:100px;">Full page coming soon — contact us to learn more</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BLOG LISTING ══ -->
+<section class="blog-listing">
+  <div class="container">
+    <div class="blog-grid">
+
+      <a href="blog-sre-observability-2026.html" class="blog-card">
+        <img class="blog-card-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&auto=format&fit=crop&q=80" alt="SRE Observability 2026">
+        <div class="blog-card-body">
+          <span class="blog-card-chip">SRE · Observability</span>
+          <div class="blog-card-title">The 2026 Observability Stack: Tools Every SRE Team Relies On</div>
+          <div class="blog-card-desc">Why the three pillars aren't enough anymore — and what the best-instrumented production systems look like today. From Prometheus and OpenTelemetry to AI-assisted alerting.</div>
+          <div class="blog-card-meta">April 2026 &nbsp;·&nbsp; 8 min read</div>
+          <span class="blog-card-link">Read article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>

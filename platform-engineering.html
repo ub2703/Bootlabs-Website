@@ -250,7 +250,27 @@ input,textarea{box-sizing:border-box;}
   .svc-stat-item{flex:1 1 100%;}
   .footer-legal{flex-wrap:wrap;gap:12px;}
   .mob-nav-link{font-size:20px;}
+  .blog-feature-card{grid-template-columns:1fr;}
+  .blog-feature-img img{min-height:240px;}
+  .blog-feature-content{padding:32px 28px;}
 }
+/* ══ BLOG FEATURE ══ */
+.blog-feature-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.blog-feature-header{margin-bottom:48px;}
+.blog-feature-card{display:grid;grid-template-columns:42% 1fr;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);text-decoration:none;transition:border-color .3s;}
+.blog-feature-card:hover{border-color:var(--border-blue);}
+.blog-feature-img{overflow:hidden;}
+.blog-feature-img img{width:100%;height:100%;min-height:380px;object-fit:cover;display:block;transition:transform .5s;}
+.blog-feature-card:hover .blog-feature-img img{transform:scale(1.03);}
+.blog-feature-content{background:#0a0a14;padding:52px 52px;display:flex;flex-direction:column;justify-content:center;gap:0;}
+.blog-feat-tags{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+.blog-feat-tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:4px 12px;background:rgba(0,102,255,.06);}
+.blog-feat-meta{font-size:13px;color:var(--dim);margin-bottom:20px;}
+.blog-feat-title{font-size:clamp(22px,2.5vw,32px);color:#fff;font-weight:400;line-height:1.22;margin-bottom:16px;}
+.blog-feat-excerpt{font-size:15px;color:var(--mid);line-height:1.75;margin-bottom:32px;}
+.blog-feat-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--cyan);transition:gap .2s;}
+.blog-feat-link:hover{gap:12px;}
+.blog-feat-link svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
 </style>
 </head>
 <body>
@@ -428,7 +448,7 @@ input,textarea{box-sizing:border-box;}
       </div>
       <!-- Right: visual -->
       <div class="svc-hero-visual">
-        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&auto=format&fit=crop&q=80" alt="Platform Engineering" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&auto=format&fit=crop&q=80" alt="SRE Observability" loading="lazy">
         <div class="svc-hero-visual-overlay"></div>
         <!-- floating status cards -->
         <div class="hero-badge-float" style="bottom:80px;left:20px;">
@@ -480,7 +500,7 @@ input,textarea{box-sizing:border-box;}
     <div class="offerings-header">
       <div class="eyebrow" style="margin-bottom:20px;">Capabilities</div>
       <h2 class="h2">What we build for reliability</h2>
-      <p class="body-l" style="max-width:600px;margin-top:20px;">Enterprise platform engineering across every layer — from cloud orchestration and API gateways to developer platforms and governance frameworks.</p>
+      <p class="body-l" style="max-width:600px;margin-top:20px;">Production reliability engineering across every dimension — instrumentation, alerting, incident response, and continuous improvement.</p>
     </div>
     <div class="offerings-grid">
       <div class="offering-card">
@@ -553,7 +573,7 @@ input,textarea{box-sizing:border-box;}
     <div class="tools-header">
       <div class="eyebrow" style="margin-bottom:20px;">Our Stack</div>
       <h2 class="h2">Tools &amp; techniques we work with.</h2>
-      <p class="body-l" style="max-width:600px;margin-top:20px;">We work across the leading platform engineering toolchain — from orchestrators and IDPs to service mesh and observability — meeting your stack where it is.</p>
+      <p class="body-l" style="max-width:600px;margin-top:20px;">We work across the full SRE toolchain — from observability pipelines and service mesh to incident management and chaos engineering — meeting your stack where it is.</p>
     </div>
     <div class="tools-cols">
       <div class="tools-col">
@@ -629,89 +649,29 @@ input,textarea{box-sizing:border-box;}
   </div>
 </section>
 
-<!-- ══ INDUSTRY APPLICATIONS ══ -->
-<section class="industry-tabs-section">
+<!-- ══ FROM THE BLOG ══ -->
+<section class="blog-feature-section">
   <div class="container">
-    <div class="industry-tabs-header">
-      <div class="eyebrow" style="margin-bottom:20px;">Industry Depth</div>
-      <h2 class="h2">Real outcomes, by industry.</h2>
+    <div class="blog-feature-header">
+      <div class="eyebrow" style="margin-bottom:20px;">From the Blog</div>
+      <h2 class="h2">SRE insight, straight from the team.</h2>
     </div>
-    <div class="tab-nav">
-      <button class="tab-btn active" onclick="switchTab(0)">Automotive</button>
-      <button class="tab-btn" onclick="switchTab(1)">Manufacturing</button>
-    </div>
-
-    <!-- Automotive -->
-    <div class="tab-panel active">
-      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">IDP for Dealer Platform</h3>
-      <div class="tab-points">
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Kubernetes-native IDP with Backstage developer portal enabling self-service environment provisioning across <strong>20+ teams</strong></div>
-        </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">GitOps-driven release workflows delivering <strong>3× faster release cycles</strong> — from bi-weekly to daily deployments across all dealer-facing services</div>
-        </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Cost governance automation saving <strong>30% on cloud spend</strong> through right-sizing and idle resource reclamation</div>
-        </div>
+    <a href="blog-sre-observability-2026.html" class="blog-feature-card">
+      <div class="blog-feature-img">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&auto=format&fit=crop&q=80" alt="SRE Observability 2026">
       </div>
-    </div>
-
-    <!-- Manufacturing -->
-    <div class="tab-panel">
-      <h3 style="font-size:22px;color:#fff;margin-bottom:20px;font-weight:400;">Self-Service ML Infrastructure</h3>
-      <div class="tab-points">
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Crossplane-based self-service provisioning giving data science teams GPU-backed environments on demand — fully provisioned in <strong>under 15 minutes</strong>, down from 3+ days</div>
+      <div class="blog-feature-content">
+        <div class="blog-feat-tags">
+          <span class="blog-feat-tag">SRE</span>
+          <span class="blog-feat-tag">Observability</span>
+          <span class="blog-feat-tag">Engineering</span>
         </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Policy-as-code guardrails ensuring all ML workloads meet security and compliance requirements before deployment</div>
-        </div>
-        <div class="tab-point">
-          <div class="tab-point-dot"></div>
-          <div class="tab-point-text">Unified developer portal enabling <strong>12 engineering teams</strong> to self-serve infrastructure without raising a single ticket</div>
-        </div>
+        <div class="blog-feat-meta">April 2026 &nbsp;·&nbsp; 8 min read</div>
+        <h3 class="blog-feat-title">The 2026 Observability Stack: Tools Every SRE Team Relies On</h3>
+        <p class="blog-feat-excerpt">Why the three pillars aren't enough anymore — and what the best-instrumented production systems look like today. From Prometheus and OpenTelemetry to AI-assisted alerting and distributed tracing, this is the stack separating reactive SRE from proactive SRE.</p>
+        <span class="blog-feat-link">Read the article <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CASE STUDY HIGHLIGHT ══ -->
-<section class="case-studies-section">
-  <div class="container">
-    <div class="case-studies-header">
-      <div class="eyebrow" style="margin-bottom:20px;">Proof Points</div>
-      <h2 class="h2">Featured outcomes.</h2>
-    </div>
-    <div class="cs-grid">
-      <div class="cs-card">
-        <div class="cs-client">Ather Energy</div>
-        <div class="cs-metric">3&times;</div>
-        <p class="cs-desc">Platform engineering and DevOps transformation that moved Ather from fortnightly releases to daily deployments — with a Kubernetes-native IDP, GitOps workflows, and full SRE observability. Developer onboarding time dropped from days to hours.</p>
-        <div class="cs-tags">
-          <span class="cs-tag">Automotive</span>
-          <span class="cs-tag">Platform Engineering</span>
-          <span class="cs-tag">IDP</span>
-        </div>
-        <a href="#" class="cs-link">Read case study →</a>
-      </div>
-      <div class="cs-card">
-        <div class="cs-client">Manufacturing Client</div>
-        <div class="cs-metric">30%</div>
-        <p class="cs-desc">Multi-cloud platform engineering with unified control plane across AWS and Azure — enabling 12 engineering teams to self-serve infrastructure without tickets. Platform governance automation delivered 30% cloud cost reduction in the first quarter.</p>
-        <div class="cs-tags">
-          <span class="cs-tag">Manufacturing</span>
-          <span class="cs-tag">Multi-Cloud</span>
-          <span class="cs-tag">Self-Service Infra</span>
-        </div>
-        <a href="#" class="cs-link">Read case study →</a>
-      </div>
-    </div>
+    </a>
   </div>
 </section>
 
@@ -719,8 +679,8 @@ input,textarea{box-sizing:border-box;}
 <section class="svc-cta-section">
   <div class="container">
     <div class="svc-cta-inner">
-      <h2 class="svc-cta-h2">Ready to unlock developer velocity?</h2>
-      <p class="svc-cta-sub">30 minutes with our platform engineering leadership. We'll show you exactly how an IDP transforms how your teams ship.</p>
+      <h2 class="svc-cta-h2">Ready to make reliability a competitive edge?</h2>
+      <p class="svc-cta-sub">30 minutes with our SRE leadership. We'll map your reliability gaps and show you what a mature observability practice looks like in production.</p>
       <button class="btn-primary" onclick="openContact()">
         Book a Discovery Call
         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
