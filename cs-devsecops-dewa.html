@@ -25,7 +25,7 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
 .mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
 .mobile-menu.open{display:flex;}
 .mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
-.mob-nav-link{font-size:22px;color:#fff;padding:14px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
 .mob-sub{padding:10px 0 4px;display:none;flex-direction:column;gap:8px;}
 .mob-nav-links .open .mob-sub{display:flex;}
 .mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
@@ -37,7 +37,7 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
 .nav-logo img{height:28px;width:auto;}
 .nav-center{display:flex;align-items:center;gap:4px;}
 .nav-item{position:relative;}
-.nav-link{font-size:15px;color:rgba(255,255,255,.9);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link{font-size:15px;color:rgba(255,255,255,.92);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
 .nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
 .nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
 .nav-item:hover .nav-link svg{transform:rotate(180deg);}
@@ -199,10 +199,11 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
 </head>
 <body>
 
-<!-- MOBILE MENU -->
+<!-- ══ MOBILE MENU ══ -->
 <div class="mobile-menu" id="mobileMenu">
   <nav class="mob-nav-links">
-    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
       <div class="mob-sub">
         <a href="cloud-devops.html" onclick="closeMobileMenu()">DevOps / Cloud</a>
         <a href="platform-engineering.html" onclick="closeMobileMenu()">SRE</a>
@@ -211,15 +212,96 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
         <a href="agentic-ai.html" onclick="closeMobileMenu()">Agentic AI</a>
       </div>
     </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Solutions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="resilient-operations-center.html" onclick="closeMobileMenu()">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" onclick="closeMobileMenu()">AI in SDLC</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Industries <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="manufacturing.html" onclick="closeMobileMenu()">Manufacturing</a>
+        <a href="automotive.html" onclick="closeMobileMenu()">Automotive</a>
+        <a href="financial-services.html" onclick="closeMobileMenu()">Financial Services</a>
+        <a href="qsr.html" onclick="closeMobileMenu()">QSR</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="sailor.html" onclick="closeMobileMenu()">Sailor</a>
+        <a href="guardian.html" onclick="closeMobileMenu()">Guardian</a>
+      </div>
+    </div>
     <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
-    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
       <div class="mob-sub">
         <a href="about-us.html" onclick="closeMobileMenu()">About Us</a>
         <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="white-papers.html" onclick="closeMobileMenu()">White Papers</a>
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
   </nav>
+  <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">DevOps / Cloud</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Infrastructure Automation</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">SRE</div><div class="mega-item-subs">Observability · SLOs · Chaos Engineering · Service Mesh</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Full Stack Development</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI &amp; ML</div><div class="mega-item-subs">ML Engineering · MLOps · Production AI · Model Monitoring</div></a>
+        <a href="agentic-ai.html" class="mega-item" style="grid-column:span 2;"><div class="mega-item-title">Agentic AI</div><div class="mega-item-subs">Task Agents · Multi-Agent Orchestration · Tool-Using Agents · LLMOps</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="resilient-operations-center.html" class="simple-item">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" class="simple-item">AI in SDLC</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#industry" class="nav-link">Industries <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="manufacturing.html" class="simple-item">Manufacturing</a>
+        <a href="automotive.html" class="simple-item">Automotive</a>
+        <a href="financial-services.html" class="simple-item">Financial Services</a>
+        <a href="qsr.html" class="simple-item">QSR</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#platforms" class="nav-link">Platforms <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="sailor.html" class="simple-item">Sailor</a>
+        <a href="guardian.html" class="simple-item">Guardian</a>
+      </div>
+    </div>
+    <a href="partnerships.html" class="nav-link">Partners</a>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="about-us.html" class="simple-item">About Us</a>
+        <a href="case-studies.html" class="simple-item">Case Studies</a>
+        <a href="white-papers.html" class="simple-item">White Papers</a>
+        <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
   <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
 </div>
 

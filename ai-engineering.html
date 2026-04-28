@@ -272,7 +272,29 @@ input,textarea{box-sizing:border-box;}
   .svc-stat-item{flex:1 1 100%;}
   .footer-legal{flex-wrap:wrap;gap:12px;}
   .mob-nav-link{font-size:20px;}
+  .cs-case-grid{grid-template-columns:1fr;}
+  .cs-case-metrics{gap:20px;}
 }
+/* ══ CASE STUDIES ══ */
+.cs-case-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cs-case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px;}
+.cs-case-card{background:#06060a;border:1px solid var(--border);border-radius:var(--r);padding:44px 40px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:border-color .3s,background .3s;}
+.cs-case-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.cs-case-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.02);}
+.cs-case-card:hover::after{transform:scaleX(1);}
+.cs-case-industry{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:5px 14px;margin-bottom:28px;width:fit-content;}
+.cs-case-title{font-size:22px;color:#fff;line-height:1.25;margin-bottom:16px;font-weight:400;}
+.cs-case-challenge{font-size:15px;color:var(--dim);line-height:1.7;margin-bottom:28px;flex:1;}
+.cs-case-metrics{display:flex;gap:32px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:24px;}
+.cs-case-metric{display:flex;flex-direction:column;gap:4px;}
+.cs-case-metric-val{font-size:32px;color:#fff;letter-spacing:-.02em;line-height:1;}
+.cs-case-metric-val span{font-size:18px;color:var(--cyan);}
+.cs-case-metric-label{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;}
+.cs-case-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.cs-case-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border);border-radius:100px;color:var(--dim);}
+.cs-case-link{font-size:13px;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;}
+.cs-case-link:hover{gap:10px;}
+.cs-case-link svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
 </style>
 </head>
 <body>
@@ -658,114 +680,83 @@ input,textarea{box-sizing:border-box;}
   </div>
 </section>
 
-<!-- ══ INDUSTRY APPLICATIONS ══ -->
-<section class="industry-tabs-section">
+<!-- ══ CASE STUDIES ══ -->
+<section class="cs-case-section">
   <div class="container">
-    <div class="industry-tabs-header">
-      <div class="eyebrow" style="margin-bottom:20px;">Industry Depth</div>
-      <h2 class="h2">Real outcomes, by industry.</h2>
+    <div style="margin-bottom:56px;">
+      <div class="eyebrow" style="margin-bottom:20px;">Client Outcomes</div>
+      <h2 class="h2">AI in production, at a leading bank.</h2>
     </div>
-    <div class="tab-nav">
-      <button class="tab-btn active" onclick="switchTab(0)">Manufacturing</button>
-      <button class="tab-btn" onclick="switchTab(1)">Financial Services</button>
-      <button class="tab-btn" onclick="switchTab(2)">QSR</button>
-    </div>
+    <div class="cs-case-grid">
 
-    <!-- Manufacturing -->
-    <div class="tab-panel active">
-      <div class="tab-panel-inner">
-        <div class="tab-panel-title">AIOps for Predictive Maintenance</div>
-        <div class="tab-points">
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">AI-driven anomaly detection on production line sensor data — catching faults before failure occurs, not after</div>
+      <!-- Card 1: Email Agent -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2 10 12 16 22 10"/></svg>
+          Financial Services · AI Agent
+        </div>
+        <div class="cs-case-title">Email Classification &amp; Response Agent for a Leading Private Sector Bank</div>
+        <div class="cs-case-challenge">A large private sector bank processed thousands of inbound customer emails daily across 20+ product lines — each with 30–40 distinct intents. Manual triaging created backlogs, inconsistent responses, and SLA breaches. BootLabs deployed a fully on-premise AI agent to classify, route, and draft responses automatically.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">20<span>+</span></div>
+            <div class="cs-case-metric-label">Banking Products</div>
           </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Predictive maintenance models correlating sensor patterns with failure history — clients see <strong>up to 60% reduction in unplanned downtime</strong> within the first quarter</div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">600<span>+</span></div>
+            <div class="cs-case-metric-label">Intents Modelled</div>
           </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Automated work order generation and parts procurement triggered by AI risk scores — removing manual intervention entirely</div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">70<span>%+</span></div>
+            <div class="cs-case-metric-label">Auto-Routed</div>
           </div>
         </div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">On-Premise LLM</span>
+          <span class="cs-case-tag">Mistral / LLaMA</span>
+          <span class="cs-case-tag">CRM Integration</span>
+          <span class="cs-case-tag">GenAI Agent</span>
+        </div>
+        <a href="cs-bank-email-agent.html" class="cs-case-link">
+          Read case study
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
-    </div>
 
-    <!-- Financial Services -->
-    <div class="tab-panel">
-      <div class="tab-panel-inner">
-        <div class="tab-panel-title">GenAI for Document Processing &amp; Compliance</div>
-        <div class="tab-points">
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Enterprise GenAI pipeline automating KYC, loan documentation, and regulatory filing end-to-end — <strong>60% less processing time</strong> vs manual workflows</div>
+      <!-- Card 2: Doc Processor -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Financial Services · AI Pipeline
+        </div>
+        <div class="cs-case-title">Universal Document Processor That Cuts AI Cost by 60% at a Leading Private Sector Bank</div>
+        <div class="cs-case-challenge">The bank handled 15+ document types — from structured forms to unstructured correspondence — each requiring different processing logic. Running everything through large LLMs was expensive and slow. BootLabs built an intelligent routing pipeline that classifies documents and sends each type to the most cost-efficient model.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">60<span>%+</span></div>
+            <div class="cs-case-metric-label">AI Cost Reduction</div>
           </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">RAG-based knowledge assistants giving compliance teams instant access to policy, regulation, and audit history across millions of documents</div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">15<span>+</span></div>
+            <div class="cs-case-metric-label">Document Types</div>
           </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Human-in-the-loop guardrails ensuring accuracy and auditability across all AI-generated outputs — deployed in <strong>90 days</strong></div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">95<span>%+</span></div>
+            <div class="cs-case-metric-label">Extraction Accuracy</div>
           </div>
         </div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Document AI</span>
+          <span class="cs-case-tag">Model Routing</span>
+          <span class="cs-case-tag">Cost Optimisation</span>
+          <span class="cs-case-tag">On-Premise</span>
+        </div>
+        <a href="cs-bank-doc-processor.html" class="cs-case-link">
+          Read case study
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
-    </div>
 
-    <!-- QSR -->
-    <div class="tab-panel">
-      <div class="tab-panel-inner">
-        <div class="tab-panel-title">Demand Forecasting &amp; Intelligent Operations</div>
-        <div class="tab-points">
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Outlet-level demand forecasting models trained on sales, weather, events, and footfall — <strong>35% reduction in food waste</strong> per outlet</div>
-          </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">AI-driven inventory replenishment simultaneously reducing waste and eliminating stockout events across hundreds of locations</div>
-          </div>
-          <div class="tab-point">
-            <div class="tab-point-dot"></div>
-            <div class="tab-point-text">Real-time menu recommendations and contextual upsell engines — driving a <strong>12% increase in average order value</strong></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CASE STUDY HIGHLIGHT ══ -->
-<section class="case-studies-section">
-  <div class="container">
-    <div class="case-studies-header">
-      <div class="eyebrow" style="margin-bottom:20px;">Proof Points</div>
-      <h2 class="h2">Featured outcomes.</h2>
-    </div>
-    <div class="cs-grid">
-      <div class="cs-card">
-        <div class="cs-client">HDFC Bank</div>
-        <div class="cs-metric">60%</div>
-        <p class="cs-desc">Document processing automation for KYC workflows — eliminating manual review bottlenecks with an enterprise GenAI pipeline trained on regulatory frameworks and document schemas. Deployed in production across multiple business units within 90 days.</p>
-        <div class="cs-tags">
-          <span class="cs-tag">Financial Services</span>
-          <span class="cs-tag">GenAI</span>
-          <span class="cs-tag">RAG</span>
-        </div>
-        <a href="#" class="cs-link">Read case study →</a>
-      </div>
-      <div class="cs-card">
-        <div class="cs-client">Mahindra Rise</div>
-        <div class="cs-metric">40%</div>
-        <p class="cs-desc">AI-powered supply chain visibility platform connecting procurement, planning, and logistics into a single real-time intelligence layer. Predictive demand signals and AIOps-driven alerts reduced carrying costs across the manufacturing group.</p>
-        <div class="cs-tags">
-          <span class="cs-tag">Manufacturing</span>
-          <span class="cs-tag">AIOps</span>
-          <span class="cs-tag">AI &amp; ML</span>
-        </div>
-        <a href="#" class="cs-link">Read case study →</a>
-      </div>
     </div>
   </div>
 </section>
@@ -891,14 +882,7 @@ function closeContact() {
   document.body.style.overflow = '';
 }
 
-const tabPanels = document.querySelectorAll('.tab-panel');
-const tabBtns = document.querySelectorAll('.tab-btn');
-function switchTab(n) {
-  tabPanels.forEach((p, i) => p.classList.toggle('active', i === n));
-  tabBtns.forEach((b, i) => b.classList.toggle('active', i === n));
-}
-
-gsap.utils.toArray('.offering-card,.cs-card,.process-step,.tab-point').forEach((el, i) => {
+gsap.utils.toArray('.offering-card,.cs-case-card,.process-step').forEach((el, i) => {
   gsap.from(el, {
     opacity: 0, y: 24, duration: 0.65,
     delay: (i % 4) * 0.08,
