@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Classification &amp; Response Agent — BootLabs Case Study</title>
+<style>
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
+:root{--blue:#0066FF;--cyan:#26a8ff;--border:rgba(255,255,255,.08);--border-blue:rgba(0,102,255,.35);--dim:rgba(255,255,255,.45);--mid:rgba(255,255,255,.7);--glass:rgba(255,255,255,.03);--r:20px;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;height:auto;}
+button{font-family:NHD,sans-serif;cursor:pointer;}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;font-family:NHD,sans-serif;cursor:pointer;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
+.btn-primary:hover{background:#0052cc;box-shadow:0 4px 32px rgba(0,102,255,.5);transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;font-family:NHD,sans-serif;cursor:pointer;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ── MOBILE MENU ── */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mob-sub{padding:10px 0 4px;display:none;flex-direction:column;gap:8px;}
+.mob-nav-links .open .mob-sub{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
+
+/* ── NAVBAR ── */
+.navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
+.navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
+.nav-logo img{height:28px;width:auto;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{font-size:15px;color:rgba(255,255,255,.92);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:240px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.simple-item{display:flex;align-items:center;padding:11px 14px;border-radius:10px;font-size:15px;color:rgba(255,255,255,.88);transition:background .2s,color .2s;}
+.simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
+.mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-title{font-size:15px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;cursor:pointer;}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ── CASE STUDY PAGE ── */
+.cs-detail-hero{padding:160px 0 0;background:#06060a;position:relative;overflow:hidden;}
+.cs-detail-hero::before{content:"";position:absolute;top:-200px;right:-100px;width:700px;height:700px;background:radial-gradient(ellipse,rgba(0,102,255,.08) 0%,transparent 65%);pointer-events:none;}
+.cs-breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);margin-bottom:32px;transition:color .2s;}
+.cs-breadcrumb:hover{color:#fff;}
+.cs-breadcrumb svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
+.cs-tag-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
+.cs-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px;border:1px solid var(--border-blue);color:var(--cyan);background:rgba(0,102,255,.06);}
+.cs-tag.industry{border-color:rgba(255,255,255,.12);color:var(--mid);background:rgba(255,255,255,.03);}
+.cs-detail-h1{font-size:clamp(32px,4.5vw,64px);font-weight:400;line-height:1.06;letter-spacing:-.01em;max-width:900px;margin-bottom:20px;}
+.cs-detail-intro{font-size:18px;color:var(--mid);line-height:1.75;max-width:680px;}
+.cs-hero-img{width:100%;height:480px;object-fit:cover;border-radius:20px;margin-top:60px;display:block;}
+
+.cs-details-strip{display:grid;grid-template-columns:repeat(3,1fr);padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:0 0 80px;gap:0;}
+.cs-detail-col{padding:0 40px 0 0;border-right:1px solid var(--border);}
+.cs-detail-col:first-child{padding-left:0;}
+.cs-detail-col:last-child{border-right:none;padding-right:0;padding-left:40px;}
+.cs-detail-col:nth-child(2){padding:0 40px;}
+.cs-detail-col-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.cs-detail-col-value{font-size:16px;color:#fff;line-height:1.4;}
+
+.cs-overview-section{padding:0 0 80px;}
+.cs-overview-grid{display:grid;grid-template-columns:1fr 380px;gap:64px;align-items:start;}
+.cs-overview-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px;}
+.cs-overview-h2{font-size:clamp(24px,2.5vw,36px);font-weight:400;margin-bottom:24px;line-height:1.2;}
+.cs-overview-text{font-size:16px;color:var(--mid);line-height:1.8;}
+.cs-snapshot-card{background:#0a0a14;border:1px solid var(--border);border-radius:var(--r);padding:32px;}
+.cs-snapshot-title{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
+.cs-snapshot-row{display:flex;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid var(--border);}
+.cs-snapshot-row:last-child{border-bottom:none;}
+.cs-snapshot-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.cs-snapshot-value{font-size:14px;color:#fff;}
+
+.cs-challenges-section{padding:80px 0;background:#080812;border-top:1px solid var(--border);}
+.cs-section-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;}
+.cs-section-h2{font-size:clamp(24px,3vw,40px);font-weight:400;line-height:1.1;margin-bottom:48px;}
+.cs-challenge-list{display:flex;flex-direction:column;gap:0;}
+.cs-challenge-item{display:grid;grid-template-columns:80px 1fr;gap:0;padding:36px 0;border-bottom:1px solid var(--border);}
+.cs-challenge-item:first-child{border-top:1px solid var(--border);}
+.cs-challenge-num{font-size:48px;font-weight:400;color:rgba(0,102,255,.15);line-height:1;padding-top:4px;}
+.cs-challenge-content{}
+.cs-challenge-title{font-size:18px;color:#fff;font-weight:500;margin-bottom:10px;}
+.cs-challenge-desc{font-size:15px;color:var(--mid);line-height:1.75;}
+
+.cs-approach-section{padding:80px 0;background:#06060a;border-top:1px solid var(--border);}
+.cs-approach-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.cs-approach-card{background:#06060a;padding:40px 36px;position:relative;transition:background .2s;}
+.cs-approach-card:hover{background:#080818;}
+.cs-approach-num{font-size:64px;font-weight:400;color:rgba(0,102,255,.1);line-height:.8;margin-bottom:16px;}
+.cs-approach-title{font-size:18px;color:#fff;font-weight:500;margin-bottom:12px;}
+.cs-approach-desc{font-size:15px;color:var(--mid);line-height:1.75;}
+
+.cs-results-section{padding:80px 0;background:#080812;border-top:1px solid var(--border);}
+.cs-results-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:48px;}
+.cs-result-cell{background:#080812;padding:44px 36px;}
+.cs-result-num{font-size:clamp(48px,5vw,72px);font-weight:400;color:#fff;letter-spacing:-.03em;line-height:1;}
+.cs-result-num span{color:var(--cyan);}
+.cs-result-label{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-top:10px;}
+.cs-results-narrative{font-size:17px;color:var(--mid);line-height:1.8;max-width:860px;}
+
+.cs-impact-section{padding:80px 0;background:#06060a;border-top:1px solid var(--border);}
+.cs-impact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;}
+.cs-impact-card{border:1px solid var(--border);border-radius:var(--r);padding:36px;background:var(--glass);transition:border-color .3s;}
+.cs-impact-card:hover{border-color:var(--border-blue);}
+.cs-impact-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,102,255,.12);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.cs-impact-icon svg{width:20px;height:20px;stroke:var(--cyan);fill:none;stroke-width:2;}
+.cs-impact-title{font-size:17px;color:#fff;font-weight:500;margin-bottom:8px;}
+.cs-impact-desc{font-size:14px;color:var(--mid);line-height:1.7;}
+
+.cs-related-section{padding:80px 0 100px;background:#06060a;border-top:1px solid var(--border);}
+.cs-related-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.cs-related-left h2{font-size:clamp(24px,3vw,40px);font-weight:400;margin-bottom:16px;}
+.cs-related-left p{font-size:16px;color:var(--mid);line-height:1.7;margin-bottom:32px;}
+.cs-related-services{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+.cs-related-tag{font-size:13px;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:8px 18px;transition:background .2s;}
+.cs-related-tag:hover{background:rgba(0,102,255,.08);}
+
+/* ── FOOTER ── */
+.footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:260px;}
+.footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.footer-col-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+.footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
+.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.08);white-space:nowrap;line-height:1;}
+.footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+
+/* ── CONTACT POPUP ── */
+.contact-popup{display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);}
+.contact-popup-box{background:#0d0d18;border:1px solid var(--border);border-radius:var(--r);padding:48px;max-width:480px;width:90%;position:relative;}
+.contact-popup-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--dim);cursor:pointer;font-size:20px;line-height:1;transition:color .2s;}
+.contact-popup-close:hover{color:#fff;}
+.contact-popup h3{font-size:24px;font-weight:400;margin-bottom:8px;}
+.contact-popup p{font-size:14px;color:var(--mid);margin-bottom:32px;}
+.contact-form{display:flex;flex-direction:column;gap:16px;}
+.contact-input{background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:14px 18px;color:#fff;font-family:NHD,sans-serif;font-size:15px;outline:none;transition:border-color .2s;width:100%;}
+.contact-input::placeholder{color:var(--dim);}
+.contact-input:focus{border-color:var(--border-blue);}
+.contact-textarea{resize:vertical;min-height:100px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .cs-overview-grid{grid-template-columns:1fr;gap:40px;}
+  .cs-related-inner{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .container{padding:0 20px;}
+  .navbar{top:10px;width:calc(100% - 24px);padding:10px 16px;border-radius:60px;}
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
+  .nav-hamburger{display:flex;}
+  .cs-detail-hero{padding:120px 0 0;}
+  .cs-hero-img{height:280px;}
+  .cs-details-strip{grid-template-columns:1fr;gap:24px;}
+  .cs-detail-col{border-right:none;border-bottom:1px solid var(--border);padding:0 0 20px!important;}
+  .cs-detail-col:last-child{border-bottom:none;}
+  .cs-challenge-item{grid-template-columns:60px 1fr;}
+  .cs-challenge-num{font-size:36px;}
+  .cs-approach-grid{grid-template-columns:1fr;}
+  .cs-results-metrics{grid-template-columns:1fr;}
+  .cs-impact-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-bot{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:480px){
+  .container{padding:0 16px;}
+  .navbar{width:calc(100% - 16px);padding:9px 12px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ MOBILE MENU ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mob-nav-links">
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="cloud-devops.html" onclick="closeMobileMenu()">DevOps / Cloud</a>
+        <a href="platform-engineering.html" onclick="closeMobileMenu()">SRE</a>
+        <a href="software-engineering.html" onclick="closeMobileMenu()">Full Stack Development</a>
+        <a href="ai-engineering.html" onclick="closeMobileMenu()">AI &amp; ML</a>
+        <a href="agentic-ai.html" onclick="closeMobileMenu()">Agentic AI</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Solutions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="resilient-operations-center.html" onclick="closeMobileMenu()">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" onclick="closeMobileMenu()">AI in SDLC</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Industries <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="manufacturing.html" onclick="closeMobileMenu()">Manufacturing</a>
+        <a href="automotive.html" onclick="closeMobileMenu()">Automotive</a>
+        <a href="financial-services.html" onclick="closeMobileMenu()">Financial Services</a>
+        <a href="qsr.html" onclick="closeMobileMenu()">QSR</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="sailor.html" onclick="closeMobileMenu()">Sailor</a>
+        <a href="guardian.html" onclick="closeMobileMenu()">Guardian</a>
+      </div>
+    </div>
+    <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="about-us.html" onclick="closeMobileMenu()">About Us</a>
+        <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="white-papers.html" onclick="closeMobileMenu()">White Papers</a>
+        <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </nav>
+  <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI Engineering</div><div class="mega-item-subs">ML Engineering · MLOps · Production AI · Model Monitoring</div></a>
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">Cloud &amp; DevOps</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Infrastructure Automation</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">Platform Engineering</div><div class="mega-item-subs">Observability · SLOs · Chaos Engineering · Service Mesh</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Software Engineering</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="security-engineering.html" class="mega-item" style="grid-column:span 2;"><div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · Threat Modelling · Compliance Automation · Zero Trust</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="resilient-operations-center.html" class="simple-item">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" class="simple-item">AI in SDLC</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#industry" class="nav-link">Industries <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="manufacturing.html" class="simple-item">Manufacturing</a>
+        <a href="automotive.html" class="simple-item">Automotive</a>
+        <a href="financial-services.html" class="simple-item">Financial Services</a>
+        <a href="qsr.html" class="simple-item">QSR</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#platforms" class="nav-link">Platforms <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="sailor.html" class="simple-item">Sailor</a>
+        <a href="guardian.html" class="simple-item">Guardian</a>
+      </div>
+    </div>
+    <a href="partnerships.html" class="nav-link">Partners</a>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="about-us.html" class="simple-item">About Us</a>
+        <a href="case-studies.html" class="simple-item">Case Studies</a>
+        <a href="white-papers.html" class="simple-item">White Papers</a>
+        <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- 1. PAGE HERO -->
+<section class="cs-detail-hero">
+  <div class="container">
+    <a href="case-studies.html" class="cs-breadcrumb">
+      <svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Case Studies
+    </a>
+    <div class="cs-tag-row">
+      <span class="cs-tag industry">Financial Services</span>
+      <span class="cs-tag">AI Engineering</span>
+      <span class="cs-tag">GenAI Agent</span>
+      <span class="cs-tag">On-Premise LLM</span>
+      <span class="cs-tag">Intent Classification</span>
+    </div>
+    <h1 class="cs-detail-h1">Email Classification &amp; Response Agent for a Leading Private Sector Bank</h1>
+    <p class="cs-detail-intro">A large private sector bank was triaging thousands of customer emails daily across 20+ product lines entirely by hand. BootLabs deployed an on-premise AI agent that classifies intent and drafts compliant responses — with zero data leaving the bank's network.</p>
+    <img class="cs-hero-img" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1400&auto=format&fit=crop&q=80" alt="Bank email operations centre">
+  </div>
+</section>
+
+<!-- 2. KEY DETAILS STRIP -->
+<section style="background:#06060a;">
+  <div class="container">
+    <div class="cs-details-strip">
+      <div class="cs-detail-col">
+        <div class="cs-detail-col-label">Industry</div>
+        <div class="cs-detail-col-value">Financial Services — Retail &amp; Corporate Banking</div>
+      </div>
+      <div class="cs-detail-col">
+        <div class="cs-detail-col-label">Services</div>
+        <div class="cs-detail-col-value">AI Engineering, On-Premise LLM Deployment, RAG, CRM Integration</div>
+      </div>
+      <div class="cs-detail-col">
+        <div class="cs-detail-col-label">Engagement Type</div>
+        <div class="cs-detail-col-value">On-premise AI agent deployment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. OVERVIEW -->
+<section style="background:#06060a;">
+  <div class="container">
+    <div class="cs-overview-section">
+      <div class="cs-overview-grid">
+        <div>
+          <div class="cs-overview-eyebrow">The Challenge</div>
+          <h2 class="cs-overview-h2">Thousands of emails daily, hundreds of intents, and no cloud allowed</h2>
+          <p class="cs-overview-text">A large private sector bank was receiving thousands of customer emails every day across more than 20 product lines — savings accounts, fixed deposits, credit cards, personal loans, home loans, business banking, trade finance, forex, insurance, wealth management, NRI services, and more. Each product carried 30 to 40 distinct customer intents — queries, complaints, service requests, escalations — totalling over 600 labelled intent categories in all. The bank's operations team handled triage and response drafting entirely by hand, creating chronic SLA breaches, inconsistent response quality, and significant agent burnout. The added constraint: the bank's data security policy prohibited all cloud LLM APIs. Everything had to run on-premise, within their private data centre, with zero inference traffic leaving the network perimeter. BootLabs designed and deployed a fully on-premise AI agent — covering hierarchical intent classification, retrieval-augmented response drafting, and a human-in-the-loop Salesforce integration — that transformed how the bank's operations team handles email at scale.</p>
+        </div>
+        <div>
+          <div class="cs-snapshot-card">
+            <div class="cs-snapshot-title">Client Snapshot</div>
+            <div class="cs-snapshot-row">
+              <span class="cs-snapshot-label">Type</span>
+              <span class="cs-snapshot-value">A Leading Private Sector Bank</span>
+            </div>
+            <div class="cs-snapshot-row">
+              <span class="cs-snapshot-label">Industry</span>
+              <span class="cs-snapshot-value">Financial Services — Retail &amp; Corporate Banking</span>
+            </div>
+            <div class="cs-snapshot-row">
+              <span class="cs-snapshot-label">Scale</span>
+              <span class="cs-snapshot-value">20+ product lines, 600+ intent categories, thousands of emails daily</span>
+            </div>
+            <div class="cs-snapshot-row">
+              <span class="cs-snapshot-label">Project</span>
+              <span class="cs-snapshot-value">On-premise email classification &amp; response agent</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. BUSINESS CHALLENGES -->
+<section class="cs-challenges-section">
+  <div class="container">
+    <div class="cs-section-eyebrow">Business Challenges</div>
+    <h2 class="cs-section-h2">What was holding them back</h2>
+    <div class="cs-challenge-list">
+      <div class="cs-challenge-item">
+        <div class="cs-challenge-num">01</div>
+        <div class="cs-challenge-content">
+          <div class="cs-challenge-title">Scale Without Security Compromise</div>
+          <p class="cs-challenge-desc">600+ intents across 20+ products demanded sub-second classification, yet the bank's data security policies required every model inference to stay within their private data centre. No cloud LLM APIs were permissible — meaning all models had to be deployed, served, and maintained entirely on the bank's own GPU infrastructure.</p>
+        </div>
+      </div>
+      <div class="cs-challenge-item">
+        <div class="cs-challenge-num">02</div>
+        <div class="cs-challenge-content">
+          <div class="cs-challenge-title">Response Quality at Production Velocity</div>
+          <p class="cs-challenge-desc">Drafting compliant, product-accurate email responses at scale required deep product knowledge encoded into prompts and retrieval layers — not just generic LLM output. Each draft had to reflect the correct policy, regulatory language, and product-specific detail for the identified intent, at a volume the operations team could never match manually.</p>
+        </div>
+      </div>
+      <div class="cs-challenge-item">
+        <div class="cs-challenge-num">03</div>
+        <div class="cs-challenge-content">
+          <div class="cs-challenge-title">CRM Integration Without Disrupting Ops</div>
+          <p class="cs-challenge-desc">Drafted responses needed to flow into the bank's existing CRM and ticketing workflows — not bypass them. A human-in-the-loop approval step before sending was non-negotiable for compliance and quality control, which meant the agent had to fit inside the existing Salesforce-based workflow, not replace it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. OUR APPROACH -->
+<section class="cs-approach-section">
+  <div class="container">
+    <div class="cs-section-eyebrow">Our Approach</div>
+    <h2 class="cs-section-h2">How we solved it</h2>
+    <div class="cs-approach-grid">
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">01</div>
+        <div class="cs-approach-title">On-Premise LLM Deployment</div>
+        <p class="cs-approach-desc">Fine-tuned Mistral and LLaMA models were deployed on the bank's GPU infrastructure using vLLM serving. No inference traffic left the bank's network perimeter at any point. The serving stack was optimised for the latency and throughput requirements of a high-volume email operations environment.</p>
+      </div>
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">02</div>
+        <div class="cs-approach-title">Multi-Layer Intent Classification</div>
+        <p class="cs-approach-desc">A two-stage hierarchical classifier first identifies the product line from 20+ categories, then resolves the specific customer intent within that product — 30 to 40 intents per product. This hierarchical approach kept classification accuracy high even across 600+ total intent categories, where a flat classifier would have degraded sharply.</p>
+      </div>
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">03</div>
+        <div class="cs-approach-title">Response Draft Engine</div>
+        <p class="cs-approach-desc">A RAG pipeline retrieved relevant product policy documents, regulatory guidelines, and approved response templates based on the classified intent. The on-premise LLM used these as grounding context to generate accurate, compliant draft responses — grounded in the bank's own policies rather than generic training data.</p>
+      </div>
+      <div class="cs-approach-card">
+        <div class="cs-approach-num">04</div>
+        <div class="cs-approach-title">CRM-Integrated HITL Workflow</div>
+        <p class="cs-approach-desc">The classified intent and drafted response surfaced directly inside the agent's existing CRM view via a Salesforce integration. Operations agents reviewed, edited if needed, and approved with a single click. The approval loop also captured structured feedback that fed a continuous fine-tuning pipeline — improving accuracy each quarter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. RESULTS -->
+<section class="cs-results-section">
+  <div class="container">
+    <div class="cs-section-eyebrow">The Outcomes</div>
+    <h2 class="cs-section-h2">Results that proved the approach</h2>
+    <div class="cs-results-metrics">
+      <div class="cs-result-cell">
+        <div class="cs-result-num">20<span>+</span></div>
+        <div class="cs-result-label">Banking products covered by the classification system</div>
+      </div>
+      <div class="cs-result-cell">
+        <div class="cs-result-num">600<span>+</span></div>
+        <div class="cs-result-label">Intents modelled with hierarchical classification</div>
+      </div>
+      <div class="cs-result-cell">
+        <div class="cs-result-num">70<span>%+</span></div>
+        <div class="cs-result-label">Emails auto-routed and draft-ready without agent intervention</div>
+      </div>
+    </div>
+    <p class="cs-results-narrative">The agent was deployed entirely within the bank's private data centre — no cloud dependencies, no data leaving the network. From day one of go-live, the majority of incoming emails were classified and had a compliant draft response ready before a human agent ever opened them. The operations team shifted from writing responses from scratch to reviewing and approving AI-drafted ones — dramatically increasing throughput without adding headcount.</p>
+  </div>
+</section>
+
+<!-- 7. BUSINESS IMPACT -->
+<section class="cs-impact-section">
+  <div class="container">
+    <div class="cs-section-eyebrow">Business Impact</div>
+    <h2 class="cs-section-h2">What changed for the organisation</h2>
+    <div class="cs-impact-grid">
+      <div class="cs-impact-card">
+        <div class="cs-impact-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="cs-impact-title">Faster Response Times</div>
+        <p class="cs-impact-desc">Average email response time reduced from hours to under 15 minutes. Customers receive faster, more consistent answers — and SLA targets that were routinely missed are now met as standard.</p>
+      </div>
+      <div class="cs-impact-card">
+        <div class="cs-impact-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="cs-impact-title">2x Handling Capacity</div>
+        <p class="cs-impact-desc">The same operations team now handles twice the email volume. Agent time shifted from drafting responses to reviewing and approving them — reducing burnout and freeing capacity for complex escalations that genuinely need human judgement.</p>
+      </div>
+      <div class="cs-impact-card">
+        <div class="cs-impact-icon">
+          <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div class="cs-impact-title">Policy-Accurate Drafts</div>
+        <p class="cs-impact-desc">Response quality consistency improved dramatically. RAG-grounded drafts reflect the correct product policy, regulatory language, and approved tone — reducing compliance risk and the manual editing burden on senior reviewers.</p>
+      </div>
+      <div class="cs-impact-card">
+        <div class="cs-impact-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="cs-impact-title">Continuous Improvement Loop</div>
+        <p class="cs-impact-desc">Every agent approval or edit feeds a structured fine-tuning pipeline. Classification accuracy and draft quality improve each quarter automatically — the system gets better with use, without requiring manual retraining cycles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. RELATED SERVICES CTA -->
+<section class="cs-related-section">
+  <div class="container">
+    <div class="cs-related-inner">
+      <div class="cs-related-left">
+        <h2>Ready to bring AI into your customer operations?</h2>
+        <p>Let's design an on-premise AI agent that handles classification and response drafting at scale — without compromising your data security posture.</p>
+        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <div class="cs-related-services">
+          <a href="ai-engineering.html" class="cs-related-tag">AI &amp; ML Engineering</a>
+          <a href="agentic-ai.html" class="cs-related-tag">Agentic AI</a>
+        </div>
+      </div>
+      <div>
+        <div style="background:#080812;border:1px solid var(--border);border-radius:var(--r);padding:40px;">
+          <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;">Also read</div>
+          <a href="cs-bank-doc-processor.html" style="display:block;padding:16px 0;border-bottom:1px solid var(--border);color:var(--mid);font-size:15px;line-height:1.5;transition:color .2s;">Universal Document Processor for a Leading Private Sector Bank &rarr;</a>
+          <a href="ai-engineering.html" style="display:block;padding:16px 0;color:var(--mid);font-size:15px;line-height:1.5;transition:color .2s;">AI &amp; Machine Learning Engineering &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
+      <div><div class="footer-col-head">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="cloud-devops.html">DevOps / Cloud</a></li>
+          <li><a href="platform-engineering.html">SRE</a></li>
+          <li><a href="software-engineering.html">Full Stack Development</a></li>
+          <li><a href="ai-engineering.html">AI &amp; ML</a></li>
+          <li><a href="agentic-ai.html">Agentic AI</a></li>
+        </ul>
+      </div>
+      <div><div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="partnerships.html">Partners</a></li>
+          <li><a href="#" onclick="openContact();return false;">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
+    <div class="footer-bot">
+      <div class="footer-copy">&copy; 2026 BootLabs Technology. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- CONTACT POPUP -->
+<div class="contact-popup" id="contactPopup" onclick="if(event.target===this)closeContact()">
+  <div class="contact-popup-box">
+    <button class="contact-popup-close" onclick="closeContact()">&#215;</button>
+    <h3>Book a Discovery Call</h3>
+    <p>Tell us about your challenge and we'll set up a focused 30-minute session.</p>
+    <form class="contact-form" onsubmit="return false;">
+      <input class="contact-input" type="text" placeholder="Your name">
+      <input class="contact-input" type="email" placeholder="Work email">
+      <input class="contact-input" type="text" placeholder="Company">
+      <textarea class="contact-input contact-textarea" placeholder="What are you trying to solve?"></textarea>
+      <button class="btn-primary" style="justify-content:center;" type="submit">Send Message <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </form>
+  </div>
+</div>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
+function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
+function toggleMobSub(el){el.parentElement.classList.toggle('open');}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
+function openContact(){const p=document.getElementById('contactPopup');p.style.display='flex';document.body.style.overflow='hidden';}
+function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
+</script>
+
+</body>
+</html>
