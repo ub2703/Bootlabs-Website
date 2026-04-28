@@ -191,6 +191,7 @@ input,textarea{box-sizing:border-box;}
   .explainer-inner{grid-template-columns:1fr;gap:48px;}
   .usecases-grid{grid-template-columns:repeat(2,1fr);}
   .process-steps{grid-template-columns:repeat(2,1fr);}
+  .cs-case-grid{grid-template-columns:1fr;}
 }
 @media(max-width:768px){
   .container{padding:0 18px;}
@@ -207,11 +208,36 @@ input,textarea{box-sizing:border-box;}
   .process-steps{grid-template-columns:1fr;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
+  .cs-case-metrics{flex-wrap:wrap;gap:20px;}
 }
 @media(max-width:480px){
   .container{padding:0 14px;}
   .navbar{width:calc(100% - 16px);padding:9px 12px;}
 }
+
+/* ══ CASE STUDIES ══ */
+.cs-case-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cs-case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px;}
+.cs-case-card{background:#06060a;border:1px solid var(--border);border-radius:var(--r);padding:44px 40px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:border-color .3s,background .3s;}
+.cs-case-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.cs-case-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.02);}
+.cs-case-card:hover::after{transform:scaleX(1);}
+.cs-case-card-wide{grid-column:span 2;}
+.cs-case-industry{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border-blue);border-radius:100px;padding:5px 14px;margin-bottom:28px;width:fit-content;}
+.cs-case-title{font-size:22px;color:#fff;line-height:1.25;margin-bottom:16px;font-weight:400;}
+.cs-case-challenge{font-size:15px;color:var(--dim);line-height:1.7;margin-bottom:28px;flex:1;}
+.cs-case-metrics{display:flex;gap:32px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:24px;}
+.cs-case-metric{display:flex;flex-direction:column;gap:4px;}
+.cs-case-metric-val{font-size:32px;color:#fff;letter-spacing:-.02em;line-height:1;}
+.cs-case-metric-val span{font-size:18px;color:var(--cyan);}
+.cs-case-metric-label{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;}
+.cs-case-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:0;}
+.cs-case-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border);border-radius:100px;color:var(--dim);}
+.cs-case-wide-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.cs-case-wide-left{display:flex;flex-direction:column;}
+.cs-case-wide-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:28px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:16px;}
+.cs-case-wide-metric{display:flex;flex-direction:column;gap:6px;}
+@media(max-width:900px){.cs-case-card-wide{grid-column:span 1;}.cs-case-wide-inner{grid-template-columns:1fr;gap:32px;}.cs-case-wide-metrics{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -681,6 +707,239 @@ input,textarea{box-sizing:border-box;}
         <div class="process-step-title">Deploy &amp; Govern</div>
         <p class="process-step-body">We deploy with full LLMOps infrastructure — cost tracking, latency monitoring, prompt versioning, safety filters — and run it through ROC for 24/7 operational oversight.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CASE STUDIES ══ -->
+<section class="cs-case-section">
+  <div class="container">
+    <div style="margin-bottom:56px;">
+      <div class="eyebrow" style="margin-bottom:20px;">Client Outcomes</div>
+      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;max-width:680px;">Agents we've shipped. Problems we've solved.</h2>
+      <p style="font-size:16px;color:var(--mid);line-height:1.75;margin-top:16px;max-width:600px;">Every card below is a live deployment. Real data, real workflows, measurable outcomes.</p>
+    </div>
+
+    <div class="cs-case-grid">
+
+      <!-- Card 1: Ather Energy -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Automotive · Conversation AI
+        </div>
+        <div class="cs-case-title">Call Summarisation &amp; Sentiment Agent — Ather Energy</div>
+        <div class="cs-case-challenge">Ather Energy's customer support team handled thousands of calls spanning technical queries, financial inquiries, and service escalations. Manual disposition summaries within tight timeframes caused inconsistencies and lost customer insight. We deployed a GenAI agent on Google Cloud that auto-summarises every call, extracts sentiment and action items, and pushes structured records directly into Salesforce — with zero agent effort.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">25<span>s</span></div>
+            <div class="cs-case-metric-label">Saved per Call</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">100<span>%</span></div>
+            <div class="cs-case-metric-label">Calls Auto-Summarised</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">Live</div>
+            <div class="cs-case-metric-label">Sentiment Capture</div>
+          </div>
+        </div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Google Cloud</span>
+          <span class="cs-case-tag">Text-to-Speech</span>
+          <span class="cs-case-tag">GenAI</span>
+          <span class="cs-case-tag">Salesforce</span>
+        </div>
+      </div>
+
+      <!-- Card 2: M&M 24x7 Customer Support -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Automotive · Customer Support
+        </div>
+        <div class="cs-case-title">24×7 Multi-Channel Customer Support AI — A Leading Indian Automotive Group</div>
+        <div class="cs-case-challenge">With 150,000+ monthly support inquiries and 45-minute peak hold times, the group's customer support operation was under severe strain. 60% of calls were tier-1 queries resolvable without a human. We deployed an omnichannel conversational AI across web, mobile, and WhatsApp — handling voice, text, and image inputs — with smart escalation to human agents for complex cases.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">60<span>%</span></div>
+            <div class="cs-case-metric-label">Call Deflection</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">4.2<span>/5</span></div>
+            <div class="cs-case-metric-label">CSAT Score</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">12<span>+</span></div>
+            <div class="cs-case-metric-label">Languages</div>
+          </div>
+        </div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Azure OpenAI</span>
+          <span class="cs-case-tag">Omnichannel</span>
+          <span class="cs-case-tag">Multimodal</span>
+          <span class="cs-case-tag">Multilingual</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Vendor Support Bot -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          Manufacturing · AI Agent
+        </div>
+        <div class="cs-case-title">24/7 Vendor Support Bot for a Large Automotive Manufacturer</div>
+        <div class="cs-case-challenge">A large manufacturer's procurement team was fielding hundreds of daily vendor queries — PO status, payment timelines, tender clarifications, compliance document requests. Manual handling caused delays and inconsistencies. We built a RAG-powered vendor support agent grounded in live ERP data and procurement policy documents, giving vendors instant, accurate answers across a self-service portal at any hour.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">70<span>%+</span></div>
+            <div class="cs-case-metric-label">Queries Resolved</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">24<span>/7</span></div>
+            <div class="cs-case-metric-label">Availability</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">50<span>%</span></div>
+            <div class="cs-case-metric-label">Faster Resolution</div>
+          </div>
+        </div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">RAG</span>
+          <span class="cs-case-tag">ERP Integration</span>
+          <span class="cs-case-tag">Vendor Portal</span>
+          <span class="cs-case-tag">Manufacturing</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Trade Reconciliation Agent -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Financial Services · Trade Ops
+        </div>
+        <div class="cs-case-title">Trade Reconciliation Agent for a Leading Broking House</div>
+        <div class="cs-case-challenge">At a large broking house, a significant share of orders arrived via phone call rather than the trading platform. Manual reconciliation of voice orders against OMS records was slow, error-prone, and a regulatory exposure. We built an AI agent that transcribes broker calls in real-time, extracts order intent (scrip, quantity, price, direction), and auto-reconciles against the order management system — flagging mismatches for immediate review.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">95<span>%</span></div>
+            <div class="cs-case-metric-label">Recon Accuracy</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">&lt;2<span>min</span></div>
+            <div class="cs-case-metric-label">Per Trade vs 15 Manual</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">100<span>%</span></div>
+            <div class="cs-case-metric-label">Audit Coverage</div>
+          </div>
+        </div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Voice AI</span>
+          <span class="cs-case-tag">OMS Integration</span>
+          <span class="cs-case-tag">NLP</span>
+          <span class="cs-case-tag">Compliance</span>
+        </div>
+      </div>
+
+      <!-- Card 5: QSR Video Surveillance -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          QSR · Computer Vision
+        </div>
+        <div class="cs-case-title">Underbilling Detection via Video Surveillance for a QSR Chain</div>
+        <div class="cs-case-challenge">A leading QSR chain was losing significant revenue to underbilling — items served at the counter but not rung into the POS. Manual auditing was impossible across hundreds of outlets. We deployed a computer vision system on existing CCTV infrastructure that monitors food service in real-time, cross-references items identified at the counter against live POS transactions, and flags discrepancies to outlet managers within 30 seconds.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">12<span>%</span></div>
+            <div class="cs-case-metric-label">Revenue Recovery</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">500<span>+</span></div>
+            <div class="cs-case-metric-label">Outlets Monitored</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">&lt;30<span>s</span></div>
+            <div class="cs-case-metric-label">Flag-to-Alert</div>
+          </div>
+        </div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Computer Vision</span>
+          <span class="cs-case-tag">POS Integration</span>
+          <span class="cs-case-tag">CCTV AI</span>
+          <span class="cs-case-tag">Loss Prevention</span>
+        </div>
+      </div>
+
+      <!-- Card 6: QSR Power & Branding -->
+      <div class="cs-case-card">
+        <div class="cs-case-industry">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          QSR · IoT + Computer Vision
+        </div>
+        <div class="cs-case-title">In-Store Energy Optimisation &amp; Branding Compliance AI for a QSR Operator</div>
+        <div class="cs-case-challenge">A national QSR operator faced two costly problems at scale: energy waste (lights and HVAC running in empty or off-hours stores) and inconsistent brand compliance (signage not illuminated, branding elements missing). We built an AI system combining computer vision on in-store cameras with IoT sensor data to monitor store state in real-time — automating energy scheduling by footfall and flagging brand compliance issues before they reach customers.</div>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">18<span>%</span></div>
+            <div class="cs-case-metric-label">Energy Cost Reduction</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">95<span>%</span></div>
+            <div class="cs-case-metric-label">Branding Compliance</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">300<span>+</span></div>
+            <div class="cs-case-metric-label">Outlets Live</div>
+          </div>
+        </div>
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Computer Vision</span>
+          <span class="cs-case-tag">IoT Sensors</span>
+          <span class="cs-case-tag">Energy AI</span>
+          <span class="cs-case-tag">Brand Compliance</span>
+        </div>
+      </div>
+
+      <!-- Card 7: Collection Voice Agent — WIDE -->
+      <div class="cs-case-card cs-case-card-wide">
+        <div class="cs-case-industry">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Financial Services · Voice AI
+        </div>
+        <div class="cs-case-wide-inner">
+          <div class="cs-case-wide-left">
+            <div class="cs-case-title" style="font-size:26px;">Outbound Collection Voice Agent for One of India's Largest Private Sector Banks</div>
+            <div class="cs-case-challenge" style="margin-bottom:32px;">The bank's collections team was making thousands of outbound calls daily — EMI reminders, overdue notices, promise-to-pay capture — at high cost and with compliance risk from inconsistent agent messaging. We built a conversational voice AI agent that handles the full outbound collections call flow autonomously: identifies the customer, explains outstanding dues, negotiates a payment date, captures promises-to-pay, and escalates only genuinely complex cases to a human agent. Fully integrated with the bank's core banking system and CRM, with a compliant script that passes regulatory audit.</div>
+            <div class="cs-case-tags">
+              <span class="cs-case-tag">Voice AI</span>
+              <span class="cs-case-tag">Core Banking Integration</span>
+              <span class="cs-case-tag">Conversational AI</span>
+              <span class="cs-case-tag">CRM</span>
+              <span class="cs-case-tag">BFSI</span>
+              <span class="cs-case-tag">Regulatory Compliance</span>
+            </div>
+          </div>
+          <div>
+            <div class="cs-case-wide-metrics">
+              <div class="cs-case-wide-metric">
+                <div class="cs-case-metric-val" style="font-size:40px;">3<span style="font-size:22px;color:var(--cyan);">×</span></div>
+                <div class="cs-case-metric-label" style="font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;">Call Throughput vs Human Agents</div>
+              </div>
+              <div class="cs-case-wide-metric">
+                <div class="cs-case-metric-val" style="font-size:40px;">40<span style="font-size:22px;color:var(--cyan);">%</span></div>
+                <div class="cs-case-metric-label" style="font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;">Reduction in Collection Costs</div>
+              </div>
+              <div class="cs-case-wide-metric">
+                <div class="cs-case-metric-val" style="font-size:40px;">100<span style="font-size:22px;color:var(--cyan);">%</span></div>
+                <div class="cs-case-metric-label" style="font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;">Script Compliance on Every Call</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
