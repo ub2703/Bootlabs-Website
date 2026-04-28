@@ -37,11 +37,15 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
 .nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
 .nav-item:hover .nav-link svg{transform:rotate(180deg);}
-.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:240px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:280px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
 .simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
 .nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
-.simple-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:15px;color:rgba(255,255,255,.88);transition:background .2s,color .2s;}
+.simple-item{display:flex;flex-direction:column;gap:1px;padding:11px 14px;border-radius:10px;color:rgba(255,255,255,.88);text-decoration:none;transition:background .2s,color .2s;}
 .simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
+.simple-item-title{font-size:14px;color:inherit;}
+.simple-item-sub{font-size:11px;color:rgba(255,255,255,.4);line-height:1.4;margin-top:2px;}
+.simple-item-title{font-size:14px;color:inherit;}
+.simple-item-sub{font-size:11px;color:rgba(255,255,255,.4);line-height:1.4;margin-top:2px;}
 .mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
 .mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
 .nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
@@ -169,7 +173,11 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
           <div class="mega-item-title">AI &amp; ML</div>
           <div class="mega-item-subs">ML Engineering · MLOps · Production AI · Model Monitoring</div>
         </a>
-        <a href="agentic-ai.html" class="mega-item" style="grid-column:span 2;">
+        <a href="security-engineering.html" class="mega-item">
+          <div class="mega-item-title">Security Engineering</div>
+          <div class="mega-item-subs">DevSecOps · VAPT · Compliance Automation · Zero Trust</div>
+        </a>
+        <a href="agentic-ai.html" class="mega-item">
           <div class="mega-item-title">Agentic AI</div>
           <div class="mega-item-subs">Task Agents · Multi-Agent Orchestration · Tool-Using Agents · LLMOps</div>
         </a>
@@ -178,32 +186,32 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
     <div class="nav-item">
       <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="simple-menu">
-        <a href="resilient-operations-center.html" class="simple-item">Resilient Operations Center</a>
-        <a href="ai-in-sdlc.html" class="simple-item">AI in SDLC</a>
+        <a href="resilient-operations-center.html" class="simple-item"><div class="simple-item-title">Resilient Operations Center</div><div class="simple-item-sub">24/7 Managed Cloud Ops · AIOps · Cost Optimisation</div></a>
+        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Automated Testing · Release Intelligence</div></a>
       </div>
     </div>
     <div class="nav-item">
       <a href="index.html#industry" class="nav-link">Industries <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="simple-menu">
-        <a href="manufacturing.html" class="simple-item">Manufacturing</a>
-        <a href="automotive.html" class="simple-item">Automotive</a>
-        <a href="financial-services.html" class="simple-item">Financial Services</a>
-        <a href="qsr.html" class="simple-item">QSR</a>
+        <a href="manufacturing.html" class="simple-item"><div class="simple-item-title">Manufacturing</div><div class="simple-item-sub">Supply Chain AI · Predictive Ops · GenAI Agents</div></a>
+        <a href="automotive.html" class="simple-item"><div class="simple-item-title">Automotive</div><div class="simple-item-sub">Service AI · Warranty Intelligence · Aftersales</div></a>
+        <a href="financial-services.html" class="simple-item"><div class="simple-item-title">Financial Services</div><div class="simple-item-sub">KYC Automation · AIOps · Compliance AI</div></a>
+        <a href="qsr.html" class="simple-item"><div class="simple-item-title">QSR</div><div class="simple-item-sub">Operations AI · Demand Forecasting · Loss Prevention</div></a>
       </div>
     </div>
     <div class="nav-item">
       <a href="index.html#platforms" class="nav-link">Platforms <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="simple-menu">
-        <a href="sailor.html" class="simple-item">Sailor</a>
-        <a href="guardian.html" class="simple-item">Guardian</a>
+        <a href="sailor.html" class="simple-item"><div class="simple-item-title">Sailor</div><div class="simple-item-sub">Cloud Cost Intelligence &amp; FinOps Platform</div></a>
+        <a href="guardian.html" class="simple-item"><div class="simple-item-title">Guardian</div><div class="simple-item-sub">Security &amp; Compliance Automation Platform</div></a>
       </div>
     </div>
     <a href="partnerships.html" class="nav-link">Partners</a>
     <div class="nav-item">
       <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="simple-menu">
-        <a href="about-us.html" class="simple-item">About Us</a>
-        <a href="case-studies.html" class="simple-item">Case Studies</a>
+        <a href="about-us.html" class="simple-item"><div class="simple-item-title">About Us</div><div class="simple-item-sub">Who we are · Leadership · Our values</div></a>
+        <a href="case-studies.html" class="simple-item"><div class="simple-item-title">Case Studies</div><div class="simple-item-sub">Client outcomes · Live deployments</div></a>
         <a href="white-papers.html" class="simple-item">White Papers</a>
         <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
       </div>
