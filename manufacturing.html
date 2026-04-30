@@ -180,6 +180,9 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   .trends-grid{grid-template-columns:repeat(2,1fr);}
   .process-steps{grid-template-columns:repeat(2,1fr);}
 }
+@media(max-width:1100px){
+  .cs-case-grid{grid-template-columns:1fr 1fr;}
+}
 @media(max-width:768px){
   .container{padding:0 18px;}
   .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
@@ -195,6 +198,8 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   .svc-stat-item{border-right:none;border-bottom:1px solid var(--border);}
   .svc-stat-item:last-child{border-bottom:none;}
   .cs-metrics{gap:28px;}
+  .cs-case-grid{grid-template-columns:1fr;}
+  .cs-case-metrics{gap:20px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
@@ -202,6 +207,26 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   .container{padding:0 14px;}
   .navbar{width:calc(100% - 16px);padding:9px 12px;}
 }
+
+/* ══ CASE STUDY CARDS ══ */
+.cs-case-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cs-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.cs-case-card{background:#06060a;border:1px solid var(--border);border-radius:var(--r);padding:44px 40px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:border-color .3s,background .3s;}
+.cs-case-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.cs-case-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.02);}
+.cs-case-card:hover::after{transform:scaleX(1);}
+.cs-case-title{font-size:20px;color:#fff;line-height:1.3;margin-bottom:16px;font-weight:400;}
+.cs-case-body{font-size:14px;color:var(--mid);line-height:1.7;margin-bottom:24px;flex:1;}
+.cs-case-metrics{display:flex;gap:28px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:24px;}
+.cs-case-metric{display:flex;flex-direction:column;gap:4px;}
+.cs-case-metric-val{font-size:28px;color:#fff;letter-spacing:-.02em;line-height:1;}
+.cs-case-metric-val span{font-size:16px;color:var(--cyan);}
+.cs-case-metric-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;}
+.cs-case-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.cs-case-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border);border-radius:100px;color:var(--dim);}
+.cs-case-link{font-size:13px;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;margin-top:auto;}
+.cs-case-link:hover{gap:10px;}
+.cs-case-link svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
 </style>
 </head>
 <body>
@@ -644,35 +669,93 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 </section>
 
 <!-- ══ REAL OUTCOMES ══ -->
-<section class="cs-section">
+<section class="cs-case-section">
   <div class="container">
     <div class="section-header">
       <div class="eyebrow" style="margin-bottom:20px;">Real Outcomes</div>
       <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;">What we've delivered</h2>
-      <p class="section-sub">From a live engagement. Names are confidential; outcomes are real.</p>
+      <p class="section-sub">From live engagements across manufacturing and automotive. Names are confidential; outcomes are real.</p>
     </div>
-    <div class="cs-card">
-      <div class="cs-tag">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        Case Study
+    <div class="cs-case-grid">
+
+      <!-- Card 1: Vendor Support Bot -->
+      <div class="cs-case-card">
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">GenAI Agent</span>
+          <span class="cs-case-tag">RAG</span>
+          <span class="cs-case-tag">SAP ERP Integration</span>
+        </div>
+        <div class="cs-case-title">24/7 AI Vendor Support Bot for a Large Automotive Manufacturer</div>
+        <p class="cs-case-body">A large automotive manufacturer's vendor management team was overwhelmed with repetitive supplier queries — PO status, invoice timelines, compliance requirements. We built an AI agent grounded in live SAP ERP data that handles vendor questions end-to-end, escalating only genuine exceptions to the procurement team.</p>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">70<span>%+</span></div>
+            <div class="cs-case-metric-label">Queries Self-Resolved</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">24<span>/7</span></div>
+            <div class="cs-case-metric-label">Vendor Support</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">50<span>%</span></div>
+            <div class="cs-case-metric-label">Faster Resolution</div>
+          </div>
+        </div>
+        <a href="cs-vendor-support-bot.html" class="cs-case-link">Read case study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
-      <div class="cs-industry">Leading Tractor &amp; Agricultural Equipment Manufacturer — India</div>
-      <h3 class="cs-title">From Call Centre Scripts to AI-Powered Service &amp; Aftermarket Intelligence</h3>
-      <p class="cs-body">A major tractor and agricultural equipment OEM was managing thousands of daily service requests through call centres armed with static scripts and PDFs. Technicians in the field had no structured way to access fault histories, warranty records, or repair guidelines across models. We deployed a multimodal troubleshooting AI that cross-references service manuals, warranty data, and historical fault records — plus a voice-based booking system and 24/7 conversational support for customer vehicle queries.</p>
-      <div class="cs-metrics">
-        <div>
-          <div class="cs-metric-num">24<span>/7</span></div>
-          <div class="cs-metric-label">AI-Powered Customer Support</div>
+
+      <!-- Card 2: Self-Service Cloud Platform -->
+      <div class="cs-case-card">
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Cloud Infrastructure</span>
+          <span class="cs-case-tag">Developer Self-Service</span>
+          <span class="cs-case-tag">IaC</span>
         </div>
-        <div>
-          <div class="cs-metric-num">60<span>%</span></div>
-          <div class="cs-metric-label">Reduction in First-Call Escalations</div>
+        <div class="cs-case-title">Self-Service Cloud Platform That Delivers Enterprise Infrastructure in Hours</div>
+        <p class="cs-case-body">A leading automotive and manufacturing group needed to scale dozens of digital initiatives simultaneously — but cloud provisioning took weeks. We built a self-service internal developer platform on top of AWS, Azure, and GCP, giving engineering teams the ability to spin up fully governed, production-ready environments on demand.</p>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">20<span>×</span></div>
+            <div class="cs-case-metric-label">Faster Cloud Adoption</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">30<span>%</span></div>
+            <div class="cs-case-metric-label">Cloud Cost Optimisation</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">2<span>×</span></div>
+            <div class="cs-case-metric-label">Faster Go-to-Market</div>
+          </div>
         </div>
-        <div>
-          <div class="cs-metric-num">3<span>×</span></div>
-          <div class="cs-metric-label">Faster Warranty Claim Processing</div>
-        </div>
+        <a href="cs-cloud-platform.html" class="cs-case-link">Read case study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
+
+      <!-- Card 3: Customer Support AI -->
+      <div class="cs-case-card">
+        <div class="cs-case-tags">
+          <span class="cs-case-tag">Azure OpenAI</span>
+          <span class="cs-case-tag">Multilingual AI</span>
+          <span class="cs-case-tag">Agentic Bot</span>
+        </div>
+        <div class="cs-case-title">24×7 AI-Powered Customer Support Across 12+ Languages for a Leading Automotive Group</div>
+        <p class="cs-case-body">A leading Indian automotive and manufacturing group was struggling to provide consistent, multilingual customer support across its diverse product lines. We deployed a GenAI-powered conversational agent on WhatsApp and web, trained on product manuals, service FAQs, and dealer knowledge — available in 12+ languages around the clock.</p>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">60<span>%</span></div>
+            <div class="cs-case-metric-label">Call Deflection</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">4.2<span>/5</span></div>
+            <div class="cs-case-metric-label">CSAT Score</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-val">12<span>+</span></div>
+            <div class="cs-case-metric-label">Languages Supported</div>
+          </div>
+        </div>
+        <a href="cs-mm-customer-support.html" class="cs-case-link">Read case study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+
     </div>
   </div>
 </section>
