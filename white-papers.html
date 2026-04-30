@@ -37,7 +37,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
 .nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
 .nav-item:hover .nav-link svg{transform:rotate(180deg);}
-.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:280px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:320px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
 .simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
 .nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
 .simple-item{display:flex;flex-direction:column;gap:1px;padding:11px 14px;border-radius:10px;color:rgba(255,255,255,.88);text-decoration:none;transition:background .2s,color .2s;}
@@ -60,13 +60,6 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-hamburger.open span:nth-child(2){opacity:0;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-.hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;text-align:center;}
-.hero::before{content:"";position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.1) 0%,transparent 65%);pointer-events:none;}
-.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 16px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:32px;}
-.hero-h1{font-size:clamp(36px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
-.hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:48px;}
-.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
 .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
 .footer-brand img{height:26px;margin-bottom:18px;}
@@ -82,15 +75,54 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .footer-legal{display:flex;gap:20px;}
 .footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
+
+/* ── Whitepaper listing hero ── */
+.wp-listing-hero{padding:140px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.wp-listing-hero::before{content:"";position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.08) 0%,transparent 65%);pointer-events:none;}
+.wp-listing-hero .container{position:relative;z-index:1;}
+.wp-listing-hero .eyebrow{margin-bottom:28px;}
+.wp-listing-hero-h1{font-size:clamp(36px,4.5vw,56px);font-weight:400;line-height:1.1;letter-spacing:-.02em;color:#fff;margin-bottom:20px;max-width:760px;}
+.wp-listing-hero-sub{font-size:17px;line-height:1.75;color:var(--mid);max-width:640px;}
+
+/* ── Whitepaper listing section ── */
+.wp-listing-section{padding:80px 0 120px;background:#06060a;}
+.wp-listing-grid{display:grid;grid-template-columns:1fr;gap:24px;}
+
+/* ── Whitepaper card ── */
+.wp-card{display:flex;flex-direction:row;gap:0;border:1px solid var(--border);border-radius:20px;background:var(--glass);padding:40px 48px;transition:border-color .25s;}
+.wp-card:hover{border-color:var(--border-blue);}
+.wp-card-left{flex:0 0 65%;padding-right:48px;}
+.wp-card-right{flex:0 0 35%;display:flex;align-items:center;justify-content:center;}
+
+/* Tags */
+.wp-tag-cyan{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(38,168,255,.3);background:rgba(38,168,255,.06);border-radius:100px;padding:4px 12px;margin-bottom:16px;}
+.wp-card-date{font-size:12px;color:var(--dim);letter-spacing:.08em;margin-bottom:12px;}
+.wp-card-h2{font-size:24px;font-weight:400;line-height:1.25;color:#fff;margin-bottom:14px;}
+.wp-card-desc{font-size:14px;line-height:1.7;color:var(--mid);margin-bottom:20px;}
+.wp-meta-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.wp-meta-pill{display:inline-block;font-size:11px;color:var(--dim);border:1px solid var(--border);border-radius:100px;padding:4px 12px;}
+.wp-card-cta{font-size:14px;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;transition:gap .2s,opacity .2s;}
+.wp-card-cta:hover{gap:10px;opacity:.85;}
+
+/* Cover block */
+.wp-cover{background:#0b0b16;border:1px solid var(--border);border-radius:12px;padding:24px;min-height:180px;width:100%;max-width:260px;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.wp-cover-accent{height:2px;background:linear-gradient(90deg,#0066FF,#26a8ff);border-radius:2px;margin-bottom:20px;flex-shrink:0;}
+.wp-cover-body{flex:1;display:flex;flex-direction:column;justify-content:space-between;}
+.wp-cover-title{font-size:12px;line-height:1.5;color:rgba(255,255,255,.75);margin-bottom:auto;}
+.wp-cover-brand{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:24px;}
+
 @media(max-width:768px){
   .container{padding:0 18px;}
   .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .hero{padding:120px 0 72px;}
   .footer-top{grid-template-columns:1fr;gap:28px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
+  .wp-listing-hero{padding:120px 0 60px;}
+  .wp-card{flex-direction:column;padding:28px 24px;}
+  .wp-card-left{flex:none;width:100%;padding-right:0;}
+  .wp-card-right{display:none;}
 }
 @media(max-width:480px){
   .container{padding:0 14px;}
@@ -186,8 +218,8 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
     <div class="nav-item">
       <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="simple-menu">
-        <a href="resilient-operations-center.html" class="simple-item"><div class="simple-item-title">Resilient Operations Center</div><div class="simple-item-sub">24/7 Managed Cloud Ops · AIOps · Cost Optimisation</div></a>
-        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Automated Testing · Release Intelligence</div></a>
+        <a href="resilient-operations-center.html" class="simple-item"><div class="simple-item-title">Resilient Operations Center</div><div class="simple-item-sub">Managed Cloud Ops · AIOps · FinOps</div></a>
+        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Automated Testing</div></a>
       </div>
     </div>
     <div class="nav-item">
@@ -223,18 +255,45 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   </div>
 </nav>
 
-<!-- ══ HERO ══ -->
-<section class="hero">
+<!-- ══ WHITEPAPER LISTING HERO ══ -->
+<section class="wp-listing-hero">
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-badge">Insights</div>
-      <h1 class="hero-h1">White Papers</h1>
-      <p class="hero-sub">Technical research, frameworks, and perspectives from BootLabs' engineering and AI teams.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        <a href="index.html" class="btn-outline">Back to Home</a>
+    <div class="eyebrow">Insights · Whitepapers</div>
+    <h1 class="wp-listing-hero-h1">Research, frameworks, and implementation guides</h1>
+    <p class="wp-listing-hero-sub">Technical depth from BootLabs' engineering and AI practices — for architects, engineering leaders, and enterprise AI teams.</p>
+  </div>
+</section>
+
+<!-- ══ WHITEPAPER GRID ══ -->
+<section class="wp-listing-section">
+  <div class="container">
+    <div class="wp-listing-grid">
+
+      <!-- Card: Building Enterprise-Grade Agentic AI Systems -->
+      <div class="wp-card">
+        <div class="wp-card-left">
+          <span class="wp-tag-cyan">Agentic AI</span>
+          <div class="wp-card-date">2026</div>
+          <h2 class="wp-card-h2">Building Enterprise-Grade Agentic AI Systems</h2>
+          <p class="wp-card-desc">A control-stack approach for safe autonomy, auditable action, and operational scale. Covers the six-layer production readiness framework and 25 critical assessment areas.</p>
+          <div class="wp-meta-pills">
+            <span class="wp-meta-pill">17 pages</span>
+            <span class="wp-meta-pill">6-layer framework</span>
+            <span class="wp-meta-pill">25-point checklist</span>
+          </div>
+          <a href="whitepaper-agentic-ai.html" class="wp-card-cta">Get the Whitepaper &rarr;</a>
+        </div>
+        <div class="wp-card-right">
+          <div class="wp-cover">
+            <div class="wp-cover-accent"></div>
+            <div class="wp-cover-body">
+              <div class="wp-cover-title">Building Enterprise-Grade Agentic AI Systems</div>
+              <div class="wp-cover-brand">BootLabs</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p style="margin-top:48px;font-size:13px;color:var(--dim);border:1px solid var(--border);display:inline-block;padding:10px 20px;border-radius:100px;">Full page coming soon — contact us to learn more</p>
+
     </div>
   </div>
 </section>

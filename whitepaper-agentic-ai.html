@@ -61,7 +61,7 @@ input,select,textarea{box-sizing:border-box;}
 .nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
 .nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
 .nav-item:hover .nav-link svg{transform:rotate(180deg);}
-.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:280px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:320px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
 .simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
 .nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
 .simple-item{display:flex;flex-direction:column;gap:1px;padding:11px 14px;border-radius:10px;color:rgba(255,255,255,.88);text-decoration:none;transition:background .2s,color .2s;}
@@ -352,8 +352,8 @@ input,select,textarea{box-sizing:border-box;}
     <div class="nav-item">
       <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="simple-menu">
-        <a href="resilient-operations-center.html" class="simple-item"><div class="simple-item-title">Resilient Operations Center</div><div class="simple-item-sub">24/7 Managed Cloud Ops · AIOps · Cost Optimisation</div></a>
-        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Automated Testing · Release Intelligence</div></a>
+        <a href="resilient-operations-center.html" class="simple-item"><div class="simple-item-title">Resilient Operations Center</div><div class="simple-item-sub">Managed Cloud Ops · AIOps · FinOps</div></a>
+        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Automated Testing</div></a>
       </div>
     </div>
     <div class="nav-item">
@@ -716,26 +716,29 @@ input,select,textarea{box-sizing:border-box;}
       <div class="gate-right" id="gateFormWrap">
         <div class="gate-form-title">Get the full whitepaper</div>
         <div class="gate-form-sub">No spam. We'll follow up only if you want us to.</div>
-        <form id="gateForm" onsubmit="handleGateSubmit(event)">
+        <form id="gateForm" onsubmit="handleGateSubmit(event)" novalidate>
+          <!-- Formspree hidden fields -->
+          <input type="hidden" name="_subject" value="Whitepaper Download — Building Enterprise-Grade Agentic AI Systems">
+          <input type="hidden" name="source" value="whitepaper-agentic-ai">
           <div class="gate-field">
             <label class="gate-label" for="gf-name">Full Name *</label>
-            <input class="gate-input" type="text" id="gf-name" placeholder="Jane Smith" required>
+            <input class="gate-input" type="text" id="gf-name" name="name" placeholder="Jane Smith" required>
           </div>
           <div class="gate-field">
             <label class="gate-label" for="gf-company">Company Name *</label>
-            <input class="gate-input" type="text" id="gf-company" placeholder="Acme Corp" required>
+            <input class="gate-input" type="text" id="gf-company" name="company" placeholder="Acme Corp" required>
           </div>
           <div class="gate-field">
             <label class="gate-label" for="gf-email">Work Email *</label>
-            <input class="gate-input" type="email" id="gf-email" placeholder="jane@company.com" required>
+            <input class="gate-input" type="email" id="gf-email" name="email" placeholder="jane@company.com" required>
           </div>
           <div class="gate-field">
             <label class="gate-label" for="gf-phone">Phone</label>
-            <input class="gate-input" type="tel" id="gf-phone" placeholder="+91 98765 43210">
+            <input class="gate-input" type="tel" id="gf-phone" name="phone" placeholder="+91 98765 43210">
           </div>
           <div class="gate-field">
             <label class="gate-label" for="gf-help">How can we help you?</label>
-            <select class="gate-select" id="gf-help">
+            <select class="gate-select" id="gf-help" name="interest">
               <option value="" disabled selected>Select an option</option>
               <option>Building an agentic AI pilot</option>
               <option>Taking an existing agent to production</option>
@@ -748,7 +751,8 @@ input,select,textarea{box-sizing:border-box;}
             <input type="checkbox" id="gf-privacy" required>
             <label for="gf-privacy">I agree to BootLabs' <a href="#">Privacy Policy</a> and consent to receiving occasional communications about AI engineering insights and services.</label>
           </div>
-          <button type="submit" class="btn-primary gate-submit">Download Whitepaper <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          <div id="gf-error" style="display:none;font-size:13px;color:#ff6b6b;margin-bottom:12px;padding:10px 14px;border:1px solid rgba(255,107,107,.3);border-radius:8px;background:rgba(255,107,107,.06);">Something went wrong. Please try again or email us directly.</div>
+          <button type="submit" id="gf-submit" class="btn-primary gate-submit">Download Whitepaper <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
         </form>
         <div class="gate-success" id="gateSuccess">
           <div class="gate-success-icon">
@@ -856,17 +860,70 @@ function openContact(){document.getElementById('contactPopup').style.display='fl
 function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
 
 /* ── Lead Gate ── */
-function handleGateSubmit(e){
+/* ⚠️  Replace FORMSPREE_FORM_ID below with your actual Formspree form ID.
+   Steps: 1) Sign up at formspree.io  2) Create a new form  3) Copy the ID (e.g. "xyzabcde")  4) Paste it below */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/FORMSPREE_FORM_ID';
+
+async function handleGateSubmit(e){
   e.preventDefault();
-  const name=document.getElementById('gf-name').value.trim();
-  const email=document.getElementById('gf-email').value.trim();
-  const company=document.getElementById('gf-company').value.trim();
-  if(!name||!email||!company)return;
-  // Hide form, show success
-  document.getElementById('gateForm').style.display='none';
-  document.getElementById('gateSuccess').style.display='block';
-  // Scroll to success
-  document.getElementById('gateFormWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+  const name    = document.getElementById('gf-name').value.trim();
+  const email   = document.getElementById('gf-email').value.trim();
+  const company = document.getElementById('gf-company').value.trim();
+  const phone   = document.getElementById('gf-phone').value.trim();
+  const interest= document.getElementById('gf-help').value;
+  const privacy = document.getElementById('gf-privacy').checked;
+  const errEl   = document.getElementById('gf-error');
+  const btn     = document.getElementById('gf-submit');
+
+  errEl.style.display = 'none';
+
+  // Client-side validation
+  if(!name || !email || !company || !privacy){
+    errEl.textContent = 'Please fill in all required fields and accept the privacy policy.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    errEl.textContent = 'Please enter a valid work email address.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  // Loading state
+  const origHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Submitting… <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-opacity=".3"/><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"/></path></svg>';
+
+  try {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {'Accept':'application/json','Content-Type':'application/json'},
+      body: JSON.stringify({
+        name, email, company, phone,
+        interest: interest || 'Not specified',
+        _subject: 'Whitepaper Download — Building Enterprise-Grade Agentic AI Systems',
+        _replyto: email
+      })
+    });
+
+    if(res.ok){
+      // Show success, hide form
+      document.getElementById('gateForm').style.display='none';
+      document.getElementById('gateSuccess').style.display='block';
+      document.getElementById('gateFormWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+    } else {
+      const data = await res.json().catch(()=>({}));
+      errEl.textContent = (data.errors||[]).map(x=>x.message).join(', ') || 'Submission failed. Please try again.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = origHTML;
+    }
+  } catch(err){
+    errEl.textContent = 'Network error — please check your connection and try again.';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.innerHTML = origHTML;
+  }
 }
 </script>
 </body>
