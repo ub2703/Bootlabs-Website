@@ -1,0 +1,7 @@
+name = "aakhrikhat"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "LEADS_DB"
+database_name = "bootlabs-leads"
+database_id = "bd03a1e7-cd3c-4238-81af-2800065ccc1b"
