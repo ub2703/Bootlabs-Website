@@ -169,7 +169,7 @@ input,select,textarea{box-sizing:border-box;}
 .wp-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.82);line-height:1.5;}
 .wp-item::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0;margin-top:7px;}
 
-/* ══ LEAD GATE ══ */
+/* ══ LEAD FORM ══ */
 .gate-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);position:relative;overflow:hidden;}
 .gate-section::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(0,102,255,.06) 0%,transparent 65%);pointer-events:none;}
 .gate-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
@@ -184,26 +184,29 @@ input,select,textarea{box-sizing:border-box;}
 .gate-quote p{font-size:14px;color:var(--dim);line-height:1.75;font-style:italic;}
 .gate-right{background:#06060a;border:1px solid var(--border);border-radius:20px;padding:40px;position:relative;overflow:hidden;}
 .gate-right::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));}
-.gate-form-title{font-size:20px;color:#fff;margin-bottom:8px;}
-.gate-form-sub{font-size:13px;color:var(--dim);margin-bottom:28px;}
+.gate-form-title{font-size:20px;color:#fff;margin-bottom:6px;}
+.gate-form-sub{font-size:13px;color:var(--dim);margin-bottom:28px;line-height:1.5;}
 .gate-field{margin-bottom:16px;}
 .gate-label{font-size:12px;color:var(--dim);display:block;margin-bottom:6px;letter-spacing:.04em;}
 .gate-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px 15px;color:#fff;font-family:NHD,sans-serif;font-size:14px;transition:border-color .2s;}
 .gate-input:focus{outline:none;border-color:var(--border-blue);}
 .gate-input::placeholder{color:var(--dim);}
+.gate-input:disabled{opacity:.5;cursor:not-allowed;}
 .gate-select{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px 15px;color:var(--mid);font-family:NHD,sans-serif;font-size:14px;appearance:none;cursor:pointer;transition:border-color .2s;}
 .gate-select:focus{outline:none;border-color:var(--border-blue);}
+.gate-select:disabled{opacity:.5;cursor:not-allowed;}
 .gate-select option{background:#0f0f1a;color:#fff;}
 .gate-privacy{display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;}
 .gate-privacy input{width:16px;height:16px;accent-color:var(--blue);margin-top:2px;flex-shrink:0;}
 .gate-privacy label{font-size:12px;color:var(--dim);line-height:1.55;}
 .gate-privacy a{color:var(--cyan);}
-.gate-submit{width:100%;justify-content:center;padding:15px;}
-.gate-success{display:none;text-align:center;padding:20px 0;}
-.gate-success-icon{width:56px;height:56px;border-radius:50%;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
-.gate-success-icon svg{width:24px;height:24px;fill:none;stroke:#22c55e;stroke-width:2;}
-.gate-success h3{font-size:20px;color:#fff;margin-bottom:8px;}
-.gate-success p{font-size:14px;color:var(--dim);margin-bottom:24px;line-height:1.6;}
+.gate-submit{width:100%;justify-content:center;padding:15px;font-size:15px;}
+/* Inline success banner */
+.gate-success-banner{display:none;align-items:center;gap:14px;padding:16px 20px;border:1px solid rgba(34,197,94,.3);border-radius:12px;background:rgba(34,197,94,.06);margin-bottom:20px;}
+.gate-success-banner svg{width:20px;height:20px;fill:none;stroke:#22c55e;stroke-width:2;flex-shrink:0;}
+.gate-success-banner-text{font-size:14px;color:#22c55e;line-height:1.4;}
+.gate-success-banner-text strong{display:block;margin-bottom:2px;}
+.gate-dl-btn{display:none;width:100%;justify-content:center;padding:13px;margin-top:12px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#22c55e;border-radius:100px;font-family:NHD,sans-serif;font-size:14px;cursor:pointer;gap:8px;transition:background .2s;}
 
 /* ══ CTA ══ */
 .cta-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
@@ -715,26 +718,37 @@ input,select,textarea{box-sizing:border-box;}
 
       <div class="gate-right" id="gateFormWrap">
         <div class="gate-form-title">Get the full whitepaper</div>
-        <div class="gate-form-sub">No spam. We'll follow up only if you want us to.</div>
+        <div class="gate-form-sub">Fill in your details — the PDF downloads automatically.</div>
+
+        <!-- Success banner (shown inline above form after submit) -->
+        <div class="gate-success-banner" id="gfSuccessBanner">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <div class="gate-success-banner-text">
+            <strong>Your download is starting</strong>
+            If it doesn't start automatically, use the button below.
+          </div>
+        </div>
+        <button class="gate-dl-btn" id="gfDlBtn" onclick="triggerDownload()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF manually
+        </button>
+
         <form id="gateForm" onsubmit="handleGateSubmit(event)" novalidate>
-          <!-- Formspree hidden fields -->
-          <input type="hidden" name="_subject" value="Whitepaper Download — Building Enterprise-Grade Agentic AI Systems">
-          <input type="hidden" name="source" value="whitepaper-agentic-ai">
           <div class="gate-field">
             <label class="gate-label" for="gf-name">Full Name *</label>
-            <input class="gate-input" type="text" id="gf-name" name="name" placeholder="Jane Smith" required>
+            <input class="gate-input" type="text" id="gf-name" name="name" placeholder="Jane Smith" required autocomplete="name">
           </div>
           <div class="gate-field">
             <label class="gate-label" for="gf-company">Company Name *</label>
-            <input class="gate-input" type="text" id="gf-company" name="company" placeholder="Acme Corp" required>
+            <input class="gate-input" type="text" id="gf-company" name="company" placeholder="Acme Corp" required autocomplete="organization">
           </div>
           <div class="gate-field">
             <label class="gate-label" for="gf-email">Work Email *</label>
-            <input class="gate-input" type="email" id="gf-email" name="email" placeholder="jane@company.com" required>
+            <input class="gate-input" type="email" id="gf-email" name="email" placeholder="jane@company.com" required autocomplete="email">
           </div>
           <div class="gate-field">
             <label class="gate-label" for="gf-phone">Phone</label>
-            <input class="gate-input" type="tel" id="gf-phone" name="phone" placeholder="+91 98765 43210">
+            <input class="gate-input" type="tel" id="gf-phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel">
           </div>
           <div class="gate-field">
             <label class="gate-label" for="gf-help">How can we help you?</label>
@@ -749,22 +763,18 @@ input,select,textarea{box-sizing:border-box;}
           </div>
           <div class="gate-privacy">
             <input type="checkbox" id="gf-privacy" required>
-            <label for="gf-privacy">I agree to BootLabs' <a href="#">Privacy Policy</a> and consent to receiving occasional communications about AI engineering insights and services.</label>
+            <label for="gf-privacy">I agree to BootLabs' <a href="#">Privacy Policy</a> and consent to receiving updates about AI engineering insights and services.</label>
           </div>
-          <div id="gf-error" style="display:none;font-size:13px;color:#ff6b6b;margin-bottom:12px;padding:10px 14px;border:1px solid rgba(255,107,107,.3);border-radius:8px;background:rgba(255,107,107,.06);">Something went wrong. Please try again or email us directly.</div>
-          <button type="submit" id="gf-submit" class="btn-primary gate-submit">Download Whitepaper <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          <div id="gf-error" style="display:none;font-size:13px;color:#ff6b6b;margin-bottom:12px;padding:10px 14px;border:1px solid rgba(255,107,107,.3);border-radius:8px;background:rgba(255,107,107,.06);line-height:1.5;"></div>
+          <button type="submit" id="gf-submit" class="btn-primary gate-submit">
+            Download Now
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </button>
         </form>
-        <div class="gate-success" id="gateSuccess">
-          <div class="gate-success-icon">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <h3>You're all set</h3>
-          <p>Your whitepaper is ready. Click below to download the full PDF.</p>
-          <a href="Building-Production-Grade-Agentic-AI-Systems.pdf" class="btn-primary" download style="display:inline-flex;margin-bottom:20px;">Download PDF <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
-          <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:4px;">
-            <p style="font-size:13px;margin-bottom:16px;">Want to benchmark your agentic AI readiness with our team?</p>
-            <button class="btn-outline" style="width:100%;justify-content:center;" onclick="openContact()">Book a 30-Min Architecture Review</button>
-          </div>
+
+        <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:24px;display:none;" id="gfBookCta">
+          <p style="font-size:13px;color:var(--dim);margin-bottom:12px;">Want a hands-on architecture review for your agentic AI roadmap?</p>
+          <button class="btn-outline" style="width:100%;justify-content:center;" onclick="openContact()">Book a 30-Min Architecture Review</button>
         </div>
       </div>
 
@@ -859,10 +869,42 @@ function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
 function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
 function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
 
-/* ── Lead Gate ── */
-/* ⚠️  Replace FORMSPREE_FORM_ID below with your actual Formspree form ID.
-   Steps: 1) Sign up at formspree.io  2) Create a new form  3) Copy the ID (e.g. "xyzabcde")  4) Paste it below */
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/FORMSPREE_FORM_ID';
+/* ── Lead Gate → Cloudflare D1 ── */
+const PDF_URL = 'Building-Production-Grade-Agentic-AI-Systems.pdf';
+const LEAD_ENDPOINT = '/api/whitepaper-lead'; // Cloudflare Pages Function
+
+function triggerDownload(){
+  const a = document.createElement('a');
+  a.href = PDF_URL;
+  a.download = 'BootLabs-Agentic-AI-Whitepaper.pdf';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function showSuccess(){
+  // Show green banner above form
+  const banner = document.getElementById('gfSuccessBanner');
+  const dlBtn  = document.getElementById('gfDlBtn');
+  const bookCta= document.getElementById('gfBookCta');
+  banner.style.display = 'flex';
+  dlBtn.style.display  = 'flex';
+  bookCta.style.display= 'block';
+  // Disable form fields (keep visible)
+  document.querySelectorAll('#gateForm input, #gateForm select').forEach(el=>el.disabled=true);
+  // Replace submit button with downloaded state
+  const btn = document.getElementById('gf-submit');
+  btn.disabled = true;
+  btn.style.background = 'rgba(34,197,94,.15)';
+  btn.style.boxShadow = 'none';
+  btn.style.border = '1px solid rgba(34,197,94,.3)';
+  btn.style.color = '#22c55e';
+  btn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Downloaded';
+  // Scroll banner into view
+  banner.scrollIntoView({behavior:'smooth',block:'nearest'});
+  // Auto-trigger download
+  triggerDownload();
+}
 
 async function handleGateSubmit(e){
   e.preventDefault();
@@ -877,52 +919,50 @@ async function handleGateSubmit(e){
 
   errEl.style.display = 'none';
 
-  // Client-side validation
-  if(!name || !email || !company || !privacy){
-    errEl.textContent = 'Please fill in all required fields and accept the privacy policy.';
-    errEl.style.display = 'block';
-    return;
+  // Validation
+  if(!name || !email || !company){
+    errEl.textContent = 'Please fill in your name, company, and work email.';
+    errEl.style.display = 'block'; return;
   }
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
     errEl.textContent = 'Please enter a valid work email address.';
-    errEl.style.display = 'block';
-    return;
+    errEl.style.display = 'block'; return;
+  }
+  if(!privacy){
+    errEl.textContent = 'Please accept the privacy policy to continue.';
+    errEl.style.display = 'block'; return;
   }
 
-  // Loading state
+  // Loading
   const origHTML = btn.innerHTML;
   btn.disabled = true;
-  btn.innerHTML = 'Submitting… <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-opacity=".3"/><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"/></path></svg>';
+  btn.innerHTML = 'Saving… <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="12" cy="12" r="9" stroke-opacity=".25"/><path d="M12 3a9 9 0 0 1 9 9" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".7s" repeatCount="indefinite"/></path></svg>';
 
   try {
-    const res = await fetch(FORMSPREE_ENDPOINT, {
+    const res = await fetch(LEAD_ENDPOINT, {
       method: 'POST',
-      headers: {'Accept':'application/json','Content-Type':'application/json'},
+      headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
-        name, email, company, phone,
+        name, email, company,
+        phone: phone || '',
         interest: interest || 'Not specified',
-        _subject: 'Whitepaper Download — Building Enterprise-Grade Agentic AI Systems',
-        _replyto: email
+        whitepaper: 'Building Enterprise-Grade Agentic AI Systems'
       })
     });
 
     if(res.ok){
-      // Show success, hide form
-      document.getElementById('gateForm').style.display='none';
-      document.getElementById('gateSuccess').style.display='block';
-      document.getElementById('gateFormWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+      showSuccess();
     } else {
       const data = await res.json().catch(()=>({}));
-      errEl.textContent = (data.errors||[]).map(x=>x.message).join(', ') || 'Submission failed. Please try again.';
+      errEl.textContent = data.error || 'Submission failed — please try again.';
       errEl.style.display = 'block';
       btn.disabled = false;
       btn.innerHTML = origHTML;
     }
   } catch(err){
-    errEl.textContent = 'Network error — please check your connection and try again.';
-    errEl.style.display = 'block';
-    btn.disabled = false;
-    btn.innerHTML = origHTML;
+    // If D1 endpoint is not yet configured, fall back gracefully
+    console.warn('Lead endpoint unavailable, proceeding with download:', err.message);
+    showSuccess();
   }
 }
 </script>
