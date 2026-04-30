@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Enterprise-Grade Agentic AI Systems — BootLabs Whitepaper</title>
+<style>
+/* ── FONTS ── */
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;height:auto;}
+ul{list-style:none;}
+button{font-family:NHD,sans-serif;cursor:pointer;}
+input,select,textarea{box-sizing:border-box;}
+
+/* ── VARS ── */
+:root{
+  --blue:#0066FF;--cyan:#26a8ff;
+  --border:rgba(255,255,255,.08);
+  --border-blue:rgba(0,102,255,.35);
+  --dim:rgba(255,255,255,.45);
+  --mid:rgba(255,255,255,.7);
+  --glass:rgba(255,255,255,.03);
+  --r:20px;
+}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
+.eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;font-weight:400;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
+.btn-primary:hover{background:#0055dd;box-shadow:0 8px 32px rgba(0,102,255,.5);transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;transition:transform .2s;}
+.btn-primary:hover svg{transform:translateX(3px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+.section-header{max-width:700px;margin-bottom:56px;}
+.section-sub{font-size:16px;color:var(--mid);line-height:1.75;margin-top:16px;}
+
+/* ══ MOBILE MENU ══ */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mob-sub{padding:12px 0 4px;display:none;flex-direction:column;gap:10px;}
+.mob-sub.open{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
+
+/* ══ NAVBAR ══ */
+.navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
+.navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
+.nav-logo img{height:28px;width:auto;display:block;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{font-size:15px;color:rgba(255,255,255,.92);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:280px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.simple-item{display:flex;flex-direction:column;gap:1px;padding:11px 14px;border-radius:10px;color:rgba(255,255,255,.88);text-decoration:none;transition:background .2s,color .2s;}
+.simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
+.simple-item-title{font-size:14px;color:inherit;}
+.simple-item-sub{font-size:11px;color:rgba(255,255,255,.4);line-height:1.4;margin-top:2px;}
+.mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-title{font-size:15px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;transition:background .2s;}
+.nav-hamburger:hover{background:rgba(255,255,255,.06);}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ══ WP HERO ══ */
+.wp-hero{padding:140px 0 100px;background:#06060a;position:relative;overflow:hidden;}
+.wp-hero::before{content:"";position:absolute;top:-100px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,102,255,.09) 0%,transparent 65%);pointer-events:none;}
+.wp-hero::after{content:"";position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(38,168,255,.05) 0%,transparent 65%);pointer-events:none;}
+.wp-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 480px;gap:80px;align-items:center;}
+.wp-hero-badge{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:32px;}
+.wp-hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
+.wp-hero-h1{font-size:clamp(36px,4.2vw,60px);font-weight:400;line-height:1.07;letter-spacing:-.025em;margin-bottom:20px;}
+.wp-hero-h1 em{font-style:normal;color:var(--cyan);}
+.wp-hero-sub{font-size:16px;line-height:1.8;color:var(--mid);max-width:520px;margin-bottom:16px;}
+.wp-hero-note{font-size:13px;color:var(--dim);margin-bottom:36px;}
+.wp-hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* ── Cover Mockup ── */
+.wp-cover{position:relative;border-radius:20px;background:linear-gradient(145deg,#0b0b16 0%,#0f1024 100%);border:1px solid var(--border);padding:40px 36px;overflow:hidden;}
+.wp-cover::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--cyan));}
+.wp-cover-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+.wp-cover-logo{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:40px;}
+.wp-cover-eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;}
+.wp-cover-title{font-size:22px;font-weight:400;line-height:1.2;color:#fff;margin-bottom:8px;letter-spacing:-.01em;}
+.wp-cover-subtitle{font-size:12px;color:var(--dim);line-height:1.6;margin-bottom:40px;max-width:300px;}
+.wp-cover-meta{display:flex;flex-direction:column;gap:10px;}
+.wp-cover-meta-item{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--mid);}
+.wp-cover-meta-dot{width:4px;height:4px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+.wp-cover-accent{position:absolute;bottom:-20px;right:-20px;width:160px;height:160px;background:radial-gradient(circle,rgba(0,102,255,.12) 0%,transparent 70%);pointer-events:none;}
+
+/* ══ STATS ══ */
+.stats-strip{background:#080810;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stats-inner{display:flex;align-items:stretch;}
+.stat-item{flex:1;padding:36px 32px;display:flex;flex-direction:column;gap:8px;border-right:1px solid var(--border);position:relative;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-size:clamp(36px,3.5vw,52px);letter-spacing:-.03em;color:#fff;line-height:1;}
+.stat-num span{font-size:.55em;color:var(--cyan);}
+.stat-body{font-size:13px;color:var(--mid);line-height:1.55;max-width:220px;}
+.stat-source{font-size:11px;color:var(--dim);margin-top:4px;letter-spacing:.06em;}
+
+/* ══ CONTENTS ══ */
+.contents-section{padding:100px 0;background:#06060a;}
+.contents-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contents-left h2{font-size:clamp(26px,3vw,40px);font-weight:400;letter-spacing:-.02em;line-height:1.15;margin-bottom:20px;}
+.contents-left p{font-size:15px;color:var(--mid);line-height:1.8;}
+.contents-toc{display:flex;flex-direction:column;gap:4px;}
+.contents-toc-item{display:flex;align-items:flex-start;gap:16px;padding:14px 18px;border-radius:12px;border:1px solid transparent;transition:border-color .2s,background .2s;}
+.contents-toc-item:hover{border-color:var(--border);background:var(--glass);}
+.contents-toc-num{font-size:11px;letter-spacing:.12em;color:var(--cyan);flex-shrink:0;width:24px;padding-top:1px;}
+.contents-toc-text{font-size:14px;color:var(--mid);line-height:1.5;}
+.contents-toc-text strong{color:#fff;display:block;font-weight:400;font-size:15px;margin-bottom:2px;}
+
+/* ══ SIX LAYERS ══ */
+.layers-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.layers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:56px;}
+.layer-card{background:#080810;padding:36px 32px;position:relative;transition:background .3s;}
+.layer-card:hover{background:#0a0a14;}
+.layer-badge{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;font-weight:500;}
+.layer-badge-a{background:rgba(0,102,255,.1);color:#6699ff;border:1px solid rgba(0,102,255,.2);}
+.layer-badge-b{background:rgba(38,168,255,.1);color:var(--cyan);border:1px solid rgba(38,168,255,.2);}
+.layer-badge-c{background:rgba(168,100,255,.1);color:#b87aff;border:1px solid rgba(168,100,255,.2);}
+.layer-badge-d{background:rgba(0,200,150,.1);color:#22d3a8;border:1px solid rgba(0,200,150,.2);}
+.layer-badge-e{background:rgba(255,100,80,.1);color:#ff7a6e;border:1px solid rgba(255,100,80,.2);}
+.layer-badge-f{background:rgba(255,180,0,.1);color:#ffc942;border:1px solid rgba(255,180,0,.2);}
+.layer-title{font-size:17px;color:#fff;margin-bottom:10px;font-weight:400;}
+.layer-body{font-size:13px;color:var(--mid);line-height:1.65;margin-bottom:18px;}
+.layer-tags{display:flex;flex-wrap:wrap;gap:7px;}
+.layer-tag{font-size:11px;color:var(--dim);padding:4px 10px;border:1px solid var(--border);border-radius:100px;}
+
+/* ══ 25 CRITICAL AREAS ══ */
+.wp-checklist-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.wp-checklist-intro{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;margin-bottom:56px;}
+.wp-checklist-intro p{font-size:15px;color:var(--mid);line-height:1.8;}
+.wp-checklist-note{font-size:13px;color:var(--dim);border-left:2px solid var(--border-blue);padding-left:16px;line-height:1.7;}
+.wp-table-wrap{border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.wp-table{width:100%;border-collapse:collapse;}
+.wp-table thead tr{background:#080810;border-bottom:1px solid var(--border);}
+.wp-table thead th{padding:16px 24px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:400;text-align:left;}
+.wp-table tbody tr{border-bottom:1px solid var(--border);}
+.wp-table tbody tr:last-child{border-bottom:none;}
+.wp-table tbody tr:nth-child(even){background:rgba(255,255,255,.012);}
+.wp-table tbody tr:hover{background:rgba(0,102,255,.025);}
+.wp-td-domain{padding:24px 24px;vertical-align:top;width:26%;}
+.wp-domain-label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);font-weight:500;line-height:1.4;}
+.wp-domain-layer{font-size:11px;color:var(--dim);margin-top:4px;}
+.wp-td-items{padding:20px 24px;vertical-align:top;}
+.wp-items-list{display:flex;flex-direction:column;gap:8px;}
+.wp-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.82);line-height:1.5;}
+.wp-item::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0;margin-top:7px;}
+
+/* ══ LEAD GATE ══ */
+.gate-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);position:relative;overflow:hidden;}
+.gate-section::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(0,102,255,.06) 0%,transparent 65%);pointer-events:none;}
+.gate-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.gate-left h2{font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.15;margin-bottom:20px;}
+.gate-left p{font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:32px;}
+.gate-benefits{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
+.gate-benefit{display:flex;align-items:flex-start;gap:14px;}
+.gate-benefit-icon{width:28px;height:28px;border-radius:8px;background:rgba(0,102,255,.1);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.gate-benefit-icon svg{width:13px;height:13px;fill:none;stroke:var(--cyan);stroke-width:2;}
+.gate-benefit-text{font-size:14px;color:var(--mid);line-height:1.55;padding-top:4px;}
+.gate-quote{border-left:2px solid var(--border-blue);padding-left:20px;}
+.gate-quote p{font-size:14px;color:var(--dim);line-height:1.75;font-style:italic;}
+.gate-right{background:#06060a;border:1px solid var(--border);border-radius:20px;padding:40px;position:relative;overflow:hidden;}
+.gate-right::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));}
+.gate-form-title{font-size:20px;color:#fff;margin-bottom:8px;}
+.gate-form-sub{font-size:13px;color:var(--dim);margin-bottom:28px;}
+.gate-field{margin-bottom:16px;}
+.gate-label{font-size:12px;color:var(--dim);display:block;margin-bottom:6px;letter-spacing:.04em;}
+.gate-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px 15px;color:#fff;font-family:NHD,sans-serif;font-size:14px;transition:border-color .2s;}
+.gate-input:focus{outline:none;border-color:var(--border-blue);}
+.gate-input::placeholder{color:var(--dim);}
+.gate-select{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px 15px;color:var(--mid);font-family:NHD,sans-serif;font-size:14px;appearance:none;cursor:pointer;transition:border-color .2s;}
+.gate-select:focus{outline:none;border-color:var(--border-blue);}
+.gate-select option{background:#0f0f1a;color:#fff;}
+.gate-privacy{display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;}
+.gate-privacy input{width:16px;height:16px;accent-color:var(--blue);margin-top:2px;flex-shrink:0;}
+.gate-privacy label{font-size:12px;color:var(--dim);line-height:1.55;}
+.gate-privacy a{color:var(--cyan);}
+.gate-submit{width:100%;justify-content:center;padding:15px;}
+.gate-success{display:none;text-align:center;padding:20px 0;}
+.gate-success-icon{width:56px;height:56px;border-radius:50%;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+.gate-success-icon svg{width:24px;height:24px;fill:none;stroke:#22c55e;stroke-width:2;}
+.gate-success h3{font-size:20px;color:#fff;margin-bottom:8px;}
+.gate-success p{font-size:14px;color:var(--dim);margin-bottom:24px;line-height:1.6;}
+
+/* ══ CTA ══ */
+.cta-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.cta-inner{text-align:center;max-width:620px;margin:0 auto;}
+.cta-h2{font-size:clamp(28px,4vw,48px);color:#fff;margin-bottom:16px;letter-spacing:-.02em;font-weight:400;line-height:1.15;}
+.cta-sub{font-size:16px;color:var(--mid);line-height:1.75;margin-bottom:40px;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* ══ FOOTER ══ */
+.footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
+.footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+.footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
+.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);white-space:nowrap;line-height:1;}
+.footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  .wp-hero-inner{grid-template-columns:1fr;}
+  .wp-cover{display:none;}
+  .contents-inner{grid-template-columns:1fr;gap:40px;}
+  .layers-grid{grid-template-columns:repeat(2,1fr);}
+  .wp-checklist-intro{grid-template-columns:1fr;gap:24px;}
+  .gate-inner{grid-template-columns:1fr;gap:48px;}
+}
+@media(max-width:768px){
+  .container{padding:0 18px;}
+  .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
+  .nav-hamburger{display:flex;}
+  .stats-inner{flex-direction:column;}
+  .stat-item{border-right:none;border-bottom:1px solid var(--border);}
+  .stat-item:last-child{border-bottom:none;}
+  .layers-grid{grid-template-columns:1fr;}
+  .wp-table thead{display:none;}
+  .wp-table,.wp-table tbody,.wp-table tr,.wp-table td{display:block;width:100%;}
+  .wp-table tbody tr{border-bottom:1px solid var(--border);padding:20px 0;}
+  .wp-td-domain{padding:0 20px 10px;}
+  .wp-td-items{padding:0 20px 20px;}
+  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-bot{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:480px){
+  .container{padding:0 14px;}
+  .navbar{width:calc(100% - 16px);padding:9px 12px;}
+  .gate-right{padding:28px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ MOBILE MENU ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mob-nav-links">
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="cloud-devops.html" onclick="closeMobileMenu()">DevOps / Cloud</a>
+        <a href="platform-engineering.html" onclick="closeMobileMenu()">SRE</a>
+        <a href="software-engineering.html" onclick="closeMobileMenu()">Full Stack Development</a>
+        <a href="ai-engineering.html" onclick="closeMobileMenu()">AI &amp; ML</a>
+        <a href="security-engineering.html" onclick="closeMobileMenu()">Security Engineering</a>
+        <a href="agentic-ai.html" onclick="closeMobileMenu()">Agentic AI</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Solutions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="resilient-operations-center.html" onclick="closeMobileMenu()">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" onclick="closeMobileMenu()">AI in SDLC</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Industries <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="manufacturing.html" onclick="closeMobileMenu()">Manufacturing</a>
+        <a href="automotive.html" onclick="closeMobileMenu()">Automotive</a>
+        <a href="financial-services.html" onclick="closeMobileMenu()">Financial Services</a>
+        <a href="qsr.html" onclick="closeMobileMenu()">QSR</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="sailor.html" onclick="closeMobileMenu()">Sailor</a>
+        <a href="guardian.html" onclick="closeMobileMenu()">Guardian</a>
+      </div>
+    </div>
+    <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="about-us.html" onclick="closeMobileMenu()">About Us</a>
+        <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="white-papers.html" onclick="closeMobileMenu()">White Papers</a>
+        <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+  </nav>
+  <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="cloud-devops.html" class="mega-item">
+          <div class="mega-item-title">DevOps / Cloud</div>
+          <div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Infrastructure Automation</div>
+        </a>
+        <a href="platform-engineering.html" class="mega-item">
+          <div class="mega-item-title">SRE</div>
+          <div class="mega-item-subs">Observability · SLOs · Chaos Engineering · Service Mesh</div>
+        </a>
+        <a href="software-engineering.html" class="mega-item">
+          <div class="mega-item-title">Full Stack Development</div>
+          <div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div>
+        </a>
+        <a href="ai-engineering.html" class="mega-item">
+          <div class="mega-item-title">AI &amp; ML</div>
+          <div class="mega-item-subs">ML Engineering · MLOps · Production AI · Model Monitoring</div>
+        </a>
+        <a href="security-engineering.html" class="mega-item">
+          <div class="mega-item-title">Security Engineering</div>
+          <div class="mega-item-subs">DevSecOps · VAPT · Compliance Automation · Zero Trust</div>
+        </a>
+        <a href="agentic-ai.html" class="mega-item">
+          <div class="mega-item-title">Agentic AI</div>
+          <div class="mega-item-subs">Task Agents · Multi-Agent Orchestration · Tool-Using Agents · LLMOps</div>
+        </a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="resilient-operations-center.html" class="simple-item"><div class="simple-item-title">Resilient Operations Center</div><div class="simple-item-sub">24/7 Managed Cloud Ops · AIOps · Cost Optimisation</div></a>
+        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Automated Testing · Release Intelligence</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#industry" class="nav-link">Industries <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="manufacturing.html" class="simple-item"><div class="simple-item-title">Manufacturing</div><div class="simple-item-sub">Supply Chain AI · Predictive Ops · GenAI Agents</div></a>
+        <a href="automotive.html" class="simple-item"><div class="simple-item-title">Automotive</div><div class="simple-item-sub">Service AI · Warranty Intelligence · Aftersales</div></a>
+        <a href="financial-services.html" class="simple-item"><div class="simple-item-title">Financial Services</div><div class="simple-item-sub">KYC Automation · AIOps · Compliance AI</div></a>
+        <a href="qsr.html" class="simple-item"><div class="simple-item-title">QSR</div><div class="simple-item-sub">Operations AI · Demand Forecasting · Loss Prevention</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#platforms" class="nav-link">Platforms <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="sailor.html" class="simple-item"><div class="simple-item-title">Sailor</div><div class="simple-item-sub">Cloud Cost Intelligence &amp; FinOps Platform</div></a>
+        <a href="guardian.html" class="simple-item"><div class="simple-item-title">Guardian</div><div class="simple-item-sub">Security &amp; Compliance Automation Platform</div></a>
+      </div>
+    </div>
+    <a href="partnerships.html" class="nav-link">Partners</a>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="about-us.html" class="simple-item"><div class="simple-item-title">About Us</div><div class="simple-item-sub">Who we are · Leadership · Our values</div></a>
+        <a href="case-studies.html" class="simple-item"><div class="simple-item-title">Case Studies</div><div class="simple-item-sub">Client outcomes · Live deployments</div></a>
+        <a href="white-papers.html" class="simple-item"><div class="simple-item-title">White Papers</div><div class="simple-item-sub">Research · Frameworks · Implementation guides</div></a>
+        <a href="blog.html" class="simple-item"><div class="simple-item-title">Blog &amp; Press Releases</div><div class="simple-item-sub">Perspectives · Product news</div></a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="wp-hero">
+  <div class="container">
+    <div class="wp-hero-inner">
+      <div class="wp-hero-left">
+        <div class="wp-hero-badge">
+          <div class="wp-hero-badge-dot"></div>
+          Whitepaper &nbsp;·&nbsp; 2026
+        </div>
+        <h1 class="wp-hero-h1">Building <em>Enterprise-Grade</em><br>Agentic AI Systems</h1>
+        <p class="wp-hero-sub">A control-stack approach for safe autonomy, auditable action, and operational scale.</p>
+        <p class="wp-hero-note">17 pages &nbsp;·&nbsp; 6-layer framework &nbsp;·&nbsp; 25-point readiness checklist</p>
+        <div class="wp-hero-btns">
+          <a href="#download" class="btn-primary">Download Free <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <button class="btn-outline" onclick="openContact()">Book Architecture Review</button>
+        </div>
+      </div>
+      <div class="wp-cover">
+        <div class="wp-cover-grid"></div>
+        <div class="wp-cover-logo">BootLabs</div>
+        <div class="wp-cover-eyebrow">Whitepaper &nbsp;·&nbsp; Agentic AI</div>
+        <div class="wp-cover-title">Building Enterprise-Grade<br>Agentic AI Systems</div>
+        <div class="wp-cover-subtitle">A control-stack approach for safe autonomy, auditable action, and operational scale</div>
+        <div class="wp-cover-meta">
+          <div class="wp-cover-meta-item"><div class="wp-cover-meta-dot"></div>Six-layer production readiness framework</div>
+          <div class="wp-cover-meta-item"><div class="wp-cover-meta-dot"></div>25-point autonomous AI readiness checklist</div>
+          <div class="wp-cover-meta-item"><div class="wp-cover-meta-dot"></div>Technology stack options &amp; implementation guide</div>
+          <div class="wp-cover-meta-item"><div class="wp-cover-meta-dot"></div>Regulated industry considerations (BFSI, manufacturing)</div>
+        </div>
+        <div class="wp-cover-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<section class="stats-strip">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">33<span>%</span></div>
+        <div class="stat-body">of enterprise software will include agentic AI by 2028, up from less than 1% in 2024</div>
+        <div class="stat-source">Gartner</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">15<span>%</span></div>
+        <div class="stat-body">of day-to-day work decisions will be made autonomously by agentic AI systems by 2028</div>
+        <div class="stat-source">Gartner</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">65<span>%</span></div>
+        <div class="stat-body">of organizations are already regularly using GenAI across marketing, IT, and product functions</div>
+        <div class="stat-source">McKinsey</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT'S INSIDE ══ -->
+<section class="contents-section">
+  <div class="container">
+    <div class="contents-inner">
+      <div class="contents-left">
+        <div class="eyebrow" style="margin-bottom:24px;">What's Inside</div>
+        <h2>The architecture decisions that separate a pilot from a production system</h2>
+        <p style="margin-top:20px;">AI agents that plan, retrieve, and execute through live enterprise systems create a new class of failure — one that looks healthy while behaving incorrectly in business terms. This whitepaper defines the six-layer control stack that makes autonomous AI safe to operate at enterprise scale.</p>
+      </div>
+      <div class="contents-toc">
+        <div class="contents-toc-item">
+          <div class="contents-toc-num">01</div>
+          <div class="contents-toc-text"><strong>Why production-grade is not an afterthought</strong>A wrong action executes successfully while creating a downstream incident. The risk model is different from every other system.</div>
+        </div>
+        <div class="contents-toc-item">
+          <div class="contents-toc-num">02</div>
+          <div class="contents-toc-text"><strong>Market context &amp; enterprise adoption patterns</strong>Where agentic AI is landing first, by function and industry, and why regulated sectors move deliberately.</div>
+        </div>
+        <div class="contents-toc-item">
+          <div class="contents-toc-num">03</div>
+          <div class="contents-toc-text"><strong>The six-layer control stack</strong>From data authority and orchestration to security, compliance, and operational monitoring.</div>
+        </div>
+        <div class="contents-toc-item">
+          <div class="contents-toc-num">04</div>
+          <div class="contents-toc-text"><strong>25 critical areas to assess your autonomous AI readiness</strong>Mapped to the six layers — covering architecture, governance, and operational validation.</div>
+        </div>
+        <div class="contents-toc-item">
+          <div class="contents-toc-num">05</div>
+          <div class="contents-toc-text"><strong>Technology stack options &amp; implementation approach</strong>Reference patterns for orchestration, RAG, tool governance, and rollout strategy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SIX LAYERS ══ -->
+<section class="layers-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow" style="margin-bottom:20px;">The Framework</div>
+      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;">The six-layer control stack for production readiness</h2>
+      <p class="section-sub">Every layer addresses a distinct failure mode. Skipping any one of them is how a pilot stays a pilot.</p>
+    </div>
+    <div class="layers-grid">
+
+      <div class="layer-card">
+        <div class="layer-badge layer-badge-a">A</div>
+        <div class="layer-title">Data &amp; Knowledge Foundation</div>
+        <div class="layer-body">Agents need more than access to data — they need authority, freshness, and traceability. Golden records, TTL-governed retrieval, and source-cited RAG prevent agents from acting on stale or conflicting information.</div>
+        <div class="layer-tags">
+          <span class="layer-tag">Golden Record Creation</span>
+          <span class="layer-tag">RAG with Source Traceability</span>
+          <span class="layer-tag">Knowledge Freshness Governance</span>
+        </div>
+      </div>
+
+      <div class="layer-card">
+        <div class="layer-badge layer-badge-b">B</div>
+        <div class="layer-title">Agent Orchestration &amp; Runtime</div>
+        <div class="layer-body">Stable multi-agent systems separate planning, execution, and validation. Tool calls are where incidents are born — whitelisting, schema validation, and replay protection keep autonomy controlled.</div>
+        <div class="layer-tags">
+          <span class="layer-tag">Multi-Agent Collaboration</span>
+          <span class="layer-tag">Safe Tool Invocation</span>
+          <span class="layer-tag">Deterministic Control Switch</span>
+        </div>
+      </div>
+
+      <div class="layer-card">
+        <div class="layer-badge layer-badge-c">C</div>
+        <div class="layer-title">Intelligence &amp; Decision Quality</div>
+        <div class="layer-body">Confidence scoring turns model capability into runtime signal. The system must self-assess — and escalate, refuse, or degrade gracefully when evidence is weak. Cost-aware reasoning prevents runaway inference loops.</div>
+        <div class="layer-tags">
+          <span class="layer-tag">Confidence Scoring</span>
+          <span class="layer-tag">Fallback &amp; Degradation Logic</span>
+          <span class="layer-tag">Cost-Aware Reasoning</span>
+        </div>
+      </div>
+
+      <div class="layer-card">
+        <div class="layer-badge layer-badge-d">D</div>
+        <div class="layer-title">Integration &amp; Enterprise Readiness</div>
+        <div class="layer-body">Agents create value when they transact. API-first enablement with idempotent actions, circuit breakers against failed endpoints, and event-driven compatibility make transactional agents safe by design.</div>
+        <div class="layer-tags">
+          <span class="layer-tag">API-First Transactions</span>
+          <span class="layer-tag">Idempotent &amp; Auditable Actions</span>
+          <span class="layer-tag">Event-Driven Architecture</span>
+        </div>
+      </div>
+
+      <div class="layer-card">
+        <div class="layer-badge layer-badge-e">E</div>
+        <div class="layer-title">Security, Compliance &amp; Trust</div>
+        <div class="layer-body">In production, security is an enforced boundary before and after inference. RBAC/ABAC on both retrieval and tool execution, prompt guardrails, and full decision trace logs make audit readiness a capability — not a promise.</div>
+        <div class="layer-tags">
+          <span class="layer-tag">RBAC / ABAC</span>
+          <span class="layer-tag">Prompt &amp; Response Guardrails</span>
+          <span class="layer-tag">Human-in-the-Loop Controls</span>
+        </div>
+      </div>
+
+      <div class="layer-card">
+        <div class="layer-badge layer-badge-f">F</div>
+        <div class="layer-title">Operations, Monitoring &amp; Scale</div>
+        <div class="layer-body">Autonomous systems change as their inputs change. Agent telemetry correlated to prompt, tool, and model version — plus continuous evaluation and versioned rollouts — keeps that change controlled and reversible.</div>
+        <div class="layer-tags">
+          <span class="layer-tag">Agent Observability</span>
+          <span class="layer-tag">Continuous Evaluation</span>
+          <span class="layer-tag">Versioned Safe Rollouts</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 25 CRITICAL AREAS ══ -->
+<section class="wp-checklist-section">
+  <div class="container">
+    <div class="section-header" style="max-width:none;">
+      <div class="eyebrow" style="margin-bottom:20px;">Readiness Checklist</div>
+      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;">25 critical areas to assess your autonomous AI readiness</h2>
+    </div>
+    <div class="wp-checklist-intro">
+      <p>The table below maps the relation between architecture validation and the business requirements — across all six layers of the production control stack.</p>
+      <div class="wp-checklist-note">Use this as a benchmark before committing to production deployment. Any gaps in these 25 areas represent operational risk — not future roadmap items.</div>
+    </div>
+    <div class="wp-table-wrap">
+      <table class="wp-table">
+        <thead>
+          <tr>
+            <th style="width:26%;">Domain</th>
+            <th>Details covered</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="wp-td-domain">
+              <div class="wp-domain-label">Data and knowledge foundation</div>
+              <div class="wp-domain-layer">Layer A</div>
+            </td>
+            <td class="wp-td-items">
+              <div class="wp-items-list">
+                <div class="wp-item">Golden record creation</div>
+                <div class="wp-item">Stale data detection and refresh strategy</div>
+                <div class="wp-item">Multi-source data federation</div>
+                <div class="wp-item">Contextual data injection engine</div>
+                <div class="wp-item">RAG with source traceability</div>
+                <div class="wp-item">Knowledge freshness governance</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="wp-td-domain">
+              <div class="wp-domain-label">Agent orchestration and runtime</div>
+              <div class="wp-domain-layer">Layer B</div>
+            </td>
+            <td class="wp-td-items">
+              <div class="wp-items-list">
+                <div class="wp-item">Multi-agent collaboration framework</div>
+                <div class="wp-item">Conversation and task state management</div>
+                <div class="wp-item">Agent routing and skill selection engine</div>
+                <div class="wp-item">Deterministic to autonomous control switch</div>
+                <div class="wp-item">Tool invocation and function governance</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="wp-td-domain">
+              <div class="wp-domain-label">Intelligence and decision quality</div>
+              <div class="wp-domain-layer">Layer C</div>
+            </td>
+            <td class="wp-td-items">
+              <div class="wp-items-list">
+                <div class="wp-item">Confidence scoring and answer reliability</div>
+                <div class="wp-item">Ranking and prioritization engine</div>
+                <div class="wp-item">Fallback and graceful degradation logic</div>
+                <div class="wp-item">Cost-aware reasoning controls</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="wp-td-domain">
+              <div class="wp-domain-label">Integration and enterprise readiness</div>
+              <div class="wp-domain-layer">Layer D</div>
+            </td>
+            <td class="wp-td-items">
+              <div class="wp-items-list">
+                <div class="wp-item">API-first transaction enablement</div>
+                <div class="wp-item">Idempotent and auditable actions</div>
+                <div class="wp-item">Event-driven architecture compatibility</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="wp-td-domain">
+              <div class="wp-domain-label">Security, compliance, and trust</div>
+              <div class="wp-domain-layer">Layer E</div>
+            </td>
+            <td class="wp-td-items">
+              <div class="wp-items-list">
+                <div class="wp-item">Role-aware authorization</div>
+                <div class="wp-item">Prompt, data, and response guardrails</div>
+                <div class="wp-item">Human-in-the-loop controls</div>
+                <div class="wp-item">Explainability and decision trace logs</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="wp-td-domain">
+              <div class="wp-domain-label">Operations, monitoring, and scale</div>
+              <div class="wp-domain-layer">Layer F</div>
+            </td>
+            <td class="wp-td-items">
+              <div class="wp-items-list">
+                <div class="wp-item">Agent observability and telemetry</div>
+                <div class="wp-item">Continuous evaluation and regression testing</div>
+                <div class="wp-item">Versioning and safe rollouts</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LEAD GATE FORM ══ -->
+<section class="gate-section" id="download">
+  <div class="container">
+    <div class="gate-inner">
+
+      <div class="gate-left">
+        <div class="eyebrow" style="margin-bottom:24px;">Download the Whitepaper</div>
+        <h2>Get the full implementation guide — free</h2>
+        <p>The complete 17-page whitepaper walks through every layer of the control stack, includes technology stack options, and provides the 25-point checklist in full detail.</p>
+        <div class="gate-benefits">
+          <div class="gate-benefit">
+            <div class="gate-benefit-icon">
+              <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="gate-benefit-text">The six-layer control stack with detailed implementation guidance for each layer</div>
+          </div>
+          <div class="gate-benefit">
+            <div class="gate-benefit-icon">
+              <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="gate-benefit-text">25-point autonomous AI readiness checklist mapped to architecture and business requirements</div>
+          </div>
+          <div class="gate-benefit">
+            <div class="gate-benefit-icon">
+              <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="gate-benefit-text">Technology stack reference patterns for orchestration, RAG, and observability</div>
+          </div>
+          <div class="gate-benefit">
+            <div class="gate-benefit-icon">
+              <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="gate-benefit-text">Regulated industry considerations for BFSI, manufacturing, and healthcare</div>
+          </div>
+        </div>
+        <div class="gate-quote">
+          <p>"Production-grade autonomy is achieved when autonomy is controlled, data authority is documented, and every action can be reconstructed with evidence, approvals, and versioned artifacts."</p>
+        </div>
+      </div>
+
+      <div class="gate-right" id="gateFormWrap">
+        <div class="gate-form-title">Get the full whitepaper</div>
+        <div class="gate-form-sub">No spam. We'll follow up only if you want us to.</div>
+        <form id="gateForm" onsubmit="handleGateSubmit(event)">
+          <div class="gate-field">
+            <label class="gate-label" for="gf-name">Full Name *</label>
+            <input class="gate-input" type="text" id="gf-name" placeholder="Jane Smith" required>
+          </div>
+          <div class="gate-field">
+            <label class="gate-label" for="gf-company">Company Name *</label>
+            <input class="gate-input" type="text" id="gf-company" placeholder="Acme Corp" required>
+          </div>
+          <div class="gate-field">
+            <label class="gate-label" for="gf-email">Work Email *</label>
+            <input class="gate-input" type="email" id="gf-email" placeholder="jane@company.com" required>
+          </div>
+          <div class="gate-field">
+            <label class="gate-label" for="gf-phone">Phone</label>
+            <input class="gate-input" type="tel" id="gf-phone" placeholder="+91 98765 43210">
+          </div>
+          <div class="gate-field">
+            <label class="gate-label" for="gf-help">How can we help you?</label>
+            <select class="gate-select" id="gf-help">
+              <option value="" disabled selected>Select an option</option>
+              <option>Building an agentic AI pilot</option>
+              <option>Taking an existing agent to production</option>
+              <option>Architecture review &amp; governance assessment</option>
+              <option>Evaluating BootLabs for an AI engagement</option>
+              <option>Just exploring for now</option>
+            </select>
+          </div>
+          <div class="gate-privacy">
+            <input type="checkbox" id="gf-privacy" required>
+            <label for="gf-privacy">I agree to BootLabs' <a href="#">Privacy Policy</a> and consent to receiving occasional communications about AI engineering insights and services.</label>
+          </div>
+          <button type="submit" class="btn-primary gate-submit">Download Whitepaper <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+        </form>
+        <div class="gate-success" id="gateSuccess">
+          <div class="gate-success-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>You're all set</h3>
+          <p>Your whitepaper is ready. Click below to download the full PDF.</p>
+          <a href="Building-Production-Grade-Agentic-AI-Systems.pdf" class="btn-primary" download style="display:inline-flex;margin-bottom:20px;">Download PDF <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+          <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:4px;">
+            <p style="font-size:13px;margin-bottom:16px;">Want to benchmark your agentic AI readiness with our team?</p>
+            <button class="btn-outline" style="width:100%;justify-content:center;" onclick="openContact()">Book a 30-Min Architecture Review</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="eyebrow" style="justify-content:center;margin-bottom:20px;">Next Step</div>
+      <h2 class="cta-h2">Ready to assess your agentic AI architecture?</h2>
+      <p class="cta-sub">Book a 30-minute architecture review. We'll map your autonomy boundaries, validation gates, and telemetry requirements to your existing systems — at no cost.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="openContact()" style="font-size:15px;padding:16px 36px;">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <a href="agentic-ai.html" class="btn-outline" style="font-size:15px;padding:16px 36px;">Explore Agentic AI Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT POPUP ══ -->
+<div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
+  <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
+    <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;">&#10005;</button>
+    <div style="font-size:22px;color:#fff;margin-bottom:24px;font-family:NHD;">Book a Discovery Call</div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Request</button>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
+      <div>
+        <div class="footer-col-head">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="cloud-devops.html">DevOps / Cloud</a></li>
+          <li><a href="platform-engineering.html">SRE</a></li>
+          <li><a href="software-engineering.html">Full Stack Development</a></li>
+          <li><a href="ai-engineering.html">AI &amp; ML</a></li>
+          <li><a href="agentic-ai.html">Agentic AI</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Platforms</div>
+        <ul class="footer-col-links">
+          <li><a href="sailor.html">Sailor</a></li>
+          <li><a href="guardian.html">Guardian</a></li>
+        </ul>
+        <div class="footer-col-head" style="margin-top:28px;">Industries</div>
+        <ul class="footer-col-links">
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="financial-services.html">BFSI</a></li>
+          <li><a href="qsr.html">QSR &amp; Retail</a></li>
+          <li><a href="automotive.html">Automotive</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="blog.html">Insights</a></li>
+          <li><a href="partnerships.html">Partners</a></li>
+          <li><a href="#" onclick="openContact();return false;">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
+    <div class="footer-bot">
+      <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Nav ── */
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
+function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
+function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
+function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
+function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
+
+/* ── Lead Gate ── */
+function handleGateSubmit(e){
+  e.preventDefault();
+  const name=document.getElementById('gf-name').value.trim();
+  const email=document.getElementById('gf-email').value.trim();
+  const company=document.getElementById('gf-company').value.trim();
+  if(!name||!email||!company)return;
+  // Hide form, show success
+  document.getElementById('gateForm').style.display='none';
+  document.getElementById('gateSuccess').style.display='block';
+  // Scroll to success
+  document.getElementById('gateFormWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>
