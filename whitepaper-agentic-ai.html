@@ -450,228 +450,42 @@ input,select,textarea{box-sizing:border-box;}
   </div>
 </section>
 
-<!-- ══ WHAT'S INSIDE ══ -->
-<section class="contents-section">
+<!-- ══ WHAT'S INSIDE (teaser only) ══ -->
+<section class="contents-section" style="padding:72px 0 0;">
   <div class="container">
     <div class="contents-inner">
       <div class="contents-left">
         <div class="eyebrow" style="margin-bottom:24px;">What's Inside</div>
-        <h2>The architecture decisions that separate a pilot from a production system</h2>
-        <p style="margin-top:20px;">AI agents that plan, retrieve, and execute through live enterprise systems create a new class of failure — one that looks healthy while behaving incorrectly in business terms. This whitepaper defines the six-layer control stack that makes autonomous AI safe to operate at enterprise scale.</p>
+        <h2>The architecture that separates a pilot from a production system</h2>
+        <p style="margin-top:16px;">Most agentic AI failures don't announce themselves. The system looks healthy, the tool call succeeds — and the wrong thing happens. This whitepaper maps every control decision that prevents that.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;">
+          <span style="font-size:12px;color:var(--mid);padding:6px 14px;border:1px solid var(--border);border-radius:100px;">17 pages</span>
+          <span style="font-size:12px;color:var(--mid);padding:6px 14px;border:1px solid var(--border);border-radius:100px;">6-layer framework</span>
+          <span style="font-size:12px;color:var(--mid);padding:6px 14px;border:1px solid var(--border);border-radius:100px;">25-point checklist</span>
+        </div>
       </div>
       <div class="contents-toc">
         <div class="contents-toc-item">
           <div class="contents-toc-num">01</div>
-          <div class="contents-toc-text"><strong>Why production-grade is not an afterthought</strong>A wrong action executes successfully while creating a downstream incident. The risk model is different from every other system.</div>
+          <div class="contents-toc-text"><strong>Why production-grade is not an afterthought</strong></div>
         </div>
         <div class="contents-toc-item">
           <div class="contents-toc-num">02</div>
-          <div class="contents-toc-text"><strong>Market context &amp; enterprise adoption patterns</strong>Where agentic AI is landing first, by function and industry, and why regulated sectors move deliberately.</div>
+          <div class="contents-toc-text"><strong>Market trends &amp; where enterprise adoption is landing</strong></div>
         </div>
         <div class="contents-toc-item">
           <div class="contents-toc-num">03</div>
-          <div class="contents-toc-text"><strong>The six-layer control stack</strong>From data authority and orchestration to security, compliance, and operational monitoring.</div>
+          <div class="contents-toc-text"><strong>The six-layer control stack — full implementation detail</strong></div>
         </div>
         <div class="contents-toc-item">
           <div class="contents-toc-num">04</div>
-          <div class="contents-toc-text"><strong>25 critical areas to assess your autonomous AI readiness</strong>Mapped to the six layers — covering architecture, governance, and operational validation.</div>
+          <div class="contents-toc-text"><strong>25 critical areas to assess your autonomous AI readiness</strong></div>
         </div>
         <div class="contents-toc-item">
           <div class="contents-toc-num">05</div>
-          <div class="contents-toc-text"><strong>Technology stack options &amp; implementation approach</strong>Reference patterns for orchestration, RAG, tool governance, and rollout strategy.</div>
+          <div class="contents-toc-text"><strong>Technology stack options &amp; rollout approach</strong></div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SIX LAYERS ══ -->
-<section class="layers-section">
-  <div class="container">
-    <div class="section-header">
-      <div class="eyebrow" style="margin-bottom:20px;">The Framework</div>
-      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;">The six-layer control stack for production readiness</h2>
-      <p class="section-sub">Every layer addresses a distinct failure mode. Skipping any one of them is how a pilot stays a pilot.</p>
-    </div>
-    <div class="layers-grid">
-
-      <div class="layer-card">
-        <div class="layer-badge layer-badge-a">A</div>
-        <div class="layer-title">Data &amp; Knowledge Foundation</div>
-        <div class="layer-body">Agents need more than access to data — they need authority, freshness, and traceability. Golden records, TTL-governed retrieval, and source-cited RAG prevent agents from acting on stale or conflicting information.</div>
-        <div class="layer-tags">
-          <span class="layer-tag">Golden Record Creation</span>
-          <span class="layer-tag">RAG with Source Traceability</span>
-          <span class="layer-tag">Knowledge Freshness Governance</span>
-        </div>
-      </div>
-
-      <div class="layer-card">
-        <div class="layer-badge layer-badge-b">B</div>
-        <div class="layer-title">Agent Orchestration &amp; Runtime</div>
-        <div class="layer-body">Stable multi-agent systems separate planning, execution, and validation. Tool calls are where incidents are born — whitelisting, schema validation, and replay protection keep autonomy controlled.</div>
-        <div class="layer-tags">
-          <span class="layer-tag">Multi-Agent Collaboration</span>
-          <span class="layer-tag">Safe Tool Invocation</span>
-          <span class="layer-tag">Deterministic Control Switch</span>
-        </div>
-      </div>
-
-      <div class="layer-card">
-        <div class="layer-badge layer-badge-c">C</div>
-        <div class="layer-title">Intelligence &amp; Decision Quality</div>
-        <div class="layer-body">Confidence scoring turns model capability into runtime signal. The system must self-assess — and escalate, refuse, or degrade gracefully when evidence is weak. Cost-aware reasoning prevents runaway inference loops.</div>
-        <div class="layer-tags">
-          <span class="layer-tag">Confidence Scoring</span>
-          <span class="layer-tag">Fallback &amp; Degradation Logic</span>
-          <span class="layer-tag">Cost-Aware Reasoning</span>
-        </div>
-      </div>
-
-      <div class="layer-card">
-        <div class="layer-badge layer-badge-d">D</div>
-        <div class="layer-title">Integration &amp; Enterprise Readiness</div>
-        <div class="layer-body">Agents create value when they transact. API-first enablement with idempotent actions, circuit breakers against failed endpoints, and event-driven compatibility make transactional agents safe by design.</div>
-        <div class="layer-tags">
-          <span class="layer-tag">API-First Transactions</span>
-          <span class="layer-tag">Idempotent &amp; Auditable Actions</span>
-          <span class="layer-tag">Event-Driven Architecture</span>
-        </div>
-      </div>
-
-      <div class="layer-card">
-        <div class="layer-badge layer-badge-e">E</div>
-        <div class="layer-title">Security, Compliance &amp; Trust</div>
-        <div class="layer-body">In production, security is an enforced boundary before and after inference. RBAC/ABAC on both retrieval and tool execution, prompt guardrails, and full decision trace logs make audit readiness a capability — not a promise.</div>
-        <div class="layer-tags">
-          <span class="layer-tag">RBAC / ABAC</span>
-          <span class="layer-tag">Prompt &amp; Response Guardrails</span>
-          <span class="layer-tag">Human-in-the-Loop Controls</span>
-        </div>
-      </div>
-
-      <div class="layer-card">
-        <div class="layer-badge layer-badge-f">F</div>
-        <div class="layer-title">Operations, Monitoring &amp; Scale</div>
-        <div class="layer-body">Autonomous systems change as their inputs change. Agent telemetry correlated to prompt, tool, and model version — plus continuous evaluation and versioned rollouts — keeps that change controlled and reversible.</div>
-        <div class="layer-tags">
-          <span class="layer-tag">Agent Observability</span>
-          <span class="layer-tag">Continuous Evaluation</span>
-          <span class="layer-tag">Versioned Safe Rollouts</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ 25 CRITICAL AREAS ══ -->
-<section class="wp-checklist-section">
-  <div class="container">
-    <div class="section-header" style="max-width:none;">
-      <div class="eyebrow" style="margin-bottom:20px;">Readiness Checklist</div>
-      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;line-height:1.1;">25 critical areas to assess your autonomous AI readiness</h2>
-    </div>
-    <div class="wp-checklist-intro">
-      <p>The table below maps the relation between architecture validation and the business requirements — across all six layers of the production control stack.</p>
-      <div class="wp-checklist-note">Use this as a benchmark before committing to production deployment. Any gaps in these 25 areas represent operational risk — not future roadmap items.</div>
-    </div>
-    <div class="wp-table-wrap">
-      <table class="wp-table">
-        <thead>
-          <tr>
-            <th style="width:26%;">Domain</th>
-            <th>Details covered</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="wp-td-domain">
-              <div class="wp-domain-label">Data and knowledge foundation</div>
-              <div class="wp-domain-layer">Layer A</div>
-            </td>
-            <td class="wp-td-items">
-              <div class="wp-items-list">
-                <div class="wp-item">Golden record creation</div>
-                <div class="wp-item">Stale data detection and refresh strategy</div>
-                <div class="wp-item">Multi-source data federation</div>
-                <div class="wp-item">Contextual data injection engine</div>
-                <div class="wp-item">RAG with source traceability</div>
-                <div class="wp-item">Knowledge freshness governance</div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="wp-td-domain">
-              <div class="wp-domain-label">Agent orchestration and runtime</div>
-              <div class="wp-domain-layer">Layer B</div>
-            </td>
-            <td class="wp-td-items">
-              <div class="wp-items-list">
-                <div class="wp-item">Multi-agent collaboration framework</div>
-                <div class="wp-item">Conversation and task state management</div>
-                <div class="wp-item">Agent routing and skill selection engine</div>
-                <div class="wp-item">Deterministic to autonomous control switch</div>
-                <div class="wp-item">Tool invocation and function governance</div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="wp-td-domain">
-              <div class="wp-domain-label">Intelligence and decision quality</div>
-              <div class="wp-domain-layer">Layer C</div>
-            </td>
-            <td class="wp-td-items">
-              <div class="wp-items-list">
-                <div class="wp-item">Confidence scoring and answer reliability</div>
-                <div class="wp-item">Ranking and prioritization engine</div>
-                <div class="wp-item">Fallback and graceful degradation logic</div>
-                <div class="wp-item">Cost-aware reasoning controls</div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="wp-td-domain">
-              <div class="wp-domain-label">Integration and enterprise readiness</div>
-              <div class="wp-domain-layer">Layer D</div>
-            </td>
-            <td class="wp-td-items">
-              <div class="wp-items-list">
-                <div class="wp-item">API-first transaction enablement</div>
-                <div class="wp-item">Idempotent and auditable actions</div>
-                <div class="wp-item">Event-driven architecture compatibility</div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="wp-td-domain">
-              <div class="wp-domain-label">Security, compliance, and trust</div>
-              <div class="wp-domain-layer">Layer E</div>
-            </td>
-            <td class="wp-td-items">
-              <div class="wp-items-list">
-                <div class="wp-item">Role-aware authorization</div>
-                <div class="wp-item">Prompt, data, and response guardrails</div>
-                <div class="wp-item">Human-in-the-loop controls</div>
-                <div class="wp-item">Explainability and decision trace logs</div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="wp-td-domain">
-              <div class="wp-domain-label">Operations, monitoring, and scale</div>
-              <div class="wp-domain-layer">Layer F</div>
-            </td>
-            <td class="wp-td-items">
-              <div class="wp-items-list">
-                <div class="wp-item">Agent observability and telemetry</div>
-                <div class="wp-item">Continuous evaluation and regression testing</div>
-                <div class="wp-item">Versioning and safe rollouts</div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </section>
@@ -682,33 +496,25 @@ input,select,textarea{box-sizing:border-box;}
     <div class="gate-inner">
 
       <div class="gate-left">
-        <div class="eyebrow" style="margin-bottom:24px;">Download the Whitepaper</div>
-        <h2>Get the full implementation guide — free</h2>
-        <p>The complete 17-page whitepaper walks through every layer of the control stack, includes technology stack options, and provides the 25-point checklist in full detail.</p>
-        <div class="gate-benefits">
-          <div class="gate-benefit">
-            <div class="gate-benefit-icon">
-              <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            </div>
-            <div class="gate-benefit-text">The six-layer control stack with detailed implementation guidance for each layer</div>
+        <div class="eyebrow" style="margin-bottom:24px;">Get the Whitepaper</div>
+        <h2>Free. 17 pages. No fluff.</h2>
+        <p>A practical implementation guide for engineering and AI leaders — not a slide deck. Covers every control decision that makes autonomous AI safe to run in regulated, production environments.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin:28px 0 32px;">
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--mid);">
+            <span style="width:20px;height:20px;border-radius:50%;background:rgba(0,102,255,.12);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            The complete 6-layer control stack with implementation detail per layer
           </div>
-          <div class="gate-benefit">
-            <div class="gate-benefit-icon">
-              <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            </div>
-            <div class="gate-benefit-text">25-point autonomous AI readiness checklist mapped to architecture and business requirements</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--mid);">
+            <span style="width:20px;height:20px;border-radius:50%;background:rgba(0,102,255,.12);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            25-point autonomous AI readiness checklist — mapped to architecture requirements
           </div>
-          <div class="gate-benefit">
-            <div class="gate-benefit-icon">
-              <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            </div>
-            <div class="gate-benefit-text">Technology stack reference patterns for orchestration, RAG, and observability</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--mid);">
+            <span style="width:20px;height:20px;border-radius:50%;background:rgba(0,102,255,.12);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            Tech stack options for orchestration, RAG, tool governance &amp; observability
           </div>
-          <div class="gate-benefit">
-            <div class="gate-benefit-icon">
-              <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            </div>
-            <div class="gate-benefit-text">Regulated industry considerations for BFSI, manufacturing, and healthcare</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--mid);">
+            <span style="width:20px;height:20px;border-radius:50%;background:rgba(0,102,255,.12);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            Compliance guidance for BFSI, manufacturing &amp; regulated deployments
           </div>
         </div>
         <div class="gate-quote">
