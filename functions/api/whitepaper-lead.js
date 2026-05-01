@@ -37,6 +37,19 @@ export async function onRequestPost({ request, env }) {
       return Response.json({ error: 'Invalid email address' }, { status: 400, headers: corsHeaders });
     }
 
+    // Reject free / personal email providers
+    const FREE_DOMAINS = [
+      'gmail.com','googlemail.com','yahoo.com','yahoo.co.in','yahoo.co.uk',
+      'hotmail.com','hotmail.co.uk','hotmail.fr','outlook.com','live.com',
+      'live.co.uk','live.in','icloud.com','me.com','mac.com','aol.com',
+      'protonmail.com','proton.me','mail.com','ymail.com','rediffmail.com',
+      'gmx.com','gmx.net','inbox.com','fastmail.com','hey.com','rocketmail.com'
+    ];
+    const emailDomain = email.split('@')[1]?.toLowerCase();
+    if (FREE_DOMAINS.includes(emailDomain)) {
+      return Response.json({ error: 'Please use your official work or business email address.' }, { status: 400, headers: corsHeaders });
+    }
+
     // Insert into D1
     await env.LEADS_DB.prepare(
       `INSERT INTO whitepaper_leads (name, email, company, phone, interest, whitepaper, ip, created_at)
