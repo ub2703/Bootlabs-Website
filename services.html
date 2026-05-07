@@ -6,8 +6,8 @@
 <title>Services — BootLabs AI Engineering Partner</title>
 <style>
 /* ── FONTS ── */
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;font-display:swap;}
 
 /* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -212,6 +212,7 @@ input,textarea{box-sizing:border-box;}
 }
 .engage-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.03);}
 .engage-card:hover::before{opacity:1;}
+.engage-grid-3col{grid-template-columns:repeat(3,1fr);}
 .engage-badge{
   display:inline-flex;align-items:center;gap:8px;
   font-size:11px;letter-spacing:.12em;text-transform:uppercase;
@@ -399,7 +400,7 @@ input,textarea{box-sizing:border-box;}
 .footer-brand img{height:26px;width:auto;margin-bottom:18px;}
 .footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
 .footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
-.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
 .footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
 .footer-col-links a:hover{color:#fff;}
 .footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
@@ -454,8 +455,8 @@ input,textarea{box-sizing:border-box;}
   .cs-grid{grid-template-columns:1fr;}
   .engage-card{padding:32px 24px;}
   .footer{padding:56px 0 28px;}
-  .footer-top{grid-template-columns:1fr;gap:28px;}
-  .footer-brand{grid-column:span 1;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
+  .footer-brand{grid-column:span 2;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 
@@ -468,6 +469,7 @@ input,textarea{box-sizing:border-box;}
   .svc-stat-item{flex:1 1 100%;}
   .footer-legal{flex-wrap:wrap;gap:12px;}
   .mob-nav-link{font-size:20px;}
+  .engage-grid-3col{grid-template-columns:1fr !important;}
 }
 </style>
 </head>
@@ -527,6 +529,7 @@ input,textarea{box-sizing:border-box;}
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
   </nav>
   <div class="mob-cta">
     <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button>
@@ -536,7 +539,7 @@ input,textarea{box-sizing:border-box;}
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
   <a href="index.html" class="nav-logo">
-    <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+    <img src="assets/images/logo.svg" alt="BootLabs">
   </a>
   <div class="nav-center">
     <div class="nav-item">
@@ -616,6 +619,7 @@ input,textarea{box-sizing:border-box;}
         <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a href="careers.html" class="nav-link">Careers</a>
   </div>
   <div class="nav-right">
     <button class="btn-primary" onclick="openContact()">
@@ -732,7 +736,7 @@ input,textarea{box-sizing:border-box;}
       <h2 class="h2">Built by us. Deployed for you.</h2>
       <p class="body-l" style="max-width:560px;margin-top:20px;">Alongside our engineering services, BootLabs offers three proprietary platforms that accelerate delivery, strengthen security posture, and give your operations an AI-native backbone.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;">
+    <div class="engage-grid-3col" style="display:grid;gap:24px;">
       <div class="engage-card" style="border-top:2px solid var(--border-blue);">
         <div class="engage-badge">Hybrid &amp; Multi-Cloud</div>
         <div class="engage-title" style="font-size:22px;">Sailor</div>
@@ -950,8 +954,8 @@ input,textarea{box-sizing:border-box;}
 <section class="svc-cta-section">
   <div class="container">
     <div class="svc-cta-inner">
-      <h2 class="svc-cta-h2">Ready to build something real?</h2>
-      <p class="svc-cta-sub">30 minutes with our engineering leadership. We'll map your biggest challenge to a concrete outcome.</p>
+      <h2 class="svc-cta-h2">Work with an engineering team that has delivered it before.</h2>
+      <p class="svc-cta-sub">Book a discovery call. Our team will assess your requirements and define a clear path to delivery.</p>
       <button class="btn-primary" onclick="openContact()">
         Book a Discovery Call
         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -978,7 +982,7 @@ input,textarea{box-sizing:border-box;}
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <img src="assets/images/logo.svg" alt="BootLabs">
         <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
@@ -1022,9 +1026,8 @@ input,textarea{box-sizing:border-box;}
     <div class="footer-bot">
       <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+              
       </div>
     </div>
   </div>
@@ -1061,9 +1064,7 @@ function toggleMobSub(el) {
 
 /* ── CONTACT POPUP ── */
 function openContact() {
-  const p = document.getElementById('contactPopup');
-  p.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink', '_blank');
 }
 function closeContact() {
   document.getElementById('contactPopup').style.display = 'none';

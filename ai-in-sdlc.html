@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI in SDLC — BootLabs</title>
 <style>
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;}
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
 a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{font-family:NHD,sans-serif;cursor:pointer;}
-:root{--blue:#0066FF;--cyan:#26a8ff;--border:rgba(255,255,255,.08);--border-blue:rgba(0,102,255,.35);--dim:rgba(255,255,255,.45);--mid:rgba(255,255,255,.7);--glass:rgba(255,255,255,.03);--r:20px;}
+:root{--blue:#0066FF;--cyan:#26a8ff;--border:rgba(255,255,255,.08);--border-blue:rgba(0,102,255,.35);--dim:rgba(255,255,255,.45);--mid:rgba(255,255,255,.7);--glass:rgba(255,255,255,.03);--r:20px;--purple:#7c3aed;--border-purple:rgba(124,58,237,.35);--claude:#d97706;}
 .container{max-width:1280px;margin:0 auto;padding:0 48px;}
 .eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
 .eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
@@ -44,14 +44,11 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
 .simple-item-title{font-size:14px;color:inherit;}
 .simple-item-sub{font-size:11px;color:rgba(255,255,255,.4);line-height:1.4;margin-top:2px;}
-.simple-item-title{font-size:14px;color:inherit;}
-.simple-item-sub{font-size:11px;color:rgba(255,255,255,.4);line-height:1.4;margin-top:2px;}
 .mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
 .mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
 .nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
 .mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
 .mega-item:hover{background:rgba(0,102,255,.08);}
-.mega-item-num{font-size:10px;letter-spacing:.1em;color:var(--dim);margin-bottom:4px;}
 .mega-item-title{font-size:15px;color:#fff;margin-bottom:4px;}
 .mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
 .nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
@@ -60,19 +57,154 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-hamburger.open span:nth-child(2){opacity:0;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-.hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;text-align:center;}
-.hero::before{content:"";position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.1) 0%,transparent 65%);pointer-events:none;}
-.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 16px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:32px;}
-.hero-h1{font-size:clamp(36px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
-.hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:48px;}
-.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* ══ SVC HERO ══ */
+.svc-hero{padding:140px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.svc-hero::before{content:"";position:absolute;top:0;right:-100px;width:900px;height:800px;background:radial-gradient(ellipse at 70% 30%,rgba(0,102,255,.1) 0%,transparent 65%);pointer-events:none;}
+.svc-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.svc-hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 16px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:28px;}
+.svc-hero-h1{font-size:clamp(32px,4vw,58px);font-weight:400;line-height:1.07;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
+.svc-hero-sub{font-size:17px;line-height:1.8;color:var(--mid);margin-bottom:40px;max-width:460px;}
+.svc-hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.svc-hero-visual{position:relative;}
+.hero-badge-float{position:absolute;display:flex;align-items:center;gap:10px;background:rgba(6,6,14,.92);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(16px);border-radius:12px;padding:12px 16px;z-index:10;}
+.hero-badge-float-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.hero-badge-float-text{font-size:13px;color:#fff;line-height:1.3;}
+.hero-badge-float-sub{font-size:11px;color:var(--dim);margin-top:2px;}
+
+/* ══ IDE MOCKUP ══ */
+.ide-mock{background:#0d0d18;border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.6);font-family:monospace;}
+.ide-titlebar{background:#0a0a14;border-bottom:1px solid rgba(255,255,255,.07);padding:10px 16px;display:flex;align-items:center;gap:10px;}
+.ide-dots{display:flex;gap:6px;}
+.ide-dot{width:10px;height:10px;border-radius:50%;}
+.ide-tabs{display:flex;gap:1px;margin-left:12px;flex:1;}
+.ide-tab{font-size:11px;color:var(--dim);padding:4px 14px;border-radius:4px 4px 0 0;border:1px solid transparent;}
+.ide-tab.active{background:#0d0d18;border-color:rgba(255,255,255,.1);border-bottom-color:#0d0d18;color:#fff;}
+.ide-body{display:grid;grid-template-columns:140px 1fr;}
+.ide-tree{border-right:1px solid rgba(255,255,255,.06);padding:10px 0;}
+.ide-tree-item{font-size:11px;color:rgba(255,255,255,.35);padding:3px 14px;display:flex;align-items:center;gap:6px;cursor:default;}
+.ide-tree-item.active{color:var(--cyan);background:rgba(38,168,255,.06);}
+.ide-tree-folder{color:rgba(255,255,255,.25);}
+.ide-code{padding:14px 0;overflow:hidden;}
+.ide-line{display:flex;align-items:baseline;gap:0;font-size:11.5px;line-height:1.8;padding:0 16px;}
+.ide-ln{color:rgba(255,255,255,.18);width:28px;flex-shrink:0;text-align:right;margin-right:14px;font-size:10.5px;}
+.c-kw{color:#c792ea;}.c-fn{color:#82aaff;}.c-str{color:#c3e88d;}.c-type{color:#ffcb6b;}.c-comment{color:rgba(255,255,255,.28);font-style:italic;}.c-plain{color:#e0e0e0;}
+.ide-ghost{color:rgba(100,200,255,.45);font-style:italic;}
+.ide-suggest{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);border-radius:4px;padding:2px 8px;font-size:10px;color:#a78bfa;margin-left:6px;font-style:normal;}
+.ide-ai-bar{background:#080814;border-top:1px solid rgba(255,255,255,.07);padding:10px 16px;display:flex;align-items:center;gap:10px;}
+.ide-ai-icon{width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ide-ai-icon svg{width:10px;height:10px;fill:#fff;}
+.ide-ai-text{font-size:11px;color:var(--mid);font-family:NHD,sans-serif;}
+.ide-ai-tag{font-size:10px;color:var(--cyan);background:rgba(38,168,255,.08);border:1px solid rgba(38,168,255,.2);border-radius:4px;padding:1px 7px;margin-left:auto;flex-shrink:0;}
+
+/* ══ STAT STRIP ══ */
+.stat-strip{background:#080810;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stat-inner{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat-item{padding:32px 32px;display:flex;flex-direction:column;gap:8px;border-right:1px solid var(--border);}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-size:clamp(24px,2.8vw,40px);letter-spacing:-.03em;color:#fff;line-height:1;}
+.stat-num span{color:var(--cyan);}
+.stat-label{font-size:13px;color:var(--mid);line-height:1.5;max-width:200px;}
+
+/* ══ CLAUDE STRIP ══ */
+.claude-strip{background:#080810;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0;}
+.claude-strip-inner{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;}
+.claude-strip-label{font-size:12px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;}
+.claude-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border:1px solid rgba(217,119,6,.3);border-radius:100px;background:rgba(217,119,6,.06);}
+.claude-badge-icon{width:20px;height:20px;border-radius:5px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.claude-badge-icon svg{width:12px;height:12px;fill:#fff;}
+.claude-badge-text{font-size:13px;color:#fbbf24;font-weight:400;}
+.claude-badge-sub{font-size:11px;color:rgba(251,191,36,.55);margin-left:4px;}
+
+/* ══ CAPABILITIES ══ */
+.sdlc-cap-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.sdlc-cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.sdlc-cap-card{border:1px solid var(--border);border-radius:var(--r);padding:40px;background:var(--glass);position:relative;overflow:hidden;transition:border-color .25s;}
+.sdlc-cap-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));opacity:0;transition:opacity .25s;}
+.sdlc-cap-card:hover{border-color:var(--border-blue);}
+.sdlc-cap-card:hover::before{opacity:1;}
+.sdlc-cap-num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
+.sdlc-cap-icon{width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.08);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.sdlc-cap-icon svg{width:18px;height:18px;fill:none;stroke:var(--cyan);stroke-width:1.5;}
+.sdlc-cap-title{font-size:17px;color:#fff;font-weight:400;line-height:1.3;margin-bottom:12px;}
+.sdlc-cap-body{font-size:14px;color:var(--mid);line-height:1.8;}
+
+/* ══ DEV FLOW ══ */
+.dev-flow-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.dev-flow-header{margin-bottom:64px;}
+.dev-pipeline{display:grid;grid-template-columns:1fr 32px 1fr 32px 1fr 32px 1fr 32px 1fr;align-items:start;gap:0;}
+.dev-node{border:1px solid var(--border);border-radius:14px;padding:20px 16px;background:var(--glass);text-align:center;}
+.dev-node-active{border-color:var(--border-blue);background:rgba(0,102,255,.04);}
+.dev-node-success{border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.03);}
+.dev-node-eyebrow{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.dev-node-title{font-size:12px;color:#fff;line-height:1.3;margin-bottom:10px;}
+.dev-node-active .dev-node-title{color:var(--cyan);}
+.dev-node-success .dev-node-title{color:#22c55e;}
+.dev-chips{display:flex;flex-direction:column;gap:4px;align-items:center;}
+.dev-chip{font-size:10px;color:var(--dim);padding:2px 8px;border:1px solid var(--border);border-radius:100px;white-space:nowrap;}
+.dev-arrow{display:flex;align-items:center;justify-content:center;padding-top:32px;}
+.dev-arrow svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,.2);stroke-width:1.5;}
+
+/* ══ VIBE SECTION ══ */
+.vibe-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.vibe-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.vibe-steps{display:flex;flex-direction:column;gap:0;margin-top:40px;}
+.vibe-step{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--border);}
+.vibe-step:last-child{border-bottom:none;}
+.vibe-step-num{width:32px;height:32px;border-radius:50%;background:rgba(124,58,237,.1);border:1px solid var(--border-purple);color:#a78bfa;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.vibe-step-title{font-size:15px;color:#fff;margin-bottom:4px;}
+.vibe-step-body{font-size:13px;color:var(--dim);line-height:1.7;}
+
+/* ══ VIBE MOCKUP ══ */
+.vibe-mock{background:#0d0d18;border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5);}
+.vibe-mock-top{background:#0a0a14;border-bottom:1px solid rgba(255,255,255,.07);padding:12px 16px;display:flex;align-items:center;gap:8px;}
+.vibe-mock-dot{width:10px;height:10px;border-radius:50%;}
+.vibe-mock-title{font-size:12px;color:var(--dim);margin-left:8px;}
+.vibe-mock-body{padding:20px;}
+.vibe-prompt-area{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;margin-bottom:16px;}
+.vibe-prompt-label{font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.vibe-prompt-text{font-size:13px;color:var(--mid);line-height:1.6;}
+.vibe-generating{display:flex;align-items:center;gap:8px;font-size:12px;color:#a78bfa;margin-bottom:16px;}
+.vibe-dots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:#a78bfa;animation:dotpulse 1.2s infinite;margin:0 1px;}
+.vibe-dots span:nth-child(2){animation-delay:.2s;}
+.vibe-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes dotpulse{0%,100%{opacity:.3;}50%{opacity:1;}}
+.vibe-preview{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:14px;}
+.vibe-preview-label{font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+.vibe-app-bar{height:28px;background:rgba(124,58,237,.15);border-radius:6px;margin-bottom:8px;display:flex;align-items:center;padding:0 10px;gap:8px;}
+.vibe-app-bar-dot{width:6px;height:6px;border-radius:50%;background:#a78bfa;}
+.vibe-app-bar-text{font-size:10px;color:#a78bfa;}
+.vibe-app-row{height:14px;background:rgba(255,255,255,.05);border-radius:4px;margin-bottom:6px;}
+.vibe-app-row.short{width:60%;}
+.vibe-app-row.med{width:80%;}
+.vibe-app-row.long{width:100%;}
+.vibe-handoff{display:flex;align-items:center;gap:8px;margin-top:14px;padding:10px 12px;background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.15);border-radius:8px;}
+.vibe-handoff-text{font-size:11px;color:#22c55e;}
+
+/* ══ GOVERNANCE ══ */
+.gov-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.gov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.gov-card{border:1px solid var(--border);border-radius:var(--r);padding:40px;background:var(--glass);transition:border-color .2s;}
+.gov-card:hover{border-color:var(--border-blue);}
+.gov-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.gov-icon svg{width:18px;height:18px;fill:none;stroke-width:1.5;}
+.gov-title{font-size:17px;color:#fff;margin-bottom:12px;font-weight:400;}
+.gov-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ══ CTA ══ */
+.cta-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cta-inner{text-align:center;max-width:640px;margin:0 auto;}
+.cta-h2{font-size:clamp(28px,4vw,48px);color:#fff;margin-bottom:16px;letter-spacing:-.02em;font-weight:400;line-height:1.15;}
+.cta-sub{font-size:16px;color:var(--mid);line-height:1.75;margin-bottom:40px;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* ══ FOOTER ══ */
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
 .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
 .footer-brand img{height:26px;margin-bottom:18px;}
 .footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
 .footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
-.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
 .footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
 .footer-col-links a:hover{color:#fff;}
 .footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
@@ -82,14 +214,31 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .footer-legal{display:flex;gap:20px;}
 .footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
+
+@media(max-width:1100px){
+  .svc-hero-inner{grid-template-columns:1fr;gap:48px;}
+  .sdlc-cap-grid{grid-template-columns:1fr 1fr;}
+  .dev-pipeline{grid-template-columns:1fr 32px 1fr 32px 1fr 32px 1fr 32px 1fr;}
+  .vibe-inner{grid-template-columns:1fr;gap:48px;}
+  .gov-grid{grid-template-columns:1fr 1fr;}
+}
 @media(max-width:768px){
   .container{padding:0 18px;}
   .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .hero{padding:120px 0 72px;}
-  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .svc-hero{padding:110px 0 64px;}
+  .svc-hero-visual{display:none;}
+  .stat-inner{grid-template-columns:1fr 1fr;}
+  .stat-item{border-right:none;border-bottom:1px solid var(--border);}
+  .stat-item:nth-child(odd){border-right:1px solid var(--border);}
+  .stat-item:last-child{border-bottom:none;}
+  .sdlc-cap-grid{grid-template-columns:1fr;}
+  .dev-pipeline{grid-template-columns:1fr;}
+  .dev-arrow{transform:rotate(90deg);padding:6px 0;}
+  .gov-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:480px){
@@ -146,48 +295,31 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
   </nav>
   <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
 </div>
 
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
-  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.svg" alt="BootLabs"></a>
   <div class="nav-center">
     <div class="nav-item">
       <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="mega-menu">
-        <a href="cloud-devops.html" class="mega-item">
-          <div class="mega-item-title">DevOps / Cloud</div>
-          <div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Infrastructure Automation</div>
-        </a>
-        <a href="platform-engineering.html" class="mega-item">
-          <div class="mega-item-title">SRE</div>
-          <div class="mega-item-subs">Observability · SLOs · Chaos Engineering · Service Mesh</div>
-        </a>
-        <a href="software-engineering.html" class="mega-item">
-          <div class="mega-item-title">Full Stack Development</div>
-          <div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div>
-        </a>
-        <a href="ai-engineering.html" class="mega-item">
-          <div class="mega-item-title">AI &amp; ML</div>
-          <div class="mega-item-subs">ML Engineering · MLOps · Production AI · Model Monitoring</div>
-        </a>
-        <a href="security-engineering.html" class="mega-item">
-          <div class="mega-item-title">Security Engineering</div>
-          <div class="mega-item-subs">DevSecOps · VAPT · Compliance Automation · Zero Trust</div>
-        </a>
-        <a href="agentic-ai.html" class="mega-item">
-          <div class="mega-item-title">Agentic AI</div>
-          <div class="mega-item-subs">Task Agents · Multi-Agent Orchestration · Tool-Using Agents · LLMOps</div>
-        </a>
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">DevOps / Cloud</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Infrastructure Automation</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">SRE</div><div class="mega-item-subs">Observability · SLOs · Chaos Engineering · Service Mesh</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Full Stack Development</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI &amp; ML</div><div class="mega-item-subs">ML Engineering · MLOps · Production AI · Model Monitoring</div></a>
+        <a href="security-engineering.html" class="mega-item"><div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · VAPT · Compliance Automation · Zero Trust</div></a>
+        <a href="agentic-ai.html" class="mega-item"><div class="mega-item-title">Agentic AI</div><div class="mega-item-subs">Task Agents · Multi-Agent Orchestration · Tool-Using Agents · LLMOps</div></a>
       </div>
     </div>
     <div class="nav-item">
       <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="simple-menu">
         <a href="resilient-operations-center.html" class="simple-item"><div class="simple-item-title">Resilient Operations Center</div><div class="simple-item-sub">Managed Cloud Ops · AIOps · FinOps</div></a>
-        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Automated Testing</div></a>
+        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Vibe Coding · Governance</div></a>
       </div>
     </div>
     <div class="nav-item">
@@ -216,6 +348,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a href="careers.html" class="nav-link">Careers</a>
   </div>
   <div class="nav-right">
     <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
@@ -224,17 +357,334 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 </nav>
 
 <!-- ══ HERO ══ -->
-<section class="hero">
+<section class="svc-hero">
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-badge">Solutions</div>
-      <h1 class="hero-h1">AI in SDLC</h1>
-      <p class="hero-sub">Embedding AI at every stage of the software development lifecycle — from requirements and design to code generation, testing, and release.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        <a href="index.html" class="btn-outline">Back to Home</a>
+    <div class="svc-hero-inner">
+      <!-- LEFT -->
+      <div>
+        <div class="svc-hero-badge">Solution</div>
+        <h1 class="svc-hero-h1">From requirement<br>to production code —<br>AI at every step.</h1>
+        <p class="svc-hero-sub">Submit a requirement and get enriched stories. Open VS Code and generate codebase-aware code. Describe an app and watch it appear. Every step governed, tracked, and policy-compliant.</p>
+        <div class="svc-hero-btns">
+          <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <a href="case-studies.html" class="btn-outline">See Case Studies</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:32px;padding:12px 0;border-top:1px solid var(--border);">
+          <span style="font-size:11px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;">Powered by</span>
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(217,119,6,.3);border-radius:100px;background:rgba(217,119,6,.06);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-size:13px;color:#fbbf24;">Anthropic Claude Code</span>
+          </div>
+        </div>
       </div>
-      <p style="margin-top:48px;font-size:13px;color:var(--dim);border:1px solid var(--border);display:inline-block;padding:10px 20px;border-radius:100px;">Full page coming soon — contact us to learn more</p>
+      <!-- RIGHT — IDE mockup -->
+      <div class="svc-hero-visual">
+        <div class="hero-badge-float" style="bottom:-18px;left:-18px;">
+          <div class="hero-badge-float-dot" style="background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,.7);"></div>
+          <div>
+            <div class="hero-badge-float-text">Codebase indexed in VectorDB</div>
+            <div class="hero-badge-float-sub">1,247 files · 98k tokens of context</div>
+          </div>
+        </div>
+        <div class="hero-badge-float" style="top:-18px;right:-18px;">
+          <div class="hero-badge-float-dot" style="background:#a78bfa;box-shadow:0 0 6px rgba(167,139,250,.7);"></div>
+          <div>
+            <div class="hero-badge-float-text">Story enriched in 8 seconds</div>
+            <div class="hero-badge-float-sub">AC · edge cases · tech context added</div>
+          </div>
+        </div>
+        <div class="ide-mock">
+          <div class="ide-titlebar">
+            <div class="ide-dots">
+              <div class="ide-dot" style="background:#ff5f56;"></div>
+              <div class="ide-dot" style="background:#ffbd2e;"></div>
+              <div class="ide-dot" style="background:#27c93f;"></div>
+            </div>
+            <div class="ide-tabs">
+              <div class="ide-tab active">user-service.ts</div>
+              <div class="ide-tab">auth.service.ts</div>
+            </div>
+          </div>
+          <div class="ide-body">
+            <div class="ide-tree">
+              <div class="ide-tree-item ide-tree-folder">▾ src</div>
+              <div class="ide-tree-item ide-tree-folder" style="padding-left:22px;">▾ services</div>
+              <div class="ide-tree-item active" style="padding-left:32px;">user-service.ts</div>
+              <div class="ide-tree-item" style="padding-left:32px;">auth.service.ts</div>
+              <div class="ide-tree-item" style="padding-left:32px;">token.service.ts</div>
+              <div class="ide-tree-item ide-tree-folder" style="padding-left:22px;">▾ schemas</div>
+              <div class="ide-tree-item" style="padding-left:32px;">user.schema.ts</div>
+            </div>
+            <div class="ide-code">
+              <div class="ide-line"><span class="ide-ln">9</span><span class="c-kw">import</span><span class="c-plain"> { validateSchema } </span><span class="c-kw">from</span><span class="c-str"> '../schemas'</span></div>
+              <div class="ide-line"><span class="ide-ln">10</span>&nbsp;</div>
+              <div class="ide-line"><span class="ide-ln">11</span><span class="c-kw">export async function</span> <span class="c-fn">createUser</span><span class="c-plain">(req: Request) {</span></div>
+              <div class="ide-line"><span class="ide-ln">12</span><span class="c-plain">&nbsp;&nbsp;const { email, role } = req.body</span></div>
+              <div class="ide-line"><span class="ide-ln">13</span><span class="c-plain">&nbsp;&nbsp;</span><span class="c-kw">const</span><span class="c-plain"> validated = </span><span class="c-kw">await</span><span class="c-plain"> </span><span class="ide-ghost">validateSchema(userSchema, req.body)</span><span class="ide-suggest">Tab ↹</span></div>
+              <div class="ide-line"><span class="ide-ln">14</span><span class="c-comment">&nbsp;&nbsp;// checks role against org policy...</span></div>
+              <div class="ide-line"><span class="ide-ln">15</span>&nbsp;</div>
+            </div>
+          </div>
+          <div class="ide-ai-bar">
+            <div class="ide-ai-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+            <div class="ide-ai-text">Context: user.schema.ts · auth.service.ts · org-policy.json</div>
+            <div class="ide-ai-tag">3 files · 312 tokens</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAT STRIP ══ -->
+<section class="stat-strip">
+  <div class="container">
+    <div class="stat-inner">
+      <div class="stat-item">
+        <div class="stat-num">&lt;&nbsp;<span>2 min</span></div>
+        <div class="stat-label">to turn a raw business requirement into enriched, dev-ready user stories</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span>Full</span> repo</div>
+        <div class="stat-label">context in every code suggestion — via VectorDB-indexed codebase</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">60–<span>80%</span></div>
+        <div class="stat-label">of unit tests and test data auto-generated per story</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Zero</div>
+        <div class="stat-label">policy violations — org guardrails enforced on every generated commit</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══ CAPABILITIES ══ -->
+<section class="sdlc-cap-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Platform Capabilities</div>
+    <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;color:#fff;max-width:600px;line-height:1.2;">Every stage of the SDLC has an AI layer behind it.</h2>
+    <div class="sdlc-cap-grid">
+      <div class="sdlc-cap-card">
+        <div class="sdlc-cap-num">01</div>
+        <div class="sdlc-cap-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+        <div class="sdlc-cap-title">Story Enrichment Agent</div>
+        <div class="sdlc-cap-body">Business requirements come in raw and vague. The Story Enrichment Agent rewrites them as dev-ready user stories — adding acceptance criteria, edge cases, dependency flags, and technical context in seconds. Dev teams start sprints with clarity, not questions.</div>
+      </div>
+      <div class="sdlc-cap-card">
+        <div class="sdlc-cap-num">02</div>
+        <div class="sdlc-cap-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <div class="sdlc-cap-title">VS Code Extension with Codebase Context</div>
+        <div class="sdlc-cap-body">The platform indexes your entire codebase into a VectorDB. The VS Code extension surfaces this context directly in the editor — so generated code matches your naming conventions, reuses existing utilities, and fits your architecture. No more generic suggestions that don't compile.</div>
+      </div>
+      <div class="sdlc-cap-card">
+        <div class="sdlc-cap-num">03</div>
+        <div class="sdlc-cap-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div class="sdlc-cap-title">Code Generation</div>
+        <div class="sdlc-cap-body">Generate implementation code for a user story with full awareness of what already exists. The AI doesn't just produce syntactically correct code — it produces code that is contextually correct: consistent with your patterns, your abstractions, and your existing service contracts.</div>
+      </div>
+      <div class="sdlc-cap-card">
+        <div class="sdlc-cap-num">04</div>
+        <div class="sdlc-cap-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div class="sdlc-cap-title">Unit Test &amp; Test Data Generation</div>
+        <div class="sdlc-cap-body">For every piece of generated code, the platform auto-generates unit tests and the test data to run them. Edge cases from the enriched story feed directly into test scenarios. 60–80% of test coverage written before a human touches the keyboard.</div>
+      </div>
+      <div class="sdlc-cap-card">
+        <div class="sdlc-cap-num">05</div>
+        <div class="sdlc-cap-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="sdlc-cap-title">Token Tracking &amp; LLM Governance</div>
+        <div class="sdlc-cap-body">Every AI call is tracked — tokens consumed per developer, per story, per sprint. Engineering leaders get full cost visibility. Budget controls and usage thresholds can be set per team. AI development costs stop being a black box.</div>
+      </div>
+      <div class="sdlc-cap-card">
+        <div class="sdlc-cap-num">06</div>
+        <div class="sdlc-cap-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="sdlc-cap-title">Security Guardrails &amp; Org Policy</div>
+        <div class="sdlc-cap-body">Every generated commit is scanned against security guardrails and your organisation's coding policy — no hardcoded secrets, only approved libraries, required error handling patterns enforced. Compliant code is the default, not a post-merge audit.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEV TRACK FLOW ══ -->
+<section class="dev-flow-section">
+  <div class="container">
+    <div class="dev-flow-header">
+      <div class="eyebrow" style="margin-bottom:20px;">How It Works</div>
+      <h2 style="font-size:clamp(24px,3vw,40px);font-weight:400;letter-spacing:-.02em;color:#fff;max-width:600px;line-height:1.2;">From raw requirement to compliant, tested code — without leaving the platform.</h2>
+    </div>
+    <div class="dev-pipeline">
+      <div class="dev-node">
+        <div class="dev-node-eyebrow">Input</div>
+        <div class="dev-node-title">Business Requirement</div>
+        <div class="dev-chips">
+          <span class="dev-chip">Plain language</span>
+          <span class="dev-chip">No tech spec</span>
+        </div>
+      </div>
+      <div class="dev-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dev-node dev-node-active">
+        <div class="dev-node-eyebrow">AI Agent</div>
+        <div class="dev-node-title">Story Enrichment</div>
+        <div class="dev-chips">
+          <span class="dev-chip">Acceptance criteria</span>
+          <span class="dev-chip">Edge cases</span>
+          <span class="dev-chip">Tech context</span>
+        </div>
+      </div>
+      <div class="dev-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dev-node dev-node-active">
+        <div class="dev-node-eyebrow">VS Code + VectorDB</div>
+        <div class="dev-node-title">Code &amp; Test Generation</div>
+        <div class="dev-chips">
+          <span class="dev-chip">Codebase context</span>
+          <span class="dev-chip">Unit tests</span>
+          <span class="dev-chip">Test data</span>
+        </div>
+      </div>
+      <div class="dev-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dev-node dev-node-active">
+        <div class="dev-node-eyebrow">On Push</div>
+        <div class="dev-node-title">Track &amp; Govern</div>
+        <div class="dev-chips">
+          <span class="dev-chip">Token tracking</span>
+          <span class="dev-chip">Change log</span>
+          <span class="dev-chip">Security scan</span>
+        </div>
+      </div>
+      <div class="dev-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dev-node dev-node-success">
+        <div class="dev-node-eyebrow">Output</div>
+        <div class="dev-node-title">Compliant, Tested Code</div>
+        <div class="dev-chips">
+          <span class="dev-chip">Policy-verified</span>
+          <span class="dev-chip">60–80% test coverage</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VIBE CODING ══ -->
+<section class="vibe-section">
+  <div class="container">
+    <div class="vibe-inner">
+      <!-- LEFT -->
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px;">Natural Language App Creation</div>
+        <h2 style="font-size:clamp(26px,3vw,40px);font-weight:400;letter-spacing:-.02em;color:#fff;max-width:480px;line-height:1.2;">Describe it. Build it. Ship it — no code required.</h2>
+        <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-top:16px;margin-bottom:0;max-width:440px;">Describe what you want to build. The platform generates the UI, data model, and logic. Iterate in plain language until it works exactly how you need it — then the generated code moves straight into the engineering workflow for production hardening.</p>
+        <div class="vibe-steps">
+          <div class="vibe-step">
+            <div class="vibe-step-num">1</div>
+            <div>
+              <div class="vibe-step-title">Describe your app in plain language</div>
+              <div class="vibe-step-body">No wireframes, no spec documents. Just describe what you want it to do and who will use it.</div>
+            </div>
+          </div>
+          <div class="vibe-step">
+            <div class="vibe-step-num">2</div>
+            <div>
+              <div class="vibe-step-title">Iterate until the MVP is right</div>
+              <div class="vibe-step-body">Refine in natural language. Change the layout, add a field, adjust the logic — the platform updates the app in real time.</div>
+            </div>
+          </div>
+          <div class="vibe-step">
+            <div class="vibe-step-num">3</div>
+            <div>
+              <div class="vibe-step-title">Share the codebase with your dev team</div>
+              <div class="vibe-step-body">One click shares the generated code, the AI's reasoning, and the business context with the engineering team inside the same platform.</div>
+            </div>
+          </div>
+          <div class="vibe-step">
+            <div class="vibe-step-num">4</div>
+            <div>
+              <div class="vibe-step-title">Developers take it to production</div>
+              <div class="vibe-step-body">The dev team uses the platform's full AI-assisted tooling — security hardening, integrations, performance tuning — to ship production-grade software from the validated MVP.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT — vibe coding mockup -->
+      <div>
+        <div class="vibe-mock">
+          <div class="vibe-mock-top">
+            <div class="ide-dots"><div class="ide-dot" style="background:#ff5f56;"></div><div class="ide-dot" style="background:#ffbd2e;"></div><div class="ide-dot" style="background:#27c93f;"></div></div>
+            <div class="vibe-mock-title">App Builder — Vibe Mode</div>
+          </div>
+          <div class="vibe-mock-body">
+            <div class="vibe-prompt-area">
+              <div class="vibe-prompt-label">Your Prompt</div>
+              <div class="vibe-prompt-text">"Build a lead tracker where my sales team can log calls, set follow-up dates, update deal status, and see a pipeline board view."</div>
+            </div>
+            <div class="vibe-generating">
+              <div class="vibe-dots"><span></span><span></span><span></span></div>
+              Building your app — UI, data model, and logic...
+            </div>
+            <div class="vibe-preview">
+              <div class="vibe-preview-label">Live Preview</div>
+              <div class="vibe-app-bar">
+                <div class="vibe-app-bar-dot"></div>
+                <div class="vibe-app-bar-text">Lead Tracker — Pipeline Board</div>
+              </div>
+              <div class="vibe-app-row long"></div>
+              <div class="vibe-app-row med"></div>
+              <div class="vibe-app-row short"></div>
+              <div class="vibe-app-row long" style="margin-top:10px;"></div>
+              <div class="vibe-app-row med"></div>
+              <div class="vibe-handoff">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#22c55e" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                <div class="vibe-handoff-text">MVP validated · Ready to share with dev team</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GOVERNANCE ══ -->
+<section class="gov-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Governance Layer</div>
+    <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;color:#fff;max-width:580px;line-height:1.2;">AI-generated code. Engineering-grade accountability.</h2>
+    <div class="gov-grid">
+      <div class="gov-card">
+        <div class="gov-icon" style="background:rgba(0,102,255,.08);border:1px solid var(--border-blue);">
+          <svg viewBox="0 0 24 24" style="stroke:var(--cyan);"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="gov-title">Token Tracking &amp; Cost Visibility</div>
+        <div class="gov-body">Every AI call — code generation, story enrichment, test creation — is tracked against the developer, story, and sprint that triggered it. Engineering leaders see exactly where AI spend is going. Budget thresholds can be set per team or per project. No surprise invoices.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-icon" style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);">
+          <svg viewBox="0 0 24 24" style="stroke:#f87171;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="gov-title">Security Guardrails</div>
+        <div class="gov-body">Generated code is automatically scanned for hardcoded secrets, vulnerable dependencies, insecure patterns, and OWASP-class issues before any commit lands. Security isn't an afterthought — it's baked into the generation step itself.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-icon" style="background:rgba(124,58,237,.08);border:1px solid var(--border-purple);">
+          <svg viewBox="0 0 24 24" style="stroke:#a78bfa;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="gov-title">Org Policy Enforcement</div>
+        <div class="gov-body">Your organisation's coding standards — approved libraries, error handling requirements, naming conventions, access control patterns — are encoded as policy rules. The AI uses them as constraints, not suggestions. Every generated function is compliant by default.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="eyebrow" style="justify-content:center;margin-bottom:24px;">Get Started</div>
+      <h2 class="cta-h2">Accelerate your engineering<br>velocity with AI.</h2>
+      <p class="cta-sub">We'll map the platform to your codebase, engineering workflow, and compliance requirements — and define what a deployment looks like for your organisation in a single discovery call.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <a href="case-studies.html" class="btn-outline">View Case Studies</a>
+      </div>
     </div>
   </div>
 </section>
@@ -254,7 +704,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <img src="assets/images/logo.svg" alt="BootLabs">
         <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
@@ -265,7 +715,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
           <li><a href="software-engineering.html">Full Stack Development</a></li>
           <li><a href="ai-engineering.html">AI &amp; ML</a></li>
           <li><a href="agentic-ai.html">Agentic AI</a></li>
-</ul>
+        </ul>
       </div>
       <div>
         <div class="footer-col-head">Platforms</div>
@@ -295,7 +745,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
     <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
     <div class="footer-bot">
       <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
-      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      <div class="footer-legal"><a href="privacy-policy.html">Privacy Policy</a></div>
     </div>
   </div>
 </footer>
@@ -305,7 +755,7 @@ window.addEventListener('scroll',()=>{document.getElementById('navbar').classLis
 function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
 function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
 function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
-function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
+function openContact(){window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink','_blank');}
 function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
 </script>
 </body>

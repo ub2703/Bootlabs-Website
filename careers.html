@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers — BootLabs</title>
+<style>
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;height:auto;}
+ul{list-style:none;}
+button{font-family:NHD,sans-serif;cursor:pointer;}
+input,textarea{box-sizing:border-box;}
+:root{--blue:#0066FF;--cyan:#26a8ff;--border:rgba(255,255,255,.08);--border-blue:rgba(0,102,255,.35);--dim:rgba(255,255,255,.45);--mid:rgba(255,255,255,.7);--glass:rgba(255,255,255,.03);--r:20px;}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
+.eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
+.h2{font-size:clamp(28px,4vw,56px);font-weight:400;line-height:1.1;}
+.body-l{font-size:18px;line-height:1.75;color:var(--mid);}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;font-weight:400;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
+.btn-primary:hover{background:#0055dd;box-shadow:0 8px 32px rgba(0,102,255,.5);transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;transition:transform .2s;}
+.btn-primary:hover svg{transform:translateX(3px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ══ MOBILE MENU ══ */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mob-sub{padding:12px 0 4px;display:none;flex-direction:column;gap:10px;}
+.mob-sub.open{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
+
+/* ══ NAVBAR ══ */
+.navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
+.navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
+.nav-logo img{height:28px;width:auto;display:block;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{font-size:15px;color:rgba(255,255,255,.92);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:280px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.simple-item{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding:11px 14px;border-radius:10px;text-decoration:none;transition:background .2s,color .2s;}
+.simple-item:hover{background:rgba(0,102,255,.08);}
+.simple-item-title{font-size:14px;color:rgba(255,255,255,.88);transition:color .2s;}
+.simple-item:hover .simple-item-title{color:#fff;}
+.simple-item-sub{font-size:11px;color:var(--dim);margin-top:3px;line-height:1.5;}
+.mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-title{font-size:15px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;transition:background .2s;}
+.nav-hamburger:hover{background:rgba(255,255,255,.06);}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ══ HERO ══ */
+.careers-hero{position:relative;width:100%;height:100vh;overflow:hidden;background:#06060a;}
+.careers-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:0;}
+.careers-hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(6,6,10,.82) 50%,rgba(6,6,10,.3) 100%);z-index:1;}
+.careers-hero .container{position:relative;z-index:2;height:100%;display:flex;align-items:center;}
+.careers-hero-inner{max-width:740px;}
+.careers-hero .eyebrow{margin-bottom:28px;}
+.careers-h1{font-size:clamp(40px,6vw,80px);font-weight:400;line-height:1.0;color:#fff;margin-bottom:28px;}
+.careers-h1 em{font-style:italic;color:var(--cyan);}
+.careers-sub{font-size:18px;line-height:1.75;color:var(--mid);max-width:560px;margin-bottom:40px;}
+.hero-pills{display:flex;flex-wrap:wrap;gap:12px;}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid rgba(255,255,255,.2);border-radius:100px;font-size:14px;color:var(--mid);background:rgba(0,0,0,.35);backdrop-filter:blur(8px);}
+.hero-pill span{color:#fff;font-weight:500;}
+
+/* ══ WHY JOIN ══ */
+.why-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:56px;}
+.why-card{background:#080810;padding:40px 36px;transition:background .3s;}
+.why-card:hover{background:#0c0c1a;}
+.why-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,102,255,.08);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.why-icon svg{width:22px;height:22px;fill:none;stroke:var(--cyan);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.why-title{font-size:17px;color:#fff;margin-bottom:10px;}
+.why-body{font-size:14px;color:var(--mid);line-height:1.7;}
+
+/* ══ VALUES ══ */
+.values-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px;}
+.value-card{border:1px solid var(--border);border-radius:20px;padding:36px 28px;background:var(--glass);transition:border-color .3s;}
+.value-card:hover{border-color:var(--border-blue);}
+.value-num{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
+.value-title{font-size:20px;color:#fff;margin-bottom:12px;}
+.value-body{font-size:14px;color:var(--mid);line-height:1.7;}
+
+/* ══ CULTURE STATS ══ */
+.culture-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.culture-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.culture-text .eyebrow{margin-bottom:28px;}
+.culture-text .h2{margin-bottom:20px;}
+.culture-text .body-l{margin-bottom:40px;}
+.culture-photo{border-radius:20px;overflow:hidden;aspect-ratio:4/3;position:relative;}
+.culture-photo img{width:100%;height:100%;object-fit:cover;}
+.stats-row{display:flex;gap:32px;flex-wrap:wrap;}
+.stat-box{display:flex;flex-direction:column;gap:4px;}
+.stat-box-num{font-size:36px;color:#fff;line-height:1;}
+.stat-box-num span{color:var(--cyan);}
+.stat-box-label{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;}
+
+/* ══ BENEFITS ══ */
+.benefits-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.benefit-card{border:1px solid var(--border);border-radius:20px;padding:36px 32px;background:var(--glass);}
+.benefit-head{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+.benefit-icon{width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.08);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.benefit-icon svg{width:20px;height:20px;fill:none;stroke:var(--cyan);stroke-width:1.5;}
+.benefit-title{font-size:17px;color:#fff;}
+.benefit-list{display:flex;flex-direction:column;gap:12px;}
+.benefit-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--mid);line-height:1.6;}
+.benefit-item::before{content:"";display:block;width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0;margin-top:7px;}
+
+/* ══ OPEN POSITIONS ══ */
+.positions-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.positions-inner{text-align:center;max-width:600px;margin:0 auto;}
+.positions-inner .eyebrow{justify-content:center;margin-bottom:28px;}
+.positions-inner .h2{margin-bottom:20px;}
+.positions-inner .body-l{margin-bottom:40px;}
+.positions-placeholder{border:1px dashed rgba(255,255,255,.12);border-radius:20px;padding:60px 40px;margin-bottom:40px;background:rgba(255,255,255,.01);}
+.positions-placeholder-text{font-size:15px;color:var(--dim);line-height:1.7;}
+.positions-placeholder-text strong{color:var(--mid);display:block;font-size:18px;margin-bottom:8px;font-weight:400;}
+
+/* ══ CTA ══ */
+.cta-section{padding:120px 0;background:#06060a;border-top:1px solid var(--border);text-align:center;}
+.cta-section .eyebrow{justify-content:center;margin-bottom:28px;}
+.cta-section .h2{max-width:640px;margin:0 auto 20px;}
+.cta-section .body-l{max-width:540px;margin:0 auto 40px;}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+
+/* ══ FOOTER ══ */
+.footer{padding:80px 0 40px;border-top:1px solid var(--border);background:#06060a;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;width:auto;margin-bottom:18px;}
+.footer-desc{font-size:14px;color:var(--dim);line-height:1.7;max-width:280px;}
+.footer-col-title{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
+.footer-links{display:flex;flex-direction:column;gap:12px;}
+.footer-links a{font-size:14px;color:var(--mid);transition:color .2s;}
+.footer-links a:hover{color:#fff;}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:32px;border-top:1px solid var(--border);font-size:13px;color:var(--dim);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  .why-grid{grid-template-columns:1fr 1fr;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .benefits-grid{grid-template-columns:1fr 1fr;}
+  .culture-inner{grid-template-columns:1fr;gap:48px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+}
+@media(max-width:768px){
+  .container{padding:0 20px;}
+  /* Hero — video on top, text below, no black gaps */
+  .careers-hero{height:auto;min-height:unset;overflow:visible;display:flex;flex-direction:column;padding-top:88px;}
+  .careers-hero video{position:static;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center center;order:-1;flex-shrink:0;}
+  .careers-hero-overlay{display:none;}
+  .careers-hero .container{position:static;height:auto;padding:40px 20px 56px;background:#06060a;}
+  .careers-hero-inner{max-width:100%;}
+  .careers-h1{font-size:clamp(34px,9vw,52px);margin-bottom:20px;}
+  .careers-sub{font-size:16px;margin-bottom:28px;}
+  .hero-pills{gap:8px;}
+  .hero-pill{font-size:12px;padding:8px 14px;}
+  /* Sections */
+  .why-grid{grid-template-columns:1fr;}
+  .values-grid{grid-template-columns:1fr;}
+  .benefits-grid{grid-template-columns:1fr;}
+  .why-section,.values-section,.culture-section,.benefits-section,.positions-section,.cta-section{padding:64px 0;}
+  .culture-inner{grid-template-columns:1fr;gap:36px;}
+  .culture-photo{aspect-ratio:16/9;}
+  .positions-placeholder{padding:36px 24px;}
+  .cta-btns{flex-direction:column;align-items:stretch;}
+  .cta-btns .btn-primary,.cta-btns .btn-outline{justify-content:center;}
+  /* Navbar */
+  .navbar{width:calc(100% - 32px);padding:10px 16px;}
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
+  .nav-hamburger{display:flex;}
+  /* Footer */
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ MOBILE MENU ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mob-nav-links">
+    <div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="mob-sub">
+      <a href="cloud-devops.html" onclick="closeMobileMenu()">DevOps / Cloud</a>
+      <a href="platform-engineering.html" onclick="closeMobileMenu()">SRE</a>
+      <a href="software-engineering.html" onclick="closeMobileMenu()">Full Stack Development</a>
+      <a href="ai-engineering.html" onclick="closeMobileMenu()">AI &amp; ML</a>
+      <a href="security-engineering.html" onclick="closeMobileMenu()">Security Engineering</a>
+      <a href="agentic-ai.html" onclick="closeMobileMenu()">Agentic AI</a>
+    </div>
+    <div class="mob-nav-link" onclick="toggleMobSub(this)">Solutions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="mob-sub">
+      <a href="resilient-operations-center.html" onclick="closeMobileMenu()">Resilient Operations Center</a>
+      <a href="ai-in-sdlc.html" onclick="closeMobileMenu()">AI in SDLC</a>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Industries <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="manufacturing.html" onclick="closeMobileMenu()">Manufacturing</a>
+        <a href="automotive.html" onclick="closeMobileMenu()">Automotive</a>
+        <a href="financial-services.html" onclick="closeMobileMenu()">Financial Services</a>
+        <a href="qsr.html" onclick="closeMobileMenu()">QSR</a>
+      </div>
+    </div>
+    <div class="mob-nav-link" onclick="toggleMobSub(this)">Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="mob-sub">
+      <a href="sailor.html" onclick="closeMobileMenu()">Sailor</a>
+      <a href="guardian.html" onclick="closeMobileMenu()">Guardian</a>
+    </div>
+    <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
+    <div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="mob-sub">
+      <a href="about-us.html" onclick="closeMobileMenu()">About Us</a>
+      <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+      <a href="white-papers.html" onclick="closeMobileMenu()">White Papers</a>
+      <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
+    </div>
+    <a class="mob-nav-link" href="careers.html" style="color:var(--cyan);" onclick="closeMobileMenu()">Careers</a>
+  </nav>
+  <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.svg" alt="BootLabs"></a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">DevOps / Cloud</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Infrastructure Automation</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">SRE</div><div class="mega-item-subs">Observability · SLOs · Chaos Engineering · Service Mesh</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Full Stack Development</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI &amp; ML</div><div class="mega-item-subs">ML Engineering · MLOps · Production AI · Model Monitoring</div></a>
+        <a href="security-engineering.html" class="mega-item"><div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · VAPT · Compliance Automation · Zero Trust</div></a>
+        <a href="agentic-ai.html" class="mega-item"><div class="mega-item-title">Agentic AI</div><div class="mega-item-subs">Task Agents · Multi-Agent Orchestration · Tool-Using Agents · LLMOps</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="resilient-operations-center.html" class="simple-item"><div class="simple-item-title">Resilient Operations Center</div><div class="simple-item-sub">Managed Cloud Ops · AIOps · FinOps</div></a>
+        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Automated Testing</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#industry" class="nav-link">Industries <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="manufacturing.html" class="simple-item"><div class="simple-item-title">Manufacturing</div><div class="simple-item-sub">Supply Chain AI · Predictive Ops · GenAI Agents</div></a>
+        <a href="automotive.html" class="simple-item"><div class="simple-item-title">Automotive</div><div class="simple-item-sub">Service AI · Warranty Intelligence · Aftersales</div></a>
+        <a href="financial-services.html" class="simple-item"><div class="simple-item-title">Financial Services</div><div class="simple-item-sub">KYC Automation · AIOps · Compliance AI</div></a>
+        <a href="qsr.html" class="simple-item"><div class="simple-item-title">QSR</div><div class="simple-item-sub">Operations AI · Demand Forecasting · Loss Prevention</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#platforms" class="nav-link">Platforms <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="sailor.html" class="simple-item"><div class="simple-item-title">Sailor</div><div class="simple-item-sub">Cloud Cost Intelligence &amp; FinOps Platform</div></a>
+        <a href="guardian.html" class="simple-item"><div class="simple-item-title">Guardian</div><div class="simple-item-sub">Security &amp; Compliance Automation Platform</div></a>
+      </div>
+    </div>
+    <a href="partnerships.html" class="nav-link">Partners</a>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="about-us.html" class="simple-item"><div class="simple-item-title">About Us</div><div class="simple-item-sub">Who we are · Leadership · Our values</div></a>
+        <a href="case-studies.html" class="simple-item"><div class="simple-item-title">Case Studies</div><div class="simple-item-sub">Client outcomes · Live deployments</div></a>
+        <a href="white-papers.html" class="simple-item"><div class="simple-item-title">White Papers</div><div class="simple-item-sub">Technical deep-dives · Research · Frameworks</div></a>
+        <a href="blog.html" class="simple-item"><div class="simple-item-title">Blog &amp; Press Releases</div><div class="simple-item-sub">Engineering insights · Company news</div></a>
+      </div>
+    </div>
+    <a href="careers.html" class="nav-link" style="color:var(--cyan);">Careers</a>
+  </div>
+  <div class="nav-right">
+    <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="careers-hero">
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d482f0_Bootlabs-Cultural%20Video-V3-Compressed_mp4.mp4" type="video/mp4">
+    <source src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d482f0_Bootlabs-Cultural%20Video-V3-Compressed_webm.webm" type="video/webm">
+  </video>
+  <div class="careers-hero-overlay"></div>
+  <div class="container">
+    <div class="careers-hero-inner">
+      <div class="eyebrow" style="margin-bottom:28px;">Careers at BootLabs</div>
+      <h1 class="careers-h1">Build what matters.<br><em>Grow without limits.</em></h1>
+      <p class="careers-sub">At BootLabs, we build the technology that transforms how enterprises operate. If you want to work on hard problems alongside people who care deeply about craft and outcomes — this is your place.</p>
+      <div class="hero-pills">
+        <div class="hero-pill"><span>200+</span> Engineers &amp; Builders</div>
+        <div class="hero-pill"><span>4</span> Global Offices</div>
+        <div class="hero-pill"><span>7</span> Countries Served</div>
+        <div class="hero-pill"><span>AI-first</span> Engineering Culture</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY JOIN ══ -->
+<section class="why-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:16px;">Why BootLabs</div>
+    <h2 class="h2" style="margin-top:16px;max-width:560px;">An environment built for builders</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="why-title">Innovate with Cutting-Edge Technology</div>
+        <p class="why-body">Work on the latest AI and cloud solutions — from production GenAI platforms to enterprise-scale infrastructure. Real systems, real impact.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="why-title">Collaborative &amp; Inclusive Culture</div>
+        <p class="why-body">Diverse perspectives drive our best work. At BootLabs, ideas are valued regardless of title — and every team member has a voice in how we build.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="why-title">Grow with Industry Leaders</div>
+        <p class="why-body">Learn from architects who have built at scale. BootLabs invests in your growth — from mentorship and certification support to hands-on leadership opportunities.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="why-title">Shape the Future of AI</div>
+        <p class="why-body">Be part of the AI revolution at the enterprise layer — where the actual transformation happens. Build systems that move industries, not just demos.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="why-title">Work on Impactful Projects</div>
+        <p class="why-body">Every engagement has a measurable objective. From cloud migration to AI-native platforms, you'll see your work move the needle for real enterprises.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="why-title">Flexible, Modern Ways of Working</div>
+        <p class="why-body">Offices in Bengaluru, Mumbai, UAE and beyond — with hybrid flexibility. We trust our people to do their best work wherever they are most effective.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VALUES ══ -->
+<section class="values-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:16px;">Our Values</div>
+    <h2 class="h2" style="margin-top:16px;max-width:560px;">What we value and how we act</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <div class="value-title">Collaboration</div>
+        <p class="value-body">Winning together is more important than winning alone. We co-create, support one another, and thrive as a team — across offices, time zones, and disciplines.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <div class="value-title">Ownership</div>
+        <p class="value-body">We demonstrate end-to-end commitment in every task we undertake. Accountability is not a policy — it's a mindset that runs through everything we deliver.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <div class="value-title">Instant Feedback</div>
+        <p class="value-body">We consistently seek and share constructive feedback to foster rapid growth and continuous improvement. No bureaucracy, no waiting — direct and honest.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">04</div>
+        <div class="value-title">Consulting Mindset</div>
+        <p class="value-body">We proactively identify problems, clearly define approaches, and strive for sustainable outcomes. We don't just execute — we think, advise, and lead.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BENEFITS ══ -->
+<section class="benefits-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:16px;">What We Offer</div>
+    <h2 class="h2" style="margin-top:16px;max-width:560px;">We take care of the people who build with us</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-head">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="benefit-title">Health &amp; Wellness</div>
+        </div>
+        <div class="benefit-list">
+          <div class="benefit-item">Comprehensive health, dental, and vision insurance</div>
+          <div class="benefit-item">22 weeks of paid parental leave</div>
+          <div class="benefit-item">Flexible paid time off and leave policies</div>
+          <div class="benefit-item">Generous mental health support</div>
+          <div class="benefit-item">Inclusive fertility and family planning benefits</div>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-head">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="benefit-title">Compensation &amp; Support</div>
+        </div>
+        <div class="benefit-list">
+          <div class="benefit-item">Competitive salary and performance-linked rewards</div>
+          <div class="benefit-item">Robust retirement and savings plans</div>
+          <div class="benefit-item">Life and income protection plans</div>
+          <div class="benefit-item">Relocation support for new joiners</div>
+          <div class="benefit-item">Annual education and certification stipend</div>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-head">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          </div>
+          <div class="benefit-title">Additional Perks</div>
+        </div>
+        <div class="benefit-list">
+          <div class="benefit-item">Monthly wellness and time-saver stipend</div>
+          <div class="benefit-item">Commuter benefits across all offices</div>
+          <div class="benefit-item">Home office setup support</div>
+          <div class="benefit-item">Daily meals and snacks in the office</div>
+          <div class="benefit-item">Learning budget for conferences and courses</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OPEN POSITIONS ══ -->
+<section class="positions-section" id="open-positions">
+  <div class="container">
+    <div class="positions-inner">
+      <div class="eyebrow">Open Positions</div>
+      <h2 class="h2" style="margin-top:16px;">We're growing fast</h2>
+      <p class="body-l">Current openings are listed on our LinkedIn page. We hire for talent and mindset — if you think BootLabs is the right place for you, we'd love to hear from you.</p>
+      <div class="positions-placeholder">
+        <p class="positions-placeholder-text">
+          <strong>Job listings coming soon</strong>
+          In the meantime, explore open roles and apply directly through LinkedIn — or send us your profile and we'll reach out when the right opportunity opens up.
+        </p>
+      </div>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://www.linkedin.com/company/bootlabs-technologies/jobs/" target="_blank" rel="noopener" class="btn-primary">
+          View Open Roles on LinkedIn
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="eyebrow" style="justify-content:center;margin-bottom:28px;">Join the Team</div>
+    <h2 class="h2">Ready to build the future of enterprise AI?</h2>
+    <p class="body-l">We're always looking for engineers, architects, and problem-solvers who want to do the best work of their careers.</p>
+    <div class="cta-btns">
+      <a href="https://www.linkedin.com/company/bootlabs-technologies/jobs/" target="_blank" rel="noopener" class="btn-primary">
+        Explore Careers on LinkedIn
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><img src="assets/images/logo.svg" alt="BootLabs"></div>
+        <p class="footer-desc">Engineering the intelligent enterprise — cloud, AI, and platform solutions for the organisations that cannot afford to fail.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <div class="footer-links">
+          <a href="cloud-devops.html">DevOps / Cloud</a>
+          <a href="platform-engineering.html">SRE</a>
+          <a href="software-engineering.html">Full Stack Dev</a>
+          <a href="ai-engineering.html">AI &amp; ML</a>
+          <a href="security-engineering.html">Security Engineering</a>
+          <a href="agentic-ai.html">Agentic AI</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-links">
+          <a href="about-us.html">About Us</a>
+          <a href="partnerships.html">Partners</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="blog.html">Blog &amp; Press</a>
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-links">
+          <a href="mailto:hello@bootlabstech.com">hello@bootlabstech.com</a>
+          <a href="tel:+919600843184">+91 9600843184</a>
+          <a href="https://www.linkedin.com/company/bootlabs-technologies/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BootLabs Technology Pvt. Ltd.</span>
+      <span>ISO 27001 · SOC 2 Certified</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ CONTACT POPUP ══ -->
+<div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
+  <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
+    <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+    <div style="font-size:22px;color:#fff;margin-bottom:24px;font-family:NHD;">Book a Discovery Call</div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">What challenge are you solving?</label><textarea rows="3" placeholder="Tell us about your project..." style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;resize:none;"></textarea></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;">Send Request <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+  </div>
+</div>
+
+<script>
+function toggleMobileMenu(){const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');m.classList.toggle('open');h.classList.toggle('open');}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');}
+function toggleMobSub(el){const s=el.nextElementSibling;if(s){s.classList.toggle('open');}}
+function openContact(){window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink','_blank');}
+function closeContact(){document.getElementById('contactPopup').style.display='none';}
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);});
+</script>
+</body>
+</html>

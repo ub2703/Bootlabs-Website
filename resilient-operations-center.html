@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resilient Operations Center — BootLabs</title>
 <style>
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;}
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
@@ -60,19 +60,56 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-hamburger.open span:nth-child(2){opacity:0;}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-.hero{padding:160px 0 100px;background:#06060a;position:relative;overflow:hidden;text-align:center;}
-.hero::before{content:"";position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(circle,rgba(0,102,255,.1) 0%,transparent 65%);pointer-events:none;}
-.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 16px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:32px;}
-.hero-h1{font-size:clamp(36px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
-.hero-sub{font-size:18px;line-height:1.75;color:var(--mid);margin-bottom:48px;}
-.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+/* ══ SVC HERO ══ */
+.svc-hero{padding:140px 0 80px;background:#06060a;position:relative;overflow:hidden;}
+.svc-hero::before{content:"";position:absolute;top:0;right:-100px;width:900px;height:800px;background:radial-gradient(ellipse at 70% 30%,rgba(0,102,255,.11) 0%,transparent 65%);pointer-events:none;}
+.svc-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.svc-hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:6px 16px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:28px;}
+.svc-hero-h1{font-size:clamp(32px,4vw,58px);font-weight:400;line-height:1.07;letter-spacing:-.02em;color:#fff;margin-bottom:24px;}
+.svc-hero-sub{font-size:17px;line-height:1.8;color:var(--mid);margin-bottom:40px;max-width:460px;}
+.svc-hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.svc-hero-visual{position:relative;}
+.hero-badge-float{position:absolute;display:flex;align-items:center;gap:10px;background:rgba(6,6,14,.92);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(16px);border-radius:12px;padding:12px 16px;z-index:10;}
+.hero-badge-float-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.hero-badge-float-text{font-size:13px;color:#fff;line-height:1.3;}
+.hero-badge-float-sub{font-size:11px;color:var(--dim);margin-top:2px;}
+/* ══ DASHBOARD MOCKUP ══ */
+.dash-mock{background:#0f0f1a;border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.6);}
+.dash-mock-top{background:#0c0c16;border-bottom:1px solid rgba(255,255,255,.07);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+.dash-mock-title{font-size:13px;color:#fff;}
+.dash-mock-live{display:flex;align-items:center;gap:6px;font-size:11px;color:#22c55e;}
+.dash-mock-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;}}
+.dash-metrics{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(255,255,255,.07);}
+.dash-metric{padding:12px 14px;border-right:1px solid rgba(255,255,255,.06);}
+.dash-metric:last-child{border-right:none;}
+.dash-metric-label{font-size:10px;color:rgba(255,255,255,.38);margin-bottom:4px;}
+.dash-metric-val{font-size:17px;color:#fff;letter-spacing:-.02em;line-height:1;}
+.dash-metric-delta{font-size:10px;margin-top:3px;}
+.dash-up{color:#22c55e;}.dash-down{color:#ef4444;}
+.dash-body{padding:14px 16px;display:grid;grid-template-columns:1.2fr 1fr;gap:12px;}
+.dash-panel-head{font-size:10px;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+.dash-badge-red{font-size:10px;background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.22);border-radius:100px;padding:2px 8px;}
+.dash-incident{border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:9px 11px;margin-bottom:7px;background:rgba(255,255,255,.015);}
+.dash-incident:last-child{margin-bottom:0;}
+.dash-inc-row{display:flex;align-items:center;gap:7px;margin-bottom:5px;}
+.dash-inc-id{font-size:10px;color:var(--dim);}
+.dash-p1{font-size:9px;background:rgba(239,68,68,.13);color:#ef4444;border:1px solid rgba(239,68,68,.28);border-radius:4px;padding:1px 5px;}
+.dash-p2{font-size:9px;background:rgba(251,146,60,.1);color:#fb923c;border:1px solid rgba(251,146,60,.22);border-radius:4px;padding:1px 5px;}
+.dash-inc-name{font-size:12px;color:#fff;margin-bottom:5px;line-height:1.3;}
+.dash-rca{font-size:11px;color:#22c55e;display:flex;align-items:center;gap:4px;}
+.dash-rca::before{content:"⚡";font-size:9px;}
+.dash-health-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.dash-health-row:last-child{border-bottom:none;}
+.dash-health-name{font-size:11px;color:var(--mid);}
+.dash-ok{font-size:9px;color:#22c55e;background:rgba(34,197,94,.1);border-radius:4px;padding:2px 7px;}
+.dash-warn{font-size:9px;color:#eab308;background:rgba(234,179,8,.1);border-radius:4px;padding:2px 7px;}
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
 .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
 .footer-brand img{height:26px;margin-bottom:18px;}
 .footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
 .footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
-.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
 .footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
 .footer-col-links a:hover{color:#fff;}
 .footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
@@ -82,14 +119,109 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .footer-legal{display:flex;gap:20px;}
 .footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
+/* ══ STAT STRIP ══ */
+.roc-stat-strip{background:#080810;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.roc-stat-inner{display:grid;grid-template-columns:repeat(4,1fr);}
+.roc-stat-item{padding:36px 32px;display:flex;flex-direction:column;gap:8px;border-right:1px solid var(--border);}
+.roc-stat-item:last-child{border-right:none;}
+.roc-stat-num{font-size:clamp(26px,3vw,44px);letter-spacing:-.03em;color:#fff;line-height:1;}
+.roc-stat-num span{color:var(--cyan);}
+.roc-stat-label{font-size:13px;color:var(--mid);line-height:1.5;max-width:200px;}
+
+/* ══ PROBLEM ══ */
+.problem-section{padding:100px 0;background:#06060a;}
+.problem-header{margin-bottom:56px;}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.problem-card{background:#06060a;padding:44px 40px;transition:background .2s;}
+.problem-card:hover{background:#08081a;}
+.problem-card-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,102,255,.08);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
+.problem-card-icon svg{width:20px;height:20px;fill:none;stroke:var(--cyan);stroke-width:1.5;}
+.problem-card-title{font-size:18px;color:#fff;font-weight:400;line-height:1.3;margin-bottom:14px;}
+.problem-card-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ══ CAPABILITIES ══ */
+.cap-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cap-header{margin-bottom:64px;}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.cap-card{border:1px solid var(--border);border-radius:var(--r);padding:44px 40px;background:var(--glass);position:relative;overflow:hidden;transition:border-color .25s;}
+.cap-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));opacity:0;transition:opacity .25s;}
+.cap-card:hover{border-color:var(--border-blue);}
+.cap-card:hover::before{opacity:1;}
+.cap-num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:24px;}
+.cap-title{font-size:21px;color:#fff;font-weight:400;line-height:1.25;margin-bottom:16px;}
+.cap-body{font-size:14px;color:var(--mid);line-height:1.8;margin-bottom:28px;flex:1;}
+.cap-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;}
+.cap-tag{font-size:11px;color:var(--dim);border:1px solid var(--border);border-radius:100px;padding:4px 12px;}
+
+/* ══ FLOW PIPELINE ══ */
+.flow-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.flow-header{margin-bottom:64px;}
+.flow-pipeline{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr 40px 1fr;align-items:center;gap:0;}
+.flow-node{border:1px solid var(--border);border-radius:16px;padding:28px 24px;background:var(--glass);}
+.flow-node-active{border-color:var(--border-blue);background:rgba(0,102,255,.04);}
+.flow-node-success{border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.03);}
+.flow-node-eyebrow{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+.flow-node-title{font-size:14px;color:#fff;line-height:1.35;margin-bottom:14px;}
+.flow-node-active .flow-node-title{color:var(--cyan);}
+.flow-node-success .flow-node-title{color:#22c55e;}
+.flow-chips{display:flex;flex-direction:column;gap:6px;}
+.flow-chip{font-size:11px;color:var(--dim);padding:3px 10px;border:1px solid var(--border);border-radius:100px;display:inline-block;width:fit-content;}
+.flow-timer{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#22c55e;margin-top:14px;padding:4px 12px;border:1px solid rgba(34,197,94,.3);border-radius:100px;background:rgba(34,197,94,.06);}
+.flow-arrow{display:flex;align-items:center;justify-content:center;}
+.flow-arrow svg{width:20px;height:20px;fill:none;stroke:rgba(255,255,255,.25);stroke-width:1.5;}
+
+/* ══ WHY ══ */
+.why-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.why-card{padding:40px;border:1px solid var(--border);border-radius:var(--r);background:var(--glass);transition:border-color .2s;}
+.why-card:hover{border-color:var(--border-blue);}
+.why-icon{width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.08);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.why-icon svg{width:18px;height:18px;fill:none;stroke:var(--cyan);stroke-width:1.5;}
+.why-title{font-size:17px;color:#fff;margin-bottom:12px;font-weight:400;}
+.why-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ══ PROCESS ══ */
+.process-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.process-card{padding:40px;border:1px solid var(--border);border-radius:var(--r);background:var(--glass);transition:border-color .2s;}
+.process-card:hover{border-color:var(--border-blue);}
+.process-step{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px;}
+.process-title{font-size:19px;color:#fff;margin-bottom:12px;font-weight:400;}
+.process-body{font-size:14px;color:var(--mid);line-height:1.75;}
+
+/* ══ CTA ══ */
+.cta-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.cta-inner{text-align:center;max-width:640px;margin:0 auto;}
+.cta-h2{font-size:clamp(28px,4vw,48px);color:#fff;margin-bottom:16px;letter-spacing:-.02em;font-weight:400;line-height:1.15;}
+.cta-sub{font-size:16px;color:var(--mid);line-height:1.75;margin-bottom:40px;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+@media(max-width:1100px){
+  .svc-hero-inner{grid-template-columns:1fr;gap:48px;}
+  .svc-hero-sub{max-width:100%;}
+  .cap-grid{grid-template-columns:1fr 1fr;}
+  .flow-pipeline{grid-template-columns:1fr;gap:0;}
+  .flow-arrow{transform:rotate(90deg);padding:8px 0;}
+  .why-grid{grid-template-columns:1fr 1fr;}
+  .process-grid{grid-template-columns:1fr 1fr;}
+}
 @media(max-width:768px){
   .container{padding:0 18px;}
   .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
   .nav-center{display:none;}
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
-  .hero{padding:120px 0 72px;}
-  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .svc-hero{padding:110px 0 64px;}
+  .svc-hero-visual{display:none;}
+  .roc-stat-inner{grid-template-columns:1fr 1fr;}
+  .roc-stat-item{border-right:none;border-bottom:1px solid var(--border);}
+  .roc-stat-item:nth-child(odd){border-right:1px solid var(--border);}
+  .roc-stat-item:last-child{border-bottom:none;}
+  .problem-grid{grid-template-columns:1fr;}
+  .cap-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  .process-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:480px){
@@ -146,13 +278,14 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
   </nav>
   <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
 </div>
 
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
-  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.svg" alt="BootLabs"></a>
   <div class="nav-center">
     <div class="nav-item">
       <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
@@ -216,6 +349,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a href="careers.html" class="nav-link">Careers</a>
   </div>
   <div class="nav-right">
     <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
@@ -224,17 +358,329 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 </nav>
 
 <!-- ══ HERO ══ -->
-<section class="hero">
+<section class="svc-hero">
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-badge">Platform</div>
-      <h1 class="hero-h1">Resilient Operations Center</h1>
-      <p class="hero-sub">An AI-powered operations intelligence platform unifying monitoring, incident management, and predictive analytics.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        <a href="index.html" class="btn-outline">Back to Home</a>
+    <div class="svc-hero-inner">
+      <!-- LEFT -->
+      <div class="svc-hero-left">
+        <div class="svc-hero-badge">Solution</div>
+        <h1 class="svc-hero-h1">From Alert Noise to<br>Probable Cause.<br>In Seconds.</h1>
+        <p class="svc-hero-sub">The gap between a 4-hour incident and a 4-minute one isn't more engineers. It's intelligence.</p>
+        <div class="svc-hero-btns">
+          <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <a href="case-studies.html" class="btn-outline">See Case Studies</a>
+        </div>
       </div>
-      <p style="margin-top:48px;font-size:13px;color:var(--dim);border:1px solid var(--border);display:inline-block;padding:10px 20px;border-radius:100px;">Full page coming soon — contact us to learn more</p>
+      <!-- RIGHT — dashboard mockup -->
+      <div class="svc-hero-visual">
+        <!-- floating badges -->
+        <div class="hero-badge-float" style="bottom:-18px;left:-18px;">
+          <div class="hero-badge-float-dot" style="background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,.7);"></div>
+          <div>
+            <div class="hero-badge-float-text">RCA in 43 seconds</div>
+            <div class="hero-badge-float-sub">CI-4589 · DB Connection Pool</div>
+          </div>
+        </div>
+        <div class="hero-badge-float" style="top:-18px;right:-18px;">
+          <div class="hero-badge-float-dot" style="background:var(--cyan);box-shadow:0 0 6px rgba(38,168,255,.7);"></div>
+          <div>
+            <div class="hero-badge-float-text">Change correlated automatically</div>
+            <div class="hero-badge-float-sub">Deploy 2.1.4 linked to incident</div>
+          </div>
+        </div>
+        <!-- Dashboard -->
+        <div class="dash-mock">
+          <div class="dash-mock-top">
+            <div class="dash-mock-title">Operations Dashboard</div>
+            <div class="dash-mock-live">Live</div>
+          </div>
+          <div class="dash-metrics">
+            <div class="dash-metric">
+              <div class="dash-metric-label">System Health</div>
+              <div class="dash-metric-val">98.5%</div>
+              <div class="dash-metric-delta dash-up">↑ +2.1%</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Active Incidents</div>
+              <div class="dash-metric-val">12</div>
+              <div class="dash-metric-delta dash-down">↓ -5</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Alerts / Hour</div>
+              <div class="dash-metric-val">234</div>
+              <div class="dash-metric-delta dash-up">↑ +12%</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Automation Rate</div>
+              <div class="dash-metric-val">87%</div>
+              <div class="dash-metric-delta dash-up">↑ +3%</div>
+            </div>
+          </div>
+          <div class="dash-body">
+            <div>
+              <div class="dash-panel-head">Critical Incidents <span class="dash-badge-red">3 Active</span></div>
+              <div class="dash-incident">
+                <div class="dash-inc-row"><span class="dash-inc-id">CI-4589</span><span class="dash-p1">P1</span></div>
+                <div class="dash-inc-name">Database Connection Pool Exhaustion</div>
+                <div class="dash-rca">Memory pressure on node db-03</div>
+              </div>
+              <div class="dash-incident">
+                <div class="dash-inc-row"><span class="dash-inc-id">CI-4590</span><span class="dash-p1">P1</span></div>
+                <div class="dash-inc-name">API Gateway Timeout</div>
+                <div class="dash-rca">Deploy 2.1.4 correlated — change linked</div>
+              </div>
+              <div class="dash-incident">
+                <div class="dash-inc-row"><span class="dash-inc-id">CI-4591</span><span class="dash-p2">P2</span></div>
+                <div class="dash-inc-name">Memory Leak in Payment Processor</div>
+                <div class="dash-rca">3 signals correlated · investigating</div>
+              </div>
+            </div>
+            <div>
+              <div class="dash-panel-head">System Health</div>
+              <div class="dash-health-row"><span class="dash-health-name">Application Servers</span><span class="dash-ok">Healthy</span></div>
+              <div class="dash-health-row"><span class="dash-health-name">Database Cluster</span><span class="dash-warn">Warning</span></div>
+              <div class="dash-health-row"><span class="dash-health-name">API Gateway</span><span class="dash-ok">Healthy</span></div>
+              <div class="dash-health-row"><span class="dash-health-name">Message Queue</span><span class="dash-ok">Healthy</span></div>
+              <div class="dash-health-row"><span class="dash-health-name">Cache Layer</span><span class="dash-ok">Healthy</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAT STRIP ══ -->
+<section class="roc-stat-strip">
+  <div class="container">
+    <div class="roc-stat-inner">
+      <div class="roc-stat-item">
+        <div class="roc-stat-num">&lt;&nbsp;<span>60s</span></div>
+        <div class="roc-stat-label">to probable root cause from first alert fire</div>
+      </div>
+      <div class="roc-stat-item">
+        <div class="roc-stat-num"><span>All</span> sources</div>
+        <div class="roc-stat-label">unified — logs, metrics, traces, APM, infra alerts</div>
+      </div>
+      <div class="roc-stat-item">
+        <div class="roc-stat-num">Any</div>
+        <div class="roc-stat-label">monitoring stack — we work with whatever tools you have or need</div>
+      </div>
+      <div class="roc-stat-item">
+        <div class="roc-stat-num">Day <span>1</span></div>
+        <div class="roc-stat-label">change context enriched into every ITSM incident ticket</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROBLEM ══ -->
+<section class="problem-section">
+  <div class="container">
+    <div class="problem-header">
+      <div class="eyebrow" style="margin-bottom:20px;">The Real Problem</div>
+      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;color:#fff;max-width:680px;line-height:1.2;">The root cause was there. The change that caused it was there. Everything needed to close the ticket — was already there.</h2>
+      <p style="margin-top:20px;font-size:16px;color:var(--mid);max-width:520px;line-height:1.75;">It just wasn't connected. Here's why.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <div class="problem-card-title">Alert Storms &amp; Fatigue</div>
+        <div class="problem-card-body">Hundreds of alerts per hour from five different tools — none of them talking to each other. The signal exists. The noise just buries it. Engineers spend the first hour figuring out what fired, not fixing what broke.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/><line x1="4" y1="10" x2="9" y2="10"/><line x1="15" y1="10" x2="20" y2="10"/></svg>
+        </div>
+        <div class="problem-card-title">No Single Source of Truth</div>
+        <div class="problem-card-body">Infra alerts in one place, app logs in another, APM traces somewhere else. Some teams have mature observability. Others have nothing. Incidents span all of it — but no one can see across all of it at once.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="problem-card-title">The Change That Caused It Was Known</div>
+        <div class="problem-card-body">A deployment went out 20 minutes before the incident. A config was changed that morning. It was all there — in your CMDB, your CI/CD logs, your change records. Nobody connected it to the alert. That's the 4 hours you lost.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CAPABILITIES ══ -->
+<section class="cap-section">
+  <div class="container">
+    <div class="cap-header">
+      <div class="eyebrow" style="margin-bottom:20px;">What We Deliver</div>
+      <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;color:#fff;max-width:640px;line-height:1.2;">Three capabilities built for the ops team that's tired of firefighting.</h2>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="cap-num">01</div>
+        <div class="cap-title">Observability Foundation</div>
+        <div class="cap-body">We start with an assessment — not a tool recommendation. No monitoring? We build it right. Already on AppDynamics or Dynatrace? We mature it, not replace it. On Prometheus but alerting on the wrong things? We tune it. The goal is full-stack visibility. The tool is whatever's right for your scale, team, and budget.</div>
+        <div class="cap-tags">
+          <span class="cap-tag">AppDynamics</span>
+          <span class="cap-tag">Dynatrace</span>
+          <span class="cap-tag">Prometheus</span>
+          <span class="cap-tag">Grafana</span>
+          <span class="cap-tag">OpenTelemetry</span>
+          <span class="cap-tag">Datadog</span>
+          <span class="cap-tag">New Relic</span>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">02</div>
+        <div class="cap-title">AI-Powered Root Cause Analysis</div>
+        <div class="cap-body">Every alert source — Prometheus, CloudWatch, Datadog, Dynatrace, whatever you have — feeds into a single AI engine. It correlates signals across tools and teams, suppresses duplicates, and returns one probable root cause. In seconds, not hours. No war room. No log trawling. Just an answer.</div>
+        <div class="cap-tags">
+          <span class="cap-tag">Multi-source ingestion</span>
+          <span class="cap-tag">Alert correlation</span>
+          <span class="cap-tag">Noise suppression</span>
+          <span class="cap-tag">Probable cause ranking</span>
+          <span class="cap-tag">On-premise LLM</span>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">03</div>
+        <div class="cap-title">Change Intelligence Agent</div>
+        <div class="cap-body">The moment RCA fires, this agent activates. It queries your service topology, scans recent deployments and config changes, and asks: was something touched before this broke? If yes — it writes that context directly into the ITSM ticket. The on-call engineer opens the ticket and the answer is already there.</div>
+        <div class="cap-tags">
+          <span class="cap-tag">Topology graph access</span>
+          <span class="cap-tag">Change management integration</span>
+          <span class="cap-tag">ITSM enrichment</span>
+          <span class="cap-tag">ServiceNow · Jira · PagerDuty</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FLOW PIPELINE ══ -->
+<section class="flow-section">
+  <div class="container">
+    <div class="flow-header">
+      <div class="eyebrow" style="margin-bottom:20px;">How It Works</div>
+      <h2 style="font-size:clamp(24px,3vw,40px);font-weight:400;letter-spacing:-.02em;color:#fff;max-width:560px;line-height:1.2;">We connect the dots before anyone has to ask.</h2>
+    </div>
+    <div class="flow-pipeline">
+      <div class="flow-node">
+        <div class="flow-node-eyebrow">Input</div>
+        <div class="flow-node-title">Alert Sources</div>
+        <div class="flow-chips">
+          <span class="flow-chip">Prometheus / Alertmanager</span>
+          <span class="flow-chip">CloudWatch / Azure Monitor</span>
+          <span class="flow-chip">Datadog / Dynatrace</span>
+          <span class="flow-chip">Logs · Traces · Metrics</span>
+        </div>
+      </div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="flow-node flow-node-active">
+        <div class="flow-node-eyebrow">AI Layer</div>
+        <div class="flow-node-title">RCA Engine</div>
+        <div class="flow-chips">
+          <span class="flow-chip">Correlate &amp; deduplicate</span>
+          <span class="flow-chip">Rank probable causes</span>
+          <span class="flow-chip">Suppress noise</span>
+        </div>
+        <div class="flow-timer">
+          <svg viewBox="0 0 24 24" width="12" height="12"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          &lt; 60 seconds
+        </div>
+      </div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="flow-node flow-node-active">
+        <div class="flow-node-eyebrow">Agent</div>
+        <div class="flow-node-title">Change Intelligence</div>
+        <div class="flow-chips">
+          <span class="flow-chip">Topology graph query</span>
+          <span class="flow-chip">Recent deployments scan</span>
+          <span class="flow-chip">Config change lookup</span>
+        </div>
+      </div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="flow-node flow-node-success">
+        <div class="flow-node-eyebrow">Output</div>
+        <div class="flow-node-title">Enriched ITSM Ticket</div>
+        <div class="flow-chips">
+          <span class="flow-chip">Probable root cause</span>
+          <span class="flow-chip">Linked change record</span>
+          <span class="flow-chip">Impacted services map</span>
+          <span class="flow-chip">Suggested next action</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY US ══ -->
+<section class="why-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Our Approach</div>
+    <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;color:#fff;max-width:620px;line-height:1.2;">We don't have a favourite tool. We have a favourite outcome.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="why-title">Assessment Before Prescription</div>
+        <div class="why-body">We don't walk in with a pre-decided tool. We assess your environment, your team's maturity, your scale, and your existing investments — then recommend what's actually right. Sometimes that's Dynatrace. Sometimes it's Prometheus. Often it's both.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="why-title">Works Across the Ecosystem</div>
+        <div class="why-body">AppDynamics, Dynatrace, Datadog, New Relic, Prometheus, Grafana — we implement, migrate, and mature all of them. The AI RCA and Change Intelligence layer sits on top and ingests from any of them. Your existing tool choice doesn't block anything.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="why-title">We Work With What You Have</div>
+        <div class="why-body">Already on AppDynamics with years of dashboards built? We're not here to rip it out. We mature what's working, fix what isn't, and add intelligence on top — so the investment you've already made starts paying off more.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW WE ENGAGE ══ -->
+<section class="process-section">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">How We Engage</div>
+    <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:400;letter-spacing:-.02em;color:#fff;max-width:560px;line-height:1.2;">From zero to intelligent ops in three stages.</h2>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-step">Step 01</div>
+        <div class="process-title">Assess &amp; Architect</div>
+        <div class="process-body">We audit your current monitoring state — what tools exist, what's missing, what's noisy. We map your service topology, identify observability gaps, and design the OSS stack and AI layer architecture for your environment.</div>
+      </div>
+      <div class="process-card">
+        <div class="process-step">Step 02</div>
+        <div class="process-title">Implement &amp; Integrate</div>
+        <div class="process-body">We deploy the OSS monitoring foundation, instrument your services with OpenTelemetry, configure the AI RCA engine to ingest from all alert sources, and connect the Change Intelligence Agent to your topology graph and ITSM platform.</div>
+      </div>
+      <div class="process-card">
+        <div class="process-step">Step 03</div>
+        <div class="process-title">Operate &amp; Continuously Improve</div>
+        <div class="process-body">Post go-live, we run managed ops — tuning alert thresholds, improving RCA accuracy, adding new signal sources, and delivering weekly SLO health reports. Alert quality improves measurably over the first 90 days.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="eyebrow" style="justify-content:center;margin-bottom:24px;">Get Started</div>
+      <h2 class="cta-h2">Stop spending hours on RCA.<br>Let the AI do it.</h2>
+      <p class="cta-sub">Whether you need to build monitoring from scratch, migrate off a legacy tool, or add an AI intelligence layer on top of what you have — we'll scope it in a single discovery call.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <a href="case-studies.html" class="btn-outline">View Case Studies</a>
+      </div>
     </div>
   </div>
 </section>
@@ -254,7 +700,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <img src="assets/images/logo.svg" alt="BootLabs">
         <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
@@ -295,7 +741,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
     <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
     <div class="footer-bot">
       <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
-      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      <div class="footer-legal"><a href="privacy-policy.html">Privacy Policy</a></div>
     </div>
   </div>
 </footer>
@@ -305,7 +751,7 @@ window.addEventListener('scroll',()=>{document.getElementById('navbar').classLis
 function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
 function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
 function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
-function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
+function openContact(){window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink','_blank');}
 function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
 </script>
 </body>

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us — BootLabs</title>
 <style>
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;font-display:swap;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
@@ -100,12 +100,7 @@ input,textarea{box-sizing:border-box;}
 .founder-name{font-size:16px;color:#fff;margin-top:32px;font-style:normal;}
 .founder-title{font-size:13px;color:var(--cyan);margin-top:4px;font-style:normal;}
 .founder-avatar-wrap{display:flex;align-items:center;justify-content:center;}
-.founder-avatar{width:100%;max-width:420px;aspect-ratio:1;border-radius:20px;background:linear-gradient(135deg,rgba(0,102,255,.12),rgba(38,168,255,.06));border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;overflow:hidden;}
-.founder-avatar::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(0,102,255,.18) 0%,transparent 65%);pointer-events:none;}
-.founder-initials{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,rgba(0,102,255,.4),rgba(38,168,255,.25));border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;font-weight:500;letter-spacing:.04em;position:relative;z-index:1;box-shadow:0 0 40px rgba(0,102,255,.25);}
-.founder-avatar-name{font-size:16px;color:#fff;position:relative;z-index:1;}
-.founder-avatar-role{font-size:12px;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;position:relative;z-index:1;}
-.founder-avatar-glow{position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:240px;height:240px;background:radial-gradient(circle,rgba(0,102,255,.2) 0%,transparent 65%);pointer-events:none;}
+.founder-photo{width:100%;max-width:420px;aspect-ratio:3/4;border-radius:20px;object-fit:cover;object-position:top center;display:block;border:1px solid var(--border);}
 
 /* ══ VISION + PILLARS ══ */
 .vision-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
@@ -135,9 +130,15 @@ input,textarea{box-sizing:border-box;}
 .team-intro{max-width:600px;margin-bottom:56px;}
 .team-intro .h2{margin:16px 0 16px;}
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
-.team-card{border:1px solid var(--border);border-radius:20px;padding:28px 24px;background:var(--glass);transition:border-color .3s;}
+.team-card{border:1px solid var(--border);border-radius:20px;padding:0;background:var(--glass);transition:border-color .3s;overflow:hidden;}
 .team-card:hover{border-color:var(--border-blue);}
-.team-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,rgba(0,102,255,.3),rgba(38,168,255,.2));border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--cyan);font-weight:500;margin-bottom:16px;letter-spacing:.02em;}
+.team-photo-wrap{position:relative;width:100%;aspect-ratio:1;overflow:hidden;}
+.team-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;position:absolute;inset:0;transition:opacity .35s ease;}
+.team-photo-default{opacity:1;}
+.team-photo-hover{opacity:0;}
+.team-card:hover .team-photo-default{opacity:0;}
+.team-card:hover .team-photo-hover{opacity:1;}
+.team-card-body{padding:20px 20px 24px;}
 .team-name{font-size:15px;color:#fff;margin-bottom:4px;}
 .team-title{font-size:15px;color:rgba(255,255,255,.88);line-height:1.5;}
 .team-linkedin{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);margin-top:12px;transition:color .2s;}
@@ -171,7 +172,7 @@ input,textarea{box-sizing:border-box;}
 .footer-brand img{height:26px;width:auto;margin-bottom:18px;}
 .footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
 .footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
-.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
 .footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
 .footer-col-links a:hover{color:#fff;}
 .footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
@@ -226,8 +227,8 @@ input,textarea{box-sizing:border-box;}
   .timeline-year{text-align:left;padding-right:0;}
   .timeline-dot{display:none;}
   .footer{padding:56px 0 28px;}
-  .footer-top{grid-template-columns:1fr;gap:28px;}
-  .footer-brand{grid-column:span 1;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
+  .footer-brand{grid-column:span 2;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:480px){
@@ -289,13 +290,14 @@ input,textarea{box-sizing:border-box;}
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
   </nav>
   <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
 </div>
 
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
-  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.svg" alt="BootLabs"></a>
   <div class="nav-center">
     <div class="nav-item">
       <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
@@ -350,7 +352,6 @@ input,textarea{box-sizing:border-box;}
       </div>
     </div>
     <a href="partnerships.html" class="nav-link">Partners</a>
-    <a href="about-us.html" class="nav-link" style="color:var(--cyan);">About Us</a>
     <div class="nav-item">
       <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="simple-menu">
@@ -360,6 +361,7 @@ input,textarea{box-sizing:border-box;}
         <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a href="careers.html" class="nav-link">Careers</a>
   </div>
   <div class="nav-right">
     <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
@@ -400,12 +402,7 @@ input,textarea{box-sizing:border-box;}
         <div class="founder-title">Founder &amp; CEO, BootLabs</div>
       </div>
       <div class="founder-avatar-wrap">
-        <div class="founder-avatar">
-          <div class="founder-initials">RS</div>
-          <div class="founder-avatar-name">Ramkumar Sambasivan</div>
-          <div class="founder-avatar-role">Founder &amp; CEO</div>
-          <div class="founder-avatar-glow"></div>
-        </div>
+        <img class="founder-photo" src="assets/images/pxl_20251210_100450173-3.jpg" alt="Ramkumar Sambasivan — Founder &amp; CEO, BootLabs">
       </div>
     </div>
   </div>
@@ -572,91 +569,116 @@ input,textarea{box-sizing:border-box;}
 
       <!-- 1. Ramkumar Sambasivan -->
       <div class="team-card">
-        <div class="team-avatar">RS</div>
-        <div class="team-name">Ramkumar Sambasivan</div>
-        <div class="team-title">Founder &amp; Chief Executive Officer</div>
-        <a href="#" class="team-linkedin">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
+        <div class="team-photo-wrap">
+          <img class="team-photo-default" src="assets/images/profiles--15.png" alt="Ramkumar Sambasivan">
+          <img class="team-photo-hover" src="assets/images/profiles--16.png" alt="Ramkumar Sambasivan">
+        </div>
+        <div class="team-card-body">
+          <div class="team-name">Ramkumar Sambasivan</div>
+          <div class="team-title">Founder &amp; Chief Executive Officer</div>
+          <a href="https://www.linkedin.com/in/ramkumar-sambasivan/" target="_blank" rel="noopener" class="team-linkedin">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
 
       <!-- 2. Karthick Dharman -->
       <div class="team-card">
-        <div class="team-avatar">KD</div>
-        <div class="team-name">Karthick Dharman</div>
-        <div class="team-title">Chief Technology Officer</div>
-        <a href="#" class="team-linkedin">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
+        <div class="team-photo-wrap">
+          <img class="team-photo-default" src="assets/images/profiles--07.png" alt="Karthick Dharman">
+          <img class="team-photo-hover" src="assets/images/profiles--08.png" alt="Karthick Dharman">
+        </div>
+        <div class="team-card-body">
+          <div class="team-name">Karthick Dharman</div>
+          <div class="team-title">Chief Technology Officer</div>
+          <a href="https://www.linkedin.com/in/karthickdharman/" target="_blank" rel="noopener" class="team-linkedin">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
 
-      <!-- 3. Samaya Ramesh Radhakrishnan -->
+      <!-- 3. Utkarsh Bhatnagar -->
       <div class="team-card">
-        <div class="team-avatar">SR</div>
-        <div class="team-name">Samaya Ramesh Radhakrishnan</div>
-        <div class="team-title">EVP, Cloud Technologies</div>
-        <a href="#" class="team-linkedin">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
+        <div class="team-photo-wrap">
+          <img class="team-photo-default" src="assets/images/profiles--05.png" alt="Utkarsh Bhatnagar">
+          <img class="team-photo-hover" src="assets/images/profiles--06.png" alt="Utkarsh Bhatnagar">
+        </div>
+        <div class="team-card-body">
+          <div class="team-name">Utkarsh Bhatnagar</div>
+          <div class="team-title">Director, Growth</div>
+          <a href="https://www.linkedin.com/in/ub2703/" target="_blank" rel="noopener" class="team-linkedin">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
 
       <!-- 4. Hemant Kalra -->
       <div class="team-card">
-        <div class="team-avatar">HK</div>
-        <div class="team-name">Hemant Kalra</div>
-        <div class="team-title">EVP, Emerging Technologies</div>
-        <a href="#" class="team-linkedin">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
+        <div class="team-photo-wrap">
+          <img class="team-photo-default" src="assets/images/profiles--01.png" alt="Hemant Kalra">
+          <img class="team-photo-hover" src="assets/images/profiles--02.png" alt="Hemant Kalra">
+        </div>
+        <div class="team-card-body">
+          <div class="team-name">Hemant Kalra</div>
+          <div class="team-title">EVP, Emerging Technologies</div>
+          <a href="https://www.linkedin.com/in/hemant-k-633130a/" target="_blank" rel="noopener" class="team-linkedin">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
 
-      <!-- 5. Utkarsh Bhatnagar -->
+      <!-- 5. Kristopher Sequeira -->
       <div class="team-card">
-        <div class="team-avatar">UB</div>
-        <div class="team-name">Utkarsh Bhatnagar</div>
-        <div class="team-title">Director, Growth</div>
-        <a href="#" class="team-linkedin">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
+        <div class="team-photo-wrap">
+          <img class="team-photo-default" src="assets/images/profiles--09.png" alt="Kristopher Sequeira">
+          <img class="team-photo-hover" src="assets/images/profiles--10.png" alt="Kristopher Sequeira">
+        </div>
+        <div class="team-card-body">
+          <div class="team-name">Kristopher Sequeira</div>
+          <div class="team-title">Director, Sales &amp; Partnerships</div>
+          <a href="https://www.linkedin.com/in/kristopher-sequeira/" target="_blank" rel="noopener" class="team-linkedin">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
 
-      <!-- 6. Kristopher Sequeira -->
+      <!-- 6. Roja M V -->
       <div class="team-card">
-        <div class="team-avatar">KS</div>
-        <div class="team-name">Kristopher Sequeira</div>
-        <div class="team-title">Director, Sales &amp; Partnerships</div>
-        <a href="#" class="team-linkedin">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
+        <div class="team-photo-wrap">
+          <img class="team-photo-default" src="assets/images/profiles--13.png" alt="Roja M V">
+          <img class="team-photo-hover" src="assets/images/profiles--14.png" alt="Roja M V">
+        </div>
+        <div class="team-card-body">
+          <div class="team-name">Roja M V</div>
+          <div class="team-title">Finance</div>
+          <a href="https://www.linkedin.com/in/roja-m-v-41149b11b/" target="_blank" rel="noopener" class="team-linkedin">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
 
-      <!-- 7. Roja M V -->
+      <!-- 7. Samaya Ramesh Radhakrishnan -->
       <div class="team-card">
-        <div class="team-avatar">RM</div>
-        <div class="team-name">Roja M V</div>
-        <div class="team-title">Finance</div>
-        <a href="#" class="team-linkedin">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
+        <div class="team-photo-wrap">
+          <img class="team-photo-default" src="assets/images/profiles--17.png" alt="Samaya Ramesh Radhakrishnan">
+          <img class="team-photo-hover" src="assets/images/profiles--18.png" alt="Samaya Ramesh Radhakrishnan">
+        </div>
+        <div class="team-card-body">
+          <div class="team-name">Samaya Ramesh Radhakrishnan</div>
+          <div class="team-title">EVP, Cloud Technologies</div>
+          <a href="https://www.linkedin.com/in/samayaramesh/" target="_blank" rel="noopener" class="team-linkedin">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
 
-      <!-- 8. Mohanlal Selvaraj -->
-      <div class="team-card">
-        <div class="team-avatar">MS</div>
-        <div class="team-name">Mohanlal Selvaraj</div>
-        <div class="team-title">Human Resources</div>
-        <a href="#" class="team-linkedin">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-      </div>
 
     </div>
   </div>
@@ -725,7 +747,7 @@ input,textarea{box-sizing:border-box;}
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <img src="assets/images/logo.svg" alt="BootLabs">
         <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
@@ -766,7 +788,7 @@ input,textarea{box-sizing:border-box;}
     <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
     <div class="footer-bot">
       <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
-      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      <div class="footer-legal"><a href="privacy-policy.html">Privacy Policy</a></div>
     </div>
   </div>
 </footer>
@@ -812,7 +834,7 @@ window.addEventListener('scroll',()=>{document.getElementById('navbar').classLis
 function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
 function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
 function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
-function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
+function openContact(){window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink','_blank');}
 function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
 </script>
 </body>

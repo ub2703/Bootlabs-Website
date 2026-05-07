@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog & Press Releases — BootLabs</title>
 <style>
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;}
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
@@ -87,7 +87,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .footer-brand img{height:26px;margin-bottom:18px;}
 .footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
 .footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
-.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
 .footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
 .footer-col-links a:hover{color:#fff;}
 .footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
@@ -104,7 +104,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   .nav-right .btn-primary{display:none;}
   .nav-hamburger{display:flex;}
   .hero{padding:120px 0 72px;}
-  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:480px){
@@ -161,13 +161,14 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
   </nav>
   <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
 </div>
 
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
-  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.svg" alt="BootLabs"></a>
   <div class="nav-center">
     <div class="nav-item">
       <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
@@ -231,6 +232,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a href="careers.html" class="nav-link">Careers</a>
   </div>
   <div class="nav-right">
     <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
@@ -253,6 +255,28 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 <section class="blog-listing">
   <div class="container">
     <div class="blog-grid">
+
+      <a href="https://www.siliconindia.com/startup/vendor/bootlabs-a-boutique-tech-consulting-partner-pioneering-in-cloud-native-solutions-cid-18364.html" target="_blank" rel="noopener" class="blog-card">
+        <img class="blog-card-img" src="https://www.siliconindia.com/images/simag_images/uploaded_images/mag_cover/ioyw0unnamed.jpg" alt="BootLabs — SiliconIndia Startup City Cover November 2022" style="object-fit:contain;background:#111118;height:280px;">
+        <div class="blog-card-body">
+          <span class="blog-card-chip">Press Release · SiliconIndia</span>
+          <div class="blog-card-title">BootLabs — A Boutique Tech Consulting Partner Pioneering in Cloud-Native Solutions</div>
+          <div class="blog-card-desc">SiliconIndia features BootLabs as a standout cloud-native consulting partner helping enterprises modernise infrastructure, accelerate delivery, and build AI-ready platforms.</div>
+          <div class="blog-card-meta">SiliconIndia</div>
+          <span class="blog-card-link">Read on SiliconIndia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
+
+      <a href="https://www.aninews.in/news/business/business/digitech-media-shines-a-light-on-industry-leaders-at-the-outlook-business-spotlight-business-excellence-awards-202320230719122042/" target="_blank" rel="noopener" class="blog-card">
+        <img class="blog-card-img" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&auto=format&fit=crop&q=80" alt="Outlook Business Excellence Awards 2023">
+        <div class="blog-card-body">
+          <span class="blog-card-chip">Press Release · ANI News</span>
+          <div class="blog-card-title">BootLabs Recognised at the Outlook Business Spotlight Business Excellence Awards 2023</div>
+          <div class="blog-card-desc">Digitech Media spotlights industry leaders at the prestigious Outlook Business Spotlight Business Excellence Awards 2023 — with BootLabs among the honoured organisations.</div>
+          <div class="blog-card-meta">July 2023 &nbsp;·&nbsp; ANI News</div>
+          <span class="blog-card-link">Read on ANI News <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
 
       <a href="blog-sre-observability-2026.html" class="blog-card">
         <img class="blog-card-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&auto=format&fit=crop&q=80" alt="SRE Observability 2026">
@@ -284,7 +308,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <img src="assets/images/logo.svg" alt="BootLabs">
         <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
@@ -325,7 +349,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
     <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
     <div class="footer-bot">
       <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
-      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      <div class="footer-legal"><a href="privacy-policy.html">Privacy Policy</a></div>
     </div>
   </div>
 </footer>
@@ -335,7 +359,7 @@ window.addEventListener('scroll',()=>{document.getElementById('navbar').classLis
 function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
 function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
 function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
-function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
+function openContact(){window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink','_blank');}
 function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
 </script>
 </body>

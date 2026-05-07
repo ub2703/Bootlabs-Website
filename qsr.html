@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QSR &amp; Hospitality — BootLabs</title>
 <style>
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;}
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
@@ -109,7 +109,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 
 /* ── WHAT WE BUILD ── */
 .build-section{padding:100px 0;background:linear-gradient(180deg,#06060a 0%,#080810 50%,#06060a 100%);}
-.build-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:64px;}
+.build-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px;}
 .build-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:48px;transition:border-color .2s,background .2s;position:relative;overflow:hidden;}
 .build-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,102,255,.4),transparent);opacity:0;transition:opacity .3s;}
 .build-card:hover{border-color:rgba(0,102,255,.3);background:rgba(0,102,255,.03);}
@@ -170,7 +170,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
 .footer-brand img{height:26px;margin-bottom:18px;}
 .footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
 .footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
-.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
 .footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
 .footer-col-links a:hover{color:#fff;}
 .footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
@@ -208,7 +208,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   .cs-metric{padding:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:24px;}
   .cs-metric:last-child{border-bottom:none;}
   .case-study-header{flex-direction:column;gap:16px;}
-  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
   .cta-inner{padding:48px 28px;}
   .stat-strip-inner{grid-template-columns:1fr 1fr;}
@@ -272,13 +272,14 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
   </nav>
   <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button></div>
 </div>
 
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
-  <a href="index.html" class="nav-logo"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs"></a>
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.svg" alt="BootLabs"></a>
   <div class="nav-center">
     <div class="nav-item">
       <a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
@@ -342,6 +343,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a href="careers.html" class="nav-link">Careers</a>
   </div>
   <div class="nav-right">
     <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
@@ -355,11 +357,11 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
     <div class="svc-hero-inner">
       <div class="svc-hero-copy">
         <div class="eyebrow svc-hero-eyebrow">QSR &amp; Hospitality</div>
-        <h1 class="svc-hero-h1">Technology That Moves as Fast as Your Kitchen.</h1>
-        <p class="svc-hero-sub">From unified ordering platforms and loyalty systems to AI-driven demand forecasting and peak-load infrastructure — we build the technology that scales with every rush hour.</p>
+        <h1 class="svc-hero-h1">Smarter Stores. Lower Costs. Always On.</h1>
+        <p class="svc-hero-sub">AI-powered surveillance that protects every outlet, in-store intelligence that cuts operational costs, and managed services with enterprise-grade backup — built for QSR operators who can't afford downtime or data loss.</p>
         <div class="svc-hero-btns">
           <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <a href="software-engineering.html" class="btn-outline">Explore Software Engineering</a>
+          <a href="resilient-operations-center.html" class="btn-outline">Explore Managed Ops</a>
         </div>
       </div>
       <div class="svc-hero-visual">
@@ -368,15 +370,15 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
         <div class="hero-badge-float badge-bl">
           <div class="hero-badge-float-dot" style="background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.5);"></div>
           <div>
-            <div class="hero-badge-float-text">3&times; order throughput</div>
-            <div class="hero-badge-float-sub">during peak hours</div>
+            <div class="hero-badge-float-text">24/7 AI surveillance</div>
+            <div class="hero-badge-float-sub">across all store cameras</div>
           </div>
         </div>
         <div class="hero-badge-float badge-tr">
           <div class="hero-badge-float-dot" style="background:var(--cyan);box-shadow:0 0 8px rgba(38,168,255,.5);"></div>
           <div>
-            <div class="hero-badge-float-text">99.9% uptime</div>
-            <div class="hero-badge-float-sub">across ordering channels</div>
+            <div class="hero-badge-float-text">Zero data loss</div>
+            <div class="hero-badge-float-sub">Veeam-protected backup</div>
           </div>
         </div>
       </div>
@@ -389,20 +391,20 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="stat-strip-inner">
       <div class="stat-item">
-        <div class="stat-num"><span>3&times;</span></div>
-        <div class="stat-label">Peak Order Throughput</div>
+        <div class="stat-num"><span>30%</span></div>
+        <div class="stat-label">Reduction in In-Store Energy Costs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span>24/7</span></div>
+        <div class="stat-label">AI Surveillance Coverage</div>
       </div>
       <div class="stat-item">
         <div class="stat-num"><span>99.9%</span></div>
-        <div class="stat-label">Uptime SLA</div>
+        <div class="stat-label">Managed Services Uptime SLA</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num"><span>25%</span></div>
-        <div class="stat-label">Reduction in Food Waste</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span>40%</span></div>
-        <div class="stat-label">Faster Menu Deployment</div>
+        <div class="stat-num"><span>Zero</span></div>
+        <div class="stat-label">Data Loss on Veeam-Protected Systems</div>
       </div>
     </div>
   </div>
@@ -413,30 +415,30 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="section-header">
       <div class="eyebrow">The Landscape</div>
-      <h2 class="section-h2" style="margin-top:16px;">What makes QSR technology uniquely hard</h2>
-      <p class="section-sub">The QSR technology stack sits at the intersection of consumer-grade reliability expectations and enterprise-grade complexity. Here is where it breaks.</p>
+      <h2 class="section-h2" style="margin-top:16px;">Where QSR operators lose money quietly</h2>
+      <p class="section-sub">The costs that erode QSR margins are rarely dramatic — they're slow, invisible, and happening at every outlet, every day.</p>
     </div>
     <div class="pain-grid">
       <div class="pain-card">
         <div class="pain-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <div class="pain-card-title">Peak Load is Not Negotiable</div>
-        <div class="pain-card-body">A QSR platform that goes down at 1pm on a Friday doesn't get a second chance. The load variance between a Tuesday morning and a Saturday lunch rush can be 10&times; — and the system has to handle both without pre-provisioned over-spend.</div>
+        <div class="pain-card-title">Security is Reactive, Not Preventive</div>
+        <div class="pain-card-body">CCTV records but doesn't alert. Loss prevention teams review footage after an incident has already cost money. Shrinkage, safety violations, and unauthorised access go undetected in real time — across dozens or hundreds of outlets.</div>
       </div>
       <div class="pain-card">
         <div class="pain-card-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
-        <div class="pain-card-title">Channel Fragmentation</div>
-        <div class="pain-card-body">Modern QSR customers order via app, kiosk, drive-through, aggregators (Swiggy, Zomato, Uber Eats), and in-store POS — all at the same time. Keeping inventory, menu state, and pricing consistent across all channels in real time is a genuinely hard engineering problem.</div>
+        <div class="pain-card-title">Operational Costs Are Not Being Managed</div>
+        <div class="pain-card-body">Energy, equipment runtime, and in-store waste bleed margin at every outlet — but are rarely tracked or actively optimised. Most operators have no real-time visibility into what each outlet is spending or why costs spike.</div>
       </div>
       <div class="pain-card">
         <div class="pain-card-icon">
           <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
         </div>
-        <div class="pain-card-title">Data Sitting Unused</div>
-        <div class="pain-card-body">Most QSR brands have years of transaction, location, and weather data that could drive better demand forecasting, smarter procurement, and reduced wastage. But it sits in disconnected PoS systems and spreadsheets — untouched.</div>
+        <div class="pain-card-title">Downtime and Data Loss Hit Revenue Directly</div>
+        <div class="pain-card-body">A POS going down at a busy outlet costs revenue by the minute. Backup failures are only discovered when recovery is needed. For multi-outlet QSR operators, infrastructure reliability and data protection are not optional.</div>
       </div>
     </div>
   </div>
@@ -447,53 +449,44 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="section-header">
       <div class="eyebrow">What We Build Here</div>
-      <h2 class="section-h2" style="margin-top:16px;">Four capabilities that transform QSR operations</h2>
-      <p class="section-sub">End-to-end engineering across ordering, intelligence, loyalty, and infrastructure — built for the pace and pressure of the QSR environment.</p>
+      <h2 class="section-h2" style="margin-top:16px;">Three things we do for QSR operators</h2>
+      <p class="section-sub">Purpose-built AI and managed infrastructure for multi-outlet QSR operations — protecting stores, cutting costs, and keeping systems always on.</p>
     </div>
     <div class="build-grid">
       <div class="build-card">
         <div class="build-card-num">01</div>
-        <div class="build-card-title">Unified Ordering &amp; POS Platforms</div>
-        <div class="build-card-body">Multi-channel ordering platforms that unify in-store POS, kiosk, mobile app, and third-party aggregator orders into a single kitchen management feed — with real-time inventory deduction and prep-time optimisation.</div>
+        <div class="build-card-title">AI Surveillance &amp; Loss Prevention</div>
+        <div class="build-card-body">Computer vision deployed on existing CCTV infrastructure — detecting theft, safety violations, unauthorised access, and queue anomalies in real time. Alerts fire before the incident becomes a loss. Works across all outlets from a single dashboard.</div>
         <div class="build-tags">
-          <span class="build-tag">Multi-Channel POS</span>
-          <span class="build-tag">Kitchen Display Integration</span>
-          <span class="build-tag">Aggregator APIs</span>
-          <span class="build-tag">Real-Time Inventory</span>
+          <span class="build-tag">Computer Vision</span>
+          <span class="build-tag">Real-Time Alerts</span>
+          <span class="build-tag">Loss Prevention</span>
+          <span class="build-tag">Safety Monitoring</span>
+          <span class="build-tag">Multi-Outlet Dashboard</span>
         </div>
       </div>
       <div class="build-card">
         <div class="build-card-num">02</div>
-        <div class="build-card-title">AI Demand Forecasting &amp; Menu Intelligence</div>
-        <div class="build-card-body">ML models trained on historical sales, weather, local events, and promotions to predict demand by item and location — reducing over-ordering, improving throughput, and dynamically adjusting menu availability.</div>
+        <div class="build-card-title">AI for In-Store Cost Optimisation</div>
+        <div class="build-card-body">AI models that monitor and optimise energy consumption, equipment runtime, and in-store operational spend — outlet by outlet, in real time. Identify cost spikes before they hit the P&amp;L, automate scheduling, and reduce wastage with data-driven decisions.</div>
         <div class="build-tags">
-          <span class="build-tag">Demand Forecasting</span>
-          <span class="build-tag">Menu Optimisation</span>
-          <span class="build-tag">Waste Reduction</span>
-          <span class="build-tag">Promotion Analytics</span>
+          <span class="build-tag">Energy Optimisation</span>
+          <span class="build-tag">Equipment Monitoring</span>
+          <span class="build-tag">Cost Analytics</span>
+          <span class="build-tag">Wastage Reduction</span>
+          <span class="build-tag">Outlet-Level Intelligence</span>
         </div>
       </div>
       <div class="build-card">
         <div class="build-card-num">03</div>
-        <div class="build-card-title">Loyalty &amp; Customer Data Platforms</div>
-        <div class="build-card-body">Loyalty platforms that go beyond points — combining transaction history, app behaviour, and location signals to drive personalised offers, re-engagement campaigns, and LTV prediction.</div>
+        <div class="build-card-title">Managed Services &amp; Veeam Backup</div>
+        <div class="build-card-body">24/7 managed infrastructure operations for QSR environments — proactive monitoring, incident response, and patch management. Enterprise-grade data protection with Veeam: POS transaction data, operational records, and system images backed up, tested, and recoverable on demand.</div>
         <div class="build-tags">
-          <span class="build-tag">CDP</span>
-          <span class="build-tag">Personalisation Engine</span>
-          <span class="build-tag">Push Campaigns</span>
-          <span class="build-tag">LTV Modelling</span>
-        </div>
-      </div>
-      <div class="build-card">
-        <div class="build-card-num">04</div>
-        <div class="build-card-title">Elastic Cloud Infrastructure</div>
-        <div class="build-card-body">Auto-scaling cloud infrastructure built for 10&times; traffic spikes — load-tested against your busiest day, with zero-downtime deployments and real-time observability across every ordering channel.</div>
-        <div class="build-tags">
-          <span class="build-tag">Auto-Scaling</span>
-          <span class="build-tag">Load Testing</span>
-          <span class="build-tag">CDN Optimisation</span>
-          <span class="build-tag">Kubernetes</span>
-          <span class="build-tag">Observability</span>
+          <span class="build-tag">24/7 Managed Ops</span>
+          <span class="build-tag">Veeam Backup</span>
+          <span class="build-tag">Disaster Recovery</span>
+          <span class="build-tag">POS Data Protection</span>
+          <span class="build-tag">Proactive Monitoring</span>
         </div>
       </div>
     </div>
@@ -506,23 +499,23 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
     <div class="section-header">
       <div class="eyebrow">Industry Trends</div>
       <h2 class="section-h2" style="margin-top:16px;">Where the QSR technology landscape is heading</h2>
-      <p class="section-sub">The brands that invest in the right technology now will be the ones with structural advantages two years from today.</p>
+      <p class="section-sub">The operators investing in AI and managed infrastructure now will have structural cost and security advantages that compound over time.</p>
     </div>
     <div class="trends-grid">
       <div class="trend-card">
         <div class="trend-card-label">Trend 01</div>
-        <div class="trend-card-title">AI-Driven Menu &amp; Pricing</div>
-        <div class="trend-card-body">Dynamic pricing and AI-optimised menus are moving from fast-casual experiments to mainstream QSR strategy. Chains that can adjust item availability, pricing, and promotion in real time based on demand signals will improve margin without touching footfall.</div>
+        <div class="trend-card-title">Computer Vision Goes Mainstream</div>
+        <div class="trend-card-body">AI-powered video analytics is moving from pilot to standard practice in retail and QSR. The cost of computer vision infrastructure has dropped dramatically — operators who deploy now get real-time loss prevention, safety compliance, and queue intelligence at a fraction of what it cost three years ago.</div>
       </div>
       <div class="trend-card">
         <div class="trend-card-label">Trend 02</div>
-        <div class="trend-card-title">Ghost Kitchens &amp; Virtual Brands</div>
-        <div class="trend-card-body">The ghost kitchen model is creating a new infrastructure challenge: one kitchen, multiple brands, all with separate ordering flows, POS integrations, and SLAs. The technology layer tying it together needs to be robust, real-time, and brand-aware.</div>
+        <div class="trend-card-title">Energy Costs Under Board-Level Scrutiny</div>
+        <div class="trend-card-body">Rising energy prices and ESG reporting obligations are pushing QSR operators to quantify and actively manage in-store consumption. Operators with AI-driven energy optimisation across their estate are reporting 20–30% cost reductions — which goes straight to the bottom line at scale.</div>
       </div>
       <div class="trend-card">
         <div class="trend-card-label">Trend 03</div>
-        <div class="trend-card-title">Sustainability as a Tech Problem</div>
-        <div class="trend-card-body">Food waste, carbon reporting, and sustainable procurement are becoming board-level concerns in QSR. The brands that can track Scope 3 emissions, optimise supply chain sustainability, and prove it to regulators and customers will have a competitive edge that compounds.</div>
+        <div class="trend-card-title">Data Protection as a Regulatory Expectation</div>
+        <div class="trend-card-body">Data residency requirements, payment data compliance (PCI DSS), and customer data regulations are raising the bar for QSR operators. Backup and disaster recovery is no longer a nice-to-have — regulators and enterprise customers increasingly expect it to be documented, tested, and evidenced.</div>
       </div>
     </div>
   </div>
@@ -533,30 +526,22 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="section-header">
       <div class="eyebrow">Real Outcomes</div>
-      <h2 class="section-h2" style="margin-top:16px;">What we have delivered for QSR operators</h2>
+      <h2 class="section-h2" style="margin-top:16px;">What operators see after deployment</h2>
     </div>
     <div class="case-study-block">
-      <div class="case-study-header">
-        <div>
-          <div class="case-study-industry">Leading QSR Chain — South Asia</div>
-          <div class="case-study-title">From Fragmented Channels to Unified Digital Ordering at Scale</div>
-        </div>
-        <a href="case-studies.html" class="btn-outline" style="flex-shrink:0;">View Case Studies</a>
-      </div>
       <div class="case-study-body">
-        <p class="case-study-text">A major QSR operator running 400+ outlets across South Asia had six separate ordering platforms — each with its own inventory sync logic and no real-time visibility into kitchen load. We consolidated all channels into a single unified ordering platform, built a real-time inventory feed from PoS to kitchen display, and migrated to auto-scaling cloud infrastructure — all delivered in parallel with live operations.</p>
         <div class="case-study-metrics">
           <div class="cs-metric">
-            <div class="cs-metric-num"><span>400</span>+</div>
-            <div class="cs-metric-label">Outlets Unified</div>
+            <div class="cs-metric-num"><span>30%</span></div>
+            <div class="cs-metric-label">Average reduction in energy costs across AI-optimised outlets</div>
           </div>
           <div class="cs-metric">
-            <div class="cs-metric-num"><span>3&times;</span></div>
-            <div class="cs-metric-label">Peak Throughput Capacity</div>
+            <div class="cs-metric-num"><span>24/7</span></div>
+            <div class="cs-metric-label">Real-time AI surveillance coverage — alerts before incidents become losses</div>
           </div>
           <div class="cs-metric">
-            <div class="cs-metric-num"><span>99.9%</span></div>
-            <div class="cs-metric-label">Uptime Since Launch</div>
+            <div class="cs-metric-num"><span>Zero</span></div>
+            <div class="cs-metric-label">Data loss incidents on Veeam-managed backup environments</div>
           </div>
         </div>
       </div>
@@ -569,24 +554,24 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="section-header">
       <div class="eyebrow">How We Engage</div>
-      <h2 class="section-h2" style="margin-top:16px;">A structured path from audit to live platform</h2>
-      <p class="section-sub">We start where you are, not where we wish you were. Every engagement begins with a clear-eyed assessment of your current state.</p>
+      <h2 class="section-h2" style="margin-top:16px;">From assessment to always-on in three steps</h2>
+      <p class="section-sub">We start with a clear-eyed view of your current estate — cameras, infrastructure, and operational data — before deploying a single thing.</p>
     </div>
     <div class="engage-steps">
       <div class="engage-step">
         <div class="engage-step-num">01</div>
-        <div class="engage-step-title">Channel &amp; Data Audit</div>
-        <div class="engage-step-body">We map your current ordering channels, integration points, and data architecture — identifying where inventory state diverges, where load capacity breaks down, and where customer data is being wasted.</div>
+        <div class="engage-step-title">Store &amp; Infrastructure Assessment</div>
+        <div class="engage-step-body">We audit your existing camera infrastructure, energy consumption baselines, backup setup, and operational data — identifying where AI can have the fastest and highest-value impact across your outlet estate.</div>
       </div>
       <div class="engage-step">
         <div class="engage-step-num">02</div>
-        <div class="engage-step-title">Platform Architecture</div>
-        <div class="engage-step-body">We design the target-state ordering and data platform — unified, cloud-native, and built to handle your peak load with room to grow. We scope integration complexity with every third-party system you rely on.</div>
+        <div class="engage-step-title">Deploy &amp; Configure</div>
+        <div class="engage-step-body">AI surveillance and cost optimisation models are deployed — on existing hardware where possible. Managed services are onboarded and Veeam backup configured, tested, and verified before we hand over a single dashboard.</div>
       </div>
       <div class="engage-step">
         <div class="engage-step-num">03</div>
-        <div class="engage-step-title">Phased Rollout</div>
-        <div class="engage-step-body">We migrate outlet by outlet, channel by channel — minimising disruption to live operations. Each phase is tested against real load before cutover. You're never down during a meal rush.</div>
+        <div class="engage-step-title">Monitor, Respond &amp; Optimise</div>
+        <div class="engage-step-body">24/7 managed operations: proactive monitoring, incident response, backup verification, and monthly reporting. AI models are continuously tuned against your outlet data to improve accuracy and deepen cost savings over time.</div>
       </div>
     </div>
   </div>
@@ -597,8 +582,8 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="cta-inner">
       <div class="eyebrow cta-eyebrow">Get Started</div>
-      <h2 class="cta-h2">Ready to build technology your kitchen can rely on?</h2>
-      <p class="cta-sub">Talk to engineers who understand that in QSR, latency isn't an IT metric — it's a customer experience. We start with a free channel audit.</p>
+      <h2 class="cta-h2">Ready to make your stores smarter and always on?</h2>
+      <p class="cta-sub">Talk to us about AI surveillance, in-store cost optimisation, and managed services built for QSR operators. We start with a free store and infrastructure assessment.</p>
       <div class="cta-btns">
         <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
         <a href="case-studies.html" class="btn-outline">See More Case Studies</a>
@@ -612,7 +597,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <img src="assets/images/logo.svg" alt="BootLabs">
         <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
@@ -653,7 +638,7 @@ a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}button{f
     <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
     <div class="footer-bot">
       <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
-      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      <div class="footer-legal"><a href="privacy-policy.html">Privacy Policy</a></div>
     </div>
   </div>
 </footer>
@@ -699,10 +684,7 @@ function closeMobileMenu(){
 function toggleMobSub(el){
   el.nextElementSibling.classList.toggle('open');
 }
-function openContact(){
-  document.getElementById('contactPopup').style.display='flex';
-  document.body.style.overflow='hidden';
-}
+function openContact(){window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink','_blank');}
 function closeContact(){
   document.getElementById('contactPopup').style.display='none';
   document.body.style.overflow='';

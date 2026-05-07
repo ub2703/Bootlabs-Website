@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <style>
 /* ── FONTS ── */
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;font-display:swap;}
 
 /* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -90,7 +90,7 @@ input,textarea{box-sizing:border-box;}
 /* simple dropdown menu */
 .simple-menu{
   position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);
-  width:240px;
+  width:280px;
   background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);
   border-radius:16px;padding:10px;
   display:flex;flex-direction:column;gap:4px;
@@ -105,13 +105,14 @@ input,textarea{box-sizing:border-box;}
   transition:opacity .18s ease,visibility 0s;
 }
 .simple-item{
-  display:flex;align-items:center;gap:10px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:0;
   padding:11px 14px;border-radius:10px;
-  font-size:15px;color:rgba(255,255,255,.88);
   text-decoration:none;transition:background .2s,color .2s;
 }
-.simple-item:hover{background:rgba(0,102,255,.08);color:#fff;}
-.simple-item-sub{font-size:11px;color:var(--dim);margin-top:2px;}
+.simple-item:hover{background:rgba(0,102,255,.08);}
+.simple-item-title{font-size:14px;color:rgba(255,255,255,.88);transition:color .2s;}
+.simple-item:hover .simple-item-title{color:#fff;}
+.simple-item-sub{font-size:11px;color:var(--dim);margin-top:3px;line-height:1.5;}
 
 /* mega menu */
 .mega-menu{
@@ -354,11 +355,11 @@ input,textarea{box-sizing:border-box;}
 .partners-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
 .partners-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
 .partners-grid-wrap{display:flex;flex-direction:column;gap:32px;}
-.partners-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
-.partner-cell{background:#080810;display:flex;align-items:center;justify-content:center;padding:32px 24px;transition:background .25s;}
-.partner-cell:hover{background:rgba(255,255,255,.03);}
-.partner-cell img{max-height:64px;max-width:160px;width:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:.55;transition:opacity .25s;}
-.partner-cell:hover img{opacity:1;}
+.partners-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.partner-cell{background:#080810;display:flex;align-items:center;justify-content:center;padding:28px 16px;transition:background .25s;}
+.partner-cell:hover{background:rgba(255,255,255,.04);}
+.partner-name{font-size:15px;color:rgba(255,255,255,.65);font-weight:400;letter-spacing:.02em;white-space:nowrap;transition:color .2s;}
+.partner-cell:hover .partner-name{color:#fff;}
 .certs-row{display:flex;gap:16px;flex-wrap:wrap;}
 .cert-badge{
   display:flex;align-items:center;gap:12px;
@@ -438,7 +439,7 @@ input,textarea{box-sizing:border-box;}
 .footer-brand img{height:26px;width:auto;margin-bottom:18px;}
 .footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
 .footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
-.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
 .footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
 .footer-col-links a:hover{color:#fff;}
 .footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
@@ -530,6 +531,8 @@ input,textarea{box-sizing:border-box;}
   /* override the desktop border-right hack on row2 */
   .caps-row2 .cap-card{border-right:none !important;border-bottom:1px solid var(--border);}
   .caps-row2 .cap-card:last-child{border-bottom:none;}
+  /* always show explore link on mobile — no hover */
+  .cap-link{opacity:1;transform:none;}
 
   /* industries */
   .industry-section{padding:72px 0;}
@@ -556,6 +559,8 @@ input,textarea{box-sizing:border-box;}
   .partners-section{padding:64px 0;}
   .partners-inner{grid-template-columns:1fr;gap:40px;}
   .partners-grid{grid-template-columns:repeat(3,1fr);}
+  .partner-cell{padding:24px 12px;}
+  .partner-name{font-size:13px;}
   .partner-cell{padding:20px 12px;}
   .certs-row{flex-direction:column;}
   .cert-badge{min-width:unset;}
@@ -567,8 +572,8 @@ input,textarea{box-sizing:border-box;}
 
   /* footer */
   .footer{padding:56px 0 28px;}
-  .footer-top{grid-template-columns:1fr;gap:28px;}
-  .footer-brand{grid-column:span 1;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
+  .footer-brand{grid-column:span 2;}
   .footer-bot{flex-direction:column;align-items:flex-start;gap:12px;}
   .footer-big{font-size:clamp(48px,14vw,120px);}
 }
@@ -597,6 +602,10 @@ input,textarea{box-sizing:border-box;}
 
   /* partners */
   .partners-grid{grid-template-columns:repeat(2,1fr);}
+  .partners-section{padding:48px 0;}
+  .partners-grid{grid-template-columns:repeat(3,1fr);}
+  .partner-cell{padding:18px 8px;}
+  .partner-name{font-size:12px;white-space:normal;text-align:center;}
 
   /* footer */
   .footer-big{font-size:clamp(36px,16vw,80px);}
@@ -667,6 +676,7 @@ input,textarea{box-sizing:border-box;}
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
   </nav>
   <div class="mob-cta">
     <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button>
@@ -676,7 +686,7 @@ input,textarea{box-sizing:border-box;}
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
   <a href="#" class="nav-logo">
-    <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+    <img src="assets/images/logo.svg" alt="BootLabs">
   </a>
   <div class="nav-center">
     <div class="nav-item">
@@ -752,10 +762,11 @@ input,textarea{box-sizing:border-box;}
       <div class="simple-menu">
         <a href="about-us.html" class="simple-item"><div class="simple-item-title">About Us</div><div class="simple-item-sub">Who we are · Leadership · Our values</div></a>
         <a href="case-studies.html" class="simple-item"><div class="simple-item-title">Case Studies</div><div class="simple-item-sub">Client outcomes · Live deployments</div></a>
-        <a href="white-papers.html" class="simple-item">White Papers</a>
-        <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
+        <a href="white-papers.html" class="simple-item"><div class="simple-item-title">White Papers</div><div class="simple-item-sub">Technical deep-dives · Research · Frameworks</div></a>
+        <a href="blog.html" class="simple-item"><div class="simple-item-title">Blog &amp; Press Releases</div><div class="simple-item-sub">Engineering insights · Company news</div></a>
       </div>
     </div>
+    <a href="careers.html" class="nav-link">Careers</a>
   </div>
   <div class="nav-right">
     <button class="btn-primary" onclick="openContact()">
@@ -771,7 +782,7 @@ input,textarea{box-sizing:border-box;}
 <!-- ══ HERO — VIDEO UNCHANGED ══ -->
 <section class="hero-section">
   <video autoplay muted loop playsinline
-    poster="https://cdn.prod.website-files.com/69133bfd571090aeadf4498e/698458b44da968b931922543_Home%20Page%20Logo%20%26%20text%20v17_poster.0000000.jpg">
+    poster="assets/images/home-page-logo-&-text-v17_poster.0000000.jpg">
     <source src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48332_Home%20Page%20Logo%20%26%20text%20v17_mp4.mp4" type="video/mp4">
     <source src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48332_Home%20Page%20Logo%20%26%20text%20v17_webm.webm" type="video/webm">
   </video>
@@ -806,11 +817,11 @@ input,textarea{box-sizing:border-box;}
   <div class="container">
     <p class="proof-label">Trusted by the world's most demanding enterprises</p>
     <div class="proof-grid">
-      <div class="proof-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48231_Mahindra%20Rise.svg" alt="Mahindra Rise"></div>
-      <div class="proof-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48236_tata.svg" alt="Tata Digital"></div>
-      <div class="proof-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48233_hdfc-bank.svg" alt="HDFC Bank"></div>
-      <div class="proof-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48235_ICICI%20Bank.svg" alt="ICICI Bank"></div>
-      <div class="proof-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48232_AstraZeneca.svg" alt="AstraZeneca"></div>
+      <div class="proof-cell"><span class="proof-cell-text">Mahindra Rise</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">Tata Digital</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">HDFC Bank</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">ICICI Bank</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">AstraZeneca</span></div>
       <div class="proof-cell"><span class="proof-cell-text">L&T</span></div>
       <div class="proof-cell"><span class="proof-cell-text">Apollo</span></div>
       <div class="proof-cell"><span class="proof-cell-text">Ather Energy</span></div>
@@ -831,12 +842,6 @@ input,textarea{box-sizing:border-box;}
       <div class="wedo-headline">
         <div class="eyebrow" style="margin-bottom:20px;">What We Do</div>
         <h2 class="h2">Five engineering disciplines.<br>One integrated partner.</h2>
-      </div>
-      <div class="wedo-cta">
-        <a href="#" class="btn-outline">
-          All capabilities
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
       </div>
     </div>
 
@@ -1072,12 +1077,11 @@ input,textarea{box-sizing:border-box;}
         <div>
           <p class="body-s" style="margin-bottom:16px;letter-spacing:.12em;text-transform:uppercase;font-size:10px;">Technology Partners</p>
           <div class="partners-grid">
-            <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818e_partner3.svg" alt="AWS"></div>
-            <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818f_partner2.svg" alt="Google Cloud"></div>
-            <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4818d_partner4.svg" alt="Microsoft Azure"></div>
-            <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48190_partner5.svg" alt="Veeam"></div>
-            <div class="partner-cell"><img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d482f3_crayon-group-seeklogo%201.svg" alt="Crayon"></div>
-            <div class="partner-cell"><span class="proof-cell-text" style="font-size:13px;">Databricks</span></div>
+            <div class="partner-cell"><span class="partner-name">Amazon Web Services</span></div>
+            <div class="partner-cell"><span class="partner-name">Google Cloud</span></div>
+            <div class="partner-cell"><span class="partner-name">Microsoft Azure</span></div>
+            <div class="partner-cell"><span class="partner-name">Veeam</span></div>
+            <div class="partner-cell"><span class="partner-name">Crayon</span></div>
           </div>
         </div>
         <div>
@@ -1156,7 +1160,6 @@ input,textarea{box-sizing:border-box;}
           "Enterprises deserve platforms built <em style="font-style:italic;color:var(--cyan);">for them</em>, not sold to them."
         </blockquote>
         <div class="founder-attribution">
-          <img class="founder-avatar" src="ram.jpg" alt="Ram — Founder & CEO, BootLabs">
           <div>
             <div class="founder-name">Ram</div>
             <div class="founder-role">Founder & CEO, BootLabs</div>
@@ -1167,7 +1170,7 @@ input,textarea{box-sizing:border-box;}
       <div class="founder-right">
         <div class="founder-action-card">
           <div class="founder-action-title">Book a Discovery Call</div>
-          <p class="founder-action-desc">30 minutes with our engineering leadership. We'll map your biggest operational challenge to a concrete AI or platform outcome — no decks, no sales theatre.</p>
+          <p class="founder-action-desc">Book a discovery call with our leadership team. We'll assess your most pressing challenge and define a concrete delivery approach — no generic presentations, no ambiguity.</p>
           <button class="btn-primary" onclick="openContact()">
             Schedule a call
             <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1196,7 +1199,7 @@ input,textarea{box-sizing:border-box;}
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <img src="assets/images/logo.svg" alt="BootLabs">
         <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
@@ -1217,20 +1220,20 @@ input,textarea{box-sizing:border-box;}
         </ul>
         <div class="footer-col-head" style="margin-top:28px;">Industries</div>
         <ul class="footer-col-links">
-          <li><a href="#">Manufacturing</a></li>
-          <li><a href="#">BFSI</a></li>
-          <li><a href="#">QSR & Retail</a></li>
-          <li><a href="#">Energy & Utilities</a></li>
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="financial-services.html">Financial Services</a></li>
+          <li><a href="qsr.html">QSR</a></li>
+          <li><a href="automotive.html">Automotive</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-head">Company</div>
         <ul class="footer-col-links">
           <li><a href="about-us.html">About Us</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">Insights</a></li>
-          <li><a href="#">Partners</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="blog.html">Insights</a></li>
+          <li><a href="partnerships.html">Partners</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
         </ul>
       </div>
     </div>
@@ -1240,9 +1243,8 @@ input,textarea{box-sizing:border-box;}
     <div class="footer-bot">
       <div class="footer-copy">© 2026 BootLabs Technology. All rights reserved.</div>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+              
       </div>
     </div>
   </div>
@@ -1279,9 +1281,7 @@ function toggleMobSub(el) {
 
 /* ── CONTACT POPUP ── */
 function openContact() {
-  const p = document.getElementById('contactPopup');
-  p.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink', '_blank');
 }
 function closeContact() {
   document.getElementById('contactPopup').style.display = 'none';
@@ -1363,6 +1363,7 @@ ScrollTrigger.create({
     }, 1000/30);
   }
 });
+
 </script>
 </body>
 </html>

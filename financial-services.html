@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Financial Services (BFSI) — BootLabs</title>
-<meta name="description" content="From core banking modernisation and open finance APIs to AI-powered fraud detection and cloud security posture — BootLabs helps BFSI institutions move fast without moving recklessly.">
+<meta name="description" content="From core banking modernisation and cloud-native infrastructure to agentic AI for banking operations and DevSecOps — BootLabs helps BFSI institutions move fast without moving recklessly.">
 <style>
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;}
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
@@ -226,6 +226,21 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
 .contact-field input:focus{border-color:var(--border-blue);}
 .contact-field input::placeholder{color:var(--dim);}
 
+/* ── Case study grid (Real Outcomes) ── */
+.cs-case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.cs-case-card{border:1px solid var(--border);border-radius:var(--r);padding:36px 36px 32px;background:var(--glass);display:flex;flex-direction:column;text-decoration:none;transition:border-color .25s,transform .25s;}
+.cs-case-card:hover{border-color:var(--border-blue);transform:translateY(-3px);}
+.cs-case-card-industry{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px;}
+.cs-case-card-title{font-size:18px;color:#fff;font-weight:400;line-height:1.3;margin-bottom:12px;}
+.cs-case-card-body{font-size:14px;color:var(--mid);line-height:1.7;flex:1;margin-bottom:24px;}
+.cs-case-metrics{display:flex;gap:28px;padding-top:20px;border-top:1px solid var(--border);flex-wrap:wrap;}
+.cs-case-metric{display:flex;flex-direction:column;gap:4px;}
+.cs-case-metric-num{font-size:26px;color:#fff;letter-spacing:-.02em;line-height:1;}
+.cs-case-metric-num span{color:var(--cyan);}
+.cs-case-metric-label{font-size:11px;color:var(--dim);line-height:1.4;}
+.cs-case-link{font-size:13px;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;margin-top:16px;transition:gap .2s;}
+.cs-case-link:hover{gap:10px;}
+
 /* ── Responsive ── */
 @media(max-width:1100px){
   .svc-hero-inner{grid-template-columns:1fr;gap:40px;}
@@ -239,6 +254,8 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
   .offerings-grid{grid-template-columns:1fr;}
 }
 @media(max-width:768px){
+  .cs-case-grid{grid-template-columns:1fr;}
+
   .container{padding:0 18px;}
   .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
   .nav-center{display:none;}
@@ -250,7 +267,7 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
   .landscape-grid{grid-template-columns:1fr;}
   .trends-grid{grid-template-columns:1fr;}
   .process-grid{grid-template-columns:1fr;}
-  .footer-top{grid-template-columns:1fr;gap:28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
   .cta-inner{padding:48px 24px;}
   .cs-card-left{padding:36px 28px;}
@@ -312,6 +329,7 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
   </nav>
   <div class="mob-cta">
     <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
@@ -321,7 +339,7 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
   <a href="index.html" class="nav-logo">
-    <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+    <img src="assets/images/logo.svg" alt="BootLabs">
   </a>
   <div class="nav-center">
     <div class="nav-item">
@@ -386,6 +404,7 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
         <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a href="careers.html" class="nav-link">Careers</a>
   </div>
   <div class="nav-right">
     <button class="btn-primary" onclick="openContact()">Book a Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
@@ -400,10 +419,10 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
       <div class="svc-hero-content">
         <div class="eyebrow">Financial Services</div>
         <h1 class="svc-hero-h1">Compliance Shouldn't Cost You Speed.</h1>
-        <p class="svc-hero-sub">From core banking modernisation and open finance APIs to AI-powered fraud detection and cloud security posture — we help BFSI institutions move fast without moving recklessly.</p>
+        <p class="svc-hero-sub">From cloud-native infrastructure and DevSecOps to agentic AI that automates banking operations — we help BFSI institutions move fast without moving recklessly.</p>
         <div class="svc-hero-btns">
           <button class="btn-primary" onclick="openContact()">Book a Discovery Call <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <a href="security-engineering.html" class="btn-outline">Explore Security Engineering</a>
+          <a href="agentic-ai.html" class="btn-outline">Explore Agentic AI</a>
         </div>
       </div>
       <div class="svc-hero-visual">
@@ -472,11 +491,11 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
       </div>
       <div class="landscape-card">
         <div class="landscape-card-icon">
-          <!-- Icon: alert / radar -->
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          <!-- Icon: inbox / mail -->
+          <svg viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
         </div>
-        <h3>Real-Time Fraud at Scale</h3>
-        <p>Fraud detection has moved from rule-based batch processing to millisecond ML inference. The window to catch a fraudulent transaction before it clears is shrinking — and the cost of false positives (blocked legitimate customers) is also very real.</p>
+        <h3>Operations Running on Manual Effort</h3>
+        <p>Banks and NBFCs process thousands of customer emails, trade confirmations, KYC documents, and compliance queries by hand every day. Skilled operations staff spend hours on classification, routing, and data extraction — work that is repetitive, error-prone, and ready for AI.</p>
       </div>
       <div class="landscape-card">
         <div class="landscape-card-icon">
@@ -500,48 +519,50 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
     <div class="offerings-grid">
       <div class="offering-card">
         <div class="offering-card-num">01</div>
-        <h3>Core Banking Modernisation</h3>
-        <p>We decompose monolithic core banking systems into modular, API-first microservices — using strangler-fig patterns to migrate safely without big-bang cutovers or regulatory risk.</p>
+        <h3>Agentic AI for Banking Operations</h3>
+        <p>AI agents that classify customer emails, process KYC documents, reconcile voice orders, and answer compliance queries — deployed on-premise inside the bank's own network, with zero data leaving the institution.</p>
         <div class="offering-tags">
-          <span class="tag">Strangler Fig Migration</span>
-          <span class="tag">Core API Layer</span>
-          <span class="tag">Microservices</span>
-          <span class="tag">Zero-Downtime Cutover</span>
+          <span class="tag">On-Premise LLM Deployment</span>
+          <span class="tag">Email Classification Agents</span>
+          <span class="tag">Document Intelligence</span>
+          <span class="tag">Voice Order Reconciliation</span>
+          <span class="tag">RAG on Internal Data</span>
         </div>
       </div>
       <div class="offering-card">
         <div class="offering-card-num">02</div>
-        <h3>Fraud Detection &amp; AI Risk Platforms</h3>
-        <p>Real-time transaction scoring platforms using ML models trained on behavioural signals, velocity patterns, and network graphs — deployed on low-latency inference infrastructure.</p>
+        <h3>Cloud Migration &amp; 24/7 Managed Operations</h3>
+        <p>We migrate on-premise BFSI infrastructure to cloud-native platforms — zero unplanned downtime, event-driven architectures replacing batch bottlenecks, and round-the-clock managed ops so the business never sleeps.</p>
         <div class="offering-tags">
-          <span class="tag">Real-Time Scoring</span>
-          <span class="tag">Graph ML</span>
-          <span class="tag">Behavioural Analytics</span>
-          <span class="tag">Model Drift Monitoring</span>
+          <span class="tag">Cloud Migration</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Zero-Downtime Cutover</span>
+          <span class="tag">Event-Driven Architecture</span>
+          <span class="tag">24/7 Managed Ops</span>
         </div>
       </div>
       <div class="offering-card">
         <div class="offering-card-num">03</div>
-        <h3>Cloud Security &amp; Compliance Engineering</h3>
-        <p>Cloud security posture management, audit-ready infrastructure, and automated compliance controls aligned to RBI, SEBI, IRDAI, and ISO 27001 frameworks.</p>
+        <h3>DevSecOps &amp; Compliance Automation</h3>
+        <p>Security shifted left into the CI/CD pipeline — every deployment scanned, every release audit-ready. Compliance controls for RBI, SEBI, IRDAI, and ISO 27001 built into the delivery rhythm, not bolted on at the end.</p>
         <div class="offering-tags">
-          <span class="tag">CSPM</span>
-          <span class="tag">RBI Cloud Guidelines</span>
-          <span class="tag">Audit Automation</span>
+          <span class="tag">DevSecOps</span>
+          <span class="tag">CI/CD Security Scanning</span>
+          <span class="tag">Compliance Automation</span>
+          <span class="tag">Audit Readiness</span>
           <span class="tag">Zero Trust</span>
-          <span class="tag">SOC 2</span>
         </div>
       </div>
       <div class="offering-card">
         <div class="offering-card-num">04</div>
-        <h3>Open Finance &amp; API Platforms</h3>
-        <p>Account Aggregator-ready API platforms, open banking gateways, and consent management systems — built to regulatory spec, secured end-to-end, and capable of handling millions of API calls per day.</p>
+        <h3>Resilient Operations Center</h3>
+        <p>A 24/7 managed ops model built for regulated financial institutions — AIOps-powered monitoring, proactive incident response, cost-optimised infrastructure, and compliance visibility across every cloud environment.</p>
         <div class="offering-tags">
-          <span class="tag">AA Framework</span>
-          <span class="tag">OAuth 2.0</span>
-          <span class="tag">API Gateway</span>
-          <span class="tag">Consent Management</span>
-          <span class="tag">Rate Limiting</span>
+          <span class="tag">AIOps</span>
+          <span class="tag">24/7 Monitoring</span>
+          <span class="tag">Incident Response</span>
+          <span class="tag">FinOps</span>
+          <span class="tag">Compliance Visibility</span>
         </div>
       </div>
     </div>
@@ -568,8 +589,8 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
       </div>
       <div class="trend-card">
         <div class="trend-card-label">Trend 03</div>
-        <h3>Quantum-Ready Security</h3>
-        <p>Post-quantum cryptography is no longer a theoretical concern. BFSI regulators are beginning to mandate quantum-readiness assessments, and institutions with long-lived customer data (mortgages, pensions) need to plan for cryptographic migration before quantum breaks current standards.</p>
+        <h3>On-Premise AI Deployment</h3>
+        <p>Regulated BFSI institutions cannot send customer data to third-party LLM APIs. The ability to deploy production-grade AI models inside the bank's own infrastructure — with full data sovereignty and audit trails — is becoming a core engineering differentiator rather than a luxury.</p>
       </div>
     </div>
   </div>
@@ -582,30 +603,80 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
       <div class="eyebrow">Real Outcomes</div>
       <h2>What we have shipped for BFSI clients</h2>
     </div>
-    <div class="cs-card">
-      <div class="cs-card-inner">
-        <div class="cs-card-left">
-          <div class="cs-card-industry">Leading Private Sector Bank — India</div>
-          <h3 class="cs-card-title">API-First Transformation: From Batch Processing to Real-Time Banking</h3>
-          <p class="cs-card-body">A top-10 Indian private bank was running batch-end-of-day reconciliation and rule-based fraud scoring built a decade ago. We designed and delivered a real-time event streaming architecture on Kafka, replaced the batch fraud pipeline with a sub-50ms ML scoring service, and built an API gateway capable of 50,000 transactions per second — all without a single missed SLA during migration.</p>
-        </div>
-        <div class="cs-card-right">
-          <div class="cs-metric">
-            <div class="cs-metric-num"><span>50ms</span></div>
-            <div class="cs-metric-label">Fraud Score Latency</div>
+    <div class="cs-case-grid">
+
+      <!-- Card 1: Email Agent -->
+      <a href="cs-bank-email-agent.html" class="cs-case-card">
+        <div class="cs-case-card-industry">Private Sector Bank · Retail &amp; Corporate Banking</div>
+        <h3 class="cs-case-card-title">Email Classification &amp; Response Agent</h3>
+        <p class="cs-case-card-body">Thousands of customer emails arriving daily across 20+ product lines — triaged entirely by hand. We deployed an on-premise AI agent that classifies intent and drafts compliant responses, with zero data leaving the bank's network.</p>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-num"><span>70%+</span></div>
+            <div class="cs-case-metric-label">Emails auto-routed &amp; draft-ready</div>
           </div>
-          <div class="cs-metric-divider"></div>
-          <div class="cs-metric">
-            <div class="cs-metric-num"><span>50K</span></div>
-            <div class="cs-metric-label">TPS API Gateway</div>
-          </div>
-          <div class="cs-metric-divider"></div>
-          <div class="cs-metric">
-            <div class="cs-metric-num"><span>Zero</span></div>
-            <div class="cs-metric-label">Missed SLAs During Migration</div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-num"><span>600+</span></div>
+            <div class="cs-case-metric-label">Intents modelled</div>
           </div>
         </div>
-      </div>
+        <span class="cs-case-link">Read case study <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <!-- Card 2: Document Processor -->
+      <a href="cs-bank-doc-processor.html" class="cs-case-card">
+        <div class="cs-case-card-industry">Private Sector Bank · Operations &amp; Compliance</div>
+        <h3 class="cs-case-card-title">Universal Document Processor</h3>
+        <p class="cs-case-card-body">A leading bank was running every document through large LLMs — expensive and slow. We built an intelligent pipeline that classifies first and routes each document to the most cost-appropriate model.</p>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-num"><span>60%+</span></div>
+            <div class="cs-case-metric-label">AI processing cost reduction</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-num"><span>95%+</span></div>
+            <div class="cs-case-metric-label">Extraction accuracy</div>
+          </div>
+        </div>
+        <span class="cs-case-link">Read case study <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <!-- Card 3: Cloud NBFC -->
+      <a href="cs-cloud-nbfc.html" class="cs-case-card">
+        <div class="cs-case-card-industry">Tier-1 NBFC · Cloud Migration &amp; DevOps</div>
+        <h3 class="cs-case-card-title">Zero-Downtime Cloud Migration for a Leading NBFC</h3>
+        <p class="cs-case-card-body">A major NBFC moved from ageing on-premise infrastructure to a cloud-native delivery platform — without a single hour of unplanned downtime. Full Kubernetes adoption, CI/CD pipeline, and observability stack in one engagement.</p>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-num"><span>40%</span></div>
+            <div class="cs-case-metric-label">Infrastructure cost reduction</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-num"><span>3×</span></div>
+            <div class="cs-case-metric-label">Faster release cycles</div>
+          </div>
+        </div>
+        <span class="cs-case-link">Read case study <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <!-- Card 4: DevSecOps -->
+      <a href="cs-devsecops-fs.html" class="cs-case-card">
+        <div class="cs-case-card-industry">Asset Management Firm · DevSecOps</div>
+        <h3 class="cs-case-card-title">Shifting Security Left — DevSecOps for a Regulated Asset Manager</h3>
+        <p class="cs-case-card-body">A leading asset management firm was shipping fast but security was a post-deployment afterthought. We turned compliance into a competitive advantage — every deployment scanned, every release audit-ready from day one.</p>
+        <div class="cs-case-metrics">
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-num"><span>70%</span></div>
+            <div class="cs-case-metric-label">Faster deployments</div>
+          </div>
+          <div class="cs-case-metric">
+            <div class="cs-case-metric-num"><span>100%</span></div>
+            <div class="cs-case-metric-label">Security scan coverage</div>
+          </div>
+        </div>
+        <span class="cs-case-link">Read case study <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
     </div>
   </div>
 </section>
@@ -657,7 +728,7 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <img src="assets/images/logo.svg" alt="BootLabs">
         <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
@@ -701,8 +772,8 @@ button{font-family:NHD,sans-serif;cursor:pointer;}
     <div class="footer-bot">
       <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        
       </div>
     </div>
   </div>
@@ -735,7 +806,7 @@ window.addEventListener('scroll',()=>{document.getElementById('navbar').classLis
 function toggleMobileMenu(){const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');const open=m.classList.toggle('open');h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
 function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
 function toggleMobSub(el){el.nextElementSibling.classList.toggle('open');}
-function openContact(){document.getElementById('contactPopup').style.display='flex';document.body.style.overflow='hidden';}
+function openContact(){window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink','_blank');}
 function closeContact(){document.getElementById('contactPopup').style.display='none';document.body.style.overflow='';}
 </script>
 </body>

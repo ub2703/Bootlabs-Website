@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BootLabs — AI Engineering Partner for the Middle East</title>
+<style>
+/* ── FONTS ── */
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;width:100%;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;height:auto;}
+ul{list-style:none;}
+button{font-family:NHD,sans-serif;cursor:pointer;}
+input,textarea{box-sizing:border-box;}
+
+/* ── VARS ── */
+:root{
+  --blue:#0066FF;--cyan:#26a8ff;
+  --border:rgba(255,255,255,.08);
+  --border-blue:rgba(0,102,255,.35);
+  --dim:rgba(255,255,255,.45);
+  --mid:rgba(255,255,255,.7);
+  --glass:rgba(255,255,255,.03);
+  --r:20px;
+}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
+.eyebrow::before{content:"";display:block;width:28px;height:1px;background:var(--cyan);flex-shrink:0;}
+.h2{font-size:clamp(28px,4vw,56px);font-weight:400;line-height:1.1;}
+.body-l{font-size:18px;line-height:1.75;color:var(--mid);}
+.body-s{font-size:16px;line-height:1.65;color:var(--dim);}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;font-weight:400;transition:all .2s;box-shadow:0 4px 24px rgba(0,102,255,.3);}
+.btn-primary:hover{background:#0055dd;box-shadow:0 8px 32px rgba(0,102,255,.5);transform:translateY(-1px);}
+.btn-primary svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;transition:transform .2s;}
+.btn-primary:hover svg{transform:translateX(3px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 27px;background:transparent;color:#fff;border:1px solid var(--border);border-radius:100px;font-size:14px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ══ MOBILE MENU ══ */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mob-sub{padding:12px 0 4px;display:none;flex-direction:column;gap:10px;}
+.mob-sub.open{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
+
+/* ══ NAVBAR ══ */
+.navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s,border-color .3s;}
+.navbar.scrolled{background:rgba(6,6,10,.95);border-color:rgba(255,255,255,.12);}
+.nav-logo img{height:28px;width:auto;display:block;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{font-size:15px;color:rgba(255,255,255,.92);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:280px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.simple-item{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding:11px 14px;border-radius:10px;transition:background .2s;}
+.simple-item:hover{background:rgba(0,102,255,.08);}
+.simple-item-title{font-size:14px;color:rgba(255,255,255,.88);}
+.simple-item-sub{font-size:11px;color:var(--dim);margin-top:3px;line-height:1.5;}
+.mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s ease,visibility 0s;}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-title{font-size:15px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;transition:background .2s;}
+.nav-hamburger:hover{background:rgba(255,255,255,.06);}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ── LANG TOGGLE ── */
+.lang-toggle{display:flex;align-items:center;border:1px solid var(--border);border-radius:100px;overflow:hidden;}
+.lang-toggle button{padding:7px 13px;background:none;border:none;color:var(--dim);cursor:pointer;font-family:NHD,sans-serif;font-size:12px;letter-spacing:.04em;transition:all .2s;}
+.lang-toggle button.active{background:var(--blue);color:#fff;}
+.lang-toggle button:hover:not(.active){color:#fff;background:rgba(255,255,255,.06);}
+
+/* ══ HERO CAROUSEL ══ */
+.hero-carousel{position:relative;width:100%;height:100vh;overflow:hidden;background:#06060a;}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;display:flex;align-items:center;pointer-events:none;}
+.hero-slide.active{opacity:1;pointer-events:auto;}
+.hero-slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0;}
+.hero-slide-overlay{position:absolute;inset:0;z-index:1;}
+.hero-slide-content{position:relative;z-index:2;max-width:780px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);padding:6px 14px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.08);margin-bottom:28px;}
+.hero-h1{font-size:clamp(36px,5.5vw,80px);font-weight:400;line-height:1.04;letter-spacing:-.01em;color:#fff;margin-bottom:24px;}
+.hero-h1 em{font-style:italic;color:var(--cyan);}
+.hero-sub{font-size:18px;line-height:1.75;color:var(--mid);max-width:580px;margin-bottom:40px;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+/* Slide 1 — Award */
+.slide-award .hero-slide-bg{background-size:cover;background-position:65% top;}
+.slide-award .hero-slide-overlay{background:linear-gradient(105deg,rgba(6,6,10,.92) 45%,rgba(6,6,10,.4) 100%);}
+.award-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;background:linear-gradient(135deg,rgba(255,185,0,.15),rgba(255,140,0,.08));border:1px solid rgba(255,185,0,.35);border-radius:100px;margin-bottom:28px;}
+.award-badge-icon{font-size:18px;}
+.award-badge-text{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#ffd966;}
+/* Slide 2 — ROC */
+.slide-roc .hero-slide-bg{
+  background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&auto=format&fit=crop&q=80');
+}
+.slide-roc .hero-slide-overlay{background:linear-gradient(105deg,rgba(6,6,10,.92) 45%,rgba(0,40,120,.3) 100%);}
+/* Slide 3 — AI SDLC */
+.slide-sdlc .hero-slide-bg{
+  background-image:url('https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1600&auto=format&fit=crop&q=80');
+}
+.slide-sdlc .hero-slide-overlay{background:linear-gradient(105deg,rgba(6,6,10,.92) 45%,rgba(0,20,80,.4) 100%);}
+/* Progress bar */
+.hero-progress{position:absolute;bottom:0;left:0;right:0;z-index:10;height:2px;background:rgba(255,255,255,.08);}
+.hero-progress-bar{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));width:0;transition:width linear;}
+/* Dots */
+.hero-dots{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;}
+.hero-dot{width:8px;height:8px;border-radius:100px;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s;border:none;}
+.hero-dot.active{width:28px;background:var(--cyan);}
+/* Arrows */
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border:1px solid var(--border);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
+.hero-arrow:hover{background:rgba(255,255,255,.18);}
+.hero-arrow.prev{left:32px;}
+.hero-arrow.next{right:32px;}
+.hero-arrow svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;}
+/* Slide counter */
+.hero-counter{position:absolute;bottom:36px;right:48px;z-index:10;font-size:12px;color:var(--dim);}
+.hero-counter span{color:#fff;}
+
+/* ══ STAT STRIP ══ */
+.stat-strip{background:#0a0a12;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0;overflow:hidden;width:100%;}
+.stat-track{display:flex;align-items:stretch;animation:statScroll 20s linear infinite;width:max-content;}
+.stat-track:hover{animation-play-state:paused;}
+@keyframes statScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.stat-item{display:flex;align-items:center;gap:16px;padding:20px 48px;border-right:1px solid var(--border);white-space:nowrap;flex-shrink:0;}
+.stat-item-num{font-size:22px;font-weight:400;color:#fff;}
+.stat-item-num span{color:var(--cyan);}
+.stat-item-label{font-size:14px;color:var(--dim);}
+.stat-dot{width:4px;height:4px;border-radius:50%;background:var(--border);flex-shrink:0;}
+
+/* ══ PROOF / CLIENTS ══ */
+.proof-section{padding:80px 0;background:#06060a;border-bottom:1px solid var(--border);}
+.proof-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);text-align:center;margin-bottom:48px;}
+.proof-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.proof-cell{background:#06060a;display:flex;align-items:center;justify-content:center;padding:32px 24px;min-height:96px;transition:background .25s;}
+.proof-cell:hover{background:rgba(255,255,255,.03);}
+.proof-cell img{max-height:36px;max-width:120px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;transition:opacity .25s;}
+.proof-cell:hover img{opacity:.9;}
+.proof-cell-text{font-size:15px;font-weight:500;color:rgba(255,255,255,.4);letter-spacing:.04em;transition:color .25s;}
+.proof-cell:hover .proof-cell-text{color:rgba(255,255,255,.9);}
+
+/* ══ WHAT WE SOLVE ══ */
+.solve-section{padding:120px 0;background:#080810;border-top:1px solid var(--border);}
+.solve-header{margin-bottom:64px;}
+.solve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.solve-card{background:#080810;padding:48px 40px;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden;transition:background .3s;}
+.solve-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.solve-card:hover{background:rgba(0,102,255,.03);}
+.solve-card:hover::before{transform:scaleX(1);}
+.solve-card-num{font-size:11px;letter-spacing:.14em;color:var(--dim);margin-bottom:24px;}
+.solve-icon{width:52px;height:52px;border-radius:14px;background:rgba(0,102,255,.1);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
+.solve-icon svg{width:24px;height:24px;fill:none;stroke:var(--cyan);stroke-width:1.5;}
+.solve-title{font-size:clamp(20px,2vw,26px);color:#fff;margin-bottom:12px;line-height:1.2;}
+.solve-subtitle{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px;}
+.solve-problem{font-size:15px;color:var(--mid);line-height:1.75;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+.solve-approach-head{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+.solve-bullets{display:flex;flex-direction:column;gap:10px;flex:1;margin-bottom:28px;}
+.solve-bullet{font-size:15px;color:var(--mid);display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
+.solve-bullet::before{content:"";display:block;width:4px;height:4px;border-radius:50%;background:var(--cyan);flex-shrink:0;margin-top:8px;}
+.solve-link{font-size:13px;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;opacity:0;transform:translateX(-4px);transition:opacity .25s,transform .25s;}
+.solve-card:hover .solve-link{opacity:1;transform:none;}
+.solve-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;}
+
+/* ══ WHY BOOTLABS ══ */
+.why-section{padding:120px 0;background:#06060a;border-top:1px solid var(--border);}
+.why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:56px;}
+.why-card{background:#06060a;padding:36px 28px;transition:background .3s;}
+.why-card:hover{background:rgba(0,102,255,.04);}
+.why-title{font-size:16px;color:#fff;margin-bottom:10px;line-height:1.3;}
+.why-desc{font-size:15px;color:var(--mid);line-height:1.7;}
+
+/* ══ LIFE AT BOOTLABS ══ */
+.culture-section{padding:100px 0;background:#080810;border-top:1px solid var(--border);}
+.culture-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.culture-text .eyebrow{margin-bottom:28px;}
+.culture-photo{border-radius:20px;overflow:hidden;aspect-ratio:4/3;position:relative;}
+.culture-photo img{width:100%;height:100%;object-fit:cover;}
+
+/* ══ DEWA CASE STUDY SPOTLIGHT ══ */
+.cs-spotlight-section{padding:120px 0;background:#080810;border-top:1px solid var(--border);}
+.cs-spotlight-inner{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.cs-spotlight-left{background:#080810;padding:56px 48px;display:flex;flex-direction:column;}
+.cs-spotlight-right{background:#06060a;padding:56px 48px;display:flex;flex-direction:column;}
+.cs-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);padding:5px 12px;border:1px solid var(--border-blue);border-radius:100px;background:rgba(0,102,255,.06);margin-bottom:28px;width:fit-content;}
+.cs-spotlight-client{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+.cs-spotlight-title{font-size:clamp(22px,2.8vw,36px);font-weight:400;color:#fff;line-height:1.2;margin-bottom:20px;}
+.cs-spotlight-desc{font-size:16px;color:var(--mid);line-height:1.8;flex:1;margin-bottom:32px;}
+.cs-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:36px;}
+.cs-metric-num{font-size:clamp(36px,4vw,52px);font-weight:400;color:#fff;line-height:1;}
+.cs-metric-num span{color:var(--cyan);}
+.cs-metric-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-top:8px;}
+.cs-quote{font-size:17px;color:var(--mid);line-height:1.8;font-style:italic;padding-left:20px;border-left:2px solid var(--cyan);flex:1;margin-bottom:32px;}
+.cs-quote-name{font-size:14px;color:#fff;font-weight:500;margin-top:16px;font-style:normal;}
+.cs-quote-role{font-size:13px;color:var(--dim);margin-top:3px;font-style:normal;}
+.cs-spotlight-img{width:100%;border-radius:12px;overflow:hidden;margin-bottom:32px;border:1px solid var(--border);}
+.cs-spotlight-img img{width:100%;height:220px;object-fit:cover;}
+
+/* ══ PARTNERS ══ */
+.partners-section{padding:100px 0;background:#06060a;border-top:1px solid var(--border);}
+.partners-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.partners-grid-wrap{display:flex;flex-direction:column;gap:32px;}
+.partners-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.partner-cell{background:#06060a;display:flex;align-items:center;justify-content:center;padding:32px 24px;transition:background .25s;}
+.partner-cell:hover{background:rgba(255,255,255,.03);}
+.partner-cell img{max-height:64px;max-width:160px;width:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:.55;transition:opacity .25s;}
+.partner-cell:hover img{opacity:1;}
+.partner-cell-text{font-size:14px;color:rgba(255,255,255,.4);}
+.certs-row{display:flex;gap:16px;flex-wrap:wrap;}
+.cert-badge{display:flex;align-items:center;gap:12px;padding:16px 20px;border:1px solid var(--border-blue);border-radius:14px;background:rgba(0,102,255,.06);flex:1;min-width:160px;}
+.cert-text{font-size:15px;color:#fff;line-height:1.4;}
+.cert-sub{font-size:11px;color:var(--dim);}
+.partners-right-title{font-size:clamp(24px,3vw,40px);font-weight:400;color:#fff;margin-bottom:16px;line-height:1.2;}
+.partners-right-desc{font-size:17px;color:var(--mid);line-height:1.75;margin-bottom:32px;}
+
+/* ══ FOUNDER CTA ══ */
+.founder-section{padding:120px 0;background:linear-gradient(135deg,#06060a 0%,#07091a 60%,#06060a 100%);border-top:1px solid var(--border);position:relative;overflow:hidden;}
+.founder-section::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(0,102,255,.08) 0%,transparent 65%);pointer-events:none;}
+.founder-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;}
+.founder-quote{font-size:clamp(22px,2.8vw,38px);font-weight:400;line-height:1.3;color:#fff;margin-bottom:28px;position:relative;padding-left:24px;}
+.founder-quote::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;background:linear-gradient(180deg,var(--blue),var(--cyan));border-radius:2px;}
+.founder-attribution{display:flex;align-items:center;gap:16px;margin-bottom:32px;}
+.founder-name{font-size:16px;color:#fff;font-weight:500;}
+.founder-role{font-size:14px;color:var(--dim);}
+.founder-action-card{border:1px solid var(--border);border-radius:var(--r);padding:40px;background:rgba(255,255,255,.02);transition:border-color .3s,background .3s;}
+.founder-action-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.04);}
+.founder-action-title{font-size:20px;color:#fff;margin-bottom:10px;}
+.founder-action-desc{font-size:16px;color:var(--mid);margin-bottom:24px;line-height:1.7;}
+
+/* ══ FOOTER ══ */
+.footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;width:auto;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
+.footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
+.footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+.footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
+.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);white-space:nowrap;line-height:1;overflow:hidden;}
+.footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  .container{padding:0 32px;}
+  .solve-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:repeat(3,1fr);}
+  .partners-inner{grid-template-columns:1fr;gap:48px;}
+  .founder-inner{grid-template-columns:1fr;gap:48px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
+  .footer-brand{grid-column:span 2;}
+  .cs-spotlight-inner{grid-template-columns:1fr;}
+  .proof-grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:768px){
+  .container{padding:0 18px;}
+  .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;z-index:999;}
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
+  .lang-toggle{display:none;}
+  .nav-hamburger{display:flex;}
+  /* Hero carousel — full screen, content top-anchored, light overlay so photo fills rest */
+  .hero-carousel{height:100svh;min-height:580px;}
+  .hero-slide{align-items:flex-start;}
+  .hero-slide .container{padding-top:110px;padding-bottom:40px;}
+  /* Much lighter overlays on mobile so image is visible throughout */
+  .slide-award .hero-slide-overlay{background:linear-gradient(180deg,rgba(6,6,10,.82) 0%,rgba(6,6,10,.72) 55%,rgba(6,6,10,.5) 100%);}
+  .slide-roc .hero-slide-overlay{background:linear-gradient(180deg,rgba(6,6,10,.75) 0%,rgba(6,6,10,.3) 60%,rgba(6,6,10,.15) 100%);}
+  .slide-sdlc .hero-slide-overlay{background:linear-gradient(180deg,rgba(6,6,10,.75) 0%,rgba(6,6,10,.3) 60%,rgba(6,6,10,.15) 100%);}
+  .hero-h1{font-size:clamp(32px,8vw,52px);}
+  .hero-sub{font-size:16px;margin-bottom:24px;}
+  .hero-arrow{display:none;}
+  .hero-counter{display:none;}
+  .hero-dots{bottom:24px;}
+  /* clients */
+  .proof-section{padding:56px 0;}
+  .proof-grid{grid-template-columns:repeat(2,1fr);}
+  /* solve */
+  .solve-section{padding:72px 0;}
+  .solve-grid{grid-template-columns:1fr;}
+  .solve-card{padding:36px 28px;}
+  /* why */
+  .why-section{padding:72px 0;}
+  .why-grid{grid-template-columns:1fr 1fr;}
+  /* life at bootlabs */
+  .culture-section{padding:72px 0;}
+  .culture-inner{grid-template-columns:1fr;gap:36px;}
+  .culture-photo{aspect-ratio:16/9;}
+  /* case study */
+  .cs-spotlight-section{padding:72px 0;}
+  .cs-spotlight-inner{grid-template-columns:1fr;}
+  .cs-spotlight-left,.cs-spotlight-right{padding:36px 28px;}
+  .cs-metrics{grid-template-columns:repeat(3,1fr);gap:16px;}
+  /* partners */
+  .partners-section{padding:64px 0;}
+  .partners-inner{grid-template-columns:1fr;gap:40px;}
+  .certs-row{flex-direction:column;}
+  /* founder */
+  .founder-section{padding:72px 0;}
+  .founder-inner{grid-template-columns:1fr;gap:36px;}
+  /* footer */
+  .footer{padding:56px 0 28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
+  .footer-brand{grid-column:span 2;}
+  .footer-bot{flex-direction:column;align-items:flex-start;gap:12px;}
+  .footer-big{font-size:clamp(48px,14vw,120px);}
+  /* stat */
+  .stat-item{padding:14px 20px;}
+  .stat-item-num{font-size:17px;}
+  .stat-item-label{font-size:12px;}
+}
+@media(max-width:480px){
+  .container{padding:0 14px;}
+  .navbar{width:calc(100% - 16px);padding:9px 12px;}
+  .nav-logo img{height:22px;}
+  .proof-grid{grid-template-columns:repeat(2,1fr);}
+  .why-grid{grid-template-columns:1fr;}
+  .cs-metrics{grid-template-columns:1fr;gap:12px;}
+  .footer-big{font-size:clamp(36px,16vw,80px);}
+  .mob-nav-link{font-size:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ MOBILE MENU ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mob-nav-links">
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="cloud-devops.html" onclick="closeMobileMenu()">DevOps / Cloud</a>
+        <a href="platform-engineering.html" onclick="closeMobileMenu()">SRE</a>
+        <a href="software-engineering.html" onclick="closeMobileMenu()">Full Stack Development</a>
+        <a href="ai-engineering.html" onclick="closeMobileMenu()">AI &amp; ML</a>
+        <a href="agentic-ai.html" onclick="closeMobileMenu()">Agentic AI</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Solutions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="resilient-operations-center.html" onclick="closeMobileMenu()">Resilient Operations Center</a>
+        <a href="ai-in-sdlc.html" onclick="closeMobileMenu()">AI in SDLC</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Industries <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="manufacturing.html" onclick="closeMobileMenu()">Manufacturing</a>
+        <a href="automotive.html" onclick="closeMobileMenu()">Automotive</a>
+        <a href="financial-services.html" onclick="closeMobileMenu()">Financial Services</a>
+        <a href="qsr.html" onclick="closeMobileMenu()">QSR</a>
+      </div>
+    </div>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="sailor.html" onclick="closeMobileMenu()">Sailor</a>
+        <a href="guardian.html" onclick="closeMobileMenu()">Guardian</a>
+      </div>
+    </div>
+    <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
+    <div>
+      <div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub">
+        <a href="about-us.html" onclick="closeMobileMenu()">About Us</a>
+        <a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="white-papers.html" onclick="closeMobileMenu()">White Papers</a>
+        <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
+      </div>
+    </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
+  </nav>
+  <div style="padding:20px 0 8px;border-top:1px solid var(--border);margin-top:8px;">
+    <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;">Language</div>
+    <div style="display:flex;gap:8px;">
+      <button onclick="setLang('en');closeMobileMenu();" style="flex:1;padding:12px;border:1px solid var(--blue);border-radius:100px;background:var(--blue);color:#fff;font-family:NHD,sans-serif;font-size:14px;">EN — English</button>
+      <button onclick="setLang('ar');closeMobileMenu();" style="flex:1;padding:12px;border:1px solid var(--border);border-radius:100px;background:none;color:var(--mid);font-family:NHD,sans-serif;font-size:14px;">عربي</button>
+    </div>
+  </div>
+  <div class="mob-cta">
+    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button>
+  </div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a href="index-me.html" class="nav-logo">
+    <img src="assets/images/logo.svg" alt="BootLabs">
+  </a>
+  <div class="nav-center">
+    <div class="nav-item">
+      <a href="#" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">DevOps / Cloud</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD · Infrastructure Automation</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">SRE</div><div class="mega-item-subs">Observability · SLOs · Chaos Engineering · Service Mesh</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Full Stack Development</div><div class="mega-item-subs">Cloud Native Apps · Modernization · Microservices · API Platforms</div></a>
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI &amp; ML</div><div class="mega-item-subs">ML Engineering · MLOps · Production AI · Model Monitoring</div></a>
+        <a href="security-engineering.html" class="mega-item"><div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · VAPT · Compliance Automation · Zero Trust</div></a>
+        <a href="agentic-ai.html" class="mega-item"><div class="mega-item-title">Agentic AI</div><div class="mega-item-subs">Task Agents · Multi-Agent Orchestration · Tool-Using Agents · LLMOps</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="resilient-operations-center.html" class="simple-item"><div class="simple-item-title">Resilient Operations Center</div><div class="simple-item-sub">Managed Cloud Ops · AIOps · FinOps</div></a>
+        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Automated Testing</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Industries <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="manufacturing.html" class="simple-item"><div class="simple-item-title">Manufacturing</div><div class="simple-item-sub">Supply Chain AI · Predictive Ops</div></a>
+        <a href="automotive.html" class="simple-item"><div class="simple-item-title">Automotive</div><div class="simple-item-sub">Service AI · Warranty Intelligence</div></a>
+        <a href="financial-services.html" class="simple-item"><div class="simple-item-title">Financial Services</div><div class="simple-item-sub">KYC Automation · AIOps · Compliance AI</div></a>
+        <a href="qsr.html" class="simple-item"><div class="simple-item-title">QSR &amp; Energy</div><div class="simple-item-sub">Operations AI · Demand Forecasting</div></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Platforms <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="sailor.html" class="simple-item"><div class="simple-item-title">Sailor</div><div class="simple-item-sub">Cloud Cost Intelligence &amp; FinOps</div></a>
+        <a href="guardian.html" class="simple-item"><div class="simple-item-title">Guardian</div><div class="simple-item-sub">Security &amp; Compliance Automation</div></a>
+      </div>
+    </div>
+    <a href="partnerships.html" class="nav-link">Partners</a>
+    <div class="nav-item">
+      <a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="about-us.html" class="simple-item"><div class="simple-item-title">About Us</div><div class="simple-item-sub">Who we are · Leadership</div></a>
+        <a href="case-studies.html" class="simple-item"><div class="simple-item-title">Case Studies</div><div class="simple-item-sub">Client outcomes · Live deployments</div></a>
+        <a href="white-papers.html" class="simple-item"><div class="simple-item-title">White Papers</div><div class="simple-item-sub">Technical deep-dives · Research</div></a>
+        <a href="blog.html" class="simple-item"><div class="simple-item-title">Blog &amp; Press Releases</div><div class="simple-item-sub">Engineering insights · News</div></a>
+      </div>
+    </div>
+    <a href="careers.html" class="nav-link">Careers</a>
+  </div>
+  <div class="nav-right">
+    <!-- Language toggle -->
+    <div class="lang-toggle" id="langToggle">
+      <button class="active" onclick="setLang('en')" id="btnEn">EN</button>
+      <button onclick="setLang('ar')" id="btnAr">عربي</button>
+    </div>
+    <button class="btn-primary" onclick="openContact()">
+      Book a Call
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HERO CAROUSEL ══ -->
+<section class="hero-carousel" id="heroCarousel">
+
+  <!-- Slide 1 — Award -->
+  <div class="hero-slide slide-award active" data-index="0">
+    <div class="hero-slide-bg" id="slide1bg"></div>
+    <div class="hero-slide-overlay"></div>
+    <div class="container">
+      <div class="hero-slide-content">
+        <div class="award-badge">
+          <span class="award-badge-icon">🏆</span>
+          <span class="award-badge-text">World Technology Awards</span>
+        </div>
+        <h1 class="hero-h1">Best Emerging<br><em>AI Company.</em></h1>
+        <p class="hero-sub">BootLabs recognised at the World Technology Awards for pioneering enterprise AI engineering across the Middle East and beyond.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="openContact()">
+            Book a Discovery Call
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <a href="about-us.html" class="btn-outline">Our Story</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2 — Resilient Operations Center -->
+  <div class="hero-slide slide-roc" data-index="1">
+    <div class="hero-slide-bg"></div>
+    <div class="hero-slide-overlay"></div>
+    <div class="container">
+      <div class="hero-slide-content">
+        <div class="hero-eyebrow">Resilient Operations Center</div>
+        <h1 class="hero-h1">Reduce MTTR.<br><em>Automate RCA.</em><br>Own Your Outcomes.</h1>
+        <p class="hero-sub">You have the monitoring tools. Your organisation still struggles with outcomes. BootLabs ROC layers AIOps on your existing stack — cutting MTTR by 60% and delivering automated root cause analysis without replacing a single tool.</p>
+        <div class="hero-btns">
+          <a href="resilient-operations-center.html" class="btn-primary">
+            Explore ROC
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="cs-devsecops-dewa.html" class="btn-outline">DEWA Case Study</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 — AI in SDLC -->
+  <div class="hero-slide slide-sdlc" data-index="2">
+    <div class="hero-slide-bg"></div>
+    <div class="hero-slide-overlay"></div>
+    <div class="container">
+      <div class="hero-slide-content">
+        <div class="hero-eyebrow">AI in SDLC · Powered by Claude</div>
+        <h1 class="hero-h1">From Vibe Coding<br><em>to Production.</em></h1>
+        <p class="hero-sub">Enable business users to generate MVPs, then accelerate the entire delivery cycle — AI code generation, automated testing, living documentation, and governed deployment. The full SDLC, powered by Claude.</p>
+        <div class="hero-btns">
+          <a href="ai-in-sdlc.html" class="btn-primary">
+            See How It Works
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <button class="btn-outline" onclick="openContact()">Talk to an Expert</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav arrows -->
+  <button class="hero-arrow prev" onclick="carouselPrev()" aria-label="Previous">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="hero-arrow next" onclick="carouselNext()" aria-label="Next">
+    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+
+  <!-- Dots -->
+  <div class="hero-dots">
+    <button class="hero-dot active" onclick="carouselGo(0)" aria-label="Slide 1"></button>
+    <button class="hero-dot" onclick="carouselGo(1)" aria-label="Slide 2"></button>
+    <button class="hero-dot" onclick="carouselGo(2)" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Counter -->
+  <div class="hero-counter"><span id="slideNum">1</span> / 3</div>
+
+  <!-- Progress bar -->
+  <div class="hero-progress"><div class="hero-progress-bar" id="progressBar"></div></div>
+
+</section>
+
+<!-- ══ STAT STRIP ══ -->
+<div class="stat-strip">
+  <div class="stat-track">
+    <div class="stat-item"><span class="stat-item-num"><span>30</span><span style="color:var(--cyan)">+</span></span><span class="stat-item-label">Enterprise Clients</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num"><span>50</span><span style="color:var(--cyan)">+</span></span><span class="stat-item-label">AI Projects Delivered</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num" style="font-size:15px;color:var(--cyan)">ISO 27001</span><span class="stat-item-label">+ SOC 2 Certified</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num"><span>7</span></span><span class="stat-item-label">Countries Served</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num"><span>4</span></span><span class="stat-item-label">Middle East Deployments</span></div>
+    <div class="stat-dot"></div>
+    <!-- duplicate for seamless loop -->
+    <div class="stat-item"><span class="stat-item-num"><span>30</span><span style="color:var(--cyan)">+</span></span><span class="stat-item-label">Enterprise Clients</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num"><span>50</span><span style="color:var(--cyan)">+</span></span><span class="stat-item-label">AI Projects Delivered</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num" style="font-size:15px;color:var(--cyan)">ISO 27001</span><span class="stat-item-label">+ SOC 2 Certified</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num"><span>7</span></span><span class="stat-item-label">Countries Served</span></div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><span class="stat-item-num"><span>4</span></span><span class="stat-item-label">Middle East Deployments</span></div>
+    <div class="stat-dot"></div>
+  </div>
+</div>
+
+<!-- ══ CLIENTS ══ -->
+<section class="proof-section" id="clients">
+  <div class="container">
+    <p class="proof-label">Trusted by the world's most demanding enterprises</p>
+    <div class="proof-grid">
+      <div class="proof-cell"><span class="proof-cell-text">DEWA</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">Sanabil Investments</span></div>
+      <div class="proof-cell"><img src="assets/images/astrazeneca.svg" alt="AstraZeneca"></div>
+      <div class="proof-cell"><span class="proof-cell-text">LAPP</span></div>
+      <div class="proof-cell"><img src="assets/images/mahindra-rise.svg" alt="Mahindra Rise"></div>
+      <div class="proof-cell"><img src="assets/images/tata.svg" alt="Tata Digital"></div>
+      <div class="proof-cell"><img src="assets/images/hdfc-bank.svg" alt="HDFC Bank"></div>
+      <div class="proof-cell"><img src="assets/images/icici-bank.svg" alt="ICICI Bank"></div>
+      <div class="proof-cell"><span class="proof-cell-text">L&amp;T</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">Apollo</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">Ather Energy</span></div>
+      <div class="proof-cell"><span class="proof-cell-text">HDFC Securities</span></div>
+      <div class="proof-cell"><span class="proof-cell-text" style="font-size:13px;letter-spacing:.08em;">more...</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT WE SOLVE ══ -->
+<section class="solve-section" id="solutions">
+  <div class="container">
+    <div class="solve-header">
+      <div class="eyebrow" style="margin-bottom:20px;">What We Solve</div>
+      <h2 class="h2" style="max-width:640px;">Three enterprise problems.<br>One engineering-first partner.</h2>
+    </div>
+    <div class="solve-grid">
+
+      <!-- Card 1: DevSecOps Adoption -->
+      <div class="solve-card">
+        <div class="solve-card-num">01</div>
+        <div class="solve-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="solve-title">DevOps & DevSecOps</div>
+        <div class="solve-subtitle">Implementation & Adoption</div>
+        <p class="solve-problem">You have best-in-class tools — GitLab, ArgoCD, SonarQube, Vault, Azure DevOps. Pipelines are configured. Coverage is on paper. But app teams aren't actually adopting them. 80% pipeline availability, 40% real usage. The tools aren't the bottleneck. The behaviour is.</p>
+        <div class="solve-approach-head">How BootLabs Fixes This</div>
+        <div class="solve-bullets">
+          <div class="solve-bullet">Gamified adoption dashboards with team-level leaderboards and delivery velocity scoring</div>
+          <div class="solve-bullet">Structured sprint-based roll-out with embedded engineering coaches in app teams</div>
+          <div class="solve-bullet">Automated compliance evidence generation — no manual audit prep</div>
+          <div class="solve-bullet">Adoption SLAs: we don't leave until real coverage is real</div>
+        </div>
+        <a href="cloud-devops.html" class="solve-link">
+          Explore DevSecOps
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Card 2: ROC -->
+      <div class="solve-card">
+        <div class="solve-card-num">02</div>
+        <div class="solve-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+        </div>
+        <div class="solve-title">Resilient Operations Center</div>
+        <div class="solve-subtitle">Outcomes-Focused · Tools-Agnostic</div>
+        <p class="solve-problem">Your ops team monitors 15 dashboards. Grafana, Datadog, Dynatrace, ServiceNow — all running. Alerts still fire at 2am. MTTR stays stubbornly high. Incidents still surprise you. The tools exist. The outcome discipline doesn't.</p>
+        <div class="solve-approach-head">How BootLabs Fixes This</div>
+        <div class="solve-bullets">
+          <div class="solve-bullet">AIOps layer over your existing stack — no rip-and-replace, no new tool budgets</div>
+          <div class="solve-bullet">Automated Root Cause Analysis cuts noise and surfaces what actually matters</div>
+          <div class="solve-bullet">60% MTTR reduction guaranteed through predictive alerting and runbook automation</div>
+          <div class="solve-bullet">Outcome SLAs with FinOps-driven cost accountability built in</div>
+        </div>
+        <a href="resilient-operations-center.html" class="solve-link">
+          Explore ROC
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Card 3: AI in SDLC -->
+      <div class="solve-card">
+        <div class="solve-card-num">03</div>
+        <div class="solve-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="19" y1="12" x2="5" y2="12"/></svg>
+        </div>
+        <div class="solve-title">AI in SDLC</div>
+        <div class="solve-subtitle">Vibe Coding → Full Delivery Cycle</div>
+        <p class="solve-problem">Engineering velocity is bottlenecked by slow code review cycles, tribal documentation, and manual QA. Business users have ideas but can't prototype — they're blocked by dev queues. Time-to-MVP is measured in months, not days.</p>
+        <div class="solve-approach-head">How BootLabs Fixes This</div>
+        <div class="solve-bullets">
+          <div class="solve-bullet">Business users generate working MVPs through guided vibe coding interfaces</div>
+          <div class="solve-bullet">AI-assisted code generation, review, and pair programming (Powered by Claude)</div>
+          <div class="solve-bullet">Automated test generation and living documentation — always in sync with code</div>
+          <div class="solve-bullet">Governed CI/CD with AI-validated quality gates before every release</div>
+        </div>
+        <a href="ai-in-sdlc.html" class="solve-link">
+          Explore AI in SDLC
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY BOOTLABS ══ -->
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Why BootLabs</div>
+    <h2 class="h2" style="max-width:700px;">Five outcomes that define every engagement.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-title">AI-Driven Enterprise</div>
+        <p class="why-desc">Every solution we build is AI-first by design — not bolted on after the fact. From intelligent automation to production-grade GenAI, AI is the default, not the add-on.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Cloud-Native Innovation</div>
+        <p class="why-desc">Platform-first engineering that eliminates vendor lock-in. Kubernetes-native, IaC-driven, and observable from day one.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Operational Resilience</div>
+        <p class="why-desc">99.9% SLA commitments backed by AIOps, SRE practices, and proactive incident prevention — not reactive firefighting.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Security &amp; Compliance</div>
+        <p class="why-desc">Security is embedded in every layer — from code pipelines to cloud infrastructure and AI model deployment. ISO 27001 and SOC 2 certified.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Cost Optimisation</div>
+        <p class="why-desc">30–40% infrastructure cost reduction through right-sizing, automated resource governance, and intelligent workload placement across cloud providers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEWA CASE STUDY SPOTLIGHT ══ -->
+<section class="cs-spotlight-section" id="case-studies">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Middle East Case Study</div>
+    <h2 class="h2" style="max-width:700px;margin-bottom:48px;">How BootLabs unified DevSecOps for Dubai's largest utility.</h2>
+    <div class="cs-spotlight-inner">
+      <div class="cs-spotlight-left">
+        <div class="cs-tag">DevSecOps · Azure DevOps</div>
+        <div class="cs-spotlight-client">DEWA — Dubai Electricity &amp; Water Authority</div>
+        <h3 class="cs-spotlight-title">One framework governing 10+ technology stacks across a government-grade IT estate.</h3>
+        <p class="cs-spotlight-desc">DEWA runs one of the most diverse IT estates in the Middle East — Java, .NET, Python, Angular, Oracle, and legacy systems, all on Azure DevOps. Each team had its own delivery process. None had a consistent security standard. BootLabs built one framework that governs all of it.</p>
+        <div class="cs-metrics">
+          <div>
+            <div class="cs-metric-num">10<span>+</span></div>
+            <div class="cs-metric-label">Tech Stacks Unified</div>
+          </div>
+          <div>
+            <div class="cs-metric-num">60<span>%</span></div>
+            <div class="cs-metric-label">Faster Delivery</div>
+          </div>
+          <div>
+            <div class="cs-metric-num">100<span>%</span></div>
+            <div class="cs-metric-label">Pipeline Coverage</div>
+          </div>
+        </div>
+        <a href="cs-devsecops-dewa.html" class="btn-outline">
+          Read Full Case Study
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="cs-spotlight-right">
+        <div class="cs-spotlight-img">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&auto=format&fit=crop&q=80" alt="Dubai skyline">
+        </div>
+        <p class="cs-quote">"What had been a collection of independently managed, inconsistently secured pipelines became a unified delivery platform with government-grade security built in. Teams that spent days preparing compliance evidence now generate it automatically."</p>
+        <div class="cs-quote-name">BootLabs Engineering Lead</div>
+        <div class="cs-quote-role">DEWA DevSecOps Programme</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PARTNERS & CERTS ══ -->
+<section class="partners-section" id="partners">
+  <div class="container">
+    <div class="partners-inner">
+      <div class="partners-grid-wrap">
+        <div>
+          <p style="margin-bottom:16px;letter-spacing:.12em;text-transform:uppercase;font-size:10px;color:var(--dim);">Technology Partners</p>
+          <div class="partners-grid">
+            <div class="partner-cell"><img src="assets/images/partner3.svg" alt="AWS"></div>
+            <div class="partner-cell"><img src="assets/images/partner2.svg" alt="Google Cloud"></div>
+            <div class="partner-cell"><img src="assets/images/partner4.svg" alt="Microsoft Azure"></div>
+            <div class="partner-cell"><img src="assets/images/partner5.svg" alt="Veeam"></div>
+            <div class="partner-cell"><img src="assets/images/crayon-group-seeklogo-1.svg" alt="Crayon"></div>
+            <div class="partner-cell"><span class="partner-cell-text">Databricks</span></div>
+          </div>
+        </div>
+        <div>
+          <p style="margin-bottom:16px;letter-spacing:.12em;text-transform:uppercase;font-size:10px;color:var(--dim);">Certifications</p>
+          <div class="certs-row">
+            <div class="cert-badge">
+              <div>
+                <div class="cert-text">ISO 27001</div>
+                <div class="cert-sub">Information Security Management</div>
+              </div>
+            </div>
+            <div class="cert-badge">
+              <div>
+                <div class="cert-text">SOC 2 Type II</div>
+                <div class="cert-sub">Security, Availability &amp; Confidentiality</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px;">Ecosystem</div>
+        <h2 class="partners-right-title">OEM partnerships, built for the long run.</h2>
+        <p class="partners-right-desc">We partner with technology OEMs — AWS, Google Cloud, Microsoft, Veeam, and Kore.ai — as a certified technology partner, not a reseller. Every engagement is co-engineered with the OEM, backed by certified architectures and direct escalation paths.</p>
+        <a href="partnerships.html" class="btn-outline">
+          Our Partnerships
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOUNDER CTA ══ -->
+<section class="founder-section" id="contact">
+  <div class="container">
+    <div class="founder-inner">
+      <div>
+        <div class="eyebrow" style="margin-bottom:28px;">From the Founder</div>
+        <blockquote class="founder-quote">
+          "Enterprises deserve platforms built <em style="font-style:italic;color:var(--cyan);">for them</em>, not sold to them."
+        </blockquote>
+        <div class="founder-attribution">
+          <div>
+            <div class="founder-name">Ram</div>
+            <div class="founder-role">Founder &amp; CEO, BootLabs</div>
+          </div>
+        </div>
+        <p class="body-l" style="max-width:480px;">We work with the Middle East's most ambitious enterprises because they demand engineering excellence — not generic cloud blueprints. If your organisation is ready to move from tools to outcomes, let's talk.</p>
+      </div>
+      <div>
+        <div class="founder-action-card">
+          <div class="founder-action-title">Book a Discovery Call</div>
+          <p class="founder-action-desc">Talk to our leadership team. We'll assess your most pressing challenge and define a concrete delivery approach — no generic presentations, no ambiguity.</p>
+          <button class="btn-primary" onclick="openContact()">
+            Schedule a Call
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT POPUP ══ -->
+<div id="contactPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;" onclick="if(event.target===this)closeContact()">
+  <div style="background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;width:100%;max-width:460px;position:relative;margin:20px;">
+    <button onclick="closeContact()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+    <div style="font-size:22px;color:#fff;margin-bottom:24px;font-family:NHD;">Book a Discovery Call</div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Full Name *</label><input type="text" placeholder="Jane Smith" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Work Email *</label><input type="email" placeholder="jane@company.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">Company *</label><input type="text" placeholder="Acme Corp" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;"></div>
+    <div style="margin-bottom:20px;"><label style="font-size:12px;color:var(--dim);display:block;margin-bottom:6px;">What challenge are you solving?</label><textarea rows="3" placeholder="Tell us about your project..." style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:NHD;font-size:14px;resize:none;"></textarea></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Request</button>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/images/logo.svg" alt="BootLabs">
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
+      <div>
+        <div class="footer-col-head">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="cloud-devops.html">DevOps / Cloud</a></li>
+          <li><a href="platform-engineering.html">SRE</a></li>
+          <li><a href="software-engineering.html">Full Stack Development</a></li>
+          <li><a href="ai-engineering.html">AI &amp; ML</a></li>
+          <li><a href="agentic-ai.html">Agentic AI</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Solutions</div>
+        <ul class="footer-col-links">
+          <li><a href="resilient-operations-center.html">Resilient Operations Center</a></li>
+          <li><a href="ai-in-sdlc.html">AI in SDLC</a></li>
+          <li><a href="sailor.html">Sailor Platform</a></li>
+          <li><a href="guardian.html">Guardian Platform</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="partnerships.html">Partners</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-mid">
+      <div class="footer-big" id="footerBig">BootLabs</div>
+    </div>
+    <div class="footer-bot">
+      <div class="footer-copy">© 2026 BootLabs Technology. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+              
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ SCRIPTS ══ -->
+<script>
+/* ── NAVBAR SCROLL ── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
+});
+
+/* ── MOBILE MENU ── */
+function toggleMobileMenu(){
+  const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');
+  m.classList.toggle('open');h.classList.toggle('open');
+}
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+function toggleMobSub(el){
+  const sub=el.nextElementSibling;
+  if(sub)sub.classList.toggle('open');
+}
+
+/* ── CONTACT POPUP ── */
+function openContact(){window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink','_blank');}
+function closeContact(){document.getElementById('contactPopup').style.display='none';}
+
+/* ── LANGUAGE TOGGLE ── */
+function setLang(lang){
+  document.cookie='bl_region='+(lang==='ar'?'me':'global')+';path=/;max-age=2592000';
+  document.getElementById('btnEn').classList.toggle('active',lang==='en');
+  document.getElementById('btnAr').classList.toggle('active',lang==='ar');
+  if(lang==='ar'){
+    // Arabic version coming soon — show toast
+    const t=document.createElement('div');
+    t.style.cssText='position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#0f0f17;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px 24px;font-size:14px;color:#fff;z-index:9999;';
+    t.textContent='Arabic version coming soon. / النسخة العربية قادمة قريباً';
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),3000);
+    document.getElementById('btnEn').classList.add('active');
+    document.getElementById('btnAr').classList.remove('active');
+  }
+}
+
+/* ── HERO CAROUSEL ── */
+let currentSlide=0;
+const totalSlides=3;
+const slideDuration=5000;
+let autoTimer=null;
+let progressStart=null;
+let progressAnim=null;
+
+const slides=document.querySelectorAll('.hero-slide');
+const dots=document.querySelectorAll('.hero-dot');
+const progressBar=document.getElementById('progressBar');
+const slideNum=document.getElementById('slideNum');
+
+function carouselGo(n){
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide=(n+totalSlides)%totalSlides;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+  if(slideNum)slideNum.textContent=currentSlide+1;
+  resetProgress();
+}
+function carouselNext(){carouselGo(currentSlide+1);}
+function carouselPrev(){carouselGo(currentSlide-1);}
+
+function resetProgress(){
+  cancelAnimationFrame(progressAnim);
+  if(progressBar){progressBar.style.width='0%';}
+  progressStart=null;
+  clearTimeout(autoTimer);
+  autoTimer=setTimeout(carouselNext,slideDuration);
+  animateProgress();
+}
+function animateProgress(ts){
+  if(!progressStart)progressStart=ts;
+  const elapsed=ts-progressStart;
+  const pct=Math.min((elapsed/slideDuration)*100,100);
+  if(progressBar)progressBar.style.width=pct+'%';
+  if(pct<100)progressAnim=requestAnimationFrame(animateProgress);
+}
+
+/* Slide 1 — World Technology Award photo */
+document.getElementById('slide1bg').style.backgroundImage=
+  "url('https://lh3.googleusercontent.com/pw/AP1GczPGXyXAWwscs8IJA--nyl86XkCFaH1Idn8NC6KIaVcx62tcZ5uhlkP-EqlqYdLfMUiGZrn0fuSwr6oij8zkPvFvjn_iozrkEODoklSU1VcK6mga96LOps4Uf4RIz9gf_x4M2Pe9iNJLaY5Z3IZOC3JE=w2608-h1622-s-no?authuser=0')";
+
+/* Start auto-play */
+resetProgress();
+
+/* ── FOOTER PARALLAX ── */
+const footerBig=document.getElementById('footerBig');
+if(footerBig){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)footerBig.style.transform='translateX(-2%)';});
+  },{threshold:.1});
+  obs.observe(footerBig);
+}
+</script>
+</body>
+</html>

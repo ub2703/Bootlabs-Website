@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — BootLabs</title>
+<style>
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#06060a;color:#fff;font-family:NHD,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}ul{list-style:none;}button{font-family:NHD,sans-serif;cursor:pointer;}
+:root{--blue:#0066FF;--cyan:#26a8ff;--border:rgba(255,255,255,.08);--border-blue:rgba(0,102,255,.35);--dim:rgba(255,255,255,.45);--mid:rgba(255,255,255,.7);--r:20px;}
+.container{max-width:1280px;margin:0 auto;padding:0 48px;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;border:none;border-radius:100px;font-size:14px;transition:all .2s;}
+.btn-primary:hover{background:#0055dd;}
+/* MOBILE MENU */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(6,6,10,.97);backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 48px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mob-nav-links{display:flex;flex-direction:column;gap:8px;flex:1;}
+.mob-nav-link{font-size:24px;color:#fff;padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mob-sub{padding:12px 0 4px;display:none;flex-direction:column;gap:10px;}
+.mob-sub.open{display:flex;}
+.mob-sub a{font-size:14px;color:var(--mid);padding:4px 0;}
+.mob-cta{margin-top:32px;}
+/* NAVBAR */
+.navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:500;width:calc(100% - 64px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;background:rgba(6,6,10,.75);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:100px;transition:background .3s;}
+.navbar.scrolled{background:rgba(6,6,10,.95);}
+.nav-logo img{height:28px;width:auto;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.nav-item{position:relative;}
+.nav-link{font-size:15px;color:rgba(255,255,255,.92);padding:8px 14px;border-radius:100px;transition:color .2s,background .2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;}
+.nav-item:hover .nav-link svg{transform:rotate(180deg);}
+.simple-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:280px;background:rgba(12,12,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(20px);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s,visibility 0s linear .18s;}
+.simple-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .simple-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s,visibility 0s;}
+.simple-item{display:flex;flex-direction:column;gap:1px;padding:11px 14px;border-radius:10px;color:rgba(255,255,255,.88);transition:background .2s;}
+.simple-item:hover{background:rgba(0,102,255,.08);}
+.simple-item-title{font-size:14px;}
+.simple-item-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;}
+.mega-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:min(680px,96vw);background:#0c0c16;border:1px solid var(--border);border-radius:var(--r);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:0 32px 64px rgba(0,0,0,.6);z-index:600;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s,visibility 0s linear .18s;}
+.mega-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+.nav-item:hover .mega-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .18s,visibility 0s;}
+.mega-item{padding:14px 16px;border-radius:12px;transition:background .2s;}
+.mega-item:hover{background:rgba(0,102,255,.08);}
+.mega-item-title{font-size:15px;color:#fff;margin-bottom:4px;}
+.mega-item-subs{font-size:12px;color:var(--dim);line-height:1.5;}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;}
+.nav-hamburger span{display:block;width:16px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+/* LEGAL PAGE */
+.legal-hero{padding:140px 0 64px;border-bottom:1px solid var(--border);}
+.legal-hero-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px;}
+.legal-hero h1{font-size:clamp(32px,5vw,56px);font-weight:400;line-height:1.1;margin-bottom:16px;}
+.legal-hero-meta{font-size:14px;color:var(--dim);}
+.legal-body{padding:72px 0 100px;}
+.legal-inner{display:grid;grid-template-columns:240px 1fr;gap:80px;align-items:start;}
+.legal-toc{position:sticky;top:100px;}
+.legal-toc-head{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
+.legal-toc a{display:block;font-size:13px;color:rgba(255,255,255,.45);padding:6px 0;border-left:2px solid var(--border);padding-left:12px;transition:color .2s,border-color .2s;}
+.legal-toc a:hover{color:#fff;border-left-color:var(--cyan);}
+.legal-content{max-width:720px;}
+.legal-section{margin-bottom:56px;}
+.legal-section h2{font-size:22px;font-weight:400;color:#fff;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.legal-section h3{font-size:16px;font-weight:500;color:var(--cyan);margin:24px 0 10px;}
+.legal-section p{font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:14px;}
+.legal-section ul{display:flex;flex-direction:column;gap:8px;margin:12px 0 16px;padding-left:0;}
+.legal-section ul li{font-size:15px;color:var(--mid);padding-left:20px;position:relative;line-height:1.7;}
+.legal-section ul li::before{content:"→";position:absolute;left:0;color:var(--cyan);font-size:12px;top:4px;}
+.legal-section a{color:var(--cyan);text-decoration:underline;text-underline-offset:3px;}
+/* FOOTER */
+.footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.footer-brand img{height:26px;width:auto;margin-bottom:18px;}
+.footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
+.footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
+.footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col-links a:hover{color:#fff;}
+.footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
+.footer-big{font-size:clamp(40px,10vw,150px);font-weight:400;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);white-space:nowrap;line-height:1;}
+.footer-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:var(--dim);transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+@media(max-width:1100px){.footer-top{grid-template-columns:1fr 1fr;gap:36px;}.footer-brand{grid-column:span 2;}}
+@media(max-width:768px){
+  .container{padding:0 20px;}
+  .navbar{top:10px;width:calc(100% - 24px);padding:10px 14px;border-radius:60px;}
+  .nav-center{display:none;}
+  .nav-right .btn-primary{display:none;}
+  .nav-hamburger{display:flex;}
+  .legal-hero{padding:110px 0 48px;}
+  .legal-inner{grid-template-columns:1fr;gap:40px;}
+  .legal-toc{display:none;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
+  .footer-brand{grid-column:span 2;}
+  .footer-bot{flex-direction:column;align-items:flex-start;}
+  .footer-big{font-size:clamp(48px,14vw,120px);}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mob-nav-links">
+    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub"><a href="cloud-devops.html" onclick="closeMobileMenu()">DevOps / Cloud</a><a href="platform-engineering.html" onclick="closeMobileMenu()">SRE</a><a href="software-engineering.html" onclick="closeMobileMenu()">Full Stack Development</a><a href="ai-engineering.html" onclick="closeMobileMenu()">AI &amp; ML</a><a href="agentic-ai.html" onclick="closeMobileMenu()">Agentic AI</a></div>
+    </div>
+    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Solutions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub"><a href="resilient-operations-center.html" onclick="closeMobileMenu()">Resilient Operations Center</a><a href="ai-in-sdlc.html" onclick="closeMobileMenu()">AI in SDLC</a></div>
+    </div>
+    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Industries <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub"><a href="manufacturing.html" onclick="closeMobileMenu()">Manufacturing</a><a href="automotive.html" onclick="closeMobileMenu()">Automotive</a><a href="financial-services.html" onclick="closeMobileMenu()">Financial Services</a><a href="qsr.html" onclick="closeMobileMenu()">QSR</a></div>
+    </div>
+    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub"><a href="sailor.html" onclick="closeMobileMenu()">Sailor</a><a href="guardian.html" onclick="closeMobileMenu()">Guardian</a></div>
+    </div>
+    <a class="mob-nav-link" href="partnerships.html" onclick="closeMobileMenu()">Partners</a>
+    <div><div class="mob-nav-link" onclick="toggleMobSub(this)">Insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="mob-sub"><a href="about-us.html" onclick="closeMobileMenu()">About Us</a><a href="case-studies.html" onclick="closeMobileMenu()">Case Studies</a><a href="white-papers.html" onclick="closeMobileMenu()">White Papers</a><a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a></div>
+    </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
+  </nav>
+  <div class="mob-cta"><button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu()">Book a Discovery Call</button></div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.svg" alt="BootLabs"></a>
+  <div class="nav-center">
+    <div class="nav-item"><a href="services.html" class="nav-link">Services <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="mega-menu">
+        <a href="cloud-devops.html" class="mega-item"><div class="mega-item-title">DevOps / Cloud</div><div class="mega-item-subs">Cloud Migration · Kubernetes · CI/CD</div></a>
+        <a href="platform-engineering.html" class="mega-item"><div class="mega-item-title">SRE</div><div class="mega-item-subs">Observability · SLOs · Service Mesh</div></a>
+        <a href="software-engineering.html" class="mega-item"><div class="mega-item-title">Full Stack Development</div><div class="mega-item-subs">Cloud Native Apps · Microservices</div></a>
+        <a href="ai-engineering.html" class="mega-item"><div class="mega-item-title">AI &amp; ML</div><div class="mega-item-subs">ML Engineering · MLOps · Production AI</div></a>
+        <a href="security-engineering.html" class="mega-item"><div class="mega-item-title">Security Engineering</div><div class="mega-item-subs">DevSecOps · VAPT · Zero Trust</div></a>
+        <a href="agentic-ai.html" class="mega-item"><div class="mega-item-title">Agentic AI</div><div class="mega-item-subs">Task Agents · Multi-Agent Orchestration</div></a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="#" class="nav-link">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="resilient-operations-center.html" class="simple-item"><div class="simple-item-title">Resilient Operations Center</div><div class="simple-item-sub">Managed Cloud Ops · AIOps</div></a>
+        <a href="ai-in-sdlc.html" class="simple-item"><div class="simple-item-title">AI in SDLC</div><div class="simple-item-sub">AI-Assisted Dev · Automated Testing</div></a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="#" class="nav-link">Industries <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="manufacturing.html" class="simple-item"><div class="simple-item-title">Manufacturing</div></a>
+        <a href="automotive.html" class="simple-item"><div class="simple-item-title">Automotive</div></a>
+        <a href="financial-services.html" class="simple-item"><div class="simple-item-title">Financial Services</div></a>
+        <a href="qsr.html" class="simple-item"><div class="simple-item-title">QSR &amp; Energy</div></a>
+      </div>
+    </div>
+    <a href="partnerships.html" class="nav-link">Partners</a>
+    <div class="nav-item"><a href="#" class="nav-link">Insights <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="simple-menu">
+        <a href="about-us.html" class="simple-item"><div class="simple-item-title">About Us</div></a>
+        <a href="case-studies.html" class="simple-item"><div class="simple-item-title">Case Studies</div></a>
+        <a href="white-papers.html" class="simple-item"><div class="simple-item-title">White Papers</div></a>
+        <a href="blog.html" class="simple-item"><div class="simple-item-title">Blog &amp; Press Releases</div></a>
+      </div>
+    </div>
+    <a href="careers.html" class="nav-link">Careers</a>
+  </div>
+  <div class="nav-right">
+    <button class="btn-primary">Book a Call</button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="legal-hero">
+  <div class="container">
+    <div class="legal-hero-eyebrow">Legal</div>
+    <h1>Terms of Service</h1>
+    <p class="legal-hero-meta">Last updated: January 2024 &nbsp;·&nbsp; BootLabs Technologies Private Limited</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="legal-body">
+  <div class="container">
+    <div class="legal-inner">
+      <!-- TOC -->
+      <div class="legal-toc">
+        <div class="legal-toc-head">Contents</div>
+        <a href="#intro">Introduction</a>
+        <a href="#definitions">Definitions</a>
+        <a href="#collection">Information We Collect</a>
+        <a href="#cookies">Cookies</a>
+        <a href="#use">Use of Data</a>
+        <a href="#retention">Retention</a>
+        <a href="#transfer">Transfer of Data</a>
+        <a href="#disclosure">Disclosure</a>
+        <a href="#security">Security</a>
+        <a href="#gdpr">GDPR Rights</a>
+        <a href="#caloppa">CalOPPA Rights</a>
+        <a href="#providers">Service Providers</a>
+        <a href="#analytics">Analytics</a>
+        <a href="#cicd">CI/CD Tools</a>
+        <a href="#remarketing">Remarketing</a>
+        <a href="#payments">Payments</a>
+        <a href="#links">Links to Other Sites</a>
+        <a href="#children">Children's Privacy</a>
+        <a href="#changes">Changes</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <!-- CONTENT -->
+      <div class="legal-content">
+        <div class="legal-section" id="intro">
+          <h2>Introduction</h2>
+          <p>Welcome to BootLabs Technologies Private Limited. BootLabs Technologies Private Limited ("us", "we", or "our") operates https://Bootlabstech.com (hereinafter referred to as "Service") &amp; https://Sailorcloud.io is the Product.</p>
+          <p>Our Privacy Policy governs your visit to https://Bootlabstech.com &amp; https://Sailorcloud.io, and explains how we collect, safeguard and disclose information that results from your use of our Service.</p>
+          <p>We use your data to provide and improve Service. By using Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.</p>
+          <p>Our Terms and Conditions ("Terms") govern all use of our Service and together with the Privacy Policy constitutes your agreement with us ("agreement").</p>
+        </div>
+        <div class="legal-section" id="definitions">
+          <h2>Definitions</h2>
+          <h3>SERVICE</h3><p>The https://Bootlabstech.com website operated by BootLabs Technologies Private Limited.</p>
+          <h3>PRODUCT</h3><p>The https://Sailorcloud.io &amp; Sailor product designed and owned by BootLabs Technologies Private Limited.</p>
+          <h3>PERSONAL DATA</h3><p>Data about a living individual who can be identified from those data (or from those and other information either in our possession or likely to come into our possession).</p>
+          <h3>USAGE DATA</h3><p>Data collected automatically either generated by the use of Service or from Service infrastructure itself (for example, the duration of a page visit).</p>
+          <h3>COOKIES</h3><p>Small files stored on your device (computer or mobile device).</p>
+          <h3>DATA CONTROLLER</h3><p>A natural or legal person who (either alone or jointly or in common with other persons) determines the purposes for which and the manner in which any personal data are, or are to be, processed. For the purpose of this Privacy Policy, we are a Data Controller of your data.</p>
+          <h3>DATA PROCESSORS (OR SERVICE PROVIDERS)</h3><p>Any natural or legal person who processes the data on behalf of the Data Controller. We may use the services of various Service Providers in order to process your data more effectively.</p>
+          <h3>DATA SUBJECT</h3><p>Any living individual who is the subject of Personal Data.</p>
+          <h3>THE USER</h3><p>The individual using our Service. The User corresponds to the Data Subject, who is the subject of Personal Data.</p>
+        </div>
+        <div class="legal-section" id="collection">
+          <h2>Information Collection and Use</h2>
+          <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
+          <h3>Personal Data</h3>
+          <p>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
+          <ul><li>Email address</li><li>Cookies and Usage Data</li></ul>
+          <p>We may use your Personal Data to contact you with newsletters, marketing or promotional materials and other information that may be of interest to you. You may opt out of receiving any, or all, of these communications from us by following the unsubscribe link.</p>
+          <h3>Usage Data</h3>
+          <p>We may also collect information that your browser sends whenever you visit our Service or when you access Service by or through a mobile device ("Usage Data"). This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
+          <p>When you access Service with a mobile device, this Usage Data may include information such as the type of mobile device you use, your mobile device unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browser you use, unique device identifiers and other diagnostic data.</p>
+          <h3>Location Data</h3>
+          <p>We may use and store information about your location if you give us permission to do so ("Location Data"). We use this data to provide features of our Service, to improve and customise our Service. You can enable or disable location services when you use our Service at any time by way of your device settings.</p>
+        </div>
+        <div class="legal-section" id="cookies">
+          <h2>Tracking &amp; Cookies</h2>
+          <p>We use cookies and similar tracking technologies to track the activity on our Service and we hold certain information. Cookies are files with a small amount of data which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your device. Other tracking technologies are also used such as beacons, tags and scripts to collect and track information and to improve and analyze our Service.</p>
+          <p>You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.</p>
+          <h3>Examples of Cookies We Use</h3>
+          <ul>
+            <li><strong>Session Cookies</strong> — We use Session Cookies to operate our Service.</li>
+            <li><strong>Preference Cookies</strong> — We use Preference Cookies to remember your preferences and various settings.</li>
+            <li><strong>Security Cookies</strong> — We use Security Cookies for security purposes.</li>
+            <li><strong>Advertising Cookies</strong> — Advertising Cookies are used to serve you with advertisements that may be relevant to you and your interests.</li>
+          </ul>
+        </div>
+        <div class="legal-section" id="use">
+          <h2>Use of Data</h2>
+          <p>BootLabs Technologies Private Limited uses the collected data for various purposes:</p>
+          <ul>
+            <li>To provide and maintain our Service</li>
+            <li>To notify you about changes to our Service</li>
+            <li>To allow you to participate in interactive features of our Service when you choose to do so</li>
+            <li>To provide customer support</li>
+            <li>To gather analysis or valuable information so that we can improve our Service</li>
+            <li>To monitor the usage of our Service</li>
+            <li>To detect, prevent and address technical issues</li>
+            <li>To fulfill any other purpose for which you provide it</li>
+            <li>To carry out our obligations and enforce our rights arising from any contracts entered into between you and us, including for billing and collection</li>
+            <li>To provide you with notices about your account and/or subscription, including expiration and renewal notices, email-instructions, etc.</li>
+            <li>To provide you with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless you have opted not to receive such information</li>
+            <li>In any other way we may describe when you provide the information</li>
+            <li>For any other purpose with your consent</li>
+          </ul>
+        </div>
+        <div class="legal-section" id="retention">
+          <h2>Retention of Data</h2>
+          <p>We will retain your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.</p>
+          <p>We will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period, except when this data is used to strengthen the security or to improve the functionality of our Service, or we are legally obligated to retain this data for longer time periods.</p>
+        </div>
+        <div class="legal-section" id="transfer">
+          <h2>Transfer of Data</h2>
+          <p>Your information, including Personal Data, may be transferred to — and maintained on — computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.</p>
+          <p>If you are located outside United States and choose to provide information to us, please note that we transfer the data, including Personal Data, to United States and process it there. Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.</p>
+          <p>BootLabs Technologies Private Limited will take all the steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organisation or a country unless there are adequate controls in place including the security of your data and other personal information.</p>
+        </div>
+        <div class="legal-section" id="disclosure">
+          <h2>Disclosure of Data</h2>
+          <p>We may disclose personal information that we collect, or you provide:</p>
+          <h3>Disclosure for Law Enforcement</h3>
+          <p>Under certain circumstances, we may be required to disclose your Personal Data if required to do so by law or in response to valid requests by public authorities.</p>
+          <h3>Business Transaction</h3>
+          <p>If we or our subsidiaries are involved in a merger, acquisition or asset sale, your Personal Data may be transferred.</p>
+          <h3>Other Cases</h3>
+          <p>We may disclose your information also to our subsidiaries and affiliates.</p>
+        </div>
+        <div class="legal-section" id="security">
+          <h2>Security of Data</h2>
+          <p>The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
+        </div>
+        <div class="legal-section" id="gdpr">
+          <h2>Your Data Protection Rights Under GDPR</h2>
+          <p>If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. — See more at <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" target="_blank" rel="noopener">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a></p>
+          <p>We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Data. If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please email us at <a href="mailto:support@Bootlabs.io">support@Bootlabs.io</a>.</p>
+          <p>In certain circumstances, you have the following data protection rights:</p>
+          <ul>
+            <li>The right to access, update or to delete the information we have on you</li>
+            <li>The right of rectification — you have the right to have your information rectified if that information is inaccurate or incomplete</li>
+            <li>The right to object to our processing of your Personal Data</li>
+            <li>The right of restriction — you have the right to request that we restrict the processing of your personal information</li>
+            <li>The right to data portability — you have the right to be provided with a copy of your Personal Data in a structured, machine-readable and commonly used format</li>
+            <li>The right to withdraw consent — you also have the right to withdraw your consent at any time where we rely on your consent to process your personal information</li>
+          </ul>
+          <p>Please note that we may ask you to verify your identity before responding to such requests. Please note, we may not be able to provide Service without some necessary data. You have the right to complain to a Data Protection Authority about our collection and use of your Personal Data. For more information, please contact your local data protection authority in the European Economic Area (EEA).</p>
+        </div>
+        <div class="legal-section" id="caloppa">
+          <h2>Your Data Protection Rights Under CalOPPA</h2>
+          <p>CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law's reach stretches well beyond California to require a person or company in the United States (and conceivably the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website. — See more at: <a href="https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/" target="_blank" rel="noopener">CalOPPA</a></p>
+          <p>According to CalOPPA we agree to the following:</p>
+          <ul>
+            <li>Users can visit our site anonymously</li>
+            <li>Our Privacy Policy link includes the word "Privacy", and can easily be found on the page specified above on the home page of our website</li>
+            <li>Users will be notified of any privacy policy changes on our Privacy Policy Page</li>
+            <li>Users are able to change their personal information by emailing us at <a href="mailto:support@Bootlabs.io">support@Bootlabs.io</a></li>
+          </ul>
+          <h3>Our Policy on "Do Not Track" Signals</h3>
+          <p>We honor Do Not Track signals and do not track, plant cookies, or use advertising when a Do Not Track browser mechanism is in place. Do Not Track is a preference you can set in your web browser to inform websites that you do not want to be tracked. You can enable or disable Do Not Track by visiting the Preferences or Settings page of your web browser.</p>
+        </div>
+        <div class="legal-section" id="providers">
+          <h2>Service Providers</h2>
+          <p>We may employ third party companies and individuals to facilitate our Service ("Service Providers"), provide Service on our behalf, perform Service-related services or assist us in analysing how our Service is used. These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
+        </div>
+        <div class="legal-section" id="analytics">
+          <h2>Analytics</h2>
+          <p>We may use third-party Service Providers to monitor and analyze the use of our Service.</p>
+          <h3>Google Analytics</h3>
+          <p>Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualise and personalise the ads of its own advertising network.</p>
+          <p>For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener">https://policies.google.com/privacy?hl=en</a>. We also encourage you to review Google's policy for safeguarding your data: <a href="https://support.google.com/analytics/answer/6004245" target="_blank" rel="noopener">https://support.google.com/analytics/answer/6004245</a>.</p>
+          <h3>Firebase</h3>
+          <p>Firebase is analytics service provided by Google Inc. You may opt-out of certain Firebase features through your mobile device settings, such as your device advertising settings or by following the instructions provided by Google in their Privacy Policy: <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener">https://policies.google.com/privacy?hl=en</a>.</p>
+          <p>For more information on what type of information Firebase collects, please visit the Google Privacy Terms web page: <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener">https://policies.google.com/privacy?hl=en</a>.</p>
+        </div>
+        <div class="legal-section" id="cicd">
+          <h2>CI/CD Tools</h2>
+          <p>We may use third-party Service Providers to automate the development process of our Service.</p>
+          <h3>GitHub</h3>
+          <p>GitHub is provided by GitHub, Inc. GitHub is a development platform to host and review code, manage projects, and build software. For more information on what data GitHub collects for what purpose and how the protection of the data is ensured, please visit the GitHub Privacy Policy page: <a href="https://help.github.com/en/articles/github-privacy-statement" target="_blank" rel="noopener">https://help.github.com/en/articles/github-privacy-statement</a>.</p>
+        </div>
+        <div class="legal-section" id="remarketing">
+          <h2>Behavioral Remarketing</h2>
+          <p>BootLabs Technologies Private Limited uses remarketing services to advertise on third party websites to you after you visited our Service. We and our third-party vendors use cookies to inform, optimise and serve ads based on your past visits to our Service.</p>
+          <h3>Google Ads (AdWords)</h3>
+          <p>Google Ads (AdWords) remarketing service is provided by Google Inc. You can opt-out of Google Analytics for Display Advertising and customise the Google Display Network ads by visiting the Google Ads Settings page: <a href="http://www.google.com/settings/ads" target="_blank" rel="noopener">http://www.google.com/settings/ads</a>. Google also recommends installing the Google Analytics Opt-out Browser Add-on: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">https://tools.google.com/dlpage/gaoptout</a>. For more information on the privacy practices of Google, please visit: <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener">https://policies.google.com/privacy?hl=en</a>.</p>
+          <h3>Bing Ads Remarketing</h3>
+          <p>Bing Ads remarketing service is provided by Microsoft Inc. You can opt-out of Bing Ads interest-based ads by following their instructions: <a href="https://advertise.bingads.microsoft.com/en-us/resources/policies/personalized-ads" target="_blank" rel="noopener">https://advertise.bingads.microsoft.com/en-us/resources/policies/personalized-ads</a>. You can learn more about the privacy practices and policies of Microsoft by visiting their Privacy Policy page: <a href="https://privacy.microsoft.com/en-us/PrivacyStatement" target="_blank" rel="noopener">https://privacy.microsoft.com/en-us/PrivacyStatement</a>.</p>
+          <h3>Twitter</h3>
+          <p>Twitter remarketing service is provided by Twitter Inc. You can opt-out from Twitter's interest-based ads by following their instructions: <a href="https://support.twitter.com/articles/20170405" target="_blank" rel="noopener">https://support.twitter.com/articles/20170405</a>. You can learn more about the privacy practices and policies of Twitter by visiting their Privacy Policy page: <a href="https://twitter.com/privacy" target="_blank" rel="noopener">https://twitter.com/privacy</a>.</p>
+          <h3>Facebook</h3>
+          <p>Facebook remarketing service is provided by Facebook Inc. You can learn more about interest-based advertising from Facebook by visiting this page: <a href="https://www.facebook.com/help/164968693837950" target="_blank" rel="noopener">https://www.facebook.com/help/164968693837950</a>. To opt-out from Facebook's interest-based ads, follow these instructions from Facebook: <a href="https://www.facebook.com/help/568137493302217" target="_blank" rel="noopener">https://www.facebook.com/help/568137493302217</a>.</p>
+          <p>Facebook adheres to the Self-Regulatory Principles for Online Behavioural Advertising established by the Digital Advertising Alliance. You can also opt-out through the Digital Advertising Alliance in the USA: <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener">http://www.aboutads.info/choices/</a>, the Digital Advertising Alliance of Canada: <a href="http://youradchoices.ca/" target="_blank" rel="noopener">http://youradchoices.ca/</a>, or the European Interactive Digital Advertising Alliance: <a href="http://www.youronlinechoices.eu/" target="_blank" rel="noopener">http://www.youronlinechoices.eu/</a>, or opt-out using your mobile device settings. For more information, please visit Facebook's Data Policy: <a href="https://www.facebook.com/privacy/explanation" target="_blank" rel="noopener">https://www.facebook.com/privacy/explanation</a>.</p>
+        </div>
+        <div class="legal-section" id="payments">
+          <h2>Payments</h2>
+          <p>We may provide paid products and/or services within Service. In that case, we use third-party services for payment processing (e.g. payment processors). We will not store or collect your payment card details. That information is provided directly to our third-party payment processors whose use of your personal information is governed by their Privacy Policy. These payment processors adhere to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, Mastercard, American Express and Discover.</p>
+          <p>The payment processors we work with are:</p>
+          <ul>
+            <li><strong>PayPal or Braintree</strong> — <a href="https://www.paypal.com/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener">Privacy Policy</a></li>
+            <li><strong>Apple Store In-App Payments</strong> — <a href="https://www.apple.com/legal/privacy/en-ww/" target="_blank" rel="noopener">Privacy Policy</a></li>
+            <li><strong>Google Play In-App Payments</strong> — <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener">Privacy Policy</a></li>
+            <li><strong>Stripe</strong> — <a href="https://stripe.com/us/privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="legal-section" id="links">
+          <h2>Links to Other Sites</h2>
+          <p>Our Service may contain links to other sites that are not operated by us. If you click a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.</p>
+          <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
+        </div>
+        <div class="legal-section" id="children">
+          <h2>Children's Privacy</h2>
+          <p>Our Services are not intended for use by children under the age of 13 ("Children"). We do not knowingly collect personally identifiable information from Children under 13. If you become aware that a Child has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from Children without verification of parental consent, we take steps to remove that information from our servers.</p>
+        </div>
+        <div class="legal-section" id="changes">
+          <h2>Changes to This Policy</h2>
+          <p>We may update our Terms of Service from time to time. We will notify you of any changes by posting the new Terms of Service on this page.</p>
+          <p>We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update "effective date" at the top of this page.</p>
+          <p>You are advised to review this page periodically for any changes. Changes to this Terms of Service are effective when they are posted on this page.</p>
+        </div>
+        <div class="legal-section" id="contact">
+          <h2>Contact Us</h2>
+          <p>If you have any questions about these Terms of Service, please contact us:</p>
+          <ul>
+            <li>By email: <a href="mailto:hello@bootlabstech.com">hello@bootlabstech.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/images/logo.svg" alt="BootLabs">
+        <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
+      </div>
+      <div><div class="footer-col-head">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="cloud-devops.html">DevOps / Cloud</a></li><li><a href="platform-engineering.html">SRE</a></li><li><a href="software-engineering.html">Full Stack Development</a></li><li><a href="ai-engineering.html">AI &amp; ML</a></li><li><a href="agentic-ai.html">Agentic AI</a></li>
+        </ul>
+      </div>
+      <div><div class="footer-col-head">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="about-us.html">About Us</a></li><li><a href="careers.html">Careers</a></li><li><a href="blog.html">Insights</a></li><li><a href="partnerships.html">Partners</a></li>
+        </ul>
+      </div>
+      <div><div class="footer-col-head">Legal</div>
+        <ul class="footer-col-links">
+          <li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html" style="color:var(--cyan);">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-mid"><div class="footer-big">BootLabs</div></div>
+    <div class="footer-bot">
+      <div class="footer-copy">© 2026 BootLabs Technology. All rights reserved.</div>
+      <div class="footer-legal"><a href="privacy-policy.html">Privacy Policy</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileMenu(){const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');m.classList.toggle('open');h.classList.toggle('open');}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');}
+function toggleMobSub(el){const s=el.nextElementSibling;s.classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);});
+</script>
+</body>
+</html>

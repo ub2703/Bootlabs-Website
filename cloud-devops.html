@@ -6,8 +6,8 @@
 <title>DevOps / Cloud — BootLabs</title>
 <style>
 /* ── FONTS ── */
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;font-display:swap;}
 
 /* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -192,16 +192,14 @@ input,textarea{box-sizing:border-box;}
 .svc-cta-sub{font-size:18px;color:var(--mid);line-height:1.75;margin-bottom:40px;}
 
 /* ══ PARTNERSHIPS ══ */
-.partnerships-section{padding:48px 0;background:#080810;border-top:1px solid var(--border);}
-.partnerships-inner{display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
-.partnerships-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);white-space:nowrap;flex-shrink:0;}
-.partnerships-divider{width:1px;height:36px;background:var(--border);flex-shrink:0;}
-.partnerships-cards{display:flex;gap:14px;flex-wrap:wrap;flex:1;}
-.partner-card{display:flex;align-items:center;gap:14px;padding:14px 22px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.02);transition:border-color .3s,background .3s;}
+.partnerships-section{padding:56px 0;background:#080810;border-top:1px solid var(--border);}
+.partnerships-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);text-align:center;margin-bottom:32px;}
+.partnerships-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.partner-card{display:flex;align-items:center;gap:16px;padding:20px 24px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.02);transition:border-color .3s,background .3s;}
 .partner-card:hover{border-color:var(--border-blue);background:rgba(0,102,255,.04);}
-.partner-card-logo{width:32px;height:32px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
-.partner-card-name{font-size:14px;color:#fff;line-height:1.2;}
-.partner-card-tier{font-size:11px;color:var(--cyan);margin-top:3px;}
+.partner-card-logo{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.partner-card-name{font-size:15px;color:#fff;line-height:1.2;}
+.partner-card-tier{font-size:12px;color:var(--cyan);margin-top:3px;}
 
 /* ══ FOOTER ══ */
 .footer{background:#06060a;border-top:1px solid var(--border);padding:72px 0 36px;}
@@ -209,7 +207,7 @@ input,textarea{box-sizing:border-box;}
 .footer-brand img{height:26px;width:auto;margin-bottom:18px;}
 .footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
 .footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
-.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
 .footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
 .footer-col-links a:hover{color:#fff;}
 .footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
@@ -247,6 +245,7 @@ input,textarea{box-sizing:border-box;}
   .svc-stat-inner{flex-wrap:wrap;}
   .svc-stat-item{flex:1 1 45%;border-right:none;border-bottom:1px solid var(--border);}
   .svc-stat-item:last-child{border-bottom:none;}
+  .partnerships-cards{grid-template-columns:1fr;}
   .offerings-grid{grid-template-columns:1fr;border-radius:14px;}
   .process-steps{grid-template-columns:1fr 1fr;}
   .tab-nav{flex-wrap:wrap;border-radius:14px;width:100%;}
@@ -256,8 +255,8 @@ input,textarea{box-sizing:border-box;}
   .cs-case-metrics{gap:20px;}
   .cs-case-metric-val{font-size:26px;}
   .footer{padding:56px 0 28px;}
-  .footer-top{grid-template-columns:1fr;gap:28px;}
-  .footer-brand{grid-column:span 1;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
+  .footer-brand{grid-column:span 2;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:480px){
@@ -327,6 +326,7 @@ input,textarea{box-sizing:border-box;}
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
   </nav>
   <div class="mob-cta">
     <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button>
@@ -336,7 +336,7 @@ input,textarea{box-sizing:border-box;}
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
   <a href="index.html" class="nav-logo">
-    <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+    <img src="assets/images/logo.svg" alt="BootLabs">
   </a>
   <div class="nav-center">
     <div class="nav-item">
@@ -416,6 +416,7 @@ input,textarea{box-sizing:border-box;}
         <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a href="careers.html" class="nav-link">Careers</a>
   </div>
   <div class="nav-right">
     <button class="btn-primary" onclick="openContact()">
@@ -494,10 +495,8 @@ input,textarea{box-sizing:border-box;}
 <!-- ══ CLOUD PARTNERSHIPS ══ -->
 <section class="partnerships-section">
   <div class="container">
-    <div class="partnerships-inner">
-      <div class="partnerships-label">Cloud Partners</div>
-      <div class="partnerships-divider"></div>
-      <div class="partnerships-cards">
+    <p class="partnerships-label">Cloud Partners</p>
+    <div class="partnerships-cards">
 
         <!-- AWS -->
         <div class="partner-card">
@@ -545,7 +544,6 @@ input,textarea{box-sizing:border-box;}
           </div>
         </div>
 
-      </div>
     </div>
   </div>
 </section>
@@ -756,8 +754,8 @@ input,textarea{box-sizing:border-box;}
 <section class="svc-cta-section">
   <div class="container">
     <div class="svc-cta-inner">
-      <h2 class="svc-cta-h2">Ready to build cloud infrastructure that lasts?</h2>
-      <p class="svc-cta-sub">30 minutes with our cloud engineering leadership. We'll map your infrastructure to a resilient, cost-efficient architecture.</p>
+      <h2 class="svc-cta-h2">Cloud infrastructure engineered to scale, recover, and stay cost-efficient.</h2>
+      <p class="svc-cta-sub">Book a discovery call. We'll assess your current infrastructure, identify the gaps, and propose an architecture that supports your scale and reliability requirements.</p>
       <button class="btn-primary" onclick="openContact()">
         Book a Discovery Call
         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -784,7 +782,7 @@ input,textarea{box-sizing:border-box;}
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <img src="assets/images/logo.svg" alt="BootLabs">
         <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
@@ -828,9 +826,8 @@ input,textarea{box-sizing:border-box;}
     <div class="footer-bot">
       <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+              
       </div>
     </div>
   </div>
@@ -864,9 +861,7 @@ function toggleMobSub(el) {
 }
 
 function openContact() {
-  const p = document.getElementById('contactPopup');
-  p.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink', '_blank');
 }
 function closeContact() {
   document.getElementById('contactPopup').style.display = 'none';

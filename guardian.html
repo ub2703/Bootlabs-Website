@@ -6,8 +6,8 @@
 <title>Guardian — Integrated Security for DevOps Workflows | BootLabs</title>
 <style>
 /* ── FONTS ── */
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d48207_NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-display:swap;}
-@font-face{font-family:NHD;src:url("https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d4820a_NeueHaasDisplayMediu.ttf") format("truetype");font-weight:500;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplayroman.ttf") format("truetype");font-weight:400;font-display:swap;}
+@font-face{font-family:NHD;src:url("assets/fonts/neuehaasdisplaymediu.ttf") format("truetype");font-weight:500;font-display:swap;}
 
 /* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -165,7 +165,7 @@ input,textarea{box-sizing:border-box;}
 .footer-brand img{height:26px;width:auto;margin-bottom:18px;}
 .footer-brand-tag{font-size:13px;color:var(--dim);line-height:1.7;max-width:240px;}
 .footer-col-head{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
-.footer-col-links{display:flex;flex-direction:column;gap:10px;}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none;padding:0;}
 .footer-col-links a{font-size:15px;color:rgba(255,255,255,.55);transition:color .2s;}
 .footer-col-links a:hover{color:#fff;}
 .footer-mid{border-top:1px solid var(--border);padding:32px 0;overflow:hidden;}
@@ -204,8 +204,8 @@ input,textarea{box-sizing:border-box;}
   .offerings-grid{grid-template-columns:1fr;border-radius:14px;}
   .cs-wide-card{padding:28px 24px;}
   .footer{padding:56px 0 28px;}
-  .footer-top{grid-template-columns:1fr;gap:28px;}
-  .footer-brand{grid-column:span 1;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
+  .footer-brand{grid-column:span 2;}
   .footer-bot{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:480px){
@@ -274,6 +274,7 @@ input,textarea{box-sizing:border-box;}
         <a href="blog.html" onclick="closeMobileMenu()">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a class="mob-nav-link" href="careers.html" onclick="closeMobileMenu()">Careers</a>
   </nav>
   <div class="mob-cta">
     <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeMobileMenu();openContact()">Book a Discovery Call</button>
@@ -283,7 +284,7 @@ input,textarea{box-sizing:border-box;}
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
   <a href="index.html" class="nav-logo">
-    <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+    <img src="assets/images/logo.svg" alt="BootLabs">
   </a>
   <div class="nav-center">
     <div class="nav-item">
@@ -363,6 +364,7 @@ input,textarea{box-sizing:border-box;}
         <a href="blog.html" class="simple-item">Blog &amp; Press Releases</a>
       </div>
     </div>
+    <a href="careers.html" class="nav-link">Careers</a>
   </div>
   <div class="nav-right">
     <button class="btn-primary" onclick="openContact()">
@@ -590,7 +592,7 @@ input,textarea{box-sizing:border-box;}
   <div class="container">
     <div class="svc-cta-inner">
       <h2 class="svc-cta-h2">Ready to build with zero vulnerabilities?</h2>
-      <p class="svc-cta-sub">See Guardian in action. 30 minutes with our security team — we'll walk you through how the unified security dashboard transforms your DevSecOps posture.</p>
+      <p class="svc-cta-sub">Book a discovery call with our security team. We'll walk through Guardian's capabilities in the context of your environment and compliance requirements.</p>
       <button class="btn-primary" onclick="openContact()">
         Book a Demo
         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -617,7 +619,7 @@ input,textarea{box-sizing:border-box;}
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/698498a0f85a3bb0b6d48099/698498a0f85a3bb0b6d480be_logo.svg" alt="BootLabs">
+        <img src="assets/images/logo.svg" alt="BootLabs">
         <p class="footer-brand-tag">Labs that build intelligent enterprises with AI, cloud-native platforms, and modern software engineering.</p>
       </div>
       <div>
@@ -661,9 +663,8 @@ input,textarea{box-sizing:border-box;}
     <div class="footer-bot">
       <div class="footer-copy">&#169; 2026 BootLabs Technology. All rights reserved.</div>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+              
       </div>
     </div>
   </div>
@@ -697,9 +698,7 @@ function toggleMobSub(el) {
 }
 
 function openContact() {
-  const p = document.getElementById('contactPopup');
-  p.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  window.open('https://outlook.office.com/bookwithme/user/e7dc14af552d4802a06e6ce9552e0cdd@bootlabstech.com/meetingtype/DCGys38YfEW-yZqm9FJR0Q2?anonymous&ep=mlink', '_blank');
 }
 function closeContact() {
   document.getElementById('contactPopup').style.display = 'none';
